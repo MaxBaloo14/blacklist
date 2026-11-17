@@ -92,3 +92,25 @@ a { color: inherit; text-decoration: none; }
 @keyframes splashBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes splashIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes splashOut { to { opacity: 0; visibility: hidden; } }
+
+/* ---------- Effets de l'accueil (CSS pur, démarrent après l'écran de chargement) ---------- */
+.hero-bg { background-image: url(/img/hero-1600.webp); background-image: image-set(url(/img/hero-1600.webp) 1x, url(/img/hero-2400.webp) 2x); }
+.hl { display: inline-block; animation: letterIn .6s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(.95s + var(--i) * 55ms); }
+.hero-sub { animation: fadeUp .7s ease both; animation-delay: 1.55s; }
+.hero-slogan { animation: fadeUp .7s ease both; animation-delay: 1.75s; }
+.hero-slogan::after { transform-origin: left; animation: slashDraw .7s cubic-bezier(.4, 0, .2, 1) both; animation-delay: 2.05s; }
+.hero-cta { animation: fadeUp .7s ease both, ctaGlow 3.2s ease-in-out 3s infinite; animation-delay: 2.0s, 3s; }
+@keyframes letterIn { from { opacity: 0; transform: translateY(55%) rotate(2deg); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes slashDraw { from { transform: skewX(-30deg) scaleX(0); } to { transform: skewX(-30deg) scaleX(1); } }
+@keyframes ctaGlow { 0%, 100% { box-shadow: 0 0 0 0 #c6282800; } 50% { filter: drop-shadow(0 0 14px #c6282899); } }
+
+.tile { position: relative; overflow: hidden; animation: fadeUp .6s ease both; animation-delay: calc(2.1s + var(--i) * 90ms); }
+.tile > * { position: relative; z-index: 1; }
+.tile::before { content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity .3s; background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), #c6282838, transparent 62%); }
+.tile::after { content: ""; position: absolute; top: 0; left: -70%; width: 45%; height: 100%; z-index: 0; transform: skewX(-20deg); background: linear-gradient(100deg, transparent, #ffffff0f, transparent); transition: left .8s ease; }
+.tile:hover::before { opacity: 1; }
+.tile:hover::after { left: 140%; }
+.tile .tile-icon { transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.tile:hover .tile-icon { transform: translateY(-3px) scale(1.12); }
+@media (prefers-reduced-motion: reduce) { .hl, .hero-sub, .hero-slogan, .hero-cta, .tile { animation: none !important; } }

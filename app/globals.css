@@ -80,3 +80,15 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Écran d'accueil : nom du site + barre de chargement, puis disparition (CSS pur, ~1 s, uniquement au chargement complet de la page) */
+.splash { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: #090a0c; animation: splashOut .4s ease .85s forwards; }
+.splash-inner { text-align: center; }
+.splash-name { font-family: var(--font-display); font-size: clamp(36px, 9vw, 72px); letter-spacing: .28em; padding-left: .28em; line-height: 1; text-transform: uppercase; animation: splashIn .5s ease both; }
+.splash-name b { color: #c62828; font-weight: 400; }
+.splash-sub { margin-top: 10px; font-family: var(--font-cond); font-size: 12px; font-weight: 600; letter-spacing: .5em; color: #777c84; }
+.splash-bar { width: min(200px, 55vw); height: 3px; margin: 20px auto 0; background: #ffffff1f; overflow: hidden; border-radius: 2px; }
+.splash-bar i { display: block; height: 100%; width: 100%; background: #c62828; transform-origin: left; animation: splashBar .8s cubic-bezier(.4, 0, .2, 1) both; }
+@keyframes splashBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes splashIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes splashOut { to { opacity: 0; visibility: hidden; } }

@@ -25,7 +25,7 @@ export default async function Nav() {
           <span>BLACK<b className="text-red">LIST</b></span>
           <small className="font-cond hidden border-l border-white/20 pl-3 text-[11px] font-semibold tracking-[.3em] text-metal lg:inline">BOOBOO CREW</small>
         </Link>
-        <div className="font-cond hidden items-center gap-6 text-[14px] font-semibold tracking-[.14em] md:flex">
+        <div className="font-cond hidden items-center gap-6 text-[14px] font-semibold tracking-[.14em] md:flex md:mr-24 min-[1500px]:mr-0">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className={`relative py-1.5 text-[#d8d8d8] transition hover:text-white ${l.login ? "border border-red px-4 hover:bg-red" : ""}`}>
               {l.label}
@@ -33,13 +33,14 @@ export default async function Nav() {
             </Link>
           ))}
           {user && <form action={logout}><button className="py-1.5 text-metal transition hover:text-white">{t("DÉCONNEXION")}</button></form>}
-          <LangSwitch />
         </div>
         <div className="flex items-center gap-3 md:hidden">
           <LangSwitch />
           <MobileNav links={links} logout={user ? <form action={logout}><button className="font-display border-b border-white/10 py-4 text-left text-4xl uppercase tracking-wide text-metal">{t("DÉCONNEXION")}</button></form> : null} />
         </div>
       </div>
+      {/* Drapeaux collés au bord droit de l'écran (écrans larges) */}
+      <div className="absolute right-4 top-1/2 hidden -translate-y-1/2 md:block"><LangSwitch /></div>
     </nav>
   );
 }

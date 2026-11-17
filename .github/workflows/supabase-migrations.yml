@@ -23,5 +23,5 @@ jobs:
           version: latest
       - run: supabase link --project-ref "$PROJECT_REF"
       # Les migrations 0001 à 0004 ont été installées à la main au départ : on les déclare comme déjà appliquées (sans danger si c'est déjà fait).
-      - run: supabase migration repair --status applied 0001 0002 0003 0004 || true
-      - run: supabase db push
+      - run: supabase migration repair --remote --status applied 0001 0002 0003 0004
+      - run: supabase db push --remote

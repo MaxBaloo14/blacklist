@@ -30,6 +30,9 @@ export const getLatestDuels = (n = 6) =>
 export const getNews = (n = 3) => safe<Row[]>((s) => s.from("announcements").select("*").eq("published", true).order("published_at", { ascending: false }).limit(n), []);
 export const getTracks = () => safe<Row[]>((s) => s.from("race_tracks").select("*").order("status").order("name"), []);
 export const getPublicDriver = (id: string) => safe<Row | null>((s) => s.from("public_driver").select("*").eq("id", id).maybeSingle(), null);
+/** Mouvements publics dans la Blacklist (sans les motifs internes de l'organisation). */
+export const getDriverMoves = (id: string) =>
+  safe<Row[]>((s) => s.from("ranking_history").select("id,from_position,to_position,kind,created_at").eq("driver_id", id).order("created_at", { ascending: false }).limit(10), []);
 export const getDriverDuels = (id: string) =>
   safe<Row[]>((s) => s.from("public_duels").select("*").or(`challenger_id.eq.${id},defender_id.eq.${id}`).order("scheduled_at", { ascending: false, nullsFirst: false }).limit(30), []);
 export const getWarmups = () => safe<Row[]>((s) => s.from("warmup_events").select("*, race_tracks(name,start_point,end_point)").order("scheduled_at", { ascending: false }).limit(20), []);

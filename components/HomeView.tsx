@@ -24,7 +24,7 @@ export default async function HomeView() {
             <span aria-hidden className="hero-sub mt-[.15em] block text-[.4em] leading-none tracking-[.34em] text-red">LOS SANTOS</span>
           </h1>
           <div className="hero-slogan font-marker slash mb-9 mt-6 -rotate-[1.2deg] pb-2.5 text-[clamp(20px,2.8vw,34px)]">10 DRIVERS. 10 POSITIONS. ONE KING.</div>
-          <div><Link href="/register" className="hero-cta btn btn-red">{t("REJOINDRE LA BLACKLIST")}</Link></div>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3"><Link href="/register" className="hero-cta btn btn-red">{t("REJOINDRE LA BLACKLIST")}</Link><Link href="/guide" className="hero-sub font-cond text-sm font-semibold tracking-[.22em] text-[#cfcfcf] underline decoration-red decoration-2 underline-offset-[6px] transition hover:text-white">{t("Première visite ? Comment ça marche")} →</Link></div>
         </div>
       </header>
 

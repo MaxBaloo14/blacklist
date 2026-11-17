@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ActionForm from "@/components/ActionForm";
 import ChallengesPanel from "@/components/ChallengesPanel";
+import JourneyPanel from "@/components/JourneyPanel";
 import DuelCard from "@/components/DuelCard";
 import Field from "@/components/Field";
 import PageHead from "@/components/PageHead";
 import Tabs from "@/components/Tabs";
 import { cancelProposal, proposeVehicle, updateProfile } from "@/app/actions/driver";
 import { requireDriver } from "@/lib/auth";
-import { getPublicSettings, getTracks } from "@/lib/data";
+import { getPublicSettings, getTracks, getWarmups } from "@/lib/data";
 import { dateOnly, dateTime, money, photoUrl } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 import { localizeReason } from "@/lib/notif-i18n";
@@ -28,7 +29,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
   const { supabase, user, profile } = await requireDriver();
   const uid = user.id;
 
-  const [{ data: rank }, { data: stats }, { data: vehicles }, { data: rewards }, { data: duels }, { data: moves }, tracks, settings, { data: inact }] = await Promise.all([
+  const [{ data: rank }, { data: stats }, { data: vehicles }, { data: rewards }, { data: duels }, { data: moves }, tracks, settings, { data: inact }, { data: activeCh }, warmups] = await Promise.all([
     supabase.from("blacklist_rankings").select("position").eq("driver_id", uid).maybeSingle(),
     supabase.from("driver_stats").select("*").eq("driver_id", uid).maybeSingle(),
     supabase.from("vehicles").select("*").eq("owner_id", uid).order("created_at", { ascending: false }),
@@ -36,7 +37,10 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
     supabase.from("public_duels").select("*").or(`challenger_id.eq.${uid},defender_id.eq.${uid}`).order("scheduled_at", { ascending: false, nullsFirst: false }),
     supabase.from("ranking_history").select("*").eq("driver_id", uid).order("created_at", { ascending: false }).limit(20),
     getTracks(), getPublicSettings(), supabase.rpc("inactivity_days", { p_driver: uid }),
+    supabase.from("challenges").select("id").in("status", ["awaiting_schedule", "scheduled", "awaiting_validation"]).limit(1),
+    getWarmups(),
   ]);
+  const nextWarmup = warmups.filter((w) => ["scheduled", "running"].includes(w.status)).sort((a, b) => +new Date(a.scheduled_at) - +new Date(b.scheduled_at))[0] ?? null;
   const myPos: number | null = rank?.position ?? null;
   const current = vehicles?.find((v) => v.status === "approved");
   const pending = vehicles?.find((v) => v.status === "pending");
@@ -61,6 +65,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
           {tab === "overview" && (
             <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
               <div className="grid gap-6">
+                <JourneyPanel profile={profile} current={current} pending={pending} myPos={myPos} active={activeCh?.[0] ?? null} nextWarmup={nextWarmup} />
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   {[["Position", myPos ? `#${myPos}` : "—", "text-red"], [t("Victoires"), stats?.wins ?? 0, "text-ok"], [t("Défaites"), stats?.losses ?? 0, "text-red"], [t("Défis remportés"), stats?.challenges_won ?? 0, "text-bone"]].map(([l, v, c]) => (
                     <div key={l as string} className="bg-ink2 p-5 text-center"><div className={`font-display text-4xl ${c}`}>{v}</div><div className="label mt-1">{l}</div></div>

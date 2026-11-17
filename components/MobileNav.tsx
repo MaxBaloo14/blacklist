@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-export default function MobileNav({ links, logout }: { links: { href: string; label: string; badge?: number }[]; logout?: React.ReactNode }) {
+export default function MobileNav({ links, logout }: { links: { href: string; label: string; badge?: number; external?: boolean }[]; logout?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="md:hidden">
@@ -19,10 +19,14 @@ export default function MobileNav({ links, logout }: { links: { href: string; la
             <nav className="wrap mt-8 flex flex-col gap-1">
               {links.map((l, i) => (
                 <motion.div key={l.href} initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.05 * i }}>
-                  <Link href={l.href} onClick={() => setOpen(false)} className="font-display flex items-center justify-between border-b border-white/10 py-4 text-4xl uppercase tracking-wide">
-                    {l.label}
-                    {!!l.badge && <span className="badge badge-red">{l.badge}</span>}
-                  </Link>
+                  {l.external ? (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="font-display flex items-center justify-between border-b border-white/10 py-4 text-4xl uppercase tracking-wide">{l.label}</a>
+                  ) : (
+                    <Link href={l.href} onClick={() => setOpen(false)} className="font-display flex items-center justify-between border-b border-white/10 py-4 text-4xl uppercase tracking-wide">
+                      {l.label}
+                      {!!l.badge && <span className="badge badge-red">{l.badge}</span>}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
               {logout}

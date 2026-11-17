@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getT } from "@/lib/i18n";
+import { DISCORD_URL } from "@/lib/links";
 
 export default async function Footer() {
   const t = await getT();
@@ -15,6 +16,7 @@ export default async function Footer() {
         <Link href="/rules" className="hover:text-white">{t("RÈGLEMENT")}</Link>
         <Link href="/warmup" className="hover:text-white">WARM-UP RACE</Link>
         <Link href="/crew" className="hover:text-white">{t("LE CREW")}</Link>
+        <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white">DISCORD</a>
         <Link href="/admin/login" className="hover:text-white">{t("ORGANISATION")}</Link>
       </div>
     </footer>

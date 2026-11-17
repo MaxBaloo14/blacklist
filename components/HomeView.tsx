@@ -2,6 +2,7 @@ import Link from "next/link";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import Tile from "@/components/Tile";
 import { getT } from "@/lib/i18n";
+import { DISCORD_URL } from "@/lib/links";
 
 /** Accueil volontairement léger : un titre, un bouton, puis les rubriques. Tout le reste est dans les pages dédiées. */
 export default async function HomeView() {
@@ -11,6 +12,7 @@ export default async function HomeView() {
     { href: "/race-network", icon: "map", title: t("CIRCUITS"), text: t("Les tracés officiels du réseau") },
     { href: "/warmup", icon: "flag", title: "WARM-UP RACE", text: t("La course d'entrée du dimanche") },
     { href: "/news", icon: "news", title: t("ACTUALITÉS"), text: t("Les annonces de l'organisation") },
+    { href: DISCORD_URL, icon: "discord", title: "DISCORD", text: t("Rejoins la BBC sur Discord"), external: true },
   ] as const;
   const letters = [..."BLACKLIST"];
   return (
@@ -29,7 +31,7 @@ export default async function HomeView() {
       </header>
 
       <nav aria-label={t("Rubriques")} className="pb-24 pt-2">
-        <div className="wrap grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="wrap grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {tiles.map((x, i) => <Tile key={x.href} index={i} {...x} />)}
         </div>
         <p className="wrap mt-10 text-center">

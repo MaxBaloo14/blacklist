@@ -86,6 +86,18 @@ const trackSchema = z.object({
   race_type: z.enum(["Sprint urbain", "Circuit", "Last Race", "Warm-up"]), status: z.enum(["active", "inactive"]), description: z.string().max(1000).optional(),
 });
 
+/** Autorisation d'envoi direct (navigateur -> stockage) d'une vidéo de circuit. Réservé aux organisateurs. */
+export async function createTrackVideoUpload(ext: string): Promise<ActionState & { path?: string; token?: string }> {
+  const supabase = await createClient();
+  const { data: isAdmin } = await supabase.rpc("is_admin");
+  if (!isAdmin) return await fail("Accès réservé aux organisateurs.");
+  if (ext !== "mp4" && ext !== "webm") return await fail("Format non supporté (MP4 ou WebM).");
+  const path = `videos/${crypto.randomUUID()}.${ext}`;
+  const { data, error } = await supabase.storage.from("track-images").createSignedUploadUrl(path);
+  if (error || !data) return await fail("Envoi impossible.");
+  return { ok: true, path, token: data.token, nonce: Date.now() };
+}
+
 export async function saveTrack(_: ActionState, f: FormData): Promise<ActionState> {
   const parsed = trackSchema.safeParse({ name: str(f, "name"), start_point: str(f, "start_point"), end_point: str(f, "end_point"), distance_km: str(f, "distance_km"), difficulty: str(f, "difficulty"), race_type: str(f, "race_type"), status: str(f, "status"), description: str(f, "description") });
   if (!parsed.success) return await fail(parsed.error.issues[0]?.message ?? "Données invalides.");
@@ -102,8 +114,22 @@ export async function saveTrack(_: ActionState, f: FormData): Promise<ActionStat
     if (upErr) return await fail("Envoi de l'image impossible.");
     row.image_path = path;
   }
+  // Vidéo : le fichier est déjà dans le stockage (envoi direct) ; on ne garde que son chemin, strictement contrôlé
+  const videoPath = str(f, "video_path");
+  let oldVideo: string | null = null;
+  if (existing && (videoPath || f.get("remove_video") === "on")) {
+    const { data: cur } = await supabase.from("race_tracks").select("video_path").eq("id", existing).maybeSingle();
+    oldVideo = cur?.video_path ?? null;
+  }
+  if (videoPath) {
+    if (!/^videos\/[0-9a-f-]{36}\.(mp4|webm)$/.test(videoPath)) return await fail("Vidéo invalide.");
+    row.video_path = videoPath;
+  } else if (f.get("remove_video") === "on") {
+    row.video_path = null;
+  }
   const { error } = existing ? await supabase.from("race_tracks").update(row).eq("id", existing) : await supabase.from("race_tracks").insert(row);
   if (error) return await fail(cleanError(error.message));
+  if (oldVideo && oldVideo !== row.video_path) await supabase.storage.from("track-images").remove([oldVideo]);
   revalidatePath("/", "layout");
   return await ok(existing ? "Circuit modifié." : "Circuit créé.");
 }

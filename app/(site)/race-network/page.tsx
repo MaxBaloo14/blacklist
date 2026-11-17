@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import TrackMap from "@/components/TrackMap";
+import TrackMedia from "@/components/TrackMedia";
 import { getTracks } from "@/lib/data";
 import { photoUrl } from "@/lib/format";
 import { getT } from "@/lib/i18n";
@@ -21,12 +22,15 @@ export default async function RaceNetwork() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {tracks.map((tk) => {
               const img = photoUrl(tk.image_path, "track-images");
+              const video = photoUrl(tk.video_path, "track-images");
+              const loop = tk.race_type === "Circuit" || tk.start_point === tk.end_point;
+              const dur = Math.max(3, Math.min(9, 2 + Number(tk.distance_km) / 2));
               return (
                 <article key={tk.id} className={`group overflow-hidden border border-white/10 bg-ink2 transition hover:border-red-dark ${tk.status === "inactive" ? "opacity-55" : ""}`}>
                   <div className="relative aspect-video overflow-hidden bg-ink3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    {img ? <img src={img} alt={tk.name} loading="lazy" className="size-full object-cover transition duration-500 group-hover:scale-105" />
-                      : <TrackMap id={tk.id} name={tk.name} loop={tk.race_type === "Circuit" || tk.start_point === tk.end_point} active={tk.status === "active"} dur={Math.max(3, Math.min(9, 2 + Number(tk.distance_km) / 2))} />}
+                    {video ? <TrackMedia id={tk.id} name={tk.name} videoUrl={video} posterUrl={img} loop={loop} active={tk.status === "active"} dur={dur} />
+                      : img ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={img} alt={tk.name} loading="lazy" className="size-full object-cover transition duration-500 group-hover:scale-105" />
+                      : <TrackMap id={tk.id} name={tk.name} loop={loop} active={tk.status === "active"} dur={dur} />}
                     <span className={`badge absolute left-3 top-3 ${tk.status === "active" ? "badge-ok" : "badge-metal"}`}>{tk.status === "active" ? t("Actif") : t("Inactif")}</span>
                   </div>
                   <div className="p-5">

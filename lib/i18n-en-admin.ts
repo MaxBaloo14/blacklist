@@ -402,4 +402,8 @@ export const EN_ADMIN: Record<string, string> = {
   "Circuit utilisé par un duel ou une Warm-up : désactive-le plutôt.": "Circuit used by a duel or a Warm-up: deactivate it instead.",
   "Aucun.": "None.", "Cible": "Target", "Clip": "Clip", "Détails": "Details", "Justificatif": "Proof", "Refusée": "Rejected", "Validée": "Validated",
   "Rechercher nom, prénom, téléphone…": "Search last name, first name, phone…", "(numéro de téléphone). Le pilote n'a pas d'email de récupération : en cas d'oubli, définis-lui un nouveau mot de passe ici.": "(phone number). The driver has no recovery email: if forgotten, set a new password for them here.",
+  "Vidéo trop lourde (20 Mo maximum).": "Video too large (20 MB maximum).", "Format non supporté (MP4 ou WebM).": "Unsupported format (MP4 or WebM).", "Envoi de la vidéo…": "Uploading the video…", "Envoi impossible.": "Upload failed.",
+  "Envoi de la vidéo impossible.": "Video upload failed.", "Vidéo prête : enregistre le circuit pour la publier.": "Video ready: save the circuit to publish it.", "Vidéo du circuit (facultatif)": "Circuit video (optional)",
+  "Courte vidéo muette en boucle : MP4 ou WebM, 5 à 20 secondes, 20 Mo maximum. Elle remplace le tracé animé.": "Short muted looping video: MP4 or WebM, 5 to 20 seconds, 20 MB maximum. It replaces the animated route.",
+  "Supprimer la vidéo actuelle": "Remove the current video", "Vidéo": "Video", "Vidéo invalide.": "Invalid video.",
 };

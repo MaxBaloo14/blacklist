@@ -1,5 +1,6 @@
 import ActionForm from "@/components/ActionForm";
 import Field from "@/components/Field";
+import VideoUpload from "@/components/VideoUpload";
 import { saveTrack } from "@/app/actions/admin";
 import { getT } from "@/lib/i18n";
 import type { Row } from "@/lib/types";
@@ -20,6 +21,7 @@ export default async function TrackForm({ track }: { track?: Row }) {
         <Field label={t("Difficulté")}><select name="difficulty" defaultValue={track?.difficulty ?? "Medium"} className="input">{diffs.map(([v, l]) => <option key={v} value={v}>{t(l)}</option>)}</select></Field>
         <Field label={t("Statut")}><select name="status" defaultValue={track?.status ?? "active"} className="input"><option value="active">{t("Actif")}</option><option value="inactive">{t("Inactif")}</option></select></Field>
         <Field label={t("Image ou carte")} hint={t("JPEG, PNG ou WebP — 5 Mo max.")}><input name="image" type="file" accept="image/jpeg,image/png,image/webp" className="input file:mr-3 file:border-0 file:bg-red file:px-3 file:py-1 file:font-cond file:text-xs file:font-bold file:uppercase file:text-white" /></Field>
+        <VideoUpload current={track?.video_path} />
         <Field label={t("Description")} className="sm:col-span-2"><textarea name="description" defaultValue={track?.description ?? ""} maxLength={1000} className="input" /></Field>
       </div>
     </ActionForm>

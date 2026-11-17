@@ -30,7 +30,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
   const approved = vehicles?.find((v) => v.status === "approved");
   return (
     <>
-      <AdminHead kicker={rank ? `BLACKLIST #${rank.position}` : t("FICHE PILOTE")} title={fullName(d)}>{t("Tél.")} : {d.phone} · Discord : {d.discord_tag ?? "—"} · {t("Dernière activité")} : {dateTime(d.last_activity_at, locale)}{rank ? ` · ${t("{n} j sans duel", { n: inact ?? 0 })}` : ""}</AdminHead>
+      <AdminHead kicker={rank ? `BLACKLIST #${rank.position}` : t("FICHE PILOTE")} title={fullName(d)}>{t("Tél.")} : {d.phone}{d.discord_tag ? ` · Discord : ${d.discord_tag}` : ""} · {t("Dernière activité")} : {dateTime(d.last_activity_at, locale)}{rank ? ` · ${t("{n} j sans duel", { n: inact ?? 0 })}` : ""}</AdminHead>
       <div className="grid gap-6 xl:grid-cols-2">
         <div className="panel">
           <div className="kicker mb-3">{t("INSCRIPTION —")} <span className={d.registration_status === "validated" ? "text-ok" : ""}>{L.reg(d.registration_status).toUpperCase()}</span></div>
@@ -59,7 +59,6 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
             <Field label={t("Prénom")}><input name="first_name" defaultValue={d.first_name} required className="input" /></Field>
             <Field label={t("Nom")}><input name="last_name" defaultValue={d.last_name} required className="input" /></Field>
             <Field label={t("Téléphone")}><input name="phone" defaultValue={d.phone} required className="input" /></Field>
-            <Field label={t("Discord")}><input name="discord_tag" defaultValue={d.discord_tag ?? ""} className="input" /></Field>
           </div>
         </ActionForm>
         <div className="panel">

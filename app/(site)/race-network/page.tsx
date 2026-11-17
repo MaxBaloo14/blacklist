@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
+import TrackMap from "@/components/TrackMap";
 import { getTracks } from "@/lib/data";
 import { photoUrl } from "@/lib/format";
 import { getT } from "@/lib/i18n";
@@ -24,7 +25,8 @@ export default async function RaceNetwork() {
                 <article key={tk.id} className={`group overflow-hidden border border-white/10 bg-ink2 transition hover:border-red-dark ${tk.status === "inactive" ? "opacity-55" : ""}`}>
                   <div className="relative aspect-video overflow-hidden bg-ink3">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    {img ? <img src={img} alt={tk.name} loading="lazy" className="size-full object-cover transition duration-500 group-hover:scale-105" /> : <div className="grid size-full place-items-center font-cond text-xs tracking-[.3em] text-metal">{t("PAS DE CARTE")}</div>}
+                    {img ? <img src={img} alt={tk.name} loading="lazy" className="size-full object-cover transition duration-500 group-hover:scale-105" />
+                      : <TrackMap id={tk.id} name={tk.name} loop={tk.race_type === "Circuit" || tk.start_point === tk.end_point} active={tk.status === "active"} dur={Math.max(3, Math.min(9, 2 + Number(tk.distance_km) / 2))} />}
                     <span className={`badge absolute left-3 top-3 ${tk.status === "active" ? "badge-ok" : "badge-metal"}`}>{tk.status === "active" ? t("Actif") : t("Inactif")}</span>
                   </div>
                   <div className="p-5">

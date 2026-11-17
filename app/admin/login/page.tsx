@@ -9,7 +9,7 @@ export default async function AdminLogin({ searchParams }: { searchParams: Promi
   const sp = await searchParams;
   return (
     <main className="relative grid min-h-screen place-items-center px-5">
-      <div className="absolute inset-0 -z-10 bg-cover bg-center opacity-20" style={{ backgroundImage: "url(/img/hero.jpg)" }} />
+      <div className="absolute inset-0 -z-10 bg-cover bg-center opacity-20" style={{ backgroundImage: "url(/img/hero.webp)" }} />
       <div className="absolute inset-0 -z-10 bg-ink/80" />
       <div className="w-full max-w-md">
         <div className="mb-6 text-center">

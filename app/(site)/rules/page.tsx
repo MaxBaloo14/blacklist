@@ -1,0 +1,71 @@
+import type { Metadata } from "next";
+import PageHead from "@/components/PageHead";
+import { getPublicSettings } from "@/lib/data";
+import { money } from "@/lib/format";
+import { getI18n } from "@/lib/i18n";
+
+export const metadata: Metadata = { title: "Règlement" };
+
+const DEFAULT_REWARDS: Record<string, number> = { "1": 2000000, "2": 1500000, "3": 1000000, "4": 800000, "5": 700000, "6": 500000, "7": 400000, "8": 300000, "9": 250000, "10": 200000 };
+
+export default async function RulesPage() {
+  const [{ t, locale }, settings] = await Promise.all([getI18n(), getPublicSettings()]);
+  const s = (k: string, d: number) => Number(settings.find((x) => x.key === k)?.value ?? d);
+  const hours = s("challenge_response_hours", 48), inactive = s("inactivity_days", 14), perWeek = s("challenges_per_week", 1);
+  const rewards: Record<string, number> = settings.find((x) => x.key === "rewards")?.value ?? DEFAULT_REWARDS;
+
+  const steps = [
+    [t("S'INSCRIRE"), t("Engage ton véhicule. Il doit être homologué par l'organisation avant de rouler.")],
+    ["WARM-UP RACE", t("Chaque dimanche, une course d'entrée. Seul le vainqueur, après validation de l'organisation, débloque la position #10.")],
+    [t("DÉFIER"), t("Tu ne peux défier que le pilote juste au-dessus de toi, sans sauter de position.")],
+    [t("PRENDRE LA PLACE"), t("Le vainqueur prend le rang et le Cash Prize du boss battu.")],
+  ];
+  const rules: [string, string[]][] = [
+    [t("Véhicules"), [t("Véhicules de boutique interdits"), t("Catégorie Supersportives interdite"), t("Un seul véhicule officiel par pilote"), t("Véhicule non homologué = aucune course")]],
+    [t("Défis"), [t("{n} défi par semaine et par challenger", { n: perWeek }), t("Le pilote défié a {h} h pour fixer une date dans la semaine en cours", { h: hours }), t("Date non fixée à temps : l'organisation est alertée"), t("Absence injustifiée : forfait possible, après vérification de l'organisation")]],
+    [t("Duel standard"), [t("Hors Top 3 : une seule course en 1 contre 1"), t("Le gagnant prend la position du perdant"), t("Le perdant descend d'un rang")]],
+    [t("Duel du podium (#3, #2, #1)"), [t("Course 1 : sprint urbain choisi par le champion"), t("Course 2 : sprint urbain choisi par le challenger"), t("Course 3 : Last Race"), t("Le premier à 2 victoires remporte le duel")]],
+    [t("Perte du véhicule"), [t("Un membre du Top 3 qui perd son duel cède sa position"), t("Il perd définitivement son véhicule engagé"), t("Il doit en enregistrer un nouveau et le faire homologuer")]],
+    [t("Inactivité"), [t("Après {d} jours sans duel : alerte et décompte affiché", { d: inactive }), t("Sanctions possibles : perte de deux positions, retrait, remplacement par un réserviste"), t("Toute sanction est une décision de l'organisation")]],
+  ];
+
+  return (
+    <>
+      <PageHead kicker={t("LE RÈGLEMENT")} title={t("Les règles")} em={t("du jeu")}>{t("Tout ce qu'il faut savoir pour entrer dans la Blacklist, défier un pilote et prendre sa place.")}</PageHead>
+      <section className="py-14">
+        <div className="wrap">
+          <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map(([title, text], i) => (
+              <div key={title} className="flex gap-4">
+                <span className="font-display text-5xl leading-none text-red-dark">{i + 1}</span>
+                <div><h2 className="font-cond text-lg font-bold uppercase tracking-[.12em]">{title}</h2><p className="mt-1 text-sm text-[#a5a9b0]">{text}</p></div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 grid gap-4 md:grid-cols-2">
+            {rules.map(([title, items]) => (
+              <section key={title} className="panel">
+                <h2 className="kicker mb-3">{title}</h2>
+                <ul className="space-y-2 text-[15px] text-[#cfcfcf]">
+                  {items.map((x) => <li key={x} className="before:mr-2.5 before:inline-block before:size-1.5 before:rotate-45 before:bg-red">{x}</li>)}
+                </ul>
+              </section>
+            ))}
+          </div>
+
+          <h2 className="h2 mb-6 mt-20">Cash <em>Prize</em></h2>
+          <p className="mb-5 max-w-2xl text-sm text-[#a5a9b0]">{t("Le montant correspond au rang du boss battu. Le site ne réalise aucun transfert d'argent : il suit uniquement les versements effectués par l'organisation.")}</p>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+            {Array.from({ length: 10 }, (_, i) => String(10 - i)).map((rank) => (
+              <div key={rank} className="bg-ink2 px-4 py-3">
+                <div className="font-display text-3xl text-red">#{rank}</div>
+                <div className="font-cond text-lg font-bold tracking-wide">{money(rewards[rank], locale)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

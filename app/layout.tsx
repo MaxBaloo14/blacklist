@@ -13,7 +13,7 @@ import { getLang } from "@/lib/i18n";
 export const metadata: Metadata = {
   title: { default: "BLACKLIST — Booboo Crew", template: "%s — BLACKLIST" },
   description: "10 drivers. 10 positions. One king. A BOOBOO CREW PRODUCTION.",
-  icons: { icon: "/img/logo.jpg" },
+  icons: { icon: "/img/favicon.png" },
 };
 export const viewport: Viewport = { themeColor: "#090A0C" };
 

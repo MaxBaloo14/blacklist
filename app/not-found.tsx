@@ -10,7 +10,7 @@ export default async function NotFound() {
     <>
       <Nav />
       <main className="relative flex min-h-screen items-center overflow-hidden pt-20">
-        <div className="absolute inset-0 -z-10 bg-cover bg-center opacity-30" style={{ backgroundImage: "url(/img/hero.jpg)" }} />
+        <div className="absolute inset-0 -z-10 bg-cover bg-center opacity-30" style={{ backgroundImage: "url(/img/hero.webp)" }} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/90" />
         <div className="wrap">
           <div className="kicker mb-3">{t("ERREUR 404")}</div>

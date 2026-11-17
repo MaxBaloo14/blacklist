@@ -1,8 +1,9 @@
 // Traductions anglaises. Clé = texte français source (voir lib/i18n-core.ts).
 // Vérification de couverture : python3 scripts/i18n-keys.py
 import type { Lang } from "@/lib/i18n-core";
+import { EN_ADMIN } from "@/lib/i18n-en-admin";
 
-export const EN: Record<string, string> = {
+const EN_SITE: Record<string, string> = {
   // Navigation
   "ACCUEIL": "HOME", "LA BLACKLIST": "THE BLACKLIST", "INSCRIPTION": "REGISTER", "CIRCUITS": "RACE NETWORK", "CONNEXION": "LOGIN",
   "MON PROFIL": "MY PROFILE", "MES DÉFIS": "MY CHALLENGES", "DÉCONNEXION": "LOGOUT", "LE CREW": "THE CREW", "ORGANISATION": "ORGANISATION",
@@ -138,6 +139,8 @@ export const EN: Record<string, string> = {
   "Action non autorisée.": "Action not allowed.", "Cette entrée existe déjà.": "This entry already exists.", "Données invalides.": "Invalid data.",
 };
 
+export const EN: Record<string, string> = { ...EN_SITE, ...EN_ADMIN };
+
 // Messages d'erreur renvoyés par la base (français, parfois avec des valeurs) → anglais
 const DB: Record<string, string> = {
   "Connexion requise.": "Login required.",
@@ -154,9 +157,25 @@ const DB: Record<string, string> = {
   "Compte inactif.": "Inactive account.", "Les véhicules de boutique sont interdits.": "Shop vehicles are banned.", "Photographie invalide.": "Invalid photo.",
   "Une demande d'homologation est déjà en cours.": "An approval request is already in progress.", "Catégorie de véhicule inconnue.": "Unknown vehicle category.",
   "Un véhicule doit d'abord être soumis à homologation.": "A vehicle must first be submitted for approval.",
+  "Accès réservé aux organisateurs.": "Restricted to organisers.", "Aucun résultat à valider pour ce défi.": "No result to validate for this challenge.", "Aucun vainqueur enregistré.": "No winner recorded.",
+  "Aucune position vacante à pourvoir.": "No vacant position to fill.", "Ce défi est déjà clos.": "This challenge is already closed.", "Ce défi ne peut plus faire l'objet d'un forfait.": "A forfeit can no longer be declared for this challenge.",
+  "Ce pilote est déjà dans la Blacklist.": "This driver is already in the Blacklist.", "Ce pilote est engagé dans un défi en cours.": "This driver is involved in an active challenge.",
+  "Ce pilote n'a pas de véhicule engagé.": "This driver has no entered vehicle.", "Ce pilote n'est pas dans la Blacklist.": "This driver is not in the Blacklist.", "Ce pilote n'est pas éligible (Warm-up non validée).": "This driver is not eligible (Warm-up not validated).",
+  "Ce pilote ne participe pas au défi.": "This driver is not part of the challenge.", "Cette demande a déjà été traitée.": "This request has already been processed.", "Cette édition est close.": "This edition is closed.",
+  "Choisis un réserviste en attente.": "Pick a waiting reserve driver.", "Des défis sont en cours : clos-les ou annule-les avant de modifier le classement à la main.": "Challenges are in progress: close or cancel them before editing the ranking by hand.",
+  "Décision invalide.": "Invalid decision.", "Déjà payée.": "Already paid.", "Déjà validé.": "Already validated.", "L'occupant du #10 est engagé dans un défi en cours.": "The #10 occupant is involved in an active challenge.",
+  "Le #10 est occupé. Évincer l'occupant (envoyé en réserve) ?": "#10 is taken. Evict the occupant (sent to reserve)?", "Le classement a changé depuis la création du défi : annule-le ou rétablis les positions.": "The ranking has changed since the challenge was created: cancel it or restore the positions.",
+  "Le classement doit contenir 10 positions.": "The ranking must contain 10 positions.", "Le duel est déjà décidé : cette manche n'est pas nécessaire.": "The duel is already decided: this race is not needed.",
+  "Le défi doit être programmé pour saisir un résultat.": "The challenge must be scheduled before a result can be entered.", "Le vainqueur doit être l'un des deux pilotes.": "The winner must be one of the two drivers.", "Le vainqueur doit être un participant.": "The winner must be a participant.",
+  "Pilote introuvable.": "Driver not found.", "Récompense introuvable.": "Reward not found.", "Réserviste introuvable.": "Reserve driver not found.", "Résultat déjà validé.": "Result already validated.", "Saisis les manches dans l'ordre.": "Enter the races in order.",
+  "Seul un véhicule homologué peut être disqualifié.": "Only an approved vehicle can be disqualified.", "Statut invalide.": "Invalid status.", "Statut non autorisé.": "Status not allowed.", "Un justificatif est requis.": "A justification is required.",
+  "Un lien de clip est requis.": "A clip link is required.", "Un motif est requis.": "A reason is required.", "Un pilote ne peut occuper qu'une position.": "A driver can only hold one position.", "Un pilote ne peut pas homologuer son propre véhicule.": "A driver cannot approve their own vehicle.",
+  "Une décision motivée est obligatoire.": "A reasoned decision is required.", "Une justification (5 caractères minimum) est obligatoire.": "A justification (5 characters minimum) is required.", "Véhicule introuvable.": "Vehicle not found.",
+  "Sélection invalide.": "Invalid selection.", "Requête invalide.": "Invalid request.", "Mot de passe : 10 caractères minimum.": "Password: 10 characters minimum.",
   "Action non autorisée.": "Action not allowed.", "Cette entrée existe déjà.": "This entry already exists.", "Données invalides.": "Invalid data.",
 };
 const DB_RE: [RegExp, string][] = [
+  [/^Le pilote en position (\d+) n'est pas valide\.$/, "The driver in position $1 is not valid."],
   [/^Tu ne peux défier que le pilote directement au-dessus de toi \(#(\d+)\)\.$/, "You can only challenge the driver directly above you (#$1)."],
   [/^Le compte de (.+) n'est pas actif\.$/, "$1's account is not active."],
   [/^L'inscription de (.+) n'est pas validée\.$/, "$1's registration is not validated."],

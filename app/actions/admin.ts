@@ -6,10 +6,11 @@ import { callRpc, cleanError, str } from "@/lib/action";
 import { checkImage } from "@/lib/upload";
 import { createServiceClient } from "@/lib/supabase/admin";
 import { parisLocalToISO } from "@/lib/format";
+import { getT } from "@/lib/i18n";
 import type { ActionState } from "@/lib/types";
 
-const fail = (message: string): ActionState => ({ ok: false, message, nonce: Date.now() });
-const ok = (message: string): ActionState => ({ ok: true, message, nonce: Date.now() });
+const fail = async (message: string): Promise<ActionState> => ({ ok: false, message: (await getT())(message), nonce: Date.now() });
+const ok = async (message: string): Promise<ActionState> => ({ ok: true, message: (await getT())(message), nonce: Date.now() });
 
 class Invalid extends Error {}
 const id = (f: FormData, k: string) => { const r = z.string().uuid().safeParse(str(f, k)); if (!r.success) throw new Invalid("Sélection invalide."); return r.data; };
@@ -30,7 +31,7 @@ const when = (f: FormData, k: string) => {
 function rpc(name: string, build: (f: FormData) => Record<string, unknown>, success: string) {
   return async (_: ActionState, f: FormData): Promise<ActionState> => {
     try { return await callRpc(name, build(f), success); }
-    catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+    catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
   };
 }
 
@@ -63,7 +64,7 @@ export async function setRanking(_: ActionState, f: FormData): Promise<ActionSta
     const arr = Array.from({ length: 10 }, (_, i) => str(f, `pos${i + 1}`) || null);
     arr.forEach((v) => { if (v && !z.string().uuid().safeParse(v).success) throw new Invalid("Sélection invalide."); });
     return await callRpc("admin_set_ranking", { p_assignments: arr, p_reason: str(f, "reason") }, "Classement modifié et journalisé.");
-  } catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }
 
 /* ---------- Données éditoriales (écriture directe, protégée par RLS + audit automatique) ---------- */
@@ -73,10 +74,10 @@ export async function updateDriverInfo(_: ActionState, f: FormData): Promise<Act
       .parse({ first_name: str(f, "first_name"), last_name: str(f, "last_name"), phone: str(f, "phone"), discord_tag: str(f, "discord_tag") });
     const supabase = await createClient();
     const { error } = await supabase.from("profiles").update(p).eq("id", id(f, "driver"));
-    if (error) return fail(cleanError(error.message));
+    if (error) return await fail(cleanError(error.message));
     revalidatePath("/admin", "layout");
-    return ok("Informations du pilote mises à jour.");
-  } catch (e) { return fail(e instanceof Invalid ? e.message : "Informations invalides."); }
+    return await ok("Informations du pilote mises à jour.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Informations invalides."); }
 }
 
 const trackSchema = z.object({
@@ -87,7 +88,7 @@ const trackSchema = z.object({
 
 export async function saveTrack(_: ActionState, f: FormData): Promise<ActionState> {
   const parsed = trackSchema.safeParse({ name: str(f, "name"), start_point: str(f, "start_point"), end_point: str(f, "end_point"), distance_km: str(f, "distance_km"), difficulty: str(f, "difficulty"), race_type: str(f, "race_type"), status: str(f, "status"), description: str(f, "description") });
-  if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Données invalides.");
+  if (!parsed.success) return await fail(parsed.error.issues[0]?.message ?? "Données invalides.");
   const supabase = await createClient();
   const existing = str(f, "id");
   const row: Record<string, unknown> = { ...parsed.data, description: parsed.data.description || null };
@@ -95,38 +96,38 @@ export async function saveTrack(_: ActionState, f: FormData): Promise<ActionStat
   const file = f.get("image") as File | null;
   if (file && file.size > 0) {
     const img = await checkImage(file);
-    if (!img.ok) return fail(img.message);
+    if (!img.ok) return await fail(img.message);
     const path = `${crypto.randomUUID()}.${img.ext}`;
     const { error: upErr } = await supabase.storage.from("track-images").upload(path, img.bytes, { contentType: img.type });
-    if (upErr) return fail("Envoi de l'image impossible.");
+    if (upErr) return await fail("Envoi de l'image impossible.");
     row.image_path = path;
   }
   const { error } = existing ? await supabase.from("race_tracks").update(row).eq("id", existing) : await supabase.from("race_tracks").insert(row);
-  if (error) return fail(cleanError(error.message));
+  if (error) return await fail(cleanError(error.message));
   revalidatePath("/", "layout");
-  return ok(existing ? "Circuit modifié." : "Circuit créé.");
+  return await ok(existing ? "Circuit modifié." : "Circuit créé.");
 }
 
 export async function deleteTrack(_: ActionState, f: FormData): Promise<ActionState> {
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("race_tracks").delete().eq("id", id(f, "id"));
-    if (error) return fail(/foreign key/i.test(error.message) ? "Circuit utilisé par un duel ou une Warm-up : désactive-le plutôt." : cleanError(error.message));
+    if (error) return await fail(/foreign key/i.test(error.message) ? "Circuit utilisé par un duel ou une Warm-up : désactive-le plutôt." : cleanError(error.message));
     revalidatePath("/", "layout");
-    return ok("Circuit supprimé.");
-  } catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+    return await ok("Circuit supprimé.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }
 
 export async function saveNews(_: ActionState, f: FormData): Promise<ActionState> {
   const p = z.object({ title: z.string().min(2).max(120), body: z.string().min(2).max(4000) }).safeParse({ title: str(f, "title"), body: str(f, "body") });
-  if (!p.success) return fail("Titre et texte requis.");
+  if (!p.success) return await fail("Titre et texte requis.");
   const supabase = await createClient();
   const { data: claims } = await supabase.auth.getClaims(); const user = { id: claims?.claims?.sub as string | undefined };
   const publish = f.get("publish") === "on";
   const { error } = await supabase.from("announcements").insert({ ...p.data, published: publish, published_at: publish ? new Date().toISOString() : null, author_id: user?.id });
-  if (error) return fail(cleanError(error.message));
+  if (error) return await fail(cleanError(error.message));
   revalidatePath("/", "layout");
-  return ok(publish ? "Annonce publiée sur la page d'accueil." : "Brouillon enregistré.");
+  return await ok(publish ? "Annonce publiée sur la page d'accueil." : "Brouillon enregistré.");
 }
 
 export async function toggleNews(_: ActionState, f: FormData): Promise<ActionState> {
@@ -134,20 +135,20 @@ export async function toggleNews(_: ActionState, f: FormData): Promise<ActionSta
     const supabase = await createClient();
     const publish = str(f, "publish") === "1";
     const { error } = await supabase.from("announcements").update({ published: publish, published_at: publish ? new Date().toISOString() : null }).eq("id", id(f, "id"));
-    if (error) return fail(cleanError(error.message));
+    if (error) return await fail(cleanError(error.message));
     revalidatePath("/", "layout");
-    return ok(publish ? "Publiée." : "Retirée de l'accueil.");
-  } catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+    return await ok(publish ? "Publiée." : "Retirée de l'accueil.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }
 
 export async function deleteNews(_: ActionState, f: FormData): Promise<ActionState> {
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("announcements").delete().eq("id", id(f, "id"));
-    if (error) return fail(cleanError(error.message));
+    if (error) return await fail(cleanError(error.message));
     revalidatePath("/", "layout");
-    return ok("Annonce supprimée.");
-  } catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+    return await ok("Annonce supprimée.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }
 
 // Valeurs autorisées pour chaque règle : on ne laisse pas saisir n'importe quoi dans la configuration
@@ -168,18 +169,18 @@ const settingSchemas: Record<string, z.ZodType> = {
 export async function saveSetting(_: ActionState, f: FormData): Promise<ActionState> {
   const key = str(f, "key");
   const schema = settingSchemas[key];
-  if (!schema) return fail("Règle inconnue.");
+  if (!schema) return await fail("Règle inconnue.");
   let value: unknown;
-  try { value = JSON.parse(str(f, "value")); } catch { return fail("JSON invalide."); }
+  try { value = JSON.parse(str(f, "value")); } catch { return await fail("JSON invalide."); }
   const parsed = schema.safeParse(value);
-  if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Valeur invalide.");
+  if (!parsed.success) return await fail(parsed.error.issues[0]?.message ?? "Valeur invalide.");
   const supabase = await createClient();
   const { data: claims } = await supabase.auth.getClaims(); const user = { id: claims?.claims?.sub as string | undefined };
   const { data, error } = await supabase.from("settings").update({ value: parsed.data, updated_by: user?.id, updated_at: new Date().toISOString() }).eq("key", key).select("key");
-  if (error) return fail(cleanError(error.message));
-  if (!data?.length) return fail("Seul un super administrateur peut modifier les règles.");
+  if (error) return await fail(cleanError(error.message));
+  if (!data?.length) return await fail("Seul un super administrateur peut modifier les règles.");
   revalidatePath("/", "layout");
-  return ok("Règle mise à jour (journalisée).");
+  return await ok("Règle mise à jour (journalisée).");
 }
 
 /** Réinitialisation du mot de passe d'un pilote par l'organisation (les pilotes n'ont pas d'email de récupération). */
@@ -187,16 +188,16 @@ export async function resetDriverPassword(_: ActionState, f: FormData): Promise<
   try {
     const supabase = await createClient();
     const { data: isAdmin } = await supabase.rpc("is_admin");
-    if (!isAdmin) return fail("Accès réservé aux organisateurs.");
+    if (!isAdmin) return await fail("Accès réservé aux organisateurs.");
     const password = String(f.get("password") ?? "");
-    if (password.length < 10 || password.length > 72) return fail("Mot de passe : 10 caractères minimum.");
+    if (password.length < 10 || password.length > 72) return await fail("Mot de passe : 10 caractères minimum.");
     const driver = id(f, "driver");
     const svc = createServiceClient();
     const { error } = await svc.auth.admin.updateUserById(driver, { password });
-    if (error) return fail("Réinitialisation impossible.");
+    if (error) return await fail("Réinitialisation impossible.");
     const { data: claims } = await supabase.auth.getClaims();
     await svc.from("admin_logs").insert({ admin_id: claims?.claims?.sub, action: "driver:reset_password", target_type: "profile", target_id: driver });
     revalidatePath("/admin", "layout");
-    return ok("Mot de passe réinitialisé. Transmets-le au pilote de façon privée.");
-  } catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+    return await ok("Mot de passe réinitialisé. Transmets-le au pilote de façon privée.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }

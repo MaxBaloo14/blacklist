@@ -59,5 +59,7 @@ export function localizeNotif(n: { kind: string; title: string; body: string | n
 /** Motifs d'historique du classement créés par la base. */
 export function localizeReason(r: string | null, lang: Lang) {
   if (!r || lang === "en") return r;
-  return r.replace(/^Duel #(\w+)$/, "Duel #$1").replace(/^Warm-up Race winner$/, "Vainqueur de la Warm-up Race").replace(/^Promoted from reserve$/, "Promu depuis la réserve");
+  return r
+    .replace(/^Duel #(\w+)$/, "Duel #$1").replace(/^Warm-up Race winner$/, "Vainqueur de la Warm-up Race").replace(/^Promoted from reserve$/, "Promu depuis la réserve")
+    .replace(/^Replaces (.+)$/, "Remplace $1").replace(/^Promoted to #(\d+)$/, "Promu au #$1").replace(/^Lost the podium duel against (.+)$/, "Duel du podium perdu contre $1");
 }

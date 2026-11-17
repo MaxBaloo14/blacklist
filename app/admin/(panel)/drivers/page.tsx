@@ -2,10 +2,14 @@ import Link from "next/link";
 import { AdminHead } from "@/components/AdminUI";
 import { requireAdmin } from "@/lib/auth";
 import { dateOnly } from "@/lib/format";
+import { getI18n } from "@/lib/i18n";
+import { labels } from "@/lib/labels";
 
 export const dynamic = "force-dynamic";
 
 export default async function Drivers({ searchParams }: { searchParams: Promise<{ q?: string; filter?: string }> }) {
+  const { t, locale } = await getI18n();
+  const L = labels(t);
   const sp = await searchParams;
   const { supabase } = await requireAdmin();
   let q = supabase.from("profiles").select("*").order("created_at", { ascending: false });
@@ -18,15 +22,15 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
   ]);
   return (
     <>
-      <AdminHead kicker="MANAGEMENT" title="Drivers">Tous les pilotes inscrits : validation des inscriptions, modification, suspension ou bannissement.</AdminHead>
+      <AdminHead kicker={t("GESTION")} title={t("Pilotes")}>{t("Tous les pilotes inscrits : validation des inscriptions, modification, suspension ou bannissement.")}</AdminHead>
       <form className="mb-5 flex flex-wrap gap-3">
-        <input name="q" defaultValue={sp.q} placeholder="Rechercher nom, prénom, Discord…" className="input max-w-sm" />
-        <select name="filter" defaultValue={sp.filter ?? ""} className="input max-w-[200px]"><option value="">Tous</option><option value="pending">Inscriptions à valider</option></select>
-        <button className="btn btn-dark btn-sm">FILTER</button>
+        <input name="q" defaultValue={sp.q} placeholder={t("Rechercher nom, prénom, Discord…")} className="input max-w-sm" />
+        <select name="filter" defaultValue={sp.filter ?? ""} className="input max-w-[200px]"><option value="">{t("Tous")}</option><option value="pending">{t("Inscriptions à valider")}</option></select>
+        <button className="btn btn-dark btn-sm">{t("FILTRER")}</button>
       </form>
       <div className="overflow-x-auto bg-ink2">
         <table className="tbl">
-          <thead><tr><th>Pilote</th><th>Discord</th><th>Rang</th><th>Véhicule</th><th>Inscription</th><th>Compte</th><th>Créé</th></tr></thead>
+          <thead><tr><th>{t("Pilote")}</th><th>{t("Discord")}</th><th>{t("Rang")}</th><th>{t("Véhicule")}</th><th>{t("Inscription")}</th><th>{t("Compte")}</th><th>{t("Créé")}</th></tr></thead>
           <tbody>
             {drivers?.map((d) => {
               const v = vehicles?.find((x) => x.owner_id === d.id && x.status === "approved") ?? vehicles?.find((x) => x.owner_id === d.id);
@@ -35,16 +39,16 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
                 <tr key={d.id}>
                   <td><Link href={`/admin/drivers/${d.id}`} className="font-cond text-lg font-bold uppercase tracking-wide hover:text-red">{d.first_name} {d.last_name}</Link></td>
                   <td>{d.discord_tag}</td><td>{r ? `#${r.position}` : "—"}</td>
-                  <td>{v ? <>{v.make_model} <span className={`badge ${v.status === "approved" ? "badge-ok" : "badge-warn"}`}>{v.status}</span></> : "—"}</td>
-                  <td><span className={`badge ${d.registration_status === "validated" ? "badge-ok" : d.registration_status === "rejected" ? "badge-red" : "badge-warn"}`}>{d.registration_status}</span></td>
-                  <td><span className={`badge ${d.account_status === "active" ? "badge-metal" : "badge-red"}`}>{d.account_status}</span></td>
-                  <td className="whitespace-nowrap">{dateOnly(d.created_at)}</td>
+                  <td>{v ? <>{v.make_model} <span className={`badge ${v.status === "approved" ? "badge-ok" : "badge-warn"}`}>{L.vehicle(v.status)}</span></> : "—"}</td>
+                  <td><span className={`badge ${d.registration_status === "validated" ? "badge-ok" : d.registration_status === "rejected" ? "badge-red" : "badge-warn"}`}>{L.reg(d.registration_status)}</span></td>
+                  <td><span className={`badge ${d.account_status === "active" ? "badge-metal" : "badge-red"}`}>{L.account(d.account_status)}</span></td>
+                  <td className="whitespace-nowrap">{dateOnly(d.created_at, locale)}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-        {!drivers?.length && <p className="p-5 text-[#a5a9b0]">Aucun résultat.</p>}
+        {!drivers?.length && <p className="p-5 text-[#a5a9b0]">{t("Aucun résultat.")}</p>}
       </div>
     </>
   );

@@ -42,7 +42,7 @@ export async function setRaceTrack(_: ActionState, f: FormData): Promise<ActionS
 
 const profileSchema = z.object({
   first_name: z.string().min(1).max(60), last_name: z.string().min(1).max(60),
-  phone: z.string().min(4).max(30), discord_tag: z.string().min(2).max(40),
+  phone: z.string().max(30).refine((v) => v.replace(/\D/g, "").length >= 4), discord_tag: z.string().max(40),
 });
 
 export async function updateProfile(_: ActionState, f: FormData): Promise<ActionState> {
@@ -51,8 +51,8 @@ export async function updateProfile(_: ActionState, f: FormData): Promise<Action
   const p = profileSchema.safeParse({ first_name: str(f, "first_name"), last_name: str(f, "last_name"), phone: str(f, "phone"), discord_tag: str(f, "discord_tag") });
   if (!p.success) return await fail("Informations invalides : tous les champs sont requis.");
   // La RLS et les droits de colonnes limitent la mise à jour à ces 4 champs, pour son propre compte.
-  const { error } = await supabase.from("profiles").update(p.data).eq("id", uid);
-  if (error) return await fail(cleanError(error.message));
+  const { error } = await supabase.from("profiles").update({ ...p.data, discord_tag: p.data.discord_tag || null }).eq("id", uid);
+  if (error) return await fail(/phone_key/.test(error.message) ? "Ce numéro de téléphone est déjà utilisé." : cleanError(error.message));
   revalidatePath("/profile");
   return { ok: true, message: (await getT())("Informations mises à jour."), nonce: Date.now() };
 }
@@ -63,14 +63,18 @@ export async function proposeVehicle(_: ActionState, f: FormData): Promise<Actio
   if (!(await rateLimit("vehicle", 5, 60 * 60_000, uid))) return await fail("Trop de propositions. Réessaie plus tard.");
   const make = str(f, "make_model"), cls = str(f, "vehicle_class");
   if (make.length < 2 || make.length > 80 || !cls) return await fail("Marque, modèle et catégorie requis.");
-  if (str(f, "shop") !== "no") return await fail("Les véhicules de boutique sont interdits.");
-  const img = await checkImage(f.get("photo") as File | null);
-  if (!img.ok) return await fail(img.message);
-  const path = `${uid}/${crypto.randomUUID()}.${img.ext}`;
-  const { error: upErr } = await supabase.storage.from("vehicle-photos").upload(path, img.bytes, { contentType: img.type });
-  if (upErr) return await fail("Envoi de la photographie impossible.");
+  // Photo facultative : si elle est fournie, elle est vérifiée puis stockée dans le dossier du pilote
+  let path: string | null = null;
+  const file = f.get("photo") as File | null;
+  if (file && file.size > 0) {
+    const img = await checkImage(file);
+    if (!img.ok) return await fail(img.message);
+    path = `${uid}/${crypto.randomUUID()}.${img.ext}`;
+    const { error: upErr } = await supabase.storage.from("vehicle-photos").upload(path, img.bytes, { contentType: img.type });
+    if (upErr) return await fail("Envoi de la photographie impossible.");
+  }
   const { error } = await supabase.rpc("propose_vehicle", { p_make_model: make, p_class: cls, p_photo_path: path, p_is_shop: false });
-  if (error) { await supabase.storage.from("vehicle-photos").remove([path]); return await fail(cleanError(error.message)); }
+  if (error) { if (path) await supabase.storage.from("vehicle-photos").remove([path]); return await fail(cleanError(error.message)); }
   revalidatePath("/profile");
   return { ok: true, message: (await getT())("Véhicule soumis à homologation."), nonce: Date.now() };
 }

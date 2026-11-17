@@ -86,8 +86,8 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 <div className="grid gap-4">
                   <Field label={t("Prénom")}><input name="first_name" defaultValue={profile.first_name} required maxLength={60} className="input" /></Field>
                   <Field label={t("Nom")}><input name="last_name" defaultValue={profile.last_name} required maxLength={60} className="input" /></Field>
-                  <Field label={t("Téléphone")}><input name="phone" type="tel" defaultValue={profile.phone} required maxLength={30} className="input" /></Field>
-                  <Field label={t("Pseudo Discord")} hint={t("C'est ton identifiant de connexion.")}><input name="discord_tag" defaultValue={profile.discord_tag} required minLength={2} maxLength={40} className="input" /></Field>
+                  <Field label={t("Téléphone")} hint={t("C'est ton identifiant de connexion.")}><input name="phone" type="tel" defaultValue={profile.phone} required maxLength={30} className="input" /></Field>
+                  <Field label={t("Pseudo Discord (facultatif)")}><input name="discord_tag" defaultValue={profile.discord_tag ?? ""} maxLength={40} className="input" /></Field>
                 </div>
               </ActionForm>
             </div>
@@ -140,7 +140,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 {current ? (
                   <div className="overflow-hidden border border-white/10 bg-ink2">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={photoUrl(current.photo_path)!} alt="" className="aspect-video w-full object-cover" />
+                    {current.photo_path ? <img src={photoUrl(current.photo_path)!} alt="" className="aspect-video w-full object-cover" /> : <div className="grid aspect-video w-full place-items-center bg-ink3 font-cond text-xs tracking-[.3em] text-metal">{t("PAS DE PHOTO")}</div>}
                     <div className="flex flex-wrap items-center justify-between gap-3 p-5"><div className="font-cond text-2xl font-bold uppercase tracking-wide">{current.make_model}<div className="text-sm font-normal text-metal">{t(current.vehicle_class)}</div></div><span className="badge badge-ok">{VSTATUS.approved[0]}</span></div>
                   </div>
                 ) : <p className="panel text-[#a5a9b0]">{t("Aucun véhicule homologué.")} {vehicles?.some((v) => v.status === "lost") && <b className="text-[#ff6b6b]">{t("Ton ancien véhicule a été confisqué : enregistre-en un nouveau et fais-le homologuer.")}</b>}</p>}
@@ -164,8 +164,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 <fieldset disabled={!!pending} className="grid gap-4">
                   <Field label={t("Marque et modèle")}><input name="make_model" required maxLength={80} className="input" /></Field>
                   <Field label={t("Catégorie")}><select name="vehicle_class" required defaultValue="" className="input"><option value="" disabled>{t("Choisir…")}</option>{classes.map((c) => <option key={c} value={c}>{t(c)}</option>)}</select></Field>
-                  <fieldset><legend className="label">{t("Véhicule de boutique ?")}</legend><div className="flex gap-6 text-[15px]"><label className="flex items-center gap-2"><input type="radio" name="shop" value="no" required className="accent-[#c62828]" /> {t("Non")}</label><label className="flex items-center gap-2"><input type="radio" name="shop" value="yes" className="accent-[#c62828]" /> {t("Oui")}</label></div></fieldset>
-                  <Field label={t("Photographie")} hint={t("JPEG, PNG ou WebP — 5 Mo max.")}><input name="photo" type="file" accept="image/jpeg,image/png,image/webp" required className="input file:mr-3 file:border-0 file:bg-red file:px-3 file:py-1 file:font-cond file:text-xs file:font-bold file:uppercase file:text-white" /></Field>
+                  <Field label={t("Photographie (facultatif)")} hint={t("JPEG, PNG ou WebP — 5 Mo max.")}><input name="photo" type="file" accept="image/jpeg,image/png,image/webp" className="input file:mr-3 file:border-0 file:bg-red file:px-3 file:py-1 file:font-cond file:text-xs file:font-bold file:uppercase file:text-white" /></Field>
                 </fieldset>
               </ActionForm>
             </div>

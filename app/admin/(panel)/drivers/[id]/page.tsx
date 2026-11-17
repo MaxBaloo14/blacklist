@@ -30,7 +30,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
   const approved = vehicles?.find((v) => v.status === "approved");
   return (
     <>
-      <AdminHead kicker={rank ? `BLACKLIST #${rank.position}` : t("FICHE PILOTE")} title={fullName(d)}>Discord : {d.discord_tag} · {t("Tél.")} : {d.phone} · {t("Dernière activité")} : {dateTime(d.last_activity_at, locale)}{rank ? ` · ${t("{n} j sans duel", { n: inact ?? 0 })}` : ""}</AdminHead>
+      <AdminHead kicker={rank ? `BLACKLIST #${rank.position}` : t("FICHE PILOTE")} title={fullName(d)}>{t("Tél.")} : {d.phone} · Discord : {d.discord_tag ?? "—"} · {t("Dernière activité")} : {dateTime(d.last_activity_at, locale)}{rank ? ` · ${t("{n} j sans duel", { n: inact ?? 0 })}` : ""}</AdminHead>
       <div className="grid gap-6 xl:grid-cols-2">
         <div className="panel">
           <div className="kicker mb-3">{t("INSCRIPTION —")} <span className={d.registration_status === "validated" ? "text-ok" : ""}>{L.reg(d.registration_status).toUpperCase()}</span></div>
@@ -59,12 +59,12 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
             <Field label={t("Prénom")}><input name="first_name" defaultValue={d.first_name} required className="input" /></Field>
             <Field label={t("Nom")}><input name="last_name" defaultValue={d.last_name} required className="input" /></Field>
             <Field label={t("Téléphone")}><input name="phone" defaultValue={d.phone} required className="input" /></Field>
-            <Field label={t("Discord")}><input name="discord_tag" defaultValue={d.discord_tag} required className="input" /></Field>
+            <Field label={t("Discord")}><input name="discord_tag" defaultValue={d.discord_tag ?? ""} className="input" /></Field>
           </div>
         </ActionForm>
         <div className="panel">
           <div className="kicker mb-3">{t("CONNEXION DU PILOTE")}</div>
-          <p className="mb-3 text-sm text-[#a5a9b0]">{t("Identifiant de connexion :")} <b className="text-bone">{d.discord_tag}</b> {t("(pseudo Discord). Le pilote n'a pas d'email de récupération : en cas d'oubli, définis-lui un nouveau mot de passe ici.")}</p>
+          <p className="mb-3 text-sm text-[#a5a9b0]">{t("Identifiant de connexion :")} <b className="text-bone">{d.phone}</b> {t("(numéro de téléphone). Le pilote n'a pas d'email de récupération : en cas d'oubli, définis-lui un nouveau mot de passe ici.")}</p>
           <ActionForm action={resetDriverPassword} label="RÉINITIALISER LE MOT DE PASSE" variant="dark" small confirm="Définir un nouveau mot de passe pour ce pilote ? L'ancien ne fonctionnera plus.">
             <input type="hidden" name="driver" value={d.id} />
             <Field label={t("Nouveau mot de passe (10 caractères minimum)")}><input name="password" type="text" required minLength={10} maxLength={72} autoComplete="off" className="input" /></Field>
@@ -75,7 +75,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
           <ul className="grid gap-2">{vehicles?.map((v) => (
             <li key={v.id} className="flex items-center gap-3 bg-ink p-2.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={photoUrl(v.photo_path)!} alt="" className="h-12 w-20 object-cover" />
+              {v.photo_path ? <img src={photoUrl(v.photo_path)!} alt="" className="h-12 w-20 object-cover" /> : <div className="h-12 w-20 bg-ink3" />}
               <div className="min-w-0 flex-1"><div className="font-cond truncate font-bold uppercase tracking-wide">{v.make_model}</div><div className="text-xs text-metal">{v.vehicle_class} · {dateOnly(v.created_at, locale)}{v.rejection_reason ? ` · ${v.rejection_reason}` : ""}</div></div>
               <span className="badge badge-metal">{L.vehicle(v.status)}</span>
             </li>

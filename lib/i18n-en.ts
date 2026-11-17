@@ -45,6 +45,8 @@ const EN_SITE: Record<string, string> = {
   "Toute sanction est une décision de l'organisation": "Every sanction is a decision of the organisation",
   "Le montant correspond au rang du boss battu. Le site ne réalise aucun transfert d'argent : il suit uniquement les versements effectués par l'organisation.": "The amount matches the rank of the beaten boss. The site does not transfer any money: it only tracks payments made by the organisation.",
   "Rejoins la BBC sur Discord": "Join the BBC on Discord",
+  "Numéro de téléphone et mot de passe requis.": "Phone number and password required.", "Ce numéro de téléphone est déjà utilisé.": "This phone number is already in use.",
+  "L'organisation examine ton dossier.": "The organisation reviews your file.", "Pseudo Discord (facultatif)": "Discord username (optional)", "Photographie (facultatif)": "Photo (optional)", "PAS DE PHOTO": "NO PHOTO",
   // Classement
   "CLASSEMENT OFFICIEL": "OFFICIAL RANKING", "La": "The",
   "10 pilotes. 10 positions. Le classement se met à jour en direct à chaque duel validé par l'organisation.": "10 drivers. 10 positions. The ranking updates live after every duel validated by the organisation.",

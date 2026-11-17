@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           <ActionForm action={login} label="SE CONNECTER" reset={false} className="panel">
             <input type="hidden" name="next" value={sp.next ?? ""} />
             <div className="grid gap-4">
-              <Field label={t("Pseudo Discord")}><input name="pseudo" required autoComplete="username" className="input" /></Field>
+              <Field label={t("Numéro de téléphone")}><input name="phone" type="tel" required autoComplete="username" className="input" /></Field>
               <Field label={t("Mot de passe")}><input name="password" type="password" required autoComplete="current-password" className="input" /></Field>
             </div>
           </ActionForm>

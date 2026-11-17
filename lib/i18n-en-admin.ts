@@ -401,4 +401,5 @@ export const EN_ADMIN: Record<string, string> = {
   "Informations invalides.": "Invalid information.",
   "Circuit utilisé par un duel ou une Warm-up : désactive-le plutôt.": "Circuit used by a duel or a Warm-up: deactivate it instead.",
   "Aucun.": "None.", "Cible": "Target", "Clip": "Clip", "Détails": "Details", "Justificatif": "Proof", "Refusée": "Rejected", "Validée": "Validated",
+  "Rechercher nom, prénom, téléphone…": "Search last name, first name, phone…", "(numéro de téléphone). Le pilote n'a pas d'email de récupération : en cas d'oubli, définis-lui un nouveau mot de passe ici.": "(phone number). The driver has no recovery email: if forgotten, set a new password for them here.",
 };

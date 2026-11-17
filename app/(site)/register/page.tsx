@@ -28,8 +28,7 @@ export default async function RegisterPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label={t("Nom")}><input name="last_name" required maxLength={60} autoComplete="family-name" className="input" /></Field>
               <Field label={t("Prénom")}><input name="first_name" required maxLength={60} autoComplete="given-name" className="input" /></Field>
-              <Field label={t("Numéro de téléphone")}><input name="phone" required type="tel" maxLength={30} autoComplete="tel" className="input" /></Field>
-              <Field label={t("Pseudo Discord")} hint={t("C'est ton identifiant de connexion et le contact de l'organisation.")}><input name="discord_tag" required minLength={2} maxLength={40} autoComplete="username" className="input" /></Field>
+              <Field label={t("Numéro de téléphone")} hint={t("C'est ton identifiant de connexion.")}><input name="phone" required type="tel" maxLength={30} autoComplete="tel" className="input" /></Field>
               <Field label={t("Mot de passe")} hint={t("10 caractères minimum.")} className="sm:col-span-2"><input name="password" type="password" required minLength={10} maxLength={72} autoComplete="new-password" className="input" /></Field>
             </div>
             <div className="kicker mb-4 mt-8">{t("VÉHICULE ENGAGÉ")}</div>
@@ -40,16 +39,6 @@ export default async function RegisterPage() {
                   <option value="" disabled>{t("Choisir…")}</option>
                   {classes.map((c) => <option key={c} value={c}>{t(c)}</option>)}
                 </select>
-              </Field>
-              <fieldset className="sm:col-span-2">
-                <legend className="label">{t("Véhicule issu de la boutique ?")}</legend>
-                <div className="flex gap-6 text-[15px]">
-                  <label className="flex items-center gap-2"><input type="radio" name="shop" value="no" required className="accent-[#c62828]" /> {t("Non")}</label>
-                  <label className="flex items-center gap-2"><input type="radio" name="shop" value="yes" className="accent-[#c62828]" /> {t("Oui")}</label>
-                </div>
-              </fieldset>
-              <Field label={t("Photographie du véhicule")} hint={t("JPEG, PNG ou WebP — 5 Mo max. Plaque et véhicule bien visibles.")} className="sm:col-span-2">
-                <input name="photo" type="file" required accept="image/jpeg,image/png,image/webp" className="input file:mr-4 file:border-0 file:bg-red file:px-4 file:py-1.5 file:font-cond file:text-xs file:font-bold file:uppercase file:tracking-widest file:text-white" />
               </Field>
             </div>
           </ActionForm>
@@ -66,7 +55,7 @@ export default async function RegisterPage() {
             <div className="panel">
               <div className="kicker mb-3">{t("ET ENSUITE ?")}</div>
               <ol className="space-y-3 text-sm text-[#a5a9b0]">
-                <li><b className="text-bone">1.</b> {t("L'organisation examine ton dossier et ta photo.")}</li>
+                <li><b className="text-bone">1.</b> {t("L'organisation examine ton dossier.")}</li>
                 <li><b className="text-bone">2.</b> {t("Statut")} : <span className="badge badge-warn">{t("En attente d'homologation")}</span> → <span className="badge badge-ok">{t("Homologué")}</span> {t("ou")} <span className="badge badge-red">{t("Refusé")}</span> {t("avec motif.")}</li>
                 <li><b className="text-bone">3.</b> {t("Participe à la Warm-up Race du dimanche pour viser la position #10.")}</li>
               </ol>

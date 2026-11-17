@@ -70,10 +70,10 @@ export async function setRanking(_: ActionState, f: FormData): Promise<ActionSta
 /* ---------- Données éditoriales (écriture directe, protégée par RLS + audit automatique) ---------- */
 export async function updateDriverInfo(_: ActionState, f: FormData): Promise<ActionState> {
   try {
-    const p = z.object({ first_name: z.string().min(1).max(60), last_name: z.string().min(1).max(60), phone: z.string().min(4).max(30), discord_tag: z.string().min(2).max(40) })
+    const p = z.object({ first_name: z.string().min(1).max(60), last_name: z.string().min(1).max(60), phone: z.string().max(30).refine((v) => v.replace(/\D/g, "").length >= 4), discord_tag: z.string().max(40) })
       .parse({ first_name: str(f, "first_name"), last_name: str(f, "last_name"), phone: str(f, "phone"), discord_tag: str(f, "discord_tag") });
     const supabase = await createClient();
-    const { error } = await supabase.from("profiles").update(p).eq("id", id(f, "driver"));
+    const { error } = await supabase.from("profiles").update({ ...p, discord_tag: p.discord_tag || null }).eq("id", id(f, "driver"));
     if (error) return await fail(cleanError(error.message));
     revalidatePath("/admin", "layout");
     return await ok("Informations du pilote mises à jour.");

@@ -279,5 +279,22 @@ select t_eq('anonyme : pas de téléphone exposé', (select count(*) from inform
 select t_eq('anonyme : aucune récompense visible', (select count(*) from rewards)::text, '0');
 select t_eq('anonyme : paramètres sensibles masqués', (select count(*) from settings where key = 'timezone')::text, '0');
 reset role;
+
+\echo ''
+\echo '### 14. Connexion par numéro, photo et pseudo facultatifs'
+reset role;
+select t_eq('clé de connexion = chiffres du numéro', (select phone_key from profiles where id=t_uid(15)), '0611223344');
+insert into auth.users(id) values (t_uid(40));
+select t_ok($$insert into profiles(id,first_name,last_name,phone) values (t_uid(40),'Sans','Discord','07 00 00 00 40')$$, 'inscription sans pseudo Discord');
+select t_fail($$insert into profiles(id,first_name,last_name,phone) values (gen_random_uuid(),'Dbl','Num','0700000040')$$, 'même numéro avec un autre format refusé');
+select t_ok($$insert into vehicles(owner_id,make_model,vehicle_class) values (t_uid(40),'Sans Photo','Muscle')$$, 'véhicule sans photo accepté');
+update profiles set registration_status='validated' where id=t_uid(40);
+select t_as(2); select admin_review_vehicle((select id from vehicles where owner_id=t_uid(40)),'approved'); reset role;
+select t_eq('véhicule sans photo homologable', (select status::text from vehicles where owner_id=t_uid(40)), 'approved');
+select t_as(40);
+select t_fail($$select propose_vehicle('Autre','Muscle', t_uid(11)||'/car.jpg')$$, 'photo hors de son dossier toujours refusée');
+select t_ok($$select propose_vehicle('Autre Sans Photo','Coupés', null)$$, 'proposition de changement sans photo');
+reset role;
+
 \echo ''
 \echo '### TOUS LES SCÉNARIOS PASSENT'

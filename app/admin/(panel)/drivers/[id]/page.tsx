@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, CSTATUS, Details } from "@/components/AdminUI";
 import Field from "@/components/Field";
-import { addReserve, markVehicleLost, recordAbsence, setAccountStatus, updateDriverInfo, validateRegistration } from "@/app/actions/admin";
+import { addReserve, markVehicleLost, recordAbsence, resetDriverPassword, setAccountStatus, updateDriverInfo, validateRegistration } from "@/app/actions/admin";
 import { requireAdmin } from "@/lib/auth";
 import { dateOnly, dateTime, fullName, photoUrl } from "@/lib/format";
 
@@ -58,6 +58,14 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
             <Field label="Discord"><input name="discord_tag" defaultValue={d.discord_tag} required className="input" /></Field>
           </div>
         </ActionForm>
+        <div className="panel">
+          <div className="kicker mb-3">CONNEXION DU PILOTE</div>
+          <p className="mb-3 text-sm text-[#a5a9b0]">Identifiant de connexion : <b className="text-bone">{d.discord_tag}</b> (pseudo Discord). Le pilote n&apos;a pas d&apos;email de récupération : en cas d&apos;oubli, définis-lui un nouveau mot de passe ici.</p>
+          <ActionForm action={resetDriverPassword} label="RESET PASSWORD" variant="dark" small confirm="Définir un nouveau mot de passe pour ce pilote ? L'ancien ne fonctionnera plus.">
+            <input type="hidden" name="driver" value={d.id} />
+            <Field label="Nouveau mot de passe (10 caractères minimum)"><input name="password" type="text" required minLength={10} maxLength={72} autoComplete="off" className="input" /></Field>
+          </ActionForm>
+        </div>
         <div className="panel">
           <div className="kicker mb-3">VÉHICULES</div>
           <ul className="grid gap-2">{vehicles?.map((v) => (

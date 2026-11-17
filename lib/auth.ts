@@ -1,18 +1,27 @@
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createClient, hasSupabase } from "@/lib/supabase/server";
 import type { Row } from "@/lib/types";
 
-export async function getSession() {
-  if (!hasSupabase) return { supabase: null, user: null, profile: null as Row | null, isAdmin: false };
+/**
+ * Session de la requête, calculée UNE seule fois (cache React) même si Nav, la page et le layout la demandent.
+ * L'identité vient de getClaims() : le jeton est vérifié localement (clés publiques de signature),
+ * sans aller-retour réseau vers Supabase. Les droits (admin) restent lus en base.
+ */
+export const getSession = cache(async () => {
+  const empty = { supabase: null, user: null as { id: string; email?: string } | null, profile: null as Row | null, isAdmin: false, unread: 0 };
+  if (!hasSupabase) return empty;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { supabase, user: null, profile: null as Row | null, isAdmin: false };
-  const [{ data: profile }, { data: isAdmin }] = await Promise.all([
-    supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(),
+  const { data } = await supabase.auth.getClaims();
+  const uid = data?.claims?.sub;
+  if (!uid) return { ...empty, supabase };
+  const [{ data: profile }, { data: isAdmin }, { count }] = await Promise.all([
+    supabase.from("profiles").select("*").eq("id", uid).maybeSingle(),
     supabase.rpc("is_admin"),
+    supabase.from("notifications").select("id", { count: "exact", head: true }).is("read_at", null),
   ]);
-  return { supabase, user, profile: profile as Row | null, isAdmin: Boolean(isAdmin) };
-}
+  return { supabase, user: { id: uid, email: data!.claims.email as string | undefined }, profile: profile as Row | null, isAdmin: Boolean(isAdmin), unread: count ?? 0 };
+});
 
 /** Espace pilote : exige un compte pilote (profil). Un compte organisateur est renvoyé vers son interface. */
 export async function requireDriver() {

@@ -1,5 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { getLang } from "@/lib/i18n";
+import { translateDb } from "@/lib/i18n-en";
 import type { ActionState } from "@/lib/types";
 
 export function cleanError(message: string): string {
@@ -16,7 +18,7 @@ export const optional = (f: FormData, k: string) => str(f, k) || null;
 export async function callRpc(name: string, args: Record<string, unknown>, success: string, paths: string[] = []): Promise<ActionState> {
   const supabase = await createClient();
   const { error } = await supabase.rpc(name, args);
-  if (error) return { ok: false, message: cleanError(error.message), nonce: Date.now() };
+  if (error) return { ok: false, message: translateDb(cleanError(error.message), await getLang()), nonce: Date.now() };
   revalidatePath("/", "layout");
   paths.forEach((p) => revalidatePath(p));
   return { ok: true, message: success, nonce: Date.now() };

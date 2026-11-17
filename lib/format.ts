@@ -1,13 +1,13 @@
 const TZ = "Europe/Paris";
 
-export const money = (n: number | string | null | undefined) =>
-  new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(Number(n ?? 0)).replace(/ | /g, " ") + " $";
+export const money = (n: number | string | null | undefined, locale = "fr-FR") =>
+  new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Number(n ?? 0)).replace(/[\u202f\u00a0]/g, " ") + " $";
 
-export const dateTime = (d?: string | null) =>
-  d ? new Intl.DateTimeFormat("fr-FR", { timeZone: TZ, day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(d)) : "—";
+export const dateTime = (d?: string | null, locale = "fr-FR") =>
+  d ? new Intl.DateTimeFormat(locale, { timeZone: TZ, day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(d)) : "—";
 
-export const dateOnly = (d?: string | null) =>
-  d ? new Intl.DateTimeFormat("fr-FR", { timeZone: TZ, day: "2-digit", month: "short", year: "numeric" }).format(new Date(d)) : "—";
+export const dateOnly = (d?: string | null, locale = "fr-FR") =>
+  d ? new Intl.DateTimeFormat(locale, { timeZone: TZ, day: "2-digit", month: "short", year: "numeric" }).format(new Date(d)) : "—";
 
 export const fullName = (p?: { first_name?: string; last_name?: string } | null) => (p ? `${p.first_name ?? ""} ${p.last_name ?? ""}`.trim() : "—");
 

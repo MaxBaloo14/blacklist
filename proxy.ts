@@ -19,8 +19,9 @@ export async function proxy(request: NextRequest) {
       },
     },
   });
-  // Rafraîchit la session et vérifie le jeton côté serveur Supabase
-  const { data: { user } } = await supabase.auth.getUser();
+  // Rafraîchit la session si besoin et vérifie le jeton localement (pas d'aller-retour réseau à chaque page)
+  const { data } = await supabase.auth.getClaims();
+  const user = data?.claims ?? null;
 
   const path = request.nextUrl.pathname;
   if (!user) {

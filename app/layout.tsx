@@ -7,18 +7,21 @@ import "@fontsource/barlow/400.css";
 import "@fontsource/barlow/500.css";
 import "@fontsource/permanent-marker";
 import "./globals.css";
+import LangProvider from "@/components/LangProvider";
+import { getLang } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: { default: "BLACKLIST — Booboo Crew", template: "%s — BLACKLIST" },
-  description: "10 drivers. 10 positions. One king. Le réseau de courses clandestines de Los Santos. A BOOBOO CREW PRODUCTION.",
+  description: "10 drivers. 10 positions. One king. A BOOBOO CREW PRODUCTION.",
   icons: { icon: "/img/logo.jpg" },
 };
 export const viewport: Viewport = { themeColor: "#090A0C" };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const lang = await getLang();
   return (
-    <html lang="fr">
-      <body>{children}</body>
+    <html lang={lang}>
+      <body><LangProvider lang={lang}>{children}</LangProvider></body>
     </html>
   );
 }

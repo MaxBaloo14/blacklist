@@ -1,5 +1,6 @@
 "use client";
 import { useActionState, useEffect, useRef, type ReactNode } from "react";
+import { useT } from "@/components/LangProvider";
 import type { ActionState } from "@/lib/types";
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 };
 
 export default function ActionForm({ action, children, label, confirm, variant = "red", small, className = "", reset = true, encType }: Props) {
+  const t = useT();
   const [state, formAction, pending] = useActionState(action, {});
   const formRef = useRef<HTMLFormElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -42,7 +44,7 @@ export default function ActionForm({ action, children, label, confirm, variant =
       {children}
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <button type="submit" disabled={pending} className={`btn btn-${variant} ${small ? "btn-sm" : ""}`}>
-          {pending ? "…" : label}
+          {pending ? "…" : t(label)}
         </button>
         {state.message && (
           <span role="status" aria-live="polite" className={`text-sm ${state.ok ? "text-ok" : "text-[#ff6b6b]"}`}>
@@ -54,8 +56,8 @@ export default function ActionForm({ action, children, label, confirm, variant =
       {confirm && (
         <dialog ref={dialogRef} className="m-auto max-w-md border border-red-dark bg-ink2 p-0 text-bone backdrop:bg-black/80 backdrop:backdrop-blur-sm">
           <div className="p-7">
-            <div className="kicker mb-2">Confirmation</div>
-            <p className="mb-6 text-[15px] leading-relaxed">{confirm}</p>
+            <div className="kicker mb-2">{t("Confirmation")}</div>
+            <p className="mb-6 text-[15px] leading-relaxed">{t(confirm)}</p>
             <div className="flex gap-3">
               <button
                 type="button"
@@ -66,10 +68,10 @@ export default function ActionForm({ action, children, label, confirm, variant =
                   formRef.current?.requestSubmit();
                 }}
               >
-                Confirm
+                {t("CONFIRMER")}
               </button>
               <button type="button" className="btn btn-ghost btn-sm" onClick={() => dialogRef.current?.close()}>
-                Cancel
+                {t("ANNULER")}
               </button>
             </div>
           </div>

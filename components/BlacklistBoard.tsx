@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Crown } from "lucide-react";
+import { useT } from "@/components/LangProvider";
 import type { Row } from "@/lib/types";
 
 const money = (n: number) => new Intl.NumberFormat("fr-FR").format(n).replace(/ | /g, " ") + " $";
@@ -15,6 +16,7 @@ function Photo({ url, big }: { url: string | null; big?: boolean }) {
 }
 
 export default function BlacklistBoard({ initial, rewards, base, limit }: { initial: Row[]; rewards: Row; base: string; limit?: number }) {
+  const t = useT();
   const [rows, setRows] = useState<Row[]>(initial);
   const [flashed, setFlashed] = useState<Set<string>>(new Set());
   const prev = useRef<Map<string, number>>(new Map(initial.filter((r) => r.driver_id).map((r) => [r.driver_id, r.position])));
@@ -53,16 +55,16 @@ export default function BlacklistBoard({ initial, rewards, base, limit }: { init
               <>
                 <div className={`rank-num font-display text-center leading-none ${king ? "!text-red text-[96px] drop-shadow-[0_0_30px_#c6282866] sm:text-[120px]" : "text-[44px] sm:text-[56px]"}`}>{r.position}</div>
                 <div className="min-w-0">
-                  {king && <div className="font-cond mb-1.5 flex items-center gap-2 text-xs font-bold tracking-[.3em] text-red"><Crown size={14} /> THE KING</div>}
+                  {king && <div className="font-cond mb-1.5 flex items-center gap-2 text-xs font-bold tracking-[.3em] text-red"><Crown size={14} /> {t("LE ROI")}</div>}
                   {vacant ? (
                     <>
-                      <strong className="font-cond text-xl uppercase tracking-wider text-metal">Vacant</strong>
-                      <span className="block text-[13px] tracking-wider text-metal/70">Open to the Warm-up Race winner</span>
+                      <strong className="font-cond text-xl uppercase tracking-wider text-metal">{t("Vacant")}</strong>
+                      <span className="block text-[13px] tracking-wider text-metal/70">{t("Ouvert au vainqueur de la Warm-up Race")}</span>
                     </>
                   ) : (
                     <>
                       <strong className={`font-cond block truncate uppercase leading-tight tracking-wide ${king ? "text-[34px]" : "text-2xl"}`}>{r.first_name} {r.last_name}</strong>
-                      <span className="text-[13px] tracking-wider text-metal">{prize ? `Prize : ${money(Number(prize))}` : ""}</span>
+                      <span className="text-[13px] tracking-wider text-metal">{prize ? `${t("Prime")} : ${money(Number(prize))}` : ""}</span>
                     </>
                   )}
                 </div>
@@ -70,7 +72,7 @@ export default function BlacklistBoard({ initial, rewards, base, limit }: { init
                   {!vacant && <><Photo url={photo} big={king} /><span className="truncate">{r.make_model ?? "—"}</span></>}
                 </div>
                 <div className="font-cond text-right text-[22px] font-bold tracking-wide">
-                  {!vacant && <><span className="text-ok">{r.wins}V</span> / <span className="text-red">{r.losses}D</span></>}
+                  {!vacant && <><span className="text-ok">{r.wins}{t("V")}</span> / <span className="text-red">{r.losses}{t("D")}</span></>}
                 </div>
               </>
             );

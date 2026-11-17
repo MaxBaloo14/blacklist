@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-export default function MobileNav({ links }: { links: { href: string; label: string; badge?: number }[] }) {
+export default function MobileNav({ links, logout }: { links: { href: string; label: string; badge?: number }[]; logout?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="md:hidden">
@@ -25,6 +25,7 @@ export default function MobileNav({ links }: { links: { href: string; label: str
                   </Link>
                 </motion.div>
               ))}
+              {logout}
             </nav>
           </motion.div>
         )}

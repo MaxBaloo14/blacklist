@@ -1,0 +1,152 @@
+// Traductions anglaises. Clé = texte français source (voir lib/i18n-core.ts).
+// Vérification de couverture : python3 scripts/i18n-keys.py
+import type { Lang } from "@/lib/i18n-core";
+
+export const EN: Record<string, string> = {
+  // Navigation
+  "ACCUEIL": "HOME", "LA BLACKLIST": "THE BLACKLIST", "INSCRIPTION": "REGISTER", "CIRCUITS": "RACE NETWORK", "CONNEXION": "LOGIN",
+  "MON PROFIL": "MY PROFILE", "MES DÉFIS": "MY CHALLENGES", "DÉCONNEXION": "LOGOUT", "LE CREW": "THE CREW", "ORGANISATION": "ORGANISATION",
+  // Accueil
+  "REJOINDRE LA BLACKLIST": "JOIN THE BLACKLIST", "VOIR LE CLASSEMENT": "VIEW THE LIST", "LA BLACKLIST — SAISON 1": "THE BLACKLIST — SEASON 1",
+  "Le classement": "The", "officiel": "official ranking", "VOIR LES 10 PILOTES": "VIEW ALL 10 DRIVERS",
+  "La Blacklist est vide : les premières places seront attribuées après la Warm-up Race.": "The Blacklist is empty: the first positions will be awarded after the Warm-up Race.",
+  "LE RÈGLEMENT": "THE RULES", "Comment": "How it", "ça marche": "works",
+  "S'INSCRIRE": "REGISTER", "DÉFIER": "CHALLENGE", "PRENDRE LA PLACE": "TAKE THE SPOT",
+  "Engage ton véhicule. Il doit être homologué par l'organisation avant de rouler.": "Enter your vehicle. It must be approved by the organisation before you race.",
+  "Chaque dimanche, une course d'entrée. Seul le vainqueur débloque la position #10.": "Every Sunday, an entry race. Only the winner unlocks position #10.",
+  "Tu ne peux défier que le pilote juste au-dessus de toi. Un défi par semaine. Il a 48 h pour fixer le duel.": "You can only challenge the driver directly above you. One challenge per week. They have 48 h to set the duel.",
+  "Le vainqueur prend le rang et le Cash Prize du boss battu. Au podium, c'est le meilleur des 3 manches.": "The winner takes the rank and the Cash Prize of the beaten boss. On the podium, it is best of 3 races.",
+  "UN SEUL VÉHICULE ENGAGÉ": "ONE ENTERED VEHICLE ONLY", "TOP 3 : LE VÉHICULE SE PERD": "TOP 3: THE VEHICLE IS LOST", "14 JOURS SANS DUEL = SANCTION": "14 DAYS WITHOUT A DUEL = SANCTION",
+  "DERNIÈRES CONFRONTATIONS": "LATEST CONFRONTATIONS", "Sur": "On the", "l'asphalte": "asphalt",
+  "Aucune confrontation pour le moment. Le premier défi de la saison arrive bientôt.": "No confrontation yet. The first challenge of the season is coming soon.",
+  "Une famille.": "One family.", "Une passion.": "One passion.", "Un crew.": "One crew.",
+  "De Los Santos à Detroit, et retour. Oby et Coby ont bâti la BBC sur la loyauté, la vitesse et la famille. La Blacklist est leur règle du jeu.": "From Los Santos to Detroit, and back. Oby and Coby built the BBC on loyalty, speed and family. The Blacklist is their rulebook.",
+  "DÉCOUVRIR LE CREW": "MEET THE CREW", "ACTUALITÉS DE L'ORGANISATION": "NEWS FROM THE ORGANISATION", "Le": "The", "bulletin": "bulletin", "Aucune annonce publiée.": "No announcement published.",
+  // Classement
+  "CLASSEMENT OFFICIEL": "OFFICIAL RANKING", "La": "The",
+  "10 pilotes. 10 positions. Le classement se met à jour en direct à chaque duel validé par l'organisation.": "10 drivers. 10 positions. The ranking updates live after every duel validated by the organisation.",
+  "V = victoires · D = défaites · Prime = Cash Prize remporté en battant le pilote de ce rang.": "W = wins · L = losses · Prize = Cash Prize won by beating the driver of this rank.",
+  "Aucune confrontation enregistrée.": "No confrontation recorded.", "LE ROI": "THE KING", "Vacant": "Vacant", "Ouvert au vainqueur de la Warm-up Race": "Open to the Warm-up Race winner",
+  "Prime": "Prize", "V": "W", "D": "L",
+  "PILOTE NON CLASSÉ": "UNRANKED DRIVER", "AUCUN VÉHICULE ENGAGÉ": "NO VEHICLE ENTERED", "Véhicule engagé": "Entered vehicle", "Membre de la Blacklist": "Blacklist member", "Hors classement": "Unranked",
+  "Victoires": "Wins", "Défaites": "Losses", "Défis remportés": "Challenges won", "Ratio de victoires": "Win ratio", "{p} % sur {n} duel(s)": "{p} % over {n} duel(s)",
+  "Historique des": "Duel", "duels": "history", "Aucun duel enregistré.": "No duel recorded.",
+  // Duels
+  "MEILLEUR DES 3": "BEST OF 3", "1 COURSE": "1 RACE", "FORFAIT": "FORFEIT", "PLACE PRISE": "POSITION TAKEN", "TITRE CONSERVÉ": "TITLE DEFENDED", "DUEL": "DUEL", "CLIP": "CLIP",
+  // Inscription / connexion
+  "REJOINS LA BLACKLIST": "JOIN THE BLACKLIST", "Inscris": "Register", "ton bolide": "your ride",
+  "Crée ton compte pilote et engage ton véhicule. Il devra être homologué par l'organisation avant ta première course.": "Create your driver account and enter your vehicle. It must be approved by the organisation before your first race.",
+  "ENVOYER L'INSCRIPTION": "SUBMIT REGISTRATION", "Ton inscription et ton véhicule seront soumis à l'organisation pour validation. Continuer ?": "Your registration and vehicle will be sent to the organisation for validation. Continue?",
+  "PILOTE": "DRIVER", "Nom": "Last name", "Prénom": "First name", "Numéro de téléphone": "Phone number", "Pseudo Discord": "Discord username",
+  "C'est ton identifiant de connexion et le contact de l'organisation.": "This is your login and the organisation's contact.", "C'est ton identifiant de connexion.": "This is your login.",
+  "Mot de passe": "Password", "10 caractères minimum.": "10 characters minimum.", "VÉHICULE ENGAGÉ": "ENTERED VEHICLE", "Marque et modèle": "Make and model", "ex. Marque Modèle": "e.g. Make Model",
+  "Catégorie": "Category", "Choisir…": "Choose…", "Véhicule issu de la boutique ?": "Shop vehicle?", "Véhicule de boutique ?": "Shop vehicle?", "Non": "No", "Oui": "Yes",
+  "Photographie du véhicule": "Vehicle photo", "Photographie": "Photo", "JPEG, PNG ou WebP — 5 Mo max. Plaque et véhicule bien visibles.": "JPEG, PNG or WebP — 5 MB max. Plate and vehicle clearly visible.", "JPEG, PNG ou WebP — 5 Mo max.": "JPEG, PNG or WebP — 5 MB max.",
+  "RÈGLES D'HOMOLOGATION": "APPROVAL RULES", "Véhicules de boutique interdits": "Shop vehicles are banned", "Catégorie Supersportives interdite": "Supersports category is banned",
+  "Un seul véhicule officiel par pilote": "One official vehicle per driver", "Véhicule non homologué = aucune course": "Unapproved vehicle = no racing",
+  "ET ENSUITE ?": "WHAT'S NEXT?", "L'organisation examine ton dossier et ta photo.": "The organisation reviews your file and your photo.", "Statut": "Status",
+  "En attente d'homologation": "Pending Approval", "Homologué": "Approved", "Refusé": "Rejected", "ou": "or", "avec motif.": "with a reason.",
+  "Participe à la Warm-up Race du dimanche pour viser la position #10.": "Join Sunday's Warm-up Race to aim for position #10.",
+  "ACCÈS PILOTE": "DRIVER ACCESS", "Connexion": "Login", "pilote": "driver", "SE CONNECTER": "LOG IN",
+  "Inscription enregistrée. Connecte-toi pour suivre ton homologation.": "Registration saved. Log in to follow your approval.", "Ce compte a été banni.": "This account has been banned.",
+  "Pas encore de compte ?": "No account yet?", "Rejoins la Blacklist": "Join the Blacklist", "Mot de passe oublié ? Contacte l'organisation sur Discord : elle peut le réinitialiser.": "Forgot your password? Contact the organisation on Discord: they can reset it.",
+  // Circuits / Warm-up / Crew
+  "TRACÉS OFFICIELS": "OFFICIAL ROUTES", "Réseau de": "Race", "courses": "Network", "Les tracés officiels du réseau. Seuls les circuits actifs peuvent être choisis pour un duel.": "The network's official routes. Only active circuits can be picked for a duel.",
+  "Aucun tracé publié pour le moment.": "No route published yet.", "PAS DE CARTE": "NO MAP", "Actif": "Active", "Inactif": "Inactive", "Départ": "Start", "Arrivée": "Finish", "Difficulté": "Difficulty",
+  "Facile": "Easy", "Moyen": "Medium", "Difficile": "Hard", "Extrême": "Extreme", "Sprint urbain": "Urban sprint", "Circuit": "Circuit", "Last Race": "Last Race", "Warm-up": "Warm-up",
+  "CHAQUE DIMANCHE": "EVERY SUNDAY", "La course d'entrée. Chaque dimanche, un seul vainqueur : celui qui débloque l'accès à la position #10.": "The entry race. Every Sunday, one winner: the one who unlocks access to position #10.",
+  "PROCHAINE ÉDITION": "NEXT EDITION", "Programmée": "Scheduled", "En cours": "In progress", "Terminée": "Completed", "Annulée": "Cancelled", "Tracé sélectionné": "Selected route", "À annoncer": "To be announced", "Parcours": "Route",
+  "Participants": "Participants", "Les participants sont inscrits par l'organisation.": "Participants are registered by the organisation.", "Aucune Warm-up Race programmée. Rendez-vous bientôt.": "No Warm-up Race scheduled. See you soon.",
+  "éditions": "editions", "Tracé": "Route", "Résultat": "Result", "Vainqueur": "Winner", "Validation en cours": "Validation pending", "Pas encore d'historique.": "No history yet.",
+  "Loyauté × Vitesse × Famille. L'histoire du BooBoo Crew, de Los Santos à Detroit, et retour.": "Loyalty × Speed × Family. The story of the BooBoo Crew, from Los Santos to Detroit, and back.",
+  // Profil
+  "APERÇU": "OVERVIEW", "DÉFIS": "CHALLENGES", "HISTORIQUE": "HISTORY", "RÉCOMPENSES": "REWARDS", "ESPACE PILOTE": "DRIVER SPACE",
+  "En attente": "Pending", "Perdu": "Lost", "Remplacé": "Replaced", "Véhicule disqualifié": "Vehicle Disqualified", "validée": "validated", "refusée": "rejected", "en attente": "pending",
+  "Ton véhicule est en attente d'homologation.": "Your vehicle is awaiting approval.", "Aucun véhicule homologué.": "No approved vehicle.", "Ton inscription n'est pas encore validée.": "Your registration is not validated yet.",
+  "Bienvenue dans le réseau.": "Welcome to the network.", "Ton dossier est en cours d'examen par l'organisation : tu seras notifié dès que ton inscription et ton véhicule seront validés.": "Your file is being reviewed by the organisation: you will be notified as soon as your registration and vehicle are validated.",
+  "Cash Prize total gagné": "Total Cash Prize won", "dont {x} déjà versés": "of which {x} already paid", "Dernière activité": "Last activity", "{n} jour(s) sans duel officiel": "{n} day(s) without an official duel", "attention : seuil atteint": "warning: threshold reached",
+  "Statuts": "Statuses", "Inscription": "Registration", "Véhicule": "Vehicle", "aucun": "none", "Compte": "Account", "Éligible au #10": "Eligible for #10", "Note de l'organisation :": "Organisation note:",
+  "ENREGISTRER": "SAVE", "MES INFORMATIONS": "MY INFORMATION", "Téléphone": "Phone",
+  "CONFRONTATIONS": "CONFRONTATIONS", "Aucune course pour le moment.": "No race yet.", "MOUVEMENTS DANS LA BLACKLIST": "BLACKLIST MOVEMENTS", "De": "From", "Vers": "To", "Motif": "Reason", "Aucun mouvement.": "No movement.",
+  "Total gagné": "Total won", "Versé": "Paid", "Boss battu": "Boss beaten", "Montant": "Amount", "Versé le": "Paid on", "Voir": "View",
+  "Aucune récompense. Bats un pilote de la Blacklist pour remporter son Cash Prize.": "No reward yet. Beat a Blacklist driver to win their Cash Prize.", "Le site ne réalise aucun transfert d'argent : il suit uniquement les versements effectués par l'organisation.": "The site does not transfer any money: it only tracks payments made by the organisation.",
+  "Ton ancien véhicule a été confisqué : enregistre-en un nouveau et fais-le homologuer.": "Your former vehicle was confiscated: register a new one and get it approved.", "DEMANDE EN COURS": "REQUEST IN PROGRESS", "ANNULER LA DEMANDE": "CANCEL REQUEST", "Annuler cette demande d'homologation ?": "Cancel this approval request?",
+  "Dernière demande refusée :": "Last request rejected:", "HISTORIQUE DES VÉHICULES": "VEHICLE HISTORY", "PROPOSER UN CHANGEMENT": "PROPOSE A CHANGE", "SOUMETTRE LE VÉHICULE": "SUBMIT VEHICLE",
+  "Ce véhicule sera soumis à homologation. Ton véhicule actuel reste engagé jusqu'à la décision de l'organisation.": "This vehicle will be submitted for approval. Your current vehicle stays entered until the organisation decides.",
+  "CHANGER DE VÉHICULE": "CHANGE VEHICLE", "ENREGISTRER UN VÉHICULE": "REGISTER A VEHICLE", "Compte créé le {d}": "Account created on {d}", "Voir mes notifications": "View my notifications",
+  // Défis
+  "SYSTÈME DE DÉFIS": "CHALLENGE SYSTEM", "Mes": "My", "défis": "challenges", "Lance ton défi, fixe la date du duel avant la fin du compte à rebours, suis le score en direct.": "Launch your challenge, set the duel date before the countdown ends, follow the score live.",
+  "Ton véhicule n'est pas homologué : tu ne peux pas participer.": "Your vehicle is not approved: you cannot take part.",
+  "Date à fixer": "Date to set", "Programmé": "Scheduled", "Résultat en cours de validation": "Result pending validation", "Terminé": "Completed", "Annulé": "Cancelled", "Forfait": "Forfeit",
+  "Standard": "Standard", "Champion": "Champion", "Challenger": "Challenger", "Organisation": "Organisation", "LANCER UN DÉFI": "LAUNCH A CHALLENGE",
+  "Tu n'es pas encore dans la Blacklist. Remporte la Warm-up Race du dimanche pour viser la position #10.": "You are not in the Blacklist yet. Win Sunday's Warm-up Race to aim for position #10.",
+  "Tu es le #1. Personne au-dessus de toi : défends ta couronne.": "You are #1. Nobody above you: defend your crown.", "Ta cible — directement au-dessus de toi": "Your target — directly above you",
+  "DÉFIER LE #{n}": "CHALLENGE #{n}", "Défier {name} (#{n}) ? Il aura 48 h pour fixer le duel. Un seul défi par semaine : le règlement ne permet pas de l'annuler librement.": "Challenge {name} (#{n})? They will have 48 h to set the duel. One challenge per week: the rules do not allow cancelling it freely.",
+  "La position #{n} est vacante : aucun pilote à défier pour le moment.": "Position #{n} is vacant: no driver to challenge for now.", "Règles : un seul défi par semaine · uniquement le pilote juste au-dessus · véhicule homologué obligatoire.": "Rules: one challenge per week · only the driver directly above · approved vehicle required.",
+  "DÉFIS EN COURS": "ACTIVE CHALLENGES", "Aucun défi en cours.": "No active challenge.", "DUEL DU PODIUM · MEILLEUR DES 3": "PODIUM DUEL · BEST OF 3", "DUEL STANDARD · 1 COURSE": "STANDARD DUEL · 1 RACE",
+  "Challenger #{a} → Défié #{b} · Tu es {role}": "Challenger #{a} → Defender #{b} · You are the {role}", "le défié": "defender", "le challenger": "challenger",
+  "pour fixer la date": "to set the date", "Délai dépassé": "Deadline passed", "Temps restant": "Time left", "FIXER LA DATE DU DUEL": "SET DUEL DATE",
+  "Confirmer cette date ? Elle sera communiquée aux deux pilotes et à l'organisation.": "Confirm this date? It will be shared with both drivers and the organisation.", "Date et heure du duel (semaine en cours, heure de Paris)": "Duel date and time (current week, Paris time)",
+  "En attente : le pilote défié doit fixer une date dans les 48 h. Passé ce délai, l'organisation est alertée.": "Waiting: the challenged driver must set a date within 48 h. After that, the organisation is alerted.",
+  "Duel prévu": "Scheduled duel", "Le résultat est saisi : il sera officiel après validation par l'organisation.": "The result is entered: it becomes official once validated by the organisation.",
+  "Course": "Race", "Choisi par": "Picked by", "À choisir": "To be picked", "Score": "Score",
+  // Notifications
+  "BOÎTE DE RÉCEPTION": "INBOX", "MARQUER {n} COMME LU(ES)": "MARK {n} AS READ", "Aucune notification.": "No notification.", "VÉHICULE CONFISQUÉ": "VEHICLE CONFISCATED",
+  // 404 / erreur / formulaires
+  "IMPASSE": "DEAD END", "ERREUR 404": "ERROR 404", "Cette route n'existe pas à Los Santos.": "This road does not exist in Los Santos.", "RETOUR AUX RUES": "BACK TO THE STREETS",
+  "ERREUR SYSTÈME": "SYSTEM ERROR", "Une": "A", "panne": "breakdown", "sur la route": "on the road", "RÉESSAYER": "RETRY",
+  "Quelque chose s'est mal passé de notre côté. Aucune donnée n'a été perdue. Réessaie dans un instant.": "Something went wrong on our side. No data was lost. Please try again in a moment.",
+  "Confirmation": "Confirmation", "CONFIRMER": "CONFIRM", "ANNULER": "CANCEL", "OK": "OK",
+  // Catégories de véhicules
+  "Compactes": "Compacts", "Coupés": "Coupes", "Muscle": "Muscle", "Sportives classiques": "Classic sports", "Sportives": "Sports", "Supersportives": "Supersports", "Berlines": "Sedans", "SUV": "SUVs", "Tout-terrain": "Off-road", "Motos": "Motorbikes",
+  // Messages des actions
+  "Trop de tentatives. Réessaie dans quelques minutes.": "Too many attempts. Try again in a few minutes.", "Pseudo Discord et mot de passe requis.": "Discord username and password required.", "Identifiants incorrects.": "Incorrect credentials.",
+  "Aucun compte pilote correspondant. L'organisation se connecte via son propre accès.": "No matching driver account. The organisation logs in through its own access.",
+  "Inscription enregistrée.": "Registration saved.", "Trop d'inscriptions depuis cette adresse. Réessaie plus tard.": "Too many registrations from this address. Try again later.",
+  "Mot de passe : 10 caractères minimum": "Password: 10 characters minimum", "Nom requis": "Last name required", "Prénom requis": "First name required", "Numéro de téléphone invalide": "Invalid phone number",
+  "Pseudo Discord requis": "Discord username required", "Le pseudo Discord ne peut pas contenir « @ »": "The Discord username cannot contain “@”", "Marque et modèle requis": "Make and model required", "Catégorie requise": "Category required",
+  "Précise si le véhicule vient de la boutique": "Say whether the vehicle comes from the shop", "Les véhicules de boutique sont interdits sur la Blacklist.": "Shop vehicles are banned from the Blacklist.",
+  "La catégorie « {c} » est interdite.": "The “{c}” category is banned.", "Catégorie de véhicule inconnue.": "Unknown vehicle category.", "Ce pseudo Discord est déjà utilisé.": "This Discord username is already taken.",
+  "Création du compte impossible.": "Account creation failed.", "Envoi de la photographie impossible.": "Photo upload failed.",
+  "Une photographie est requise.": "A photo is required.", "Photographie trop lourde (5 Mo maximum).": "Photo too large (5 MB maximum).", "Format non supporté (JPEG, PNG ou WebP).": "Unsupported format (JPEG, PNG or WebP).",
+  "Connexion requise.": "Login required.", "Trop de requêtes. Patiente un instant.": "Too many requests. Please wait a moment.", "Cible invalide.": "Invalid target.", "Date invalide.": "Invalid date.", "Choisis un circuit.": "Pick a circuit.",
+  "Informations invalides : tous les champs sont requis.": "Invalid information: all fields are required.", "Trop de propositions. Réessaie plus tard.": "Too many proposals. Try again later.", "Marque, modèle et catégorie requis.": "Make, model and category required.",
+  "Les véhicules de boutique sont interdits.": "Shop vehicles are banned.",
+  "Défi lancé ! Le pilote défié a 48 h pour fixer la date.": "Challenge sent! The challenged driver has 48 h to set the date.", "Date du duel enregistrée. Les deux pilotes sont prévenus.": "Duel date saved. Both drivers are notified.",
+  "Circuit choisi.": "Circuit picked.", "Demande annulée.": "Request cancelled.", "Tout est lu.": "All read.", "Informations mises à jour.": "Information updated.", "Véhicule soumis à homologation.": "Vehicle submitted for approval.",
+  "Action non autorisée.": "Action not allowed.", "Cette entrée existe déjà.": "This entry already exists.", "Données invalides.": "Invalid data.",
+};
+
+// Messages d'erreur renvoyés par la base (français, parfois avec des valeurs) → anglais
+const DB: Record<string, string> = {
+  "Connexion requise.": "Login required.",
+  "Seuls les pilotes de la Blacklist peuvent lancer un défi.": "Only Blacklist drivers can issue a challenge.",
+  "Le #1 n'a personne à défier.": "#1 has nobody to challenge.",
+  "Un défi est déjà en cours pour l'un des deux pilotes.": "A challenge is already in progress for one of the two drivers.",
+  "Tu as déjà utilisé ton défi de la semaine.": "You have already used your challenge for the week.",
+  "Seul le pilote défié fixe la date du duel.": "Only the challenged driver sets the duel date.",
+  "La date de ce défi est déjà fixée ou le défi est clos.": "This challenge's date is already set or the challenge is closed.",
+  "Le délai est dépassé : contacte l'organisation.": "The deadline has passed: contact the organisation.",
+  "La date doit être dans le futur.": "The date must be in the future.",
+  "Tu ne choisis pas le tracé de cette manche.": "You do not pick the route for this race.",
+  "Ce défi est clos.": "This challenge is closed.", "Circuit inactif ou inconnu.": "Inactive or unknown circuit.", "Manche introuvable.": "Race not found.", "Défi introuvable.": "Challenge not found.",
+  "Compte inactif.": "Inactive account.", "Les véhicules de boutique sont interdits.": "Shop vehicles are banned.", "Photographie invalide.": "Invalid photo.",
+  "Une demande d'homologation est déjà en cours.": "An approval request is already in progress.", "Catégorie de véhicule inconnue.": "Unknown vehicle category.",
+  "Un véhicule doit d'abord être soumis à homologation.": "A vehicle must first be submitted for approval.",
+  "Action non autorisée.": "Action not allowed.", "Cette entrée existe déjà.": "This entry already exists.", "Données invalides.": "Invalid data.",
+};
+const DB_RE: [RegExp, string][] = [
+  [/^Tu ne peux défier que le pilote directement au-dessus de toi \(#(\d+)\)\.$/, "You can only challenge the driver directly above you (#$1)."],
+  [/^Le compte de (.+) n'est pas actif\.$/, "$1's account is not active."],
+  [/^L'inscription de (.+) n'est pas validée\.$/, "$1's registration is not validated."],
+  [/^Le véhicule de (.+) n'est pas homologué\.$/, "$1's vehicle is not approved."],
+  [/^Le duel doit avoir lieu dans la semaine en cours \(avant le (.+)\)\.$/, "The duel must take place within the current week (before $1)."],
+  [/^La catégorie « (.+) » est interdite\.$/, "The “$1” category is banned."],
+];
+
+export function translateDb(msg: string, lang: Lang): string {
+  if (lang !== "en") return msg;
+  if (DB[msg]) return DB[msg];
+  for (const [re, en] of DB_RE) if (re.test(msg)) return msg.replace(re, en);
+  return msg;
+}

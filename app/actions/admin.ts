@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { callRpc, cleanError, str } from "@/lib/action";
 import { checkImage } from "@/lib/upload";
+import { createServiceClient } from "@/lib/supabase/admin";
 import { parisLocalToISO } from "@/lib/format";
 import type { ActionState } from "@/lib/types";
 
@@ -120,7 +121,7 @@ export async function saveNews(_: ActionState, f: FormData): Promise<ActionState
   const p = z.object({ title: z.string().min(2).max(120), body: z.string().min(2).max(4000) }).safeParse({ title: str(f, "title"), body: str(f, "body") });
   if (!p.success) return fail("Titre et texte requis.");
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: claims } = await supabase.auth.getClaims(); const user = { id: claims?.claims?.sub as string | undefined };
   const publish = f.get("publish") === "on";
   const { error } = await supabase.from("announcements").insert({ ...p.data, published: publish, published_at: publish ? new Date().toISOString() : null, author_id: user?.id });
   if (error) return fail(cleanError(error.message));
@@ -173,10 +174,29 @@ export async function saveSetting(_: ActionState, f: FormData): Promise<ActionSt
   const parsed = schema.safeParse(value);
   if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Valeur invalide.");
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: claims } = await supabase.auth.getClaims(); const user = { id: claims?.claims?.sub as string | undefined };
   const { data, error } = await supabase.from("settings").update({ value: parsed.data, updated_by: user?.id, updated_at: new Date().toISOString() }).eq("key", key).select("key");
   if (error) return fail(cleanError(error.message));
   if (!data?.length) return fail("Seul un super administrateur peut modifier les règles.");
   revalidatePath("/", "layout");
   return ok("Règle mise à jour (journalisée).");
+}
+
+/** Réinitialisation du mot de passe d'un pilote par l'organisation (les pilotes n'ont pas d'email de récupération). */
+export async function resetDriverPassword(_: ActionState, f: FormData): Promise<ActionState> {
+  try {
+    const supabase = await createClient();
+    const { data: isAdmin } = await supabase.rpc("is_admin");
+    if (!isAdmin) return fail("Accès réservé aux organisateurs.");
+    const password = String(f.get("password") ?? "");
+    if (password.length < 10 || password.length > 72) return fail("Mot de passe : 10 caractères minimum.");
+    const driver = id(f, "driver");
+    const svc = createServiceClient();
+    const { error } = await svc.auth.admin.updateUserById(driver, { password });
+    if (error) return fail("Réinitialisation impossible.");
+    const { data: claims } = await supabase.auth.getClaims();
+    await svc.from("admin_logs").insert({ admin_id: claims?.claims?.sub, action: "driver:reset_password", target_type: "profile", target_id: driver });
+    revalidatePath("/admin", "layout");
+    return ok("Mot de passe réinitialisé. Transmets-le au pilote de façon privée.");
+  } catch (e) { return fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }

@@ -1,11 +1,19 @@
-import { createClient, hasSupabase } from "@/lib/supabase/server";
+import { createClient as createSb } from "@supabase/supabase-js";
+import { hasSupabase } from "@/lib/supabase/server";
 import type { Row } from "@/lib/types";
 
+/** Client anonyme pour les données 100 % publiques (vues en lecture seule) : réponses mises en cache 15 s par Next. */
+const publicClient = () =>
+  createSb(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: { fetch: (input, init) => fetch(input, { ...init, next: { revalidate: 15 } }) },
+  });
+
 /** Les pages publiques restent affichables même si la base est injoignable (états vides). */
-async function safe<T>(fn: (s: Awaited<ReturnType<typeof createClient>>) => PromiseLike<{ data: T | null; error: unknown }>, fallback: T): Promise<T> {
+async function safe<T>(fn: (s: ReturnType<typeof publicClient>) => PromiseLike<{ data: T | null; error: unknown }>, fallback: T): Promise<T> {
   if (!hasSupabase) return fallback;
   try {
-    const s = await createClient();
+    const s = publicClient();
     const { data, error } = await fn(s);
     if (error) { console.error("[data]", error); return fallback; }
     return (data ?? fallback) as T;

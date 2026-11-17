@@ -273,7 +273,7 @@ select t_rows('super admin modifie une règle', $$update settings set value='10'
 reset role;
 select t_eq('modification de règle journalisée', (select count(*) from admin_logs where action='update:settings' and admin_id=t_uid(1))::text, '1');
 select t_anon();
-select t_eq('anonyme : circuits lisibles', (select count(*) from race_tracks)::text, '1');
+select t_eq('anonyme : circuits lisibles (3 de départ + 1)', (select count(*) from race_tracks)::text, '4');
 select t_eq('anonyme : duels publics', (select (count(*) >= 4)::text from public_duels), 'true');
 select t_eq('anonyme : pas de téléphone exposé', (select count(*) from information_schema.columns where table_name in ('public_driver','public_blacklist','public_duels') and column_name in ('phone','discord_tag'))::text, '0');
 select t_eq('anonyme : aucune récompense visible', (select count(*) from rewards)::text, '0');

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flag, MapPinned, ScrollText, Newspaper, Trophy, ArrowUpRight } from "lucide-react";
+import { Flag, MapPinned, Newspaper, Trophy, ArrowUpRight } from "lucide-react";
 import { getT } from "@/lib/i18n";
 
 /** Accueil volontairement léger : un titre, deux boutons, puis les rubriques. Tout le reste est dans les pages dédiées. */
@@ -9,7 +9,6 @@ export default async function HomeView() {
     { href: "/blacklist", icon: Trophy, title: t("LA BLACKLIST"), text: t("Le classement officiel des 10 pilotes") },
     { href: "/race-network", icon: MapPinned, title: t("CIRCUITS"), text: t("Les tracés officiels du réseau") },
     { href: "/warmup", icon: Flag, title: "WARM-UP RACE", text: t("La course d'entrée du dimanche") },
-    { href: "/rules", icon: ScrollText, title: t("RÈGLEMENT"), text: t("Défis, podium et Cash Prize") },
     { href: "/news", icon: Newspaper, title: t("ACTUALITÉS"), text: t("Les annonces de l'organisation") },
   ];
   return (
@@ -28,7 +27,7 @@ export default async function HomeView() {
       </header>
 
       <nav aria-label={t("Rubriques")} className="pb-24 pt-2">
-        <div className="wrap grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="wrap grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {tiles.map(({ href, icon: Icon, title, text }) => (
             <Link key={href} href={href} className="group relative flex min-h-[150px] flex-col justify-between border border-white/10 bg-ink2 p-5 transition duration-200 hover:-translate-y-1 hover:border-red hover:bg-[#1a1114]">
               <div className="flex items-start justify-between">

@@ -13,6 +13,7 @@ export default async function Nav() {
     { href: "/blacklist", label: t("LA BLACKLIST") },
     ...(user && profile ? [] : [{ href: "/register", label: t("INSCRIPTION") }]),
     { href: "/race-network", label: t("CIRCUITS") },
+    { href: "/rules", label: t("RÈGLEMENT") },
     ...(user && profile
       ? [{ href: "/profile", label: t("MON PROFIL") }, { href: "/challenges", label: t("MES DÉFIS") }, { href: "/notifications", label: "NOTIFICATIONS", badge: unread }]
       : isAdmin ? [{ href: "/admin", label: "CONTROL CENTER" }] : [{ href: "/login", label: t("CONNEXION"), login: true }]),

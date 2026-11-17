@@ -12,6 +12,7 @@ export default async function Footer() {
       <div className="font-cond mt-6 flex flex-wrap justify-center gap-x-7 gap-y-2 text-xs tracking-[.2em] text-metal">
         <Link href="/blacklist" className="hover:text-white">{t("LA BLACKLIST")}</Link>
         <Link href="/race-network" className="hover:text-white">{t("CIRCUITS")}</Link>
+        <Link href="/rules" className="hover:text-white">{t("RÈGLEMENT")}</Link>
         <Link href="/warmup" className="hover:text-white">WARM-UP RACE</Link>
         <Link href="/crew" className="hover:text-white">{t("LE CREW")}</Link>
         <Link href="/admin/login" className="hover:text-white">{t("ORGANISATION")}</Link>

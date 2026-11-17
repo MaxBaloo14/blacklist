@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 export default function MobileNav({ links, logout }: { links: { href: string; label: string; badge?: number; external?: boolean }[]; logout?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="md:hidden">
+    <div>
       <button aria-label="Menu" onClick={() => setOpen(true)} className="border border-white/20 p-2"><Menu size={20} /></button>
       <AnimatePresence>
         {open && (

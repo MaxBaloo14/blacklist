@@ -14,7 +14,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <>
       <PageHead kicker={t("ACCÈS PILOTE")} title={t("Connexion")} em={t("pilote")} />
       <section className="py-14">
-        <div className="wrap max-w-xl">
+        <div className="wrap [&>*]:max-w-xl">
           {sp.registered && <p className="badge badge-ok mb-4 !normal-case">{t("Inscription enregistrée. Connecte-toi pour suivre ton homologation.")}</p>}
           {sp.error === "banned" && <p className="badge badge-red mb-4 !normal-case">{t("Ce compte a été banni.")}</p>}
           <ActionForm action={login} label="SE CONNECTER" reset={false} className="panel">

@@ -6,9 +6,12 @@ import JourneyPanel from "@/components/JourneyPanel";
 import DuelCard from "@/components/DuelCard";
 import Field from "@/components/Field";
 import PageHead from "@/components/PageHead";
+import { BadgeGrid } from "@/components/PilotBadges";
 import Tabs from "@/components/Tabs";
 import { cancelProposal, proposeVehicle, updateProfile } from "@/app/actions/driver";
 import { requireDriver } from "@/lib/auth";
+import { badgeCatalog } from "@/lib/badges";
+import { bestRank } from "@/lib/driver-stats";
 import { getPublicSettings, getTracks, getWarmups } from "@/lib/data";
 import { dateOnly, dateTime, money, photoUrl } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
@@ -19,7 +22,7 @@ export const metadata: Metadata = { title: "Mon profil" };
 
 export default async function Profile({ searchParams }: { searchParams: Promise<{ tab?: string; welcome?: string }> }) {
   const [sp, { t, lang, locale }] = await Promise.all([searchParams, getI18n()]);
-  const TABS: [string, string][] = [["overview", t("APERÇU")], ["challenges", t("DÉFIS")], ["history", t("HISTORIQUE")], ["rewards", t("RÉCOMPENSES")], ["garage", "GARAGE"]];
+  const TABS: [string, string][] = [["overview", t("APERÇU")], ["challenges", t("DÉFIS")], ["history", t("HISTORIQUE")], ["rewards", t("RÉCOMPENSES")], ["garage", "GARAGE"], ["badges", "BADGES"]];
   const VSTATUS: Record<string, [string, string]> = {
     pending: [t("En attente d'homologation"), "badge-warn"], approved: [t("Homologué"), "badge-ok"], rejected: [t("Refusé"), "badge-red"],
     disqualified: [t("Véhicule disqualifié"), "badge-red"], lost: [t("Perdu"), "badge-red"], replaced: [t("Remplacé"), "badge-metal"],
@@ -53,6 +56,12 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
   const ready = !current ? (pending ? t("Ton véhicule est en attente d'homologation.") : t("Aucun véhicule homologué.")) : profile.registration_status !== "validated" ? t("Ton inscription n'est pas encore validée.") : null;
   const lastVeh = vehicles?.find((v) => v.status === "rejected" && !pending);
   const m = (n: number | string) => money(n, locale);
+  const paidCount = (rewards ?? []).filter((r) => r.status === "paid").length;
+  const catalog = badgeCatalog({
+    driverId: uid, position: myPos, best: bestRank(myPos, moves ?? []), wins: stats?.wins ?? 0, losses: stats?.losses ?? 0, challengesWon: stats?.challenges_won ?? 0, duels: duels ?? [],
+    registered: profile.registration_status === "validated", vehicle: Boolean(current), rewardsPaid: paidCount, warmupWinner: Boolean(profile.entry_eligible) || (moves ?? []).some((x) => x.kind === "entry"),
+  }, t);
+  const earnedCount = catalog.filter((b) => b.earned).length;
 
   return (
     <>
@@ -61,6 +70,16 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
         <div className="wrap">
           {sp.welcome && <p className="panel mb-6 text-[15px]"><b className="text-red">{t("Bienvenue dans le réseau.")}</b> {t("Ton dossier est en cours d'examen par l'organisation : tu seras notifié dès que ton inscription et ton véhicule seront validés.")}</p>}
           <Tabs base="/profile" tabs={TABS} current={tab} />
+
+          {tab === "badges" && (
+            <div>
+              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+                <div><div className="kicker mb-1.5">{t("MES BADGES")}</div><h2 className="h2 !text-[clamp(28px,3.5vw,42px)]">{earnedCount} / {catalog.length} <em>{t("obtenus")}</em></h2></div>
+                <p className="max-w-md text-sm text-[#a5a9b0]">{t("Les badges se débloquent automatiquement selon tes duels, ton classement et ton dossier.")}</p>
+              </div>
+              <BadgeGrid badges={[...catalog].sort((a, b) => Number(b.earned) - Number(a.earned))} earnedLabel={t("OBTENU")} lockedLabel={t("À DÉBLOQUER")} />
+            </div>
+          )}
 
           {tab === "overview" && (
             <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
@@ -95,6 +114,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                   <Field label={t("Pseudo Discord (facultatif)")}><input name="discord_tag" defaultValue={profile.discord_tag ?? ""} maxLength={40} className="input" /></Field>
                 </div>
               </ActionForm>
+
             </div>
           )}
 

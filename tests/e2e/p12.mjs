@@ -1,0 +1,15 @@
+import { launch, newPage, BASE, SHOT, pilotLogin } from "./lib.mjs";
+const b = await launch();
+const n = await newPage(b, { width: 1400, height: 800 }); await pilotLogin(n, "0600000015");
+await n.goto(BASE + "/notifications"); await n.waitForLoadState("networkidle"); await n.waitForTimeout(3500);
+await n.screenshot({ path: `${SHOT}/100-notifications.png` });
+await n.goto(BASE + "/profile"); await n.waitForLoadState("networkidle"); await n.waitForTimeout(1500);
+await n.screenshot({ path: `${SHOT}/101-profile-badges.png`, clip: { x: 0, y: 180, width: 1400, height: 420 } });
+const m = await newPage(b, { width: 390, height: 800 }); await pilotLogin(m, "0600000014"); await m.goto(BASE + "/profile"); await m.waitForLoadState("networkidle"); await m.waitForTimeout(3500);
+await m.screenshot({ path: `${SHOT}/102-profile-mobile.png`, clip: { x: 0, y: 150, width: 390, height: 520 } });
+const p = await newPage(b, { width: 1400, height: 900 }); await p.goto(BASE + "/blacklist"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3500);
+await p.locator("h2:has-text('asphalte')").first().scrollIntoViewIfNeeded(); await p.waitForTimeout(800);
+await p.screenshot({ path: `${SHOT}/103-example-duel.png` });
+const l = await newPage(b, { width: 1400, height: 700 }); await l.goto(BASE + "/login"); await l.waitForLoadState("networkidle"); await l.waitForTimeout(3500);
+await l.screenshot({ path: `${SHOT}/104-login.png` });
+console.log(n.errors, m.errors, p.errors); await b.close();

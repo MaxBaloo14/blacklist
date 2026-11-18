@@ -1,0 +1,10 @@
+import { launch, newPage, BASE, SHOT, pilotLogin } from "./lib.mjs";
+const b = await launch();
+const n = await newPage(b, { width: 1400, height: 1000 }); await pilotLogin(n, "0600000015");
+await n.goto(BASE + "/profile?tab=badges"); await n.waitForLoadState("networkidle"); await n.waitForTimeout(3600);
+await n.screenshot({ path: `${SHOT}/110-badges-tab.png`, fullPage: true });
+await n.goto(BASE + "/profile"); await n.waitForLoadState("networkidle"); await n.waitForTimeout(1200);
+await n.screenshot({ path: `${SHOT}/111-profile-tabs.png`, clip: { x: 0, y: 180, width: 1400, height: 200 } });
+const m = await newPage(b, { width: 390, height: 900 }); await pilotLogin(m, "0600000014"); await m.goto(BASE + "/profile?tab=badges"); await m.waitForLoadState("networkidle"); await m.waitForTimeout(3600);
+await m.screenshot({ path: `${SHOT}/112-badges-mobile.png`, fullPage: true });
+console.log(n.errors, m.errors); await b.close();

@@ -12,7 +12,7 @@ export default async function Crew() {
     <>
       <PageHead kicker="A BOOBOO CREW PRODUCTION" title="Two brothers." em="One mission.">{t("Loyauté × Vitesse × Famille. L'histoire du BooBoo Crew, de Los Santos à Detroit, et retour.")}</PageHead>
       <section className="py-14">
-        <div className="wrap max-w-4xl space-y-6">
+        <div className="wrap space-y-6 [&>*]:max-w-4xl">
           {chapters.map((c) => {
             const x = lang === "en" ? c.en : c;
             return (

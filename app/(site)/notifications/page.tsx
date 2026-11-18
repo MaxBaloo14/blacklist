@@ -16,9 +16,9 @@ export default async function Notifications() {
   const unread = (data ?? []).filter((n) => !n.read_at).length;
   return (
     <>
-      <PageHead kicker={t("BOÎTE DE RÉCEPTION")} title="Notifi" em="cations" />
+      <PageHead kicker={t("BOÎTE DE RÉCEPTION")} title={t("Mes")} em={t("notifications")} />
       <section className="py-14">
-        <div className="wrap max-w-3xl">
+        <div className="wrap [&>*]:max-w-3xl">
           {unread > 0 && <ActionForm action={markAllRead} label={t("MARQUER {n} COMME LU(ES)", { n: unread })} variant="ghost" small className="mb-6" />}
           {!data?.length && <p className="panel text-[#a5a9b0]">{t("Aucune notification.")}</p>}
           <ul className="grid gap-2.5">

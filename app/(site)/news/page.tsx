@@ -12,7 +12,7 @@ export default async function NewsPage() {
     <>
       <PageHead kicker={t("L'ORGANISATION")} title={t("Actualités")} em="BBC">{t("Les annonces officielles de la BooBoo Crew.")}</PageHead>
       <section className="py-14">
-        <div className="wrap max-w-3xl">
+        <div className="wrap [&>*]:max-w-3xl">
           {!news.length && <p className="panel text-[#a5a9b0]">{t("Aucune annonce publiée.")}</p>}
           <div className="grid gap-4">
             {news.map((n) => (

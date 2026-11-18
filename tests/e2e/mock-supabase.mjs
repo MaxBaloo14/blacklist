@@ -54,6 +54,11 @@ async function auth(req, res, url, body) {
     const r = await pool.query("select id,email,created_at from auth.users where id=$1", [c.sub]);
     return r.rows[0] ? json(res, 200, userJson(r.rows[0])) : json(res, 403, { code: 403, error_code: "user_not_found", msg: "User from sub claim in JWT does not exist" });
   }
+  if (path === "/user" && req.method === "PUT") {
+    const c = verify(bearer); if (!c) return json(res, 401, { code: 401, error_code: "bad_jwt", msg: "invalid JWT" });
+    if (body.password) await pool.query("update auth.users set encrypted_password = crypt($2, gen_salt('bf')) where id=$1", [c.sub, body.password]);
+    const r = await pool.query("select id,email,created_at from auth.users where id=$1", [c.sub]); return json(res, 200, userJson(r.rows[0]));
+  }
   if (path === "/logout") return empty(res, 204);
   if (path === "/.well-known/jwks.json") return json(res, 200, { keys: [] });
   if (path === "/settings") return json(res, 200, { external: {}, disable_signup: false, mailer_autoconfirm: true });

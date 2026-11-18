@@ -2,6 +2,7 @@ import Link from "next/link";
 import { logout } from "@/app/actions/auth";
 import LangSwitch from "./LangSwitch";
 import MobileNav from "./MobileNav";
+import ActiveLink from "./ActiveLink";
 
 export type NavLink = { href: string; label: string; badge?: number; login?: boolean; external?: boolean };
 
@@ -21,15 +22,13 @@ export default function NavView({ links, loggedIn, logoutLabel }: { links: NavLi
           <small className="font-cond hidden border-l border-white/20 pl-3 text-[11px] font-semibold tracking-[.3em] text-metal min-[1700px]:inline">BOOBOO CREW</small>
         </Link>
 
-        <div className={`font-cond hidden items-center justify-center gap-x-6 whitespace-nowrap text-[14px] font-semibold tracking-[.14em] ${bp.show}`}>
-          {links.map((l) => {
-            const cls = `relative whitespace-nowrap py-1.5 text-[#d8d8d8] transition hover:text-white ${l.login ? "border border-red px-4 hover:bg-red" : ""}`;
-            const inner = (<>{l.label}{!!l.badge && <span className="ml-1.5 inline-block min-w-5 bg-red px-1 text-center text-[11px] text-white">{l.badge}</span>}</>);
-            return l.external
-              ? <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
-              : <Link key={l.href} href={l.href} className={cls}>{inner}</Link>;
-          })}
-          {loggedIn && <form action={logout}><button className="whitespace-nowrap py-1.5 text-metal transition hover:text-white">{logoutLabel}</button></form>}
+        <div className={`font-cond hidden items-center justify-center gap-x-1.5 whitespace-nowrap text-[14px] font-semibold tracking-[.14em] ${bp.show}`}>
+          {links.map((l) => (
+            <ActiveLink key={l.href} href={l.href} external={l.external} className={`tab ${l.login ? "tab-login" : ""}`}>
+              {l.label}{!!l.badge && <span className="ml-1.5 inline-block min-w-5 bg-ink px-1 text-center text-[11px] text-white">{l.badge}</span>}
+            </ActiveLink>
+          ))}
+          {loggedIn && <form action={logout}><button className="tab !text-metal">{logoutLabel}</button></form>}
         </div>
         <div className={`hidden ${bp.block}`} aria-hidden />
 

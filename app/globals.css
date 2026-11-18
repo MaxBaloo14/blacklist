@@ -38,6 +38,22 @@ a { color: inherit; text-decoration: none; }
   .btn-red:hover { box-shadow: 0 14px 30px #c6282855; }
   .btn-ghost { @apply bg-white/10 text-white hover:bg-white hover:text-ink; box-shadow: inset 0 0 0 1px #ffffff40; }
   .btn-dark { @apply bg-ink3 text-bone hover:bg-red; }
+  /* Onglets réactifs : un fond rouge balaie l'onglet au survol, l'onglet actif reste allumé. */
+  .tab { @apply relative isolate inline-flex cursor-pointer items-center whitespace-nowrap px-4 py-2 text-[#d8d8d8] transition duration-200; clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%); }
+  .tab::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #781818; transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.2,.7,.2,1), background-color .2s; }
+  .tab:hover { @apply text-white; }
+  .tab:hover::before { transform: scaleX(1); }
+  .tab:active { transform: translateY(1px); }
+  .tab[aria-current="page"], .tab[aria-selected="true"] { @apply text-white; }
+  .tab[aria-current="page"]::before, .tab[aria-selected="true"]::before { transform: scaleX(1); background: #c62828; }
+  .tab-login { background: #78181866; }
+  .vtab { @apply relative isolate block whitespace-nowrap px-4 py-2 text-[#bcbfc5] transition duration-200; }
+  .vtab::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #c6282855, transparent); transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+  .vtab::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #c62828; transform: scaleY(0); transition: transform .25s; }
+  .vtab:hover { @apply translate-x-0.5 text-white; }
+  .vtab:hover::before, .vtab[aria-current="page"]::before { transform: scaleX(1); }
+  .vtab:hover::after, .vtab[aria-current="page"]::after { transform: scaleY(1); }
+  .vtab[aria-current="page"] { @apply text-white; }
   .btn-sm { @apply px-5 py-2 text-sm; letter-spacing: .14em; }
 
   .panel { @apply bg-ink2 p-5 sm:p-7; border-left: 3px solid #781818; }

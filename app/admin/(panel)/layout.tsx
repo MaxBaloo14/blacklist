@@ -1,3 +1,4 @@
+import ActiveLink from "@/components/ActiveLink";
 import Link from "next/link";
 import LangSwitch from "@/components/LangSwitch";
 import { logout } from "@/app/actions/auth";
@@ -22,9 +23,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <LangSwitch />
         </div>
         <nav className="font-cond flex gap-1 overflow-x-auto px-3 pb-3 text-[13px] font-semibold tracking-[.16em] lg:flex-col lg:overflow-visible">
-          {NAV.map(([href, label]) => <Link key={href} href={href} className="whitespace-nowrap border-l-2 border-transparent px-3 py-2 text-[#bcbfc5] transition hover:border-red hover:bg-white/5 hover:text-white">{label}</Link>)}
-          <Link href="/" className="whitespace-nowrap px-3 py-2 text-metal hover:text-white lg:mt-4">{t("← SITE PUBLIC")}</Link>
-          <form action={logout}><button className="px-3 py-2 text-metal hover:text-white">{t("DÉCONNEXION")}</button></form>
+          {NAV.map(([href, label]) => <ActiveLink key={href} href={href} exact={href === "/admin"} className="vtab">{label}</ActiveLink>)}
+          <Link href="/" className="vtab !text-metal lg:mt-4">{t("← SITE PUBLIC")}</Link>
+          <form action={logout}><button className="vtab w-full text-left !text-metal">{t("DÉCONNEXION")}</button></form>
         </nav>
       </aside>
       <main className="min-w-0 p-5 sm:p-8">{children}</main>

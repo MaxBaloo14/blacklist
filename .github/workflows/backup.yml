@@ -31,9 +31,24 @@ jobs:
             echo "::error::Le secret BACKUP_PASSPHRASE est absent : aucune sauvegarde n'est conservée (elle serait lisible par tous sur un dépôt public). Crée ce secret dans GitHub puis relance."
             exit 1
           fi
+      # L'installation de la dernière version échoue parfois (limite de requêtes de GitHub) : on réessaie après une pause, puis on se rabat sur une version précise.
       - uses: supabase/setup-cli@v1
+        id: cli1
+        continue-on-error: true
         with:
           version: latest
+      - if: steps.cli1.outcome == 'failure'
+        run: sleep 90
+      - uses: supabase/setup-cli@v1
+        id: cli2
+        if: steps.cli1.outcome == 'failure'
+        continue-on-error: true
+        with:
+          version: latest
+      - uses: supabase/setup-cli@v1
+        if: steps.cli1.outcome == 'failure' && steps.cli2.outcome == 'failure'
+        with:
+          version: 2.20.5
       - run: supabase link --project-ref "$PROJECT_REF"
       - name: Exporter le schéma et les données
         run: |

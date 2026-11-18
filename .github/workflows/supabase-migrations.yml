@@ -18,9 +18,24 @@ jobs:
       PROJECT_REF: idhkufafxxtocrxsjyan
     steps:
       - uses: actions/checkout@v4
+      # L'installation de la dernière version échoue parfois (limite de requêtes de GitHub) : on réessaie après une pause, puis on se rabat sur une version précise.
       - uses: supabase/setup-cli@v1
+        id: cli1
+        continue-on-error: true
         with:
           version: latest
+      - if: steps.cli1.outcome == 'failure'
+        run: sleep 90
+      - uses: supabase/setup-cli@v1
+        id: cli2
+        if: steps.cli1.outcome == 'failure'
+        continue-on-error: true
+        with:
+          version: latest
+      - uses: supabase/setup-cli@v1
+        if: steps.cli1.outcome == 'failure' && steps.cli2.outcome == 'failure'
+        with:
+          version: 2.20.5
       - run: supabase link --project-ref "$PROJECT_REF"
       # Les migrations 0001 à 0004 ont été installées à la main au départ : on les déclare comme déjà appliquées (sans danger si c'est déjà fait).
       - run: supabase migration repair --remote --yes --status applied 0001 0002 0003 0004

@@ -24,6 +24,23 @@ async function safe<T>(fn: (s: ReturnType<typeof publicClient>) => PromiseLike<{
 }
 
 export const getBlacklist = () => safe<Row[]>((s) => s.from("public_blacklist").select("*").order("position"), []);
+/** Classement + mouvement récent (7 jours) + pastille « en duel » : tout vient de vues et tables publiques en lecture seule. */
+export async function getBlacklistLive(): Promise<Row[]> {
+  const [rows, hist, duels] = await Promise.all([
+    getBlacklist(),
+    safe<Row[]>((s) => s.from("ranking_history").select("driver_id,from_position,to_position,created_at").gte("created_at", new Date(Date.now() - 7 * 864e5).toISOString()).not("driver_id", "is", null).order("created_at", { ascending: false }).limit(200), []),
+    safe<Row[]>((s) => s.from("public_duels").select("challenger_id,defender_id").eq("status", "scheduled"), []),
+  ]);
+  const move = new Map<string, number | "new">();
+  for (const h of hist) {
+    if (move.has(h.driver_id)) continue; // le plus récent d'abord
+    if (h.to_position == null) continue;
+    if (h.from_position == null) continue; // les entrées ne sont pas des mouvements : pas de pastille
+    move.set(h.driver_id, h.from_position - h.to_position);
+  }
+  const inDuel = new Set(duels.flatMap((d) => [d.challenger_id, d.defender_id]));
+  return rows.map((r) => ({ ...r, move: r.driver_id && move.get(r.driver_id) ? move.get(r.driver_id) : null, in_duel: !!r.driver_id && inDuel.has(r.driver_id) }));
+}
 export const getRewards = () => safe<Row>(async (s) => s.from("settings").select("value").eq("key", "rewards").maybeSingle().then((r) => ({ data: r.data?.value ?? {}, error: r.error })), {});
 export const getLatestDuels = (n = 6) =>
   safe<Row[]>((s) => s.from("public_duels").select("*").in("status", ["completed", "forfeited", "scheduled"]).order("scheduled_at", { ascending: false, nullsFirst: false }).limit(n), []);

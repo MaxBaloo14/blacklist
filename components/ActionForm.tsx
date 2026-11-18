@@ -44,11 +44,11 @@ export default function ActionForm({ action, children, label, confirm, variant =
       {children}
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <button type="submit" disabled={pending} className={`btn btn-${variant} ${small ? "btn-sm" : ""}`}>
-          {pending ? "…" : t(label)}
+          {pending ? <span className="spin" aria-label="…" /> : t(label)}
         </button>
         {state.message && (
-          <span role="status" aria-live="polite" className={`text-sm ${state.ok ? "text-ok" : "text-[#ff6b6b]"}`}>
-            {state.message}
+          <span key={state.nonce ?? state.message} role="status" aria-live="polite" className={`toast ${state.ok ? "toast-ok" : "toast-err"}`}>
+            <span aria-hidden>{state.ok ? "✓" : "!"}</span> {state.message}
           </span>
         )}
       </div>

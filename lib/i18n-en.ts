@@ -23,6 +23,7 @@ const EN_SITE: Record<string, string> = {
   "Une famille.": "One family.", "Une passion.": "One passion.", "Un crew.": "One crew.",
   "De Los Santos à Detroit, et retour. Oby et Coby ont bâti la BBC sur la loyauté, la vitesse et la famille. La Blacklist est leur règle du jeu.": "From Los Santos to Detroit, and back. Oby and Coby built the BBC on loyalty, speed and family. The Blacklist is their rulebook.",
   "DÉCOUVRIR LE CREW": "MEET THE CREW", "ACTUALITÉS DE L'ORGANISATION": "NEWS FROM THE ORGANISATION", "Le": "The", "bulletin": "bulletin", "Aucune annonce publiée.": "No announcement published.",
+  "PODIUM": "PODIUM", "EN DUEL": "IN A DUEL", "VOIR LA FICHE": "VIEW PROFILE", "NOUVEAU": "NEW", "Mouvement des 7 derniers jours": "Movement over the last 7 days",
   "Le podium": "The podium", "Engage ton véhicule, il est homologué par l'organisation.": "Enter your vehicle, it gets approved by the organisation.",
   "Le vainqueur du dimanche débloque la position #10.": "Sunday's winner unlocks position #10.", "Un défi par semaine, uniquement le pilote juste au-dessus.": "One challenge per week, only the driver directly above you.",
   "Le vainqueur gagne le rang et le Cash Prize du boss battu.": "The winner takes the rank and the Cash Prize of the beaten boss.",

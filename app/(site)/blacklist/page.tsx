@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import BlacklistBoard from "@/components/BlacklistBoard";
 import DuelCard from "@/components/DuelCard";
 import PageHead from "@/components/PageHead";
-import { getBlacklist, getLatestDuels, getRewards } from "@/lib/data";
+import { getBlacklistLive, getLatestDuels, getRewards } from "@/lib/data";
 import { getT } from "@/lib/i18n";
 
 export const metadata: Metadata = { title: "The Blacklist" };
 
 export default async function BlacklistPage() {
-  const [t, list, rewards, duels] = await Promise.all([getT(), getBlacklist(), getRewards(), getLatestDuels(6)]);
+  const [t, list, rewards, duels] = await Promise.all([getT(), getBlacklistLive(), getRewards(), getLatestDuels(6)]);
   return (
     <>
       <PageHead kicker={t("CLASSEMENT OFFICIEL")} title={t("La")} em="Blacklist">{t("10 pilotes. 10 positions. Le classement se met à jour en direct à chaque duel validé par l'organisation.")}</PageHead>

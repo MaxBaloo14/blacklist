@@ -227,3 +227,23 @@ export async function resetDriverPassword(_: ActionState, f: FormData): Promise<
     return await ok("Mot de passe réinitialisé. Transmets-le au pilote de façon privée.");
   } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
 }
+
+const tplSchema = z.object({ kind: z.enum(["registration", "vehicle", "duel"]), title: z.string().min(2).max(80), body: z.string().min(3).max(300) });
+export async function saveTemplate(_: ActionState, f: FormData): Promise<ActionState> {
+  const p = tplSchema.safeParse({ kind: str(f, "kind"), title: str(f, "title"), body: str(f, "body") });
+  if (!p.success) return await fail("Titre (2 à 80 caractères) et texte (3 à 300) requis.");
+  const supabase = await createClient();
+  const { error } = await supabase.from("message_templates").insert(p.data);
+  if (error) return await fail(cleanError(error.message));
+  revalidatePath("/admin", "layout");
+  return await ok("Modèle enregistré.");
+}
+export async function deleteTemplate(_: ActionState, f: FormData): Promise<ActionState> {
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase.from("message_templates").delete().eq("id", id(f, "id"));
+    if (error) return await fail(cleanError(error.message));
+    revalidatePath("/admin", "layout");
+    return await ok("Modèle supprimé.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+}

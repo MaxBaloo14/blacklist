@@ -26,7 +26,7 @@ export default async function RaceNetwork() {
               const loop = tk.race_type === "Circuit" || tk.start_point === tk.end_point;
               const dur = Math.max(3, Math.min(9, 2 + Number(tk.distance_km) / 2));
               return (
-                <article key={tk.id} className={`group overflow-hidden border border-white/10 bg-ink2 transition hover:border-red-dark ${tk.status === "inactive" ? "opacity-55" : ""}`}>
+                <article key={tk.id} className={`group overflow-hidden border border-white/10 bg-ink2 transition hover:border-red-dark ${tk.status === "inactive" ? "opacity-90" : ""}`}>
                   <div className="relative aspect-video overflow-hidden bg-ink3">
                     {video ? <TrackMedia id={tk.id} name={tk.name} videoUrl={video} posterUrl={img} loop={loop} active={tk.status === "active"} dur={dur} />
                       : img ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={img} alt={tk.name} loading="lazy" className="size-full object-cover transition duration-500 group-hover:scale-105" />

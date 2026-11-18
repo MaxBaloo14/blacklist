@@ -12,6 +12,8 @@ export default async function Footer() {
       <div className="font-marker mt-2.5 text-lg text-metal">Blacklist — there is no second place.</div>
       <div className="font-cond mt-6 flex flex-wrap justify-center gap-x-7 gap-y-2 text-xs tracking-[.2em] text-metal">
         <Link href="/blacklist" className="hover:text-white">{t("LA BLACKLIST")}</Link>
+        <Link href="/calendar" className="hover:text-white">{t("CALENDRIER")}</Link>
+        <Link href="/hall-of-fame" className="hover:text-white">HALL OF FAME</Link>
         <Link href="/race-network" className="hover:text-white">{t("CIRCUITS")}</Link>
         <Link href="/guide" className="hover:text-white">{t("GUIDE")}</Link>
         <Link href="/rules" className="hover:text-white">{t("RÈGLEMENT")}</Link>

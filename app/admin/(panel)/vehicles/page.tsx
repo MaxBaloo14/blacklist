@@ -1,3 +1,4 @@
+import TemplatePicker from "@/components/TemplatePicker";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, Details } from "@/components/AdminUI";
 import Field from "@/components/Field";
@@ -13,10 +14,11 @@ export default async function VehiclesAdmin() {
   const { t, locale } = await getI18n();
   const L = labels(t);
   const { supabase } = await requireAdmin();
-  const [{ data: pending }, { data: approved }, { data: recent }] = await Promise.all([
+  const [{ data: pending }, { data: approved }, { data: recent }, { data: tpls }] = await Promise.all([
     supabase.from("vehicles").select("*, profiles(first_name,last_name,phone)").eq("status", "pending").order("created_at"),
     supabase.from("vehicles").select("*, profiles(first_name,last_name)").eq("status", "approved").order("created_at", { ascending: false }),
     supabase.from("vehicle_approvals").select("*, vehicles(make_model, profiles(first_name,last_name))").order("created_at", { ascending: false }).limit(25),
+    supabase.from("message_templates").select("id,title,body").eq("kind", "vehicle").order("title"),
   ]);
   return (
     <>
@@ -37,6 +39,7 @@ export default async function VehiclesAdmin() {
                 <Details summary={t("Refuser avec motif")} tone="text-red">
                   <ActionForm action={reviewVehicle} label="REFUSER" variant="ghost" small confirm="Refuser ce véhicule ? Le motif sera communiqué au pilote.">
                     <input type="hidden" name="vehicle" value={v.id} /><input type="hidden" name="decision" value="rejected" />
+                    <TemplatePicker templates={tpls ?? []} target="reason" />
                     <Field label={t("Motif du refus (visible du pilote)")}><input name="reason" required minLength={3} className="input" /></Field>
                   </ActionForm>
                 </Details>

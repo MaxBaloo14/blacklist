@@ -16,7 +16,7 @@ export default function NavView({ links, loggedIn, logoutLabel, unread = 0, show
     ? { grid: "min-[1500px]:grid-cols-[1fr_auto_1fr]", show: "min-[1500px]:flex", hide: "min-[1500px]:hidden", block: "min-[1500px]:block" }
     : { grid: "xl:grid-cols-[1fr_auto_1fr]", show: "xl:flex", hide: "xl:hidden", block: "xl:block" };
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/[.07] bg-ink/85 backdrop-blur-md">
+    <nav aria-label="Navigation principale" className="fixed inset-x-0 top-0 z-50 border-b border-white/[.07] bg-ink/85 backdrop-blur-md">
       <div className={`mx-auto grid h-[68px] max-w-[1680px] grid-cols-[1fr_auto] items-center gap-4 px-5 sm:px-6 ${bp.grid}`}>
         <Link href="/" className="font-display flex items-center gap-3 whitespace-nowrap text-[26px] tracking-wider">
           <span>BLACK<b className="text-red">LIST</b></span>

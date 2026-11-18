@@ -38,8 +38,9 @@ export default async function Guide() {
         <div className="wrap">
           <ol className="grid gap-4 md:grid-cols-2">
             {steps.map((st, i) => (
-              <Reveal key={st.title} delay={i * 0.05}>
-                <li className="flex h-full gap-4 border border-white/10 bg-ink2 p-6">
+              <li key={st.title} className="contents">
+              <Reveal delay={i * 0.05} className="h-full">
+                <div className="flex h-full gap-4 border border-white/10 bg-ink2 p-6">
                   <div className="shrink-0">
                     <div className="grid size-12 place-items-center bg-red/15 text-red"><st.icon size={24} strokeWidth={1.75} /></div>
                     <div className="font-display mt-2 text-center text-3xl leading-none text-red-dark">{i + 1}</div>
@@ -49,8 +50,9 @@ export default async function Guide() {
                     <p className="mt-1.5 text-sm text-[#a5a9b0]">{st.text}</p>
                     {st.href && <Link href={st.href} className="font-cond mt-3 inline-block text-sm font-semibold tracking-[.18em] text-red hover:text-white">{st.cta} →</Link>}
                   </div>
-                </li>
+                </div>
               </Reveal>
+              </li>
             ))}
           </ol>
 

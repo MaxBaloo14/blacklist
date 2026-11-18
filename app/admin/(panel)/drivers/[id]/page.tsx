@@ -1,3 +1,4 @@
+import TemplatePicker from "@/components/TemplatePicker";
 import { notFound } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, Details } from "@/components/AdminUI";
@@ -27,6 +28,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
     supabase.from("sanctions").select("*").eq("driver_id", id).order("created_at", { ascending: false }),
     supabase.rpc("inactivity_days", { p_driver: id }),
   ]);
+  const { data: regTpls } = await supabase.from("message_templates").select("id,title,body").eq("kind", "registration").order("title");
   const approved = vehicles?.find((v) => v.status === "approved");
   return (
     <>
@@ -38,6 +40,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
             <input type="hidden" name="driver" value={d.id} />
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label={t("Décision")}><select name="decision" className="input"><option value="validated">{t("Valider")}</option><option value="rejected">{t("Refuser")}</option></select></Field>
+              <div className="sm:col-span-2"><TemplatePicker templates={regTpls ?? []} target="note" /></div>
               <Field label={t("Note / motif (visible du pilote)")}><input name="note" className="input" defaultValue={d.registration_note ?? ""} /></Field>
             </div>
           </ActionForm>

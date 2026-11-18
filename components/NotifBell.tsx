@@ -38,7 +38,7 @@ export default function NotifBell({ unread }: { unread: number }) {
 
   return (
     <div ref={box} className="relative">
-      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label={t("Notifications")} className={`bell ${open ? "bell-open" : ""}`}>
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label={count > 0 ? `${t("Notifications")} ${count > 9 ? "9+" : count}` : t("Notifications")} className={`bell ${open ? "bell-open" : ""}`}>
         <Bell size={19} className={count > 0 ? "bell-ring" : ""} />
         {count > 0 && <span className="bell-dot">{count > 9 ? "9+" : count}</span>}
       </button>

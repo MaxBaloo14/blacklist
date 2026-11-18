@@ -10,10 +10,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const NAV: [string, string][] = [
     ["/admin", t("TABLEAU DE BORD")], ["/admin/drivers", t("PILOTES")], ["/admin/ranking", t("CLASSEMENT")], ["/admin/vehicles", t("VÉHICULES")], ["/admin/challenges", t("DÉFIS")],
     ["/admin/tracks", t("CIRCUITS")], ["/admin/warmup", "WARM-UP"], ["/admin/rewards", "CASH PRIZE"], ["/admin/reserve", t("RÉSERVE")],
-    ["/admin/inactivity", t("INACTIVITÉ")], ["/admin/exports", "EXPORTS"], ["/admin/news", t("ACTUALITÉS")], ["/admin/rules", t("RÈGLES")], ["/admin/logs", t("JOURNAL D'AUDIT")],
+    ["/admin/inactivity", t("INACTIVITÉ")], ["/admin/stats", t("CHIFFRES")], ["/admin/templates", t("MODÈLES")], ["/admin/exports", "EXPORTS"], ["/admin/news", t("ACTUALITÉS")], ["/admin/rules", t("RÈGLES")], ["/admin/logs", t("JOURNAL D'AUDIT")],
   ];
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[250px_1fr]">
+      <a href="#contenu" className="skip-link">{t("Aller au contenu")}</a>
       <aside className="border-b border-white/10 bg-[#06070a] lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:border-b-0 lg:border-r">
         <div className="flex items-start justify-between gap-3 p-5">
           <div>
@@ -22,13 +23,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </div>
           <LangSwitch />
         </div>
-        <nav className="font-cond flex gap-1 overflow-x-auto px-3 pb-3 text-[13px] font-semibold tracking-[.16em] lg:flex-col lg:overflow-visible">
+        <nav aria-label={t("Menu du Control Center")} className="font-cond flex gap-1 overflow-x-auto px-3 pb-3 text-[13px] font-semibold tracking-[.16em] lg:flex-col lg:overflow-visible">
           {NAV.map(([href, label]) => <ActiveLink key={href} href={href} exact={href === "/admin"} className="vtab">{label}</ActiveLink>)}
           <Link href="/" className="vtab !text-metal lg:mt-4">{t("← SITE PUBLIC")}</Link>
           <form action={logout}><button className="vtab w-full text-left !text-metal">{t("DÉCONNEXION")}</button></form>
         </nav>
       </aside>
-      <main className="min-w-0 p-5 sm:p-8">{children}</main>
+      <main id="contenu" tabIndex={-1} className="min-w-0 p-5 outline-none sm:p-8">{children}</main>
     </div>
   );
 }

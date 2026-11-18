@@ -87,3 +87,9 @@ export async function cancelProposal(): Promise<ActionState> {
 export async function markAllRead(): Promise<ActionState> {
   return callRpc("mark_notifications_read", {}, (await getT())("Tout est lu."), ["/notifications"]);
 }
+
+export async function predictDuel(_: ActionState, f: FormData): Promise<ActionState> {
+  const id = z.string().uuid().safeParse(str(f, "challenge")), pick = z.enum(["challenger", "defender"]).safeParse(str(f, "pick"));
+  if (!id.success || !pick.success) return await fail("Choix invalide.");
+  return callRpc("predict_duel", { p_challenge: id.data, p_pick: pick.data }, (await getT())("Pronostic enregistré."), ["/blacklist", "/calendar"]);
+}

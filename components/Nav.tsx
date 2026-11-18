@@ -11,6 +11,7 @@ export default async function Nav() {
     { href: "/", label: t("ACCUEIL") },
     { href: "/blacklist", label: t("LA BLACKLIST") },
     ...(loggedIn ? [] : [{ href: "/register", label: t("INSCRIPTION") }]),
+    { href: "/calendar", label: t("CALENDRIER") },
     { href: "/race-network", label: t("CIRCUITS") },
     { href: "/rules", label: t("RÈGLEMENT") },
     { href: DISCORD_URL, label: "DISCORD", external: true },

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
+import PredictionBar from "@/components/PredictionBar";
+import type { PredictionInfo } from "@/lib/predictions";
 import type { Row } from "@/lib/types";
 import { dateOnly, dateTime, money } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 
 /** Duel en face-à-face : un pilote de chaque côté, grand VS au centre, résultat ou compte à rebours en bas. */
-export default async function DuelCard({ d, example, rewards }: { d: Row; example?: boolean; rewards?: Row }) {
+export default async function DuelCard({ d, example, rewards, prediction }: { d: Row; example?: boolean; rewards?: Row; prediction?: PredictionInfo }) {
   const { t, locale } = await getI18n();
   const done = d.status === "completed" || d.status === "forfeited";
   const chWin = Boolean(d.winner_id && d.winner_id === d.challenger_id);
@@ -83,6 +85,12 @@ export default async function DuelCard({ d, example, rewards }: { d: Row; exampl
           </div>
         )}
       </div>
+      {upcoming && prediction && !example && (
+        <div className="mt-4 border-t border-white/10 pt-4">
+          <PredictionBar challengeId={d.id} challenger={ch || "—"} defender={df || "—"} ch={prediction.ch} df={prediction.df} mine={prediction.mine} canVote={prediction.canVote} loggedIn={prediction.loggedIn} />
+          <a href={`/api/calendar.ics?duel=${d.id}`} className="font-cond mt-3 inline-block text-xs font-semibold tracking-[.18em] text-[#cfcfcf] underline decoration-red decoration-2 underline-offset-4 hover:text-white">{t("AJOUTER À MON AGENDA")}</a>
+        </div>
+      )}
       <dl className="duel-detail">
         {rows.map(([k, v, hi]) => (
           <div key={k}><dt>{k}</dt><dd className={hi ? "hi" : ""}>{v}</dd></div>

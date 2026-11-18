@@ -198,7 +198,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
               </ActionForm>
             </div>
           )}
-          <div className="mt-12 text-xs text-metal">{t("Compte créé le {d}", { d: dateOnly(profile.created_at, locale) })} · <Link href="/notifications" className="text-red hover:text-white">{t("Voir mes notifications")}</Link></div>
+          <div className="mt-12 text-xs text-metal">{t("Compte créé le {d}", { d: dateOnly(profile.created_at, locale) })} · <Link href="/notifications" className="text-red underline underline-offset-4 hover:text-white">{t("Voir mes notifications")}</Link></div>
         </div>
       </section>
     </>

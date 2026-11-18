@@ -1,3 +1,4 @@
+import TemplatePicker from "@/components/TemplatePicker";
 import ActionForm from "@/components/ActionForm";
 import { Details } from "@/components/AdminUI";
 import { labels } from "@/lib/labels";
@@ -8,7 +9,7 @@ import { dateTime, fullName } from "@/lib/format";
 import type { Row } from "@/lib/types";
 import { getI18n } from "@/lib/i18n";
 
-export default async function AdminChallenge({ c, names, tracks }: { c: Row; names: Row; tracks: Row[] }) {
+export default async function AdminChallenge({ c, names, tracks, templates = [] }: { c: Row; names: Row; tracks: Row[]; templates?: Row[] }) {
   const { t, locale } = await getI18n();
   const L = labels(t);
   const ch = names[c.challenger_id], df = names[c.defender_id];
@@ -80,6 +81,7 @@ export default async function AdminChallenge({ c, names, tracks }: { c: Row; nam
               <ActionForm action={declareForfeit} label="DÉCLARER LE FORFAIT" small variant="ghost" confirm="Déclarer ce forfait ? L'adversaire est déclaré vainqueur et le classement est mis à jour immédiatement." reset={false}>
                 <input type="hidden" name="challenge" value={c.id} />
                 <Field label={t("Pilote déclarant forfait")}><select name="forfeiting" required defaultValue="" className="input"><option value="" disabled>{t("Choisir…")}</option><option value={c.defender_id}>{fullName(df)} ({t("défié")})</option><option value={c.challenger_id}>{fullName(ch)} ({t("challenger")})</option></select></Field>
+                <TemplatePicker templates={templates as never} target="reason" />
                 <Field label={t("Motif / vérification effectuée")} className="mt-2"><input name="reason" required minLength={3} className="input" /></Field>
               </ActionForm>
             </Details>
@@ -87,6 +89,7 @@ export default async function AdminChallenge({ c, names, tracks }: { c: Row; nam
           <Details summary={t("Annuler le duel")} tone="text-red">
             <ActionForm action={cancelChallenge} label="ANNULER LE DUEL" small variant="ghost" confirm="Annuler ce duel ? Aucun changement de classement ne sera appliqué." reset={false}>
               <input type="hidden" name="challenge" value={c.id} />
+              <TemplatePicker templates={templates as never} target="reason" />
               <Field label={t("Justification (obligatoire)")}><input name="reason" required minLength={3} className="input" /></Field>
               <label className="mt-2 flex items-center gap-2 text-sm"><input type="checkbox" name="free_week" className="accent-[#c62828]" /> {t("Libérer le défi hebdomadaire du challenger (absence justifiée)")}</label>
             </ActionForm>

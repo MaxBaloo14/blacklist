@@ -26,7 +26,7 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
       <AdminHead kicker={t("GESTION")} title={t("Pilotes")}>{t("Tous les pilotes inscrits : validation des inscriptions, modification, suspension ou bannissement.")}</AdminHead>
       <form className="mb-5 flex flex-wrap gap-3">
         <input name="q" defaultValue={sp.q} placeholder={t("Rechercher nom, prénom, téléphone…")} className="input max-w-sm" />
-        <select name="filter" defaultValue={sp.filter ?? ""} className="input max-w-[200px]"><option value="">{t("Tous")}</option><option value="pending">{t("Inscriptions à valider")}</option></select>
+        <select name="filter" aria-label={t("Filtrer les pilotes")} defaultValue={sp.filter ?? ""} className="input max-w-[200px]"><option value="">{t("Tous")}</option><option value="pending">{t("Inscriptions à valider")}</option></select>
         <button className="btn btn-dark btn-sm">{t("FILTRER")}</button>
       </form>
       <div className="overflow-x-auto bg-ink2">

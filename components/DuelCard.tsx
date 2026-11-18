@@ -1,16 +1,44 @@
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import type { Row } from "@/lib/types";
-import { dateTime } from "@/lib/format";
+import { dateOnly, dateTime, money } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 
 /** Duel en face-à-face : un pilote de chaque côté, grand VS au centre, résultat ou compte à rebours en bas. */
-export default async function DuelCard({ d, example }: { d: Row; example?: boolean }) {
+export default async function DuelCard({ d, example, rewards }: { d: Row; example?: boolean; rewards?: Row }) {
   const { t, locale } = await getI18n();
   const done = d.status === "completed" || d.status === "forfeited";
   const chWin = Boolean(d.winner_id && d.winner_id === d.challenger_id);
   const dfWin = Boolean(d.winner_id && d.winner_id === d.defender_id);
   const upcoming = !done && d.scheduled_at && new Date(d.scheduled_at).getTime() > Date.now();
+
+  const fullName = (who: "ch" | "df") => `${who === "ch" ? d.challenger_first : d.defender_first} ${who === "ch" ? d.challenger_last : d.defender_last}`.trim();
+  const prizeRaw = rewards?.[String(d.defender_position)];
+  const prize = prizeRaw ? money(Number(prizeRaw), locale) : null;
+  const ch = fullName("ch"), df = fullName("df");
+  const dp = Number(d.defender_position), cp = Number(d.challenger_position);
+
+  // Détail du duel : ce qui était en jeu, et ce que le vainqueur a gagné
+  const rows: [string, string, boolean?][] = [];
+  rows.push([t("Format"), d.is_podium ? t("Meilleur des 3 manches") : t("1 course")]);
+  if (done) {
+    if (d.status === "forfeited") rows.push([t("Issue"), t("Forfait")]);
+    rows.push([t("Vainqueur"), chWin ? ch : dfWin ? df : "—", true]);
+    if (d.is_podium) rows.push([t("Score des manches"), `${d.challenger_wins} – ${d.champion_wins}`]);
+    if (chWin) {
+      rows.push([t("Place gagnée"), `#${dp}`, true]);
+      rows.push([t("Ancien occupant"), t("{n} descend #{p}", { n: df, p: cp })]);
+      if (prize) rows.push([t("Cash Prize remporté"), prize, true]);
+    } else {
+      rows.push([t("Résultat"), t("{n} conserve sa place #{p}", { n: df, p: dp })]);
+      rows.push([t("Cash Prize"), t("Non versé : le titre est conservé")]);
+    }
+    if (d.validated_at) rows.push([t("Validé le"), dateOnly(d.validated_at, locale)]);
+  } else {
+    rows.push([t("En jeu"), `${t("La place")} #${dp}`, true]);
+    if (prize) rows.push([t("Cash Prize en jeu"), prize, true]);
+    rows.push([t("Si le challenger gagne"), t("{c} prend la place #{d}, {n} descend #{p}", { c: ch, d: dp, n: df, p: cp })]);
+  }
 
   const side = (who: "ch" | "df") => {
     const win = who === "ch" ? chWin : dfWin;
@@ -25,7 +53,7 @@ export default async function DuelCard({ d, example }: { d: Row; example?: boole
       <Wrap className={`duel-side ${win ? "duel-win" : done ? "duel-lose" : ""} ${who === "df" ? "text-right" : "text-left"}`}>
         <span className="duel-pos font-display">#{pos}</span>
         <strong className="font-cond block truncate text-xl uppercase leading-tight tracking-wide">{`${first} ${last ?? ""}`.trim()}</strong>
-        <span className={`font-display block text-5xl leading-none ${win ? "text-red" : ""}`}>{score ?? "–"}</span>
+        <span className={`font-display block text-5xl leading-none ${win ? "text-ok" : done ? "text-red" : ""}`}>{score ?? "–"}</span>
       </Wrap>
     );
   };
@@ -55,6 +83,11 @@ export default async function DuelCard({ d, example }: { d: Row; example?: boole
           </div>
         )}
       </div>
+      <dl className="duel-detail">
+        {rows.map(([k, v, hi]) => (
+          <div key={k}><dt>{k}</dt><dd className={hi ? "hi" : ""}>{v}</dd></div>
+        ))}
+      </dl>
     </div>
   );
 }

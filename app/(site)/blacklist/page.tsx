@@ -26,8 +26,8 @@ export default async function BlacklistPage() {
           <div className="kicker mb-2.5">{t("DERNIÈRES CONFRONTATIONS")}</div>
           <h2 className="h2 mb-8">{t("Sur")} <em>{t("l'asphalte")}</em></h2>
           <div className="grid gap-4 md:grid-cols-3">
-            <DuelCard d={EXAMPLE_DUEL} example />
-            {duels.map((d) => <DuelCard key={d.id} d={d} />)}
+            <DuelCard d={EXAMPLE_DUEL} example rewards={rewards} />
+            {duels.map((d) => <DuelCard key={d.id} d={d} rewards={rewards} />)}
           </div>
           <p className="mt-4 text-xs tracking-wider text-metal">{t("Exemple de duel : le #5 prend la place du #4 en le battant. Les vrais duels apparaîtront ici.")}</p>
         </div>

@@ -30,7 +30,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
   const approved = vehicles?.find((v) => v.status === "approved");
   return (
     <>
-      <AdminHead kicker={rank ? `BLACKLIST #${rank.position}` : t("FICHE PILOTE")} title={fullName(d)}>{t("Tél.")} : {d.phone}{d.discord_tag ? ` · Discord : ${d.discord_tag}` : ""} · {t("Dernière activité")} : {dateTime(d.last_activity_at, locale)}{rank ? ` · ${t("{n} j sans duel", { n: inact ?? 0 })}` : ""}</AdminHead>
+      <AdminHead kicker={rank ? `BLACKLIST #${rank.position}` : t("FICHE PILOTE")} title={fullName(d)}>{t("Tél.")} : {d.phone}{d.discord_tag ? ` · Discord : ${d.discord_tag}` : ""} · IBAN : {d.bank_iban ?? "—"} · {t("Dernière activité")} : {dateTime(d.last_activity_at, locale)}{rank ? ` · ${t("{n} j sans duel", { n: inact ?? 0 })}` : ""}</AdminHead>
       <div className="grid gap-6 xl:grid-cols-2">
         <div className="panel">
           <div className="kicker mb-3">{t("INSCRIPTION —")} <span className={d.registration_status === "validated" ? "text-ok" : ""}>{L.reg(d.registration_status).toUpperCase()}</span></div>

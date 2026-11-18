@@ -112,6 +112,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                   <Field label={t("Nom")}><input name="last_name" defaultValue={profile.last_name} required maxLength={60} className="input" /></Field>
                   <Field label={t("Téléphone")} hint={t("C'est ton identifiant de connexion.")}><input name="phone" type="tel" defaultValue={profile.phone} required maxLength={30} className="input" /></Field>
                   <Field label={t("Pseudo Discord (facultatif)")}><input name="discord_tag" defaultValue={profile.discord_tag ?? ""} maxLength={40} className="input" /></Field>
+                  <Field label={t("IBAN bancaire")} hint={t("Compte sur lequel l'organisation te verse ton Cash Prize. Visible uniquement par toi et l'organisation.")}><input name="bank_iban" defaultValue={profile.bank_iban ?? ""} maxLength={40} autoComplete="off" spellCheck={false} placeholder="XX00 0000 0000" className="input font-mono tracking-wider" /></Field>
                 </div>
               </ActionForm>
 
@@ -144,6 +145,9 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 <div className="panel-flat"><div className="label">{t("Versé")}</div><div className="font-display text-4xl text-ok">{m(cashPaid)}</div></div>
                 <div className="panel-flat"><div className="label">{t("En attente")}</div><div className="font-display text-4xl text-red">{m(cashTotal - cashPaid)}</div></div>
               </div>
+              {!profile.bank_iban && (
+                <p className="panel mb-6 text-[15px]"><b className="text-red">{t("IBAN manquant.")}</b> {t("Renseigne ton IBAN bancaire pour recevoir ton Cash Prize.")} <Link href="/profile?tab=overview" className="text-red underline underline-offset-4 hover:text-white">{t("Ajouter mon IBAN")}</Link></p>
+              )}
               {rewards?.length ? (
                 <div className="overflow-x-auto bg-ink2"><table className="tbl"><thead><tr><th>Date</th><th>{t("Boss battu")}</th><th>{t("Montant")}</th><th>{t("Statut")}</th><th>{t("Versé le")}</th><th>Clip</th></tr></thead><tbody>
                   {rewards.map((r: Row) => (

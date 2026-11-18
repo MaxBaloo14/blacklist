@@ -43,15 +43,16 @@ export async function setRaceTrack(_: ActionState, f: FormData): Promise<ActionS
 const profileSchema = z.object({
   first_name: z.string().min(1).max(60), last_name: z.string().min(1).max(60),
   phone: z.string().max(30).refine((v) => v.replace(/\D/g, "").length >= 4), discord_tag: z.string().max(40),
+  bank_iban: z.string().max(40).refine((v) => v === "" || (v.length >= 3 && /^[A-Za-z0-9 -]+$/.test(v))),
 });
 
 export async function updateProfile(_: ActionState, f: FormData): Promise<ActionState> {
   const { supabase, uid } = await userId();
   if (!uid) return await fail("Connexion requise.");
-  const p = profileSchema.safeParse({ first_name: str(f, "first_name"), last_name: str(f, "last_name"), phone: str(f, "phone"), discord_tag: str(f, "discord_tag") });
+  const p = profileSchema.safeParse({ first_name: str(f, "first_name"), last_name: str(f, "last_name"), phone: str(f, "phone"), discord_tag: str(f, "discord_tag"), bank_iban: str(f, "bank_iban") });
   if (!p.success) return await fail("Informations invalides : tous les champs sont requis.");
-  // La RLS et les droits de colonnes limitent la mise à jour à ces 4 champs, pour son propre compte.
-  const { error } = await supabase.from("profiles").update({ ...p.data, discord_tag: p.data.discord_tag || null }).eq("id", uid);
+  // La RLS et les droits de colonnes limitent la mise à jour à ces champs, pour son propre compte.
+  const { error } = await supabase.from("profiles").update({ ...p.data, discord_tag: p.data.discord_tag || null, bank_iban: p.data.bank_iban || null }).eq("id", uid);
   if (error) return await fail(/phone_key/.test(error.message) ? "Ce numéro de téléphone est déjà utilisé." : cleanError(error.message));
   revalidatePath("/profile");
   return { ok: true, message: (await getT())("Informations mises à jour."), nonce: Date.now() };

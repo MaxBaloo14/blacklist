@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 const T = {
   fr: {
     ranking: ["Position", "Prénom", "Nom", "Véhicule", "Catégorie", "Victoires", "Défaites", "Cash Prize du rang ($)", "Dans la Blacklist depuis"],
-    rankingFull: ["Téléphone", "Statut du compte"],
+    rankingFull: ["Téléphone", "IBAN", "Statut du compte"],
     duels: ["Date", "Rang challenger", "Challenger", "Rang défendeur", "Défendeur", "Format", "Statut", "Vainqueur", "Score challenger", "Score défendeur", "Clip"],
     duelsFull: ["Créé le", "Validé le", "Motif d'annulation"],
     podium: "Meilleur des 3", single: "1 course",
@@ -19,7 +19,7 @@ const T = {
   },
   en: {
     ranking: ["Position", "First name", "Last name", "Vehicle", "Category", "Wins", "Losses", "Rank Cash Prize ($)", "In the Blacklist since"],
-    rankingFull: ["Phone", "Account status"],
+    rankingFull: ["Phone", "IBAN", "Account status"],
     duels: ["Date", "Challenger rank", "Challenger", "Defender rank", "Defender", "Format", "Status", "Winner", "Challenger score", "Defender score", "Clip"],
     duelsFull: ["Created on", "Validated on", "Cancel reason"],
     podium: "Best of 3", single: "1 race",
@@ -41,14 +41,14 @@ export async function GET(req: Request, { params }: { params: Promise<{ kind: st
   let header: string[], rows: (string | number | null | undefined)[][];
   if (kind === "ranking") {
     const [list, rewards] = await Promise.all([getBlacklist(), getRewards()]);
-    const extra = new Map<string, { phone: string; account_status: string }>();
+    const extra = new Map<string, { phone: string; bank_iban: string | null; account_status: string }>();
     if (full && supabase) {
-      const { data } = await supabase.from("profiles").select("id,phone,account_status");
+      const { data } = await supabase.from("profiles").select("id,phone,bank_iban,account_status");
       (data ?? []).forEach((p) => extra.set(p.id, p));
     }
     header = [...tr.ranking, ...(full ? tr.rankingFull : [])];
     rows = list.map((r) => [r.position, r.first_name, r.last_name, r.make_model, r.vehicle_class, r.driver_id ? r.wins : "", r.driver_id ? r.losses : "", rewards?.[String(r.position)] ?? "", iso(r.ranked_since),
-      ...(full ? [extra.get(r.driver_id)?.phone ?? "", extra.get(r.driver_id)?.account_status ?? ""] : [])]);
+      ...(full ? [extra.get(r.driver_id)?.phone ?? "", extra.get(r.driver_id)?.bank_iban ?? "", extra.get(r.driver_id)?.account_status ?? ""] : [])]);
   } else if (full && supabase) {
     const [{ data: ch }, { data: profs }] = await Promise.all([
       supabase.from("challenges").select("*").order("created_at", { ascending: false }),

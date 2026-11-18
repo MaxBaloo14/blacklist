@@ -11,5 +11,5 @@ create extension if not exists pgcrypto;
 alter table auth.users add column if not exists encrypted_password text, add column if not exists created_at timestamptz default now();
 grant all on all tables in schema storage to anon, authenticated, service_role;
 SQL
-for f in 0001_schema 0002_functions 0003_storage 0004_unique_discord 0005_seed_tracks 0006_phone_login 0007_track_video 0008_demo_pilots 0009_duel_reminders; do run /tmp/$f.sql; done
+for f in 0001_schema 0002_functions 0003_storage 0004_unique_discord 0005_seed_tracks 0006_phone_login 0007_track_video 0008_demo_pilots 0009_duel_reminders 0010_bank_iban; do run /tmp/$f.sql; done
 echo "bl_e2e prête"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Crown } from "lucide-react";
 import BlacklistBoard from "@/components/BlacklistBoard";
 import DuelCard from "@/components/DuelCard";
 import PageHead from "@/components/PageHead";
@@ -22,9 +23,14 @@ export default async function BlacklistPage() {
       <section className="py-14">
         <div className="wrap">
           <BlacklistBoard initial={list} rewards={rewards} base="/blacklist" />
-          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/hall-of-fame" className="font-cond inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] text-[#cfcfcf] hover:text-red">{t("VOIR LE HALL OF FAME")} →</Link>
-          </div>
+          <Link href="/hall-of-fame" className="hof-banner group mt-8">
+            <span className="hof-banner-icon" aria-hidden><Crown size={30} /></span>
+            <span className="min-w-0">
+              <span className="font-display block text-3xl uppercase leading-none sm:text-4xl">Hall of <em className="not-italic text-red">Fame</em></span>
+              <span className="font-cond mt-1 block text-sm tracking-[.12em] text-[#cfcfcf]">{t("Les rois qui se sont succédé sur le trône et les records de la Blacklist.")}</span>
+            </span>
+            <span className="hof-banner-cta">{t("VOIR LE HALL OF FAME")} →</span>
+          </Link>
           <p className="mt-4 text-xs tracking-wider text-metal">{t("V = victoires · D = défaites · Prime = Cash Prize remporté en battant le pilote de ce rang.")}</p>
         </div>
       </section>

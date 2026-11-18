@@ -24,7 +24,7 @@ export default async function RankingAdmin() {
   return (
     <>
       <AdminHead kicker={t("GESTION")} title={t("Classement")}>{t("Les changements automatiques sont validés duel par duel (page Challenges). Ici : correction manuelle, avec justification obligatoire, journalisée.")}</AdminHead>
-      {!!active && <p className="badge badge-warn mb-5 !normal-case">{active} défi(s) en cours : la modification manuelle est bloquée tant qu&apos;ils ne sont pas clos ou annulés.</p>}
+      {!!active && <p className="badge badge-warn mb-5 !normal-case">{t("{n} défi(s) en cours : la modification manuelle est bloquée tant qu'ils ne sont pas clos ou annulés.", { n: active })}</p>}
       <ActionForm action={setRanking} label="APPLIQUER LA MODIFICATION" reset={false} confirm="Appliquer ce classement ? Chaque mouvement est notifié aux pilotes et journalisé.">
         <div className="grid gap-2">
           {ranks?.map((r) => (

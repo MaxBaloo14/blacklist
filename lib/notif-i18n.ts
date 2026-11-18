@@ -3,6 +3,7 @@ import type { Lang } from "@/lib/i18n-core";
 // Les notifications sont enregistrées en anglais par la base (texte fixe, valable pour tous).
 // En français, on traduit à l'affichage les messages connus ; les motifs écrits par l'organisation restent tels quels.
 const TITLES: [RegExp, string][] = [
+  [/^Add your IBAN to receive your Cash Prize$/, "Ajoute ton IBAN pour recevoir ton Cash Prize"],
   [/^Your duel starts in 24 hours$/, "Ton duel commence dans 24 h"],
   [/^Your duel starts in 1 hour$/, "Ton duel commence dans 1 h"],
   [/^A new challenge has been issued$/, "Un nouveau défi t'a été lancé"],
@@ -29,6 +30,7 @@ const TITLES: [RegExp, string][] = [
   [/^Your inactivity period requires attention$/, "Ta période d'inactivité demande ton attention"],
 ];
 const BODIES: [RegExp, string][] = [
+  [/^Your Cash Prize of \$(\d+) cannot be paid until you add your bank IBAN in your profile\.$/, "Ton Cash Prize de $1 $ ne peut pas être versé tant que tu n'as pas renseigné ton IBAN bancaire dans ton profil."],
   [/^Set a duel date within the current week before the deadline\.$/, "Fixe une date de duel dans la semaine en cours avant la fin du délai."],
   [/^You lost your engaged vehicle\. Register a new valid vehicle and get it approved to race again\.$/, "Tu as perdu ton véhicule engagé. Enregistre un nouveau véhicule valide et fais-le homologuer pour pouvoir courir à nouveau."],
   [/^You are now #(\d+)\.$/, "Tu es maintenant #$1."],
@@ -45,7 +47,7 @@ const KINDS: Record<string, string> = {
   challenge_new: "DÉFI", challenge_deadline: "DÉLAI", challenge_sent: "DÉFI", challenge_scheduled: "DUEL PROGRAMMÉ", challenge_cancelled: "DUEL ANNULÉ",
   registration: "INSCRIPTION", account: "COMPTE", vehicle_approved: "VÉHICULE", vehicle_rejected: "VÉHICULE", vehicle_disqualified: "VÉHICULE", vehicle_lost: "VÉHICULE CONFISQUÉ",
   reward: "CASH PRIZE", reward_paid: "CASH PRIZE", duel_won: "VICTOIRE", duel_lost: "DÉFAITE", duel_validated: "COURSE VALIDÉE", ranking_changed: "CLASSEMENT",
-  sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
+  sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", iban_missing: "IBAN MANQUANT", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
 };
 
 const apply = (s: string, rules: [RegExp, string][]) => {
@@ -53,9 +55,14 @@ const apply = (s: string, rules: [RegExp, string][]) => {
   return s;
 };
 
+// Montants lisibles : 800000 → 800 000 $ (français) ou $800,000 (anglais)
+const money = (body: string | null, lang: Lang) => body && (lang === "en"
+  ? body.replace(/\$(\d{4,})/g, (_, d) => "$" + Number(d).toLocaleString("en-US"))
+  : body.replace(/(\d{4,}) \$/g, (_, d) => Number(d).toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ") + " $"));
+
 export function localizeNotif(n: { kind: string; title: string; body: string | null }, lang: Lang) {
-  if (lang === "en") return { kind: n.kind.replace(/_/g, " ").toUpperCase(), title: n.title, body: n.body };
-  return { kind: KINDS[n.kind] ?? n.kind.replace(/_/g, " ").toUpperCase(), title: apply(n.title, TITLES), body: n.body ? apply(n.body, BODIES) : n.body };
+  if (lang === "en") return { kind: n.kind.replace(/_/g, " ").toUpperCase(), title: n.title, body: money(n.body, lang) };
+  return { kind: KINDS[n.kind] ?? n.kind.replace(/_/g, " ").toUpperCase(), title: apply(n.title, TITLES), body: money(n.body ? apply(n.body, BODIES) : n.body, lang) };
 }
 
 /** Motifs d'historique du classement créés par la base. */

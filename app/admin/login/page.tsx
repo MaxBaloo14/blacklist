@@ -11,7 +11,7 @@ export default async function AdminLogin({ searchParams }: { searchParams: Promi
   const [sp, t] = await Promise.all([searchParams, getT()]);
   return (
     <main className="relative grid min-h-screen place-items-center px-5">
-      <div className="absolute inset-0 -z-10 bg-cover bg-center opacity-20" style={{ backgroundImage: "url(/img/hero.webp)" }} />
+      <div className="absolute inset-0 -z-10 bg-cover bg-center opacity-20" style={{ backgroundImage: "url(/img/hero-1600.webp)" }} />
       <div className="absolute inset-0 -z-10 bg-ink/80" />
       <div className="absolute right-4 top-4"><LangSwitch /></div>
       <div className="w-full max-w-md">

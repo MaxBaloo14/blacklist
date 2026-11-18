@@ -25,6 +25,11 @@ export default async function Dashboard() {
     c(supabase.from("challenges").select("id", { count: "exact", head: true }).eq("status", "awaiting_schedule").lt("respond_by", new Date().toISOString())),
     supabase.from("notifications").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(12),
   ]);
+  // Primes à verser dont le pilote n'a pas encore renseigné son IBAN
+  const { data: pendingRewards } = await supabase.from("rewards").select("driver_id").eq("status", "pending");
+  const rewardDrivers = [...new Set((pendingRewards ?? []).map((r) => r.driver_id))];
+  const { data: withIban } = rewardDrivers.length ? await supabase.from("profiles").select("id").in("id", rewardDrivers).not("bank_iban", "is", null) : { data: [] as { id: string }[] };
+  const noIban = rewardDrivers.length - (withIban?.length ?? 0);
   const awaiting = await c(supabase.from("challenges").select("id", { count: "exact", head: true }).eq("status", "awaiting_validation"));
   return (
     <>
@@ -39,8 +44,9 @@ export default async function Dashboard() {
         <Link href="/admin/rewards"><Stat label={t("Récompenses en attente")} value={rewards} tone={rewards ? "text-red" : ""} /></Link>
         <Link href="/admin/inactivity"><Stat label={t("Alertes d'inactivité")} value={inactive} tone={inactive ? "text-red" : ""} /></Link>
       </div>
-      <div className="mt-3 grid gap-3 md:grid-cols-2">
+      <div className="mt-3 grid gap-3 md:grid-cols-3">
         <Link href="/admin/challenges"><Stat label={t("Résultats à valider")} value={awaiting} tone={awaiting ? "text-red" : ""} /></Link>
+        <Link href="/admin/rewards"><Stat label={t("Primes à verser sans IBAN")} value={noIban} tone={noIban ? "text-red" : ""} /></Link>
         <Link href="/admin/challenges"><Stat label={t("Dates non fixées (48 h dépassées)")} value={overdue} tone={overdue ? "text-red" : ""} /></Link>
       </div>
       <h2 className="font-cond mb-3 mt-10 text-lg font-bold uppercase tracking-[.18em]">{t("Alertes organisation")}</h2>

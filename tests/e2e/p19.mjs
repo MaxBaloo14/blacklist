@@ -1,0 +1,18 @@
+import { launch, BASE, SHOT, adminPage, text, check } from "./lib.mjs";
+import { execSync } from "node:child_process";
+const b = await launch(); const ad = await adminPage(b); await ad.setViewportSize({ width: 1400, height: 900 });
+await ad.goto(BASE + "/admin"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(900);
+const t0 = await text(ad); check("tableau de bord : 1 prime sans IBAN", /1 \| PRIMES À VERSER SANS IBAN/.test(t0), (t0.match(/.{20}PRIMES À VERSER SANS IBAN/) ?? [""])[0]);
+await ad.screenshot({ path: `${SHOT}/170-dashboard-noiban.png`, clip: { x: 250, y: 0, width: 1150, height: 560 } });
+await ad.goto(BASE + "/admin/rewards"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(600);
+check("prime sans IBAN : avertissement", /IBAN NON RENSEIGNÉ/i.test(await text(ad)));
+execSync(`su postgres -c "psql -d bl_e2e -qc \\"update profiles set bank_iban='FR76 3000 6000 0112 3456 7890 189' where first_name='Lio'\\""`);
+await ad.goto(BASE + "/admin"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(600);
+check("tableau de bord : 0 sans IBAN après saisie", /0 \| PRIMES À VERSER SANS IBAN/.test(await text(ad)));
+await ad.goto(BASE + "/admin/drivers"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(800);
+await ad.screenshot({ path: `${SHOT}/171-drivers-iban-col.png`, clip: { x: 250, y: 180, width: 1150, height: 460 } });
+await ad.goto(BASE + "/admin/rewards"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(600);
+await ad.locator(".copy-btn").first().click(); await ad.waitForTimeout(400);
+check("bouton Copier : confirme « COPIÉ »", /COPIÉ/.test(await ad.locator(".copy-btn").first().innerText()));
+await ad.screenshot({ path: `${SHOT}/172-rewards-copy.png`, clip: { x: 250, y: 330, width: 1150, height: 260 } });
+console.log(ad.errors); await b.close();

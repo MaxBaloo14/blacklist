@@ -1,3 +1,4 @@
+import CopyButton from "@/components/CopyButton";
 import Link from "next/link";
 import { AdminHead } from "@/components/AdminUI";
 import { requireAdmin } from "@/lib/auth";
@@ -30,15 +31,17 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
       </form>
       <div className="overflow-x-auto bg-ink2">
         <table className="tbl">
-          <thead><tr><th>{t("Pilote")}</th><th>{t("Téléphone")}</th><th>{t("Rang")}</th><th>{t("Véhicule")}</th><th>{t("Inscription")}</th><th>{t("Compte")}</th><th>{t("Créé")}</th></tr></thead>
+          <thead><tr><th>{t("Pilote")}</th><th>{t("Téléphone")}</th><th>IBAN</th><th>{t("Rang")}</th><th>{t("Véhicule")}</th><th>{t("Inscription")}</th><th>{t("Compte")}</th><th>{t("Créé")}</th></tr></thead>
           <tbody>
             {drivers?.map((d) => {
               const v = vehicles?.find((x) => x.owner_id === d.id && x.status === "approved") ?? vehicles?.find((x) => x.owner_id === d.id);
               const r = ranks?.find((x) => x.driver_id === d.id);
               return (
                 <tr key={d.id}>
-                  <td><Link href={`/admin/drivers/${d.id}`} className="font-cond text-lg font-bold uppercase tracking-wide hover:text-red">{d.first_name} {d.last_name}</Link></td>
-                  <td>{d.phone}</td><td>{r ? `#${r.position}` : "—"}</td>
+                  <td className="whitespace-nowrap"><Link href={`/admin/drivers/${d.id}`} className="font-cond text-lg font-bold uppercase tracking-wide hover:text-red">{d.first_name} {d.last_name}</Link></td>
+                  <td>{d.phone}</td>
+                  <td>{d.bank_iban ? <span className="inline-flex flex-wrap items-center gap-2"><code className="font-mono text-[13px] tracking-wider">{d.bank_iban}</code><CopyButton value={d.bank_iban} /></span> : <span className="badge badge-red">{t("MANQUANT")}</span>}</td>
+                  <td>{r ? `#${r.position}` : "—"}</td>
                   <td>{v ? <>{v.make_model} <span className={`badge ${v.status === "approved" ? "badge-ok" : "badge-warn"}`}>{L.vehicle(v.status)}</span></> : "—"}</td>
                   <td><span className={`badge ${d.registration_status === "validated" ? "badge-ok" : d.registration_status === "rejected" ? "badge-red" : "badge-warn"}`}>{L.reg(d.registration_status)}</span></td>
                   <td><span className={`badge ${d.account_status === "active" ? "badge-metal" : "badge-red"}`}>{L.account(d.account_status)}</span></td>

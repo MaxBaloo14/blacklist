@@ -1,3 +1,4 @@
+import CopyButton from "@/components/CopyButton";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, Details, Stat } from "@/components/AdminUI";
 import Field from "@/components/Field";
@@ -29,7 +30,7 @@ export default async function RewardsAdmin() {
       <div className="mb-12 grid gap-4">{pending.map((r) => (
         <article key={r.id} className="border border-white/10 bg-ink2 p-5">
           <div className="flex flex-wrap items-center justify-between gap-3"><div><div className="font-display text-3xl uppercase">{who(r.driver_id)}</div><div className="font-cond tracking-wide text-metal">{t("Boss #{n} battu", { n: r.rank_beaten })} · {dateTime(r.created_at, locale)}</div></div><div className="font-display text-4xl text-red">{money(r.amount, locale)}</div></div>
-          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm"><span className="label !mb-0">{t("IBAN du pilote")}</span>{ibanOf(r.driver_id) ? <code className="select-all bg-ink px-3 py-1 font-mono tracking-wider text-bone">{ibanOf(r.driver_id)}</code> : <span className="badge badge-warn">{t("IBAN non renseigné")}</span>}</div>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm"><span className="label !mb-0">{t("IBAN du pilote")}</span>{ibanOf(r.driver_id) ? <><code className="select-all bg-ink px-3 py-1 font-mono tracking-wider text-bone">{ibanOf(r.driver_id)}</code><CopyButton value={ibanOf(r.driver_id)!} /></> : <span className="badge badge-warn">{t("IBAN non renseigné")}</span>}</div>
           <div className="mt-3 text-sm">Clip : {r.clip_url ? <a href={r.clip_url} target="_blank" rel="noopener noreferrer" className="text-red hover:text-white">{r.clip_url}</a> : <span className="text-metal">{t("non renseigné")}</span>}</div>
           <div className="mt-4 grid gap-2 lg:grid-cols-2">
             <Details summary={t("Confirmer le paiement")}><ActionForm action={confirmPayment} label="CONFIRMER LE PAIEMENT" confirm={t("Confirmer que {m} ont été versés à {n} ? Ton identifiant et la date seront enregistrés.", { m: money(r.amount, locale), n: who(r.driver_id) })} reset={false}><input type="hidden" name="reward" value={r.id} /><Field label={t("Justificatif (lien, optionnel)")}><input name="proof" type="url" className="input" placeholder="https://…" /></Field><Field label={t("Note")} className="mt-2"><input name="note" className="input" /></Field></ActionForm></Details>

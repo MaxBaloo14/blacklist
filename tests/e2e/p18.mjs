@@ -1,0 +1,12 @@
+import { launch, BASE, SHOT, adminPage } from "./lib.mjs";
+const b = await launch(); const ad = await adminPage(b);
+await ad.setViewportSize({ width: 1400, height: 900 });
+await ad.goto(BASE + "/admin/rewards"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(900);
+await ad.screenshot({ path: `${SHOT}/160-rewards.png`, clip: { x: 0, y: 0, width: 1400, height: 640 } });
+await ad.goto(BASE + "/admin/drivers"); await ad.waitForLoadState("networkidle");
+const href = await ad.locator('a[href^="/admin/drivers/"]:has-text("LIO"), a[href^="/admin/drivers/"]:has-text("Lio")').first().getAttribute("href");
+await ad.goto(BASE + href); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(900);
+await ad.screenshot({ path: `${SHOT}/161-driver-fiche.png`, clip: { x: 0, y: 0, width: 1400, height: 420 } });
+await ad.goto(BASE + "/admin/drivers"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(600);
+await ad.screenshot({ path: `${SHOT}/162-drivers-list.png`, clip: { x: 0, y: 0, width: 1400, height: 560 } });
+await b.close();

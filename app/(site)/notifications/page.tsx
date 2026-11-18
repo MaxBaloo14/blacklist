@@ -12,6 +12,7 @@ export const metadata: Metadata = { title: "Notifications" };
 
 export default async function Notifications() {
   const [{ t, lang, locale }, { supabase, user }] = await Promise.all([getI18n(), requireDriver()]);
+  await supabase.rpc("duel_reminders");
   const { data } = await supabase.from("notifications").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(100);
   const unread = (data ?? []).filter((n) => !n.read_at).length;
   return (

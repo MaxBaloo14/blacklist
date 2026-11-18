@@ -250,3 +250,14 @@ a:hover .plinth { filter: brightness(1.2); }
 .duel-detail dt { font-family: var(--font-cond); letter-spacing: .14em; text-transform: uppercase; color: #777c84; flex: none; }
 .duel-detail dd { text-align: right; color: #d8d8d8; font-weight: 500; }
 .duel-detail dd.hi { color: #ff6b6b; font-weight: 700; }
+
+/* ---------- Frise des duels ---------- */
+.tline { position: relative; display: flex; gap: 14px; overflow-x: auto; padding: 8px 4px 14px; scroll-snap-type: x proximity; }
+.tline::before { content: ""; position: absolute; left: 0; right: 0; top: 29px; height: 2px; background: linear-gradient(90deg, #ffffff14, #ffffff2a, #ffffff14); }
+.tline li { position: relative; flex: none; width: 168px; scroll-snap-align: start; display: grid; justify-items: start; gap: 10px; }
+.tline-dot { position: relative; z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; font-size: 22px; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.tline-win .tline-dot { background: #4caf7a; color: #07110b; box-shadow: 0 0 18px #4caf7a77; }
+.tline-loss .tline-dot { background: #c62828; color: #fff; box-shadow: 0 0 18px #c6282877; }
+.tline-card { padding: .55rem .7rem; width: 100%; background: var(--grain), #121418; border-top: 2px solid; }
+.tline-win .tline-card { border-color: #4caf7a; }
+.tline-loss .tline-card { border-color: #c62828; }

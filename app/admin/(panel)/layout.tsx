@@ -10,7 +10,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const NAV: [string, string][] = [
     ["/admin", t("TABLEAU DE BORD")], ["/admin/drivers", t("PILOTES")], ["/admin/ranking", t("CLASSEMENT")], ["/admin/vehicles", t("VÉHICULES")], ["/admin/challenges", t("DÉFIS")],
     ["/admin/tracks", t("CIRCUITS")], ["/admin/warmup", "WARM-UP"], ["/admin/rewards", "CASH PRIZE"], ["/admin/reserve", t("RÉSERVE")],
-    ["/admin/inactivity", t("INACTIVITÉ")], ["/admin/news", t("ACTUALITÉS")], ["/admin/rules", t("RÈGLES")], ["/admin/logs", t("JOURNAL D'AUDIT")],
+    ["/admin/inactivity", t("INACTIVITÉ")], ["/admin/exports", "EXPORTS"], ["/admin/news", t("ACTUALITÉS")], ["/admin/rules", t("RÈGLES")], ["/admin/logs", t("JOURNAL D'AUDIT")],
   ];
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[250px_1fr]">

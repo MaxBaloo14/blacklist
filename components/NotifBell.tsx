@@ -16,6 +16,14 @@ export default function NotifBell({ unread }: { unread: number }) {
   const box = useRef<HTMLDivElement>(null);
   useEffect(() => setCount(unread), [unread]);
 
+  // Rappels de duel et nouvelles notifications : on actualise le compteur toutes les 60 s (onglet visible uniquement)
+  useEffect(() => {
+    const tick = () => { if (document.visibilityState === "visible") fetch("/api/notifications", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((j) => { if (j) { setCount(j.unread); setItems(j.items); } }).catch(() => {}); };
+    tick();
+    const i = setInterval(tick, 60_000);
+    return () => clearInterval(i);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     let alive = true;

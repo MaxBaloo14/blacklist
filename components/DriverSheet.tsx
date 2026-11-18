@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import DuelCard from "@/components/DuelCard";
+import DuelTimeline from "@/components/DuelTimeline";
 import PageHead from "@/components/PageHead";
 import PilotBadges from "@/components/PilotBadges";
 import { driverBadges } from "@/lib/badges";
@@ -101,6 +102,7 @@ export default async function DriverSheet({ d, duels, moves }: { d: Row; duels: 
       <section className="pb-24">
         <div className="wrap">
           <h2 className="h2 mb-8">{t("Historique des")} <em>{t("duels")}</em></h2>
+          <DuelTimeline driverId={d.id} duels={duels} />
           {duels.length ? <div className="grid gap-4 md:grid-cols-3">{duels.map((x) => <DuelCard key={x.id} d={x} />)}</div> : <p className="panel text-[#a5a9b0]">{t("Aucun duel enregistré.")}</p>}
         </div>
       </section>

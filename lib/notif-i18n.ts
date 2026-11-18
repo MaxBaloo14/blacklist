@@ -3,6 +3,8 @@ import type { Lang } from "@/lib/i18n-core";
 // Les notifications sont enregistrées en anglais par la base (texte fixe, valable pour tous).
 // En français, on traduit à l'affichage les messages connus ; les motifs écrits par l'organisation restent tels quels.
 const TITLES: [RegExp, string][] = [
+  [/^Your duel starts in 24 hours$/, "Ton duel commence dans 24 h"],
+  [/^Your duel starts in 1 hour$/, "Ton duel commence dans 1 h"],
   [/^A new challenge has been issued$/, "Un nouveau défi t'a été lancé"],
   [/^You have (\d+) hours to schedule your duel$/, "Tu as $1 h pour fixer la date de ton duel"],
   [/^Challenge sent$/, "Défi envoyé"],
@@ -43,7 +45,7 @@ const KINDS: Record<string, string> = {
   challenge_new: "DÉFI", challenge_deadline: "DÉLAI", challenge_sent: "DÉFI", challenge_scheduled: "DUEL PROGRAMMÉ", challenge_cancelled: "DUEL ANNULÉ",
   registration: "INSCRIPTION", account: "COMPTE", vehicle_approved: "VÉHICULE", vehicle_rejected: "VÉHICULE", vehicle_disqualified: "VÉHICULE", vehicle_lost: "VÉHICULE CONFISQUÉ",
   reward: "CASH PRIZE", reward_paid: "CASH PRIZE", duel_won: "VICTOIRE", duel_lost: "DÉFAITE", duel_validated: "COURSE VALIDÉE", ranking_changed: "CLASSEMENT",
-  sanction: "SANCTION", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
+  sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
 };
 
 const apply = (s: string, rules: [RegExp, string][]) => {

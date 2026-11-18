@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const { supabase, user } = await getSession();
   if (!supabase || !user) return NextResponse.json({ items: [], unread: 0 }, { status: 401 });
+  await supabase.rpc("duel_reminders");   // rappels 24 h / 1 h avant un duel (une seule fois chacun)
   const lang = await getLang();
   const locale = lang === "en" ? "en-GB" : "fr-FR";
   const { data } = await supabase.from("notifications").select("id,kind,title,body,link,read_at,created_at").eq("user_id", user.id).order("created_at", { ascending: false }).limit(8);

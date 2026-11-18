@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CalendarPlus, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import DuelCard from "@/components/DuelCard";
 import PageHead from "@/components/PageHead";
 import { getLatestDuels, getRewards, getWarmups } from "@/lib/data";
@@ -54,7 +54,6 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
               <Link href={`/calendar?m=${next}`} aria-label={t("Mois suivant")} className="cal-nav"><ChevronRight size={18} /></Link>
               {m !== today.slice(0, 7) && <Link href="/calendar" className="font-cond ml-2 text-xs font-semibold tracking-[.2em] text-red hover:text-white">{t("AUJOURD'HUI")}</Link>}
             </div>
-            <a href="/api/calendar.ics" className="btn btn-ghost btn-sm"><CalendarPlus size={16} /> {t("S'ABONNER À L'AGENDA")}</a>
           </div>
 
           <table className="cal-table">

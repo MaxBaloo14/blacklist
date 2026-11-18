@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Download } from "lucide-react";
 import BlacklistBoard from "@/components/BlacklistBoard";
 import DuelCard from "@/components/DuelCard";
 import PageHead from "@/components/PageHead";
@@ -25,7 +24,6 @@ export default async function BlacklistPage() {
           <BlacklistBoard initial={list} rewards={rewards} base="/blacklist" />
           <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link href="/hall-of-fame" className="font-cond inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] text-[#cfcfcf] hover:text-red">{t("VOIR LE HALL OF FAME")} →</Link>
-            <a href="/api/export/ranking" className="font-cond inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] text-[#cfcfcf] hover:text-red"><Download size={14} /> {t("EXPORTER LE CLASSEMENT (CSV)")}</a>
           </div>
           <p className="mt-4 text-xs tracking-wider text-metal">{t("V = victoires · D = défaites · Prime = Cash Prize remporté en battant le pilote de ce rang.")}</p>
         </div>
@@ -38,8 +36,6 @@ export default async function BlacklistPage() {
             <DuelCard d={EXAMPLE_DUEL} example rewards={rewards} />
             {duels.map((d) => <DuelCard key={d.id} d={d} rewards={rewards} prediction={predictions.get(d.id)} />)}
           </div>
-          <a href="/api/export/duels" className="font-cond mt-5 inline-flex items-center gap-2 text-xs font-semibold tracking-[.2em] text-[#cfcfcf] hover:text-red"><Download size={14} /> {t("EXPORTER L'HISTORIQUE DES DUELS (CSV)")}</a>
-          <p className="mt-4 text-xs tracking-wider text-metal">{t("Exemple de duel : le #5 prend la place du #4 en le battant. Les vrais duels apparaîtront ici.")}</p>
         </div>
       </section>
     </>

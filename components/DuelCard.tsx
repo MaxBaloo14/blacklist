@@ -88,7 +88,6 @@ export default async function DuelCard({ d, example, rewards, prediction }: { d:
       {upcoming && prediction && !example && (
         <div className="mt-4 border-t border-white/10 pt-4">
           <PredictionBar challengeId={d.id} challenger={ch || "—"} defender={df || "—"} ch={prediction.ch} df={prediction.df} mine={prediction.mine} canVote={prediction.canVote} loggedIn={prediction.loggedIn} />
-          <a href={`/api/calendar.ics?duel=${d.id}`} className="font-cond mt-3 inline-block text-xs font-semibold tracking-[.18em] text-[#cfcfcf] underline decoration-red decoration-2 underline-offset-4 hover:text-white">{t("AJOUTER À MON AGENDA")}</a>
         </div>
       )}
       <dl className="duel-detail">

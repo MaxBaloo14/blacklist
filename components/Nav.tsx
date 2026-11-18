@@ -15,8 +15,8 @@ export default async function Nav() {
     { href: "/rules", label: t("RÈGLEMENT") },
     { href: DISCORD_URL, label: "DISCORD", external: true },
     ...(loggedIn
-      ? [{ href: "/profile", label: t("MON PROFIL") }, { href: "/challenges", label: t("MES DÉFIS") }, { href: "/notifications", label: "NOTIFICATIONS", badge: unread }]
+      ? [{ href: "/profile", label: t("MON PROFIL") }, { href: "/challenges", label: t("MES DÉFIS") }]
       : isAdmin ? [{ href: "/admin", label: "CONTROL CENTER" }] : [{ href: "/login", label: t("CONNEXION"), login: true }]),
   ];
-  return <NavView links={links} loggedIn={Boolean(user)} logoutLabel={t("DÉCONNEXION")} />;
+  return <NavView links={links} loggedIn={Boolean(user)} logoutLabel={t("DÉCONNEXION")} unread={unread} showBell={loggedIn} />;
 }

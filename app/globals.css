@@ -185,3 +185,47 @@ a:hover .plinth { filter: brightness(1.2); }
 @keyframes toastIn { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
 .spin { display: inline-block; width: 1.1em; height: 1.1em; border: 2px solid #ffffff55; border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Compte à rebours en grands chiffres ---------- */
+.cd-board { display: inline-flex; gap: .5rem; }
+.cd-cell { display: grid; justify-items: center; min-width: 58px; padding: .5rem .55rem .35rem; background: var(--grain), linear-gradient(180deg, #1b1d22, #0d0e11); border-top: 2px solid #781818; clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%); }
+.cd-digits { font-family: var(--font-display); font-size: 40px; line-height: 1; letter-spacing: .02em; color: #f4f4f4; font-variant-numeric: tabular-nums; }
+.cd-label { font-family: var(--font-cond); font-size: 10px; letter-spacing: .22em; color: #777c84; margin-top: 3px; }
+.cd-urgent .cd-cell { border-top-color: #c62828; animation: cdPulse 1.4s ease-in-out infinite; }
+.cd-urgent .cd-digits { color: #ff6b6b; text-shadow: 0 0 18px #c6282899; }
+@keyframes cdPulse { 0%, 100% { filter: none; } 50% { filter: drop-shadow(0 0 10px #c628288a); } }
+
+/* ---------- Duel en face-à-face ---------- */
+.duel-side { display: grid; gap: .15rem; padding: .5rem .6rem; transition: opacity .3s, background .3s; }
+.duel-side:hover { background: #ffffff06; }
+.duel-pos { font-size: 26px; line-height: 1; color: #ffffff3a; }
+.duel-win { background: linear-gradient(90deg, #c628281c, transparent); box-shadow: inset 3px 0 0 #c62828; }
+.duel-win.text-right { background: linear-gradient(270deg, #c628281c, transparent); box-shadow: inset -3px 0 0 #c62828; }
+.duel-win .duel-pos { color: #c62828; }
+.duel-lose { opacity: .5; }
+.duel-vs { display: grid; place-items: center; width: 62px; height: 62px; background: #c62828; clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%); box-shadow: 0 0 30px #c62828; font-size: 26px; color: #fff; filter: drop-shadow(0 0 14px #c6282899); }
+
+/* ---------- Badges pilote ---------- */
+.pilot-badge { display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .85rem; font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: transform .2s, filter .2s; cursor: default; }
+.pilot-badge:hover { transform: translateY(-2px); filter: brightness(1.25); }
+.pilot-badge-red { background: #c628282e; color: #ff6b6b; box-shadow: inset 0 0 0 1px #c6282880; }
+.pilot-badge-gold { background: #d4a64a22; color: #e6bd68; box-shadow: inset 0 0 0 1px #d4a64a66; }
+.pilot-badge-ok { background: #4caf7a1c; color: #4caf7a; box-shadow: inset 0 0 0 1px #4caf7a66; }
+.pilot-badge-metal { background: #ffffff10; color: #cfcfcf; box-shadow: inset 0 0 0 1px #ffffff2a; }
+
+/* ---------- Squelettes de chargement ---------- */
+.skel { position: relative; overflow: hidden; background: #14161a; }
+.skel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, #ffffff0d 50%, transparent 80%); transform: translateX(-100%); animation: skelSweep 1.4s ease-in-out infinite; }
+@keyframes skelSweep { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .skel::after, .cd-urgent .cd-cell, .bell-ring { animation: none; } }
+
+/* ---------- Cloche de notifications ---------- */
+.bell { position: relative; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #ffffff26; background: #ffffff08; color: #d8d8d8; transition: .2s; }
+.bell:hover, .bell-open { background: #c628282e; border-color: #c62828; color: #fff; }
+.bell-dot { position: absolute; top: -6px; right: -6px; min-width: 19px; height: 19px; padding: 0 4px; display: grid; place-items: center; background: #c62828; color: #fff; font-family: var(--font-cond); font-size: 11px; font-weight: 700; box-shadow: 0 0 12px #c62828aa; }
+.bell-ring { animation: bellRing 3.5s ease-in-out infinite; transform-origin: 50% 0; }
+@keyframes bellRing { 0%, 88%, 100% { transform: rotate(0); } 90% { transform: rotate(14deg); } 93% { transform: rotate(-12deg); } 96% { transform: rotate(8deg); } }
+.bell-panel { position: absolute; right: 0; top: calc(100% + 12px); width: 360px; max-width: calc(100vw - 24px); background: #0d0e11; border: 1px solid #ffffff1f; border-top: 3px solid #c62828; box-shadow: 0 24px 60px #000c; animation: toastIn .25s cubic-bezier(.2,.7,.2,1); z-index: 60; }
+.bell-item { padding: .7rem 1rem; border-left: 3px solid transparent; border-bottom: 1px solid #ffffff0d; transition: background .2s; }
+.bell-item:hover { background: #ffffff08; }
+.bell-unread { border-left-color: #c62828; background: #c628280d; }

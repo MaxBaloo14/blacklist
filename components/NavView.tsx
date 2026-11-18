@@ -3,6 +3,7 @@ import { logout } from "@/app/actions/auth";
 import LangSwitch from "./LangSwitch";
 import MobileNav from "./MobileNav";
 import ActiveLink from "./ActiveLink";
+import NotifBell from "./NotifBell";
 
 export type NavLink = { href: string; label: string; badge?: number; login?: boolean; external?: boolean };
 
@@ -10,7 +11,7 @@ export type NavLink = { href: string; label: string; badge?: number; login?: boo
  * Barre de navigation : logo à gauche, liens CENTRÉS sur une seule ligne, drapeaux collés au bord droit.
  * Connecté, il y a plus de liens : le menu complet n'apparaît qu'à partir de 1500 px, en dessous c'est le menu déroulant.
  */
-export default function NavView({ links, loggedIn, logoutLabel }: { links: NavLink[]; loggedIn: boolean; logoutLabel: string }) {
+export default function NavView({ links, loggedIn, logoutLabel, unread = 0, showBell = false }: { links: NavLink[]; loggedIn: boolean; logoutLabel: string; unread?: number; showBell?: boolean }) {
   const bp = loggedIn
     ? { grid: "min-[1500px]:grid-cols-[1fr_auto_1fr]", show: "min-[1500px]:flex", hide: "min-[1500px]:hidden", block: "min-[1500px]:block" }
     : { grid: "xl:grid-cols-[1fr_auto_1fr]", show: "xl:flex", hide: "xl:hidden", block: "xl:block" };
@@ -33,12 +34,13 @@ export default function NavView({ links, loggedIn, logoutLabel }: { links: NavLi
         <div className={`hidden ${bp.block}`} aria-hidden />
 
         <div className={`flex items-center gap-3 ${bp.hide}`}>
+          {showBell && <NotifBell unread={unread} />}
           <LangSwitch />
           <MobileNav links={links} logout={loggedIn ? <form action={logout}><button className="font-display border-b border-white/10 py-4 text-left text-4xl uppercase tracking-wide text-metal">{logoutLabel}</button></form> : null} />
         </div>
       </div>
       {/* Drapeaux collés au bord droit de l'écran quand le menu complet est affiché */}
-      <div className={`absolute right-4 top-1/2 hidden -translate-y-1/2 ${bp.block}`}><LangSwitch /></div>
+      <div className={`absolute right-4 top-1/2 hidden -translate-y-1/2 items-center gap-3 ${bp.show}`}>{showBell && <NotifBell unread={unread} />}<LangSwitch /></div>
     </nav>
   );
 }

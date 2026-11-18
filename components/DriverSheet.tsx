@@ -1,6 +1,8 @@
 import Reveal from "@/components/Reveal";
 import DuelCard from "@/components/DuelCard";
 import PageHead from "@/components/PageHead";
+import { Crown, Flame, Medal, Shield, Swords, Trophy } from "lucide-react";
+import { driverBadges } from "@/lib/badges";
 import { bestRank, daysSince, driverStats } from "@/lib/driver-stats";
 import { dateOnly, photoUrl } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
@@ -15,6 +17,8 @@ export default async function DriverSheet({ d, duels, moves }: { d: Row; duels: 
   const pct = total ? Math.round((d.wins / total) * 100) : 0;
   const best = bestRank(d.position, moves);
   const since = daysSince(d.ranked_since);
+  const badges = driverBadges(d, duels, best, t);
+  const icons = { crown: Crown, trophy: Trophy, flame: Flame, shield: Shield, swords: Swords, medal: Medal };
   const kindLabel: Record<string, string> = { duel: t("Duel"), entry: t("Entrée"), sanction: t("Sanction"), removal: t("Retrait"), reserve: t("Réserve"), manual: t("Ajustement") };
 
   const mini: [string, string | number, string?][] = [
@@ -29,6 +33,13 @@ export default async function DriverSheet({ d, duels, moves }: { d: Row; duels: 
     <>
       <PageHead kicker={d.position ? `BLACKLIST #${d.position}` : t("PILOTE NON CLASSÉ")} title={d.first_name} em={d.last_name} />
       <section className="py-14">
+        {badges.length > 0 && (
+          <div className="wrap mb-8 flex flex-wrap gap-2.5" aria-label={t("Badges")}>
+            {badges.map((b) => { const Icon = icons[b.icon]; return (
+              <span key={b.key} title={b.hint} className={`pilot-badge pilot-badge-${b.tone}`}><Icon size={16} /> {b.label}</span>
+            ); })}
+          </div>
+        )}
         <div className="wrap grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           <div className="border border-white/10 bg-ink2">
             {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -1,0 +1,65 @@
+# Sauvegarde de la base Supabase (schéma + données, y compris les comptes), CHIFFRÉE avant d'être conservée.
+# Le dépôt est public : une sauvegarde non chiffrée exposerait des numéros de téléphone et des IBAN. Elle n'est donc JAMAIS publiée en clair.
+# Secrets nécessaires (Settings > Secrets and variables > Actions) :
+#   SUPABASE_ACCESS_TOKEN, SUPABASE_DB_PASSWORD  (déjà créés pour les migrations)
+#   BACKUP_PASSPHRASE  (un mot de passe long de ton choix, à garder précieusement : sans lui, la sauvegarde est illisible)
+name: Sauvegarde de la base
+on:
+  schedule:
+    - cron: "23 3 * * 0"        # chaque dimanche à 03h23 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Test : fait la sauvegarde et affiche des comptes, sans rien conserver"
+        type: boolean
+        default: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+      PROJECT_REF: idhkufafxxtocrxsjyan
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier la phrase secrète
+        if: ${{ !inputs.dry_run }}
+        run: |
+          if [ -z "$BACKUP_PASSPHRASE" ]; then
+            echo "::error::Le secret BACKUP_PASSPHRASE est absent : aucune sauvegarde n'est conservée (elle serait lisible par tous sur un dépôt public). Crée ce secret dans GitHub puis relance."
+            exit 1
+          fi
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase link --project-ref "$PROJECT_REF"
+      - name: Exporter le schéma et les données
+        run: |
+          mkdir -p out
+          supabase db dump --linked -f out/schema.sql
+          supabase db dump --linked --data-only --use-copy -f out/data-public.sql
+          supabase db dump --linked --data-only --use-copy --schema auth -f out/data-auth.sql || echo "::warning::Export des comptes (schéma auth) impossible : les données publiques sont sauvegardées, pas les identifiants de connexion."
+          ls -la out
+      - name: Contrôle (comptes seulement, aucun contenu affiché)
+        run: |
+          for f in out/*.sql; do echo "$f : $(wc -l < "$f") lignes"; done
+          echo "profils exportés : $(awk '/^COPY "public"."profiles"/{f=1;next} /^\\\./{f=0} f' out/data-public.sql | wc -l)"
+          echo "comptes exportés : $( [ -f out/data-auth.sql ] && awk '/^COPY "auth"."users"/{f=1;next} /^\\\./{f=0} f' out/data-auth.sql | wc -l || echo 0)"
+      - name: Chiffrer
+        if: ${{ !inputs.dry_run }}
+        run: |
+          tar -czf backup.tar.gz -C out .
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$BACKUP_PASSPHRASE" --symmetric --cipher-algo AES256 -o "backup-$(date -u +%F).tar.gz.gpg" backup.tar.gz
+          rm -f backup.tar.gz
+          rm -rf out
+          ls -la backup-*.gpg
+      - name: Conserver la sauvegarde chiffrée (90 jours)
+        if: ${{ !inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-chiffree
+          path: backup-*.tar.gz.gpg
+          retention-days: 90
+          if-no-files-found: error

@@ -23,4 +23,15 @@ ok("vide / n'importe quoi", () => { assert.equal(parseClip(""), null); assert.eq
 ok("intégration YouTube sans cookies", () => assert.match(embedUrl(parseClip("https://youtu.be/dQw4w9WgXcQ"), "x.fr"), /^https:\/\/www\.youtube-nocookie\.com\/embed\/dQw4w9WgXcQ/));
 ok("intégration Twitch avec le domaine parent", () => assert.match(embedUrl(parseClip("https://clips.twitch.tv/FunnyBraveCatPJSalt-abc123"), "blacklist-snowy.vercel.app"), /parent=blacklist-snowy\.vercel\.app/));
 ok("le domaine parent est encodé", () => assert.ok(!embedUrl(parseClip("https://clips.twitch.tv/FunnyBraveCatPJSalt-abc123"), "a&b=c").includes("&b=c")));
+const med = (u) => parseClip(u);
+ok("Medal : lien de jeu (clips)", () => assert.equal(med("https://medal.tv/games/gta-v/clips/nRXUuC0ZTsq4ugxT8/AbCdEf123")?.id, "gta-v/nRXUuC0ZTsq4ugxT8"));
+ok("Medal : lien court /clips/<id>", () => assert.equal(med("https://medal.tv/clips/nRXUuC0ZTsq4ugxT8")?.provider, "medal"));
+ok("Medal : lien /clip/<id> et www", () => assert.equal(med("https://www.medal.tv/clip/nRXUuC0ZTsq4ugxT8")?.provider, "medal"));
+ok("Medal : préfixe de langue /fr/", () => assert.equal(med("https://medal.tv/fr/games/gta-v/clips/nRXUuC0ZTsq4ugxT8?invite=cr-xyz")?.id, "gta-v/nRXUuC0ZTsq4ugxT8"));
+ok("Medal : ancien lien ?contentId=", () => assert.equal(med("https://medal.tv/?contentId=nRXUuC0ZTsq4ugxT8")?.id, "gta-v/nRXUuC0ZTsq4ugxT8"));
+ok("Medal : autre jeu conservé", () => assert.equal(med("https://medal.tv/games/valorant/clips/nRXUuC0ZTsq4ugxT8")?.id, "valorant/nRXUuC0ZTsq4ugxT8"));
+ok("Medal : adresse d'intégration (singulier /clip/, sans la page non intégrable)", () => assert.equal(embedUrl(med("https://medal.tv/games/gta-v/clips/nRXUuC0ZTsq4ugxT8"), "x.fr"), "https://medal.tv/games/gta-v/clip/nRXUuC0ZTsq4ugxT8?autoplay=1&muted=0&loop=0&mobilecontrols=1"));
+ok("Medal : faux domaine refusé", () => { assert.equal(med("https://medal.tv.evil.example/clips/nRXUuC0ZTsq4ugxT8"), null); assert.equal(med("https://evil.example/medal.tv/clips/nRXUuC0ZTsq4ugxT8"), null); });
+ok("Medal : identifiant piégé refusé", () => { assert.equal(med("https://medal.tv/clips/abc"), null); assert.equal(med('https://medal.tv/clips/nRXUuC0ZTsq4ugxT8"onload="x'), null); assert.equal(med("https://medal.tv/games/ga me/clips/nRXUuC0ZTsq4ugxT8"), null); });
+ok("Medal : http refusé", () => assert.equal(med("http://medal.tv/clips/nRXUuC0ZTsq4ugxT8"), null));
 console.log(`\n${n} tests unitaires OK`);

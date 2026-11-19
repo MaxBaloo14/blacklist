@@ -2,7 +2,7 @@
  * Clips intégrés : on n'accepte que des fournisseurs connus, et l'adresse d'intégration est RECONSTRUITE à partir d'un identifiant validé.
  * Une adresse quelconque n'est jamais placée dans un cadre : elle reste un simple lien.
  */
-export type Clip = { provider: "youtube" | "twitch" | "twitch-vod" | "streamable" | "vimeo" | "file"; id: string; label: string; url: string };
+export type Clip = { provider: "youtube" | "medal" | "twitch" | "twitch-vod" | "streamable" | "vimeo" | "file"; id: string; label: string; url: string };
 
 const YT = /^[A-Za-z0-9_-]{11}$/;
 const TW_SLUG = /^[A-Za-z0-9_-]{5,120}$/;
@@ -21,6 +21,16 @@ export function parseClip(raw?: string | null): Clip | null {
   }
   if (host === "youtu.be" && parts[0] && YT.test(parts[0])) return { provider: "youtube", id: parts[0], label: "YouTube", url: u.toString() };
 
+  // Medal : ids de clip alphanumériques. Liens de partage : /clips/<id>[/<jeton>], /games/<jeu>/clips/<id>, /clip/<id>, préfixe de langue facultatif, ou ?contentId=<id>.
+  if (host === "medal.tv" || host === "m.medal.tv") {
+    const MEDAL_ID = /^[A-Za-z0-9_-]{8,40}$/;
+    const p2 = parts.length && /^[a-z]{2}(-[A-Za-z]{2})?$/.test(parts[0]) ? parts.slice(1) : parts;   // retire /fr/, /en/…
+    let game = "gta-v", id: string | undefined;
+    if (p2[0] === "games" && /^[a-z0-9-]{1,40}$/.test(p2[1] ?? "") && (p2[2] === "clips" || p2[2] === "clip")) { game = p2[1]; id = p2[3]; }
+    else if (p2[0] === "clips" || p2[0] === "clip") id = p2[1];
+    else if (p2.length === 0) id = u.searchParams.get("contentId") ?? undefined;
+    if (id && MEDAL_ID.test(id)) return { provider: "medal", id: `${game}/${id}`, label: "Medal", url: u.toString() };
+  }
   if (host === "clips.twitch.tv" && parts[0] && TW_SLUG.test(parts[0])) return { provider: "twitch", id: parts[0], label: "Twitch", url: u.toString() };
   if (host === "twitch.tv" || host === "m.twitch.tv") {
     if (parts[1] === "clip" && parts[2] && TW_SLUG.test(parts[2])) return { provider: "twitch", id: parts[2], label: "Twitch", url: u.toString() };
@@ -39,6 +49,7 @@ export function parseClip(raw?: string | null): Clip | null {
 export function embedUrl(c: Clip, parentHost: string): string {
   switch (c.provider) {
     case "youtube": return `https://www.youtube-nocookie.com/embed/${c.id}?autoplay=1&rel=0`;
+    case "medal": { const [game, id] = c.id.split("/"); return `https://medal.tv/games/${game}/clip/${id}?autoplay=1&muted=0&loop=0&mobilecontrols=1`; }
     case "twitch": return `https://clips.twitch.tv/embed?clip=${encodeURIComponent(c.id)}&parent=${encodeURIComponent(parentHost)}&autoplay=true`;
     case "twitch-vod": return `https://player.twitch.tv/?video=v${c.id}&parent=${encodeURIComponent(parentHost)}&autoplay=true`;
     case "streamable": return `https://streamable.com/e/${c.id}?autoplay=1`;

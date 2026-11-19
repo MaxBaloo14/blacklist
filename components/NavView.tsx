@@ -5,7 +5,8 @@ import MobileNav from "./MobileNav";
 import ActiveLink from "./ActiveLink";
 import NotifBell from "./NotifBell";
 
-export type NavLink = { href: string; label: string; badge?: number; login?: boolean; external?: boolean };
+export type { NavLink } from "@/lib/navlinks";
+import type { NavLink } from "@/lib/navlinks";
 
 /**
  * Barre de navigation : logo à gauche, liens CENTRÉS sur une seule ligne, drapeaux collés au bord droit.
@@ -36,7 +37,7 @@ export default function NavView({ links, loggedIn, logoutLabel, unread = 0, show
         <div className={`flex items-center gap-3 ${bp.hide}`}>
           {showBell && <NotifBell unread={unread} />}
           <LangSwitch />
-          <MobileNav links={links} logout={loggedIn ? <form action={logout}><button className="font-display border-b border-white/10 py-4 text-left text-4xl uppercase tracking-wide text-metal">{logoutLabel}</button></form> : null} />
+          <div className="hidden md:block"><MobileNav links={links} logout={loggedIn ? <form action={logout}><button className="font-display border-b border-white/10 py-4 text-left text-4xl uppercase tracking-wide text-metal">{logoutLabel}</button></form> : null} /></div>
         </div>
       </div>
       {/* Drapeaux collés au bord droit de l'écran quand le menu complet est affiché */}

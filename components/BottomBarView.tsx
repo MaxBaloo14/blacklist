@@ -1,19 +1,37 @@
 "use client";
-import { Bell, CalendarDays, Home, Map, Swords, Trophy, User } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Bell, CalendarDays, CircleUser, Home, LogIn, Map, MessageCircle, ScrollText, Settings, Swords, Trophy, UserPlus } from "lucide-react";
 import ActiveLink from "./ActiveLink";
 
-const ICONS = { trophy: Trophy, calendar: CalendarDays, swords: Swords, bell: Bell, user: User, home: Home, map: Map };
-export type BottomItem = { href: string; label: string; icon: keyof typeof ICONS; badge?: number };
+const ICON_BY_HREF: Record<string, typeof Home> = {
+  "/": Home, "/blacklist": Trophy, "/register": UserPlus, "/calendar": CalendarDays, "/race-network": Map, "/rules": ScrollText,
+  "/profile": CircleUser, "/challenges": Swords, "/notifications": Bell, "/login": LogIn, "/admin": Settings,
+};
+export type BottomItem = { href: string; label: string; badge?: number; external?: boolean };
 
-export default function BottomBarView({ items, label }: { items: BottomItem[]; label: string }) {
+export default function BottomBarView({ items, label, logout }: { items: BottomItem[]; label: string; logout?: React.ReactNode }) {
+  const scroller = useRef<HTMLUListElement>(null);
+  const [edge, setEdge] = useState({ left: false, right: true });
+
+  const measure = () => { const el = scroller.current; if (el) setEdge({ left: el.scrollLeft > 4, right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4 }); };
+  useEffect(() => {
+    measure();
+    // L'onglet de la page courante est amené dans la zone visible
+    scroller.current?.querySelector('[aria-current="page"]')?.scrollIntoView({ inline: "center", block: "nearest" });
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [items.length]);
+
   return (
     <nav aria-label={label} className="bottombar md:hidden">
-      <ul className="grid" style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}>
+      <div className={`bottombar-fade bottombar-fade-l ${edge.left ? "on" : ""}`} aria-hidden />
+      <div className={`bottombar-fade bottombar-fade-r ${edge.right ? "on" : ""}`} aria-hidden />
+      <ul ref={scroller} onScroll={measure} className="bottombar-scroll">
         {items.map((it) => {
-          const Icon = ICONS[it.icon];
+          const Icon = it.external ? MessageCircle : ICON_BY_HREF[it.href] ?? Home;
           return (
             <li key={it.href}>
-              <ActiveLink href={it.href} className="bottombar-item">
+              <ActiveLink href={it.href} external={it.external} className="bottombar-item">
                 <span className="relative">
                   <Icon size={22} strokeWidth={1.9} aria-hidden />
                   {!!it.badge && <span className="bottombar-dot" aria-label={String(it.badge)}>{it.badge > 9 ? "9+" : it.badge}</span>}
@@ -23,6 +41,7 @@ export default function BottomBarView({ items, label }: { items: BottomItem[]; l
             </li>
           );
         })}
+        {logout && <li className="bottombar-logout">{logout}</li>}
       </ul>
     </nav>
   );

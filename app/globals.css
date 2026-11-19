@@ -352,3 +352,15 @@ a.underline { text-decoration-line: underline; }
 .clip-card:hover { transform: translateY(-4px); border-color: #c62828; }
 .clip-poster { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 7; background: radial-gradient(circle at 50% 40%, #c6282844, transparent 60%), repeating-linear-gradient(135deg, #15171b 0 10px, #101215 10px 20px); }
 .clip-play { display: grid; place-items: center; width: 64px; height: 64px; background: #c62828; color: #fff; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); box-shadow: 0 0 30px #c62828aa; }
+
+/* Barre du bas : toutes les rubriques, défilement horizontal au doigt, avec un dégradé qui signale qu'il y en a d'autres */
+.bottombar { overflow: hidden; }
+.bottombar-scroll { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.bottombar-scroll::-webkit-scrollbar { display: none; }
+.bottombar-scroll > li { flex: none; scroll-snap-align: start; }
+.bottombar-scroll .bottombar-item { min-width: 84px; padding-left: 12px; padding-right: 12px; white-space: nowrap; }
+.bottombar-logout .bottombar-item { color: #8b9098; min-width: 84px; align-content: center; height: 100%; }
+.bottombar-fade { position: absolute; top: 0; bottom: 0; width: 34px; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .2s; }
+.bottombar-fade.on { opacity: 1; }
+.bottombar-fade-l { left: 0; background: linear-gradient(90deg, #090a0c, transparent); }
+.bottombar-fade-r { right: 0; background: linear-gradient(270deg, #090a0c, transparent); }

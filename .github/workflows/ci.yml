@@ -31,12 +31,17 @@ jobs:
           npm i --no-save playwright
           npx playwright install --with-deps chromium
       - name: Outils (PostgreSQL, ffmpeg, openssl)
+        timeout-minutes: 10
+        env:
+          DEBIAN_FRONTEND: noninteractive
+          NEEDRESTART_MODE: a
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq postgresql ffmpeg openssl
+          sudo -E apt-get update -qq
+          sudo -E apt-get install -y -qq postgresql ffmpeg openssl
           for c in $(pg_lsclusters -h | awk '{print $1"/"$2}'); do sudo pg_ctlcluster "${c%/*}" "${c#*/}" start || true; done
           pg_lsclusters
       - name: Tous les tests
+        timeout-minutes: 20
         run: sudo -E env "PATH=$PATH" bash tests/run-all.sh
       - name: Captures d'écran des tests (en cas d'échec)
         if: failure()

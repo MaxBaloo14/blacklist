@@ -12,7 +12,7 @@ run() {
   local s=$(date +%s)
   echo; echo "━━━━ $name"
   if "$@" > "/tmp/test-$$.log" 2>&1; then PASSED+=("$name ($(( $(date +%s) - s )) s)"); tail -n 3 "/tmp/test-$$.log" | sed 's/^/   /'
-  else FAILED+=("$name"); echo "   ÉCHEC — dernières lignes :"; grep -E "FAIL|ERROR|Error" "/tmp/test-$$.log" | head -12 | sed 's/^/   /'; tail -n 5 "/tmp/test-$$.log" | sed 's/^/   /'; fi
+  else FAILED+=("$name"); echo "   ÉCHEC — détail :"; grep -E "FAIL|ERROR" "/tmp/test-$$.log" | head -12 | sed 's/^/   /'; tail -n 30 "/tmp/test-$$.log" | sed 's/^/   | /'; fi
 }
 dbcheck() { out=$(bash supabase/tests/go.sh 2>&1); echo "$out" | tail -4; echo "$out" | grep -qE "^ERROR|FAIL  " && return 1; echo "$out" | grep -q "TOUS LES SCÉNARIOS PASSENT (push inclus)"; }
 

@@ -3,9 +3,9 @@ const b = await launch();
 const mobile = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
 // Visiteur : barre du bas
 const v = await (await b.newContext(mobile)).newPage(); await v.goto(BASE + "/blacklist"); await v.waitForLoadState("networkidle"); await v.waitForTimeout(3800);
-check("visiteur : barre du bas visible (5 onglets)", (await v.locator(".bottombar-item:visible").count()) === 5);
+check("visiteur : barre du bas visible (8 rubriques, à faire défiler)", (await v.locator(".bottombar-scroll li").count()) >= 8);
 await v.screenshot({ path: `${SHOT}/200-bottom-visitor.png` });
-await v.locator('.bottombar-item:has-text("Calendrier")').click(); await v.waitForTimeout(1500);
+await v.locator('.bottombar-item:has-text("CALENDRIER")').first().click(); await v.waitForTimeout(1500);
 check("la barre navigue vers le calendrier", /\/calendar/.test(v.url()));
 // Desktop : pas de barre
 const d = await (await b.newContext({ viewport: { width: 1280, height: 800 } })).newPage(); await d.goto(BASE + "/blacklist"); await d.waitForLoadState("networkidle");
@@ -15,7 +15,7 @@ const pctx = await b.newContext(mobile); const p = await pctx.newPage(); await p
 await p.goto(BASE + "/notifications"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3800);
 const tn = await text(p);
 check("notification « Ajoute ton IBAN » reçue par le gagnant sans IBAN", /Ajoute ton IBAN pour recevoir ton Cash Prize/.test(tn) && /ne peut pas être versé/.test(tn), (tn.match(/Ajoute ton IBAN.{0,120}/) ?? [""])[0]);
-check("pilote : barre du bas avec Défis, Alertes, Profil", (await p.locator('.bottombar-item:has-text("Défis"), .bottombar-item:has-text("Alertes"), .bottombar-item:has-text("Profil")').count()) === 3);
+check("pilote : barre du bas avec Mes défis, Notifications, Mon profil", (await p.locator('.bottombar-item:has-text("MES DÉFIS"), .bottombar-item:has-text("NOTIFICATIONS"), .bottombar-item:has-text("MON PROFIL")').count()) === 3);
 await p.screenshot({ path: `${SHOT}/201-bottom-pilot-notif.png` });
 // Après saisie de l'IBAN, plus de relance au prochain gain (pas testé ici) ; version anglaise
 await p.context().addCookies([{ name: "lang", value: "en", url: BASE }]); await p.goto(BASE + "/notifications"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3800);

@@ -10,7 +10,7 @@ async function scan(p, path, name) {
   await p.goto(BASE + path); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3600);
   const r = await p.evaluate(() => {
     const vw = document.documentElement.clientWidth;
-    const bad = [...document.querySelectorAll("body *")].filter((e) => { const b = e.getBoundingClientRect(); const cs = getComputedStyle(e); return b.width > 0 && b.right > vw + 2 && cs.position !== "fixed" && !e.closest(".tline, .overflow-x-auto, nav .overflow-x-auto, table, svg") && cs.visibility !== "hidden"; }).slice(0, 4).map((e) => `${e.tagName.toLowerCase()}.${String(e.className).slice(0, 40)} (${Math.round(e.getBoundingClientRect().right)})`);
+    const bad = [...document.querySelectorAll("body *")].filter((e) => { const b = e.getBoundingClientRect(); const cs = getComputedStyle(e); return b.width > 0 && b.right > vw + 2 && cs.position !== "fixed" && !e.closest(".tline, .overflow-x-auto, nav .overflow-x-auto, .bottombar, table, svg") && cs.visibility !== "hidden"; }).slice(0, 4).map((e) => `${e.tagName.toLowerCase()}.${String(e.className).slice(0, 40)} (${Math.round(e.getBoundingClientRect().right)})`);
     const small = [...document.querySelectorAll("a, button, input, select, summary")].filter((e) => { const b = e.getBoundingClientRect(); return b.width > 0 && b.height > 0 && (b.height < 30 || b.width < 30) && getComputedStyle(e).visibility !== "hidden" && !e.closest(".splash"); }).length;
     return { scrollW: document.documentElement.scrollWidth, vw, bad, small };
   });

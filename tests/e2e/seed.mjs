@@ -17,13 +17,6 @@ for (let i = 0; i < 5; i++) { await ad.goto(BASE + "/admin/vehicles"); if (!(awa
 await ad.goto(BASE + "/admin/ranking");
 for (const [pos, n] of [[1, "Kael"], [2, "Ryn"], [3, "Zane"], [4, "Mika"], [5, "Lio"]]) { const s = ad.locator(`[name=pos${pos}]`); await s.selectOption(await s.locator("option", { hasText: n }).first().getAttribute("value")); }
 await ad.fill('[name=reason]', "Mise en place"); await act(ad, "APPLIQUER LA MODIFICATION");
-// photos pour les 3 premiers (stockage du banc d'essai)
-const rows = execSync(`su postgres -c "psql -d bl_e2e -Atc \\"select v.id||'|'||v.owner_id from vehicles v join blacklist_rankings r on r.driver_id=v.owner_id where r.position<=3 order by r.position\\""`).toString().trim().split("\n");
-for (const [k, r] of rows.entries()) {
-  const [vid, oid] = r.split("|"); const path = `${oid}/seed${k}.jpg`;
-  execSync(`curl -s -X POST -H "apikey: sb_secret_e2e" -H "Authorization: Bearer sb_secret_e2e" -H "Content-Type: image/jpeg" --data-binary @/tmp/e2e-media/car${k + 1}.jpg http://127.0.0.1:54321/storage/v1/object/vehicle-photos/${path}`);
-  execSync(`su postgres -c "psql -d bl_e2e -qc \\"update vehicles set photo_path='${path}' where id='${vid}'\\""`);
-}
 // duel #5 (Lio) défie #4 (Mika), Mika fixe la date, résultat : Lio gagne -> mouvement
 const lio = await newPage(b); await pilotLogin(lio, "0600000015"); await lio.goto(BASE + "/challenges"); await lio.waitForLoadState("networkidle"); await act(lio, "DÉFIER LE #4");
 const mika = await newPage(b); await pilotLogin(mika, "0600000014"); await mika.goto(BASE + "/challenges"); await mika.waitForLoadState("networkidle");

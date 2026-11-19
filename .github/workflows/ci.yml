@@ -42,7 +42,7 @@ jobs:
           pg_lsclusters
       - name: Tous les tests
         timeout-minutes: 20
-        run: sudo -E env "PATH=$PATH" bash tests/run-all.sh
+        run: sudo env "PATH=$PATH" "PLAYWRIGHT_BROWSERS_PATH=$PLAYWRIGHT_BROWSERS_PATH" "CI=true" bash tests/run-all.sh
       - name: Captures d'écran des tests (en cas d'échec)
         if: failure()
         uses: actions/upload-artifact@v4

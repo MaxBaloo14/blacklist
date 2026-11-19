@@ -1,4 +1,6 @@
+import { execSync } from "node:child_process";
 import { launch, newPage, BASE, SHOT, act, text, check, adminPage } from "./lib.mjs";
+execSync(`su postgres -c "psql -d bl_e2e -qc \\"update race_tracks set video_path=null\\""`);   // départ propre : aucun circuit n'a de vidéo
 const b = await launch(); const ad = await adminPage(b);
 await ad.goto(BASE + "/admin/tracks"); await ad.waitForLoadState("networkidle");
 // formulaire d'édition du 1er circuit : on ouvre les détails si besoin
@@ -13,7 +15,7 @@ const vp = await ad.locator('input[name=video_path]').nth(1).inputValue().catch(
 check("vidéo envoyée directement vers le stockage (navigateur → Supabase)", /^videos\/.+\.webm$/.test(vp), vp);
 await ad.screenshot({ path: `${SHOT}/41-video-uploaded-form.png`, fullPage: true });
 await file.locator("xpath=ancestor::form").locator("button:visible").first().click(); await ad.waitForTimeout(2500);
-await ad.goto(BASE + "/admin/tracks"); const tt = await text(ad);
+let tt = ""; for (let i = 0; i < 12; i++) { await ad.goto(BASE + "/admin/tracks"); await ad.waitForLoadState("networkidle"); tt = await text(ad); if (/VIDÉO/i.test(tt.replace(/VIDÉO DU CIRCUIT/gi, ""))) break; await ad.waitForTimeout(1000); }
 check("badge Vidéo dans la liste admin", /VIDÉO/i.test(tt));
 // Page publique
 const pub = await newPage(b, { width: 1280, height: 900 });

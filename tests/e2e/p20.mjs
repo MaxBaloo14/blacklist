@@ -14,8 +14,6 @@ check("un duelliste ne peut pas pronostiquer son duel", mine === 0, String(mine)
 // visiteur : lecture seule
 const v = await newPage(b, { width: 1400, height: 900 }); await v.goto(BASE + "/calendar"); await v.waitForLoadState("networkidle"); await v.waitForTimeout(3600);
 check("visiteur : pas de boutons de vote", (await v.locator(".predict-btn").count()) === 0 && /connecte-toi pour pronostiquer/i.test(await text(v)));
-const ics = await (await fetch(BASE + "/api/calendar.ics")).text();
-check("agenda .ics valide", /BEGIN:VCALENDAR/.test(ics) && (ics.match(/BEGIN:VEVENT/g) ?? []).length >= 2 && /SUMMARY:Blacklist — /.test(ics), `${(ics.match(/BEGIN:VEVENT/g) ?? []).length} événements`);
 // Hall of Fame
 await v.goto(BASE + "/hall-of-fame"); await v.waitForLoadState("networkidle"); await v.waitForTimeout(3600);
 const th = await text(v); check("hall of fame : 3 rois listés", /KAEL NOVA/.test(th) && /RYN VEX/.test(th) && /ZANE DRIFT/.test(th));

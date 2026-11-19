@@ -17,4 +17,4 @@ const lio = await newPage(b, { width: 1400, height: 900 }); await pilotLogin(lio
 for (const p of ["/profile", "/profile?tab=badges", "/challenges", "/notifications"]) total += await scan(lio, p, "pilote");
 const ad = await adminPage(b); await ad.setViewportSize({ width: 1400, height: 900 });
 for (const p of ["/admin", "/admin/drivers", "/admin/rewards", "/admin/stats", "/admin/templates", "/admin/exports"]) total += await scan(ad, p, "admin");
-console.log("\nTOTAL types de violations :", total); await b.close();
+console.log("\nTOTAL types de violations :", total); await b.close(); if (total > 0) process.exitCode = 1;

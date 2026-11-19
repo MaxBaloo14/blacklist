@@ -1,7 +1,7 @@
 import { launch, newPage, BASE, SHOT, act, text, check, adminPage, pilotLogin } from "./lib.mjs";
 const b = await launch();
 // Sécurité : un pilote n'entre pas dans l'admin ; anonyme non plus
-const pb = await newPage(b); await pilotLogin(pb, "0600000002");
+const pb = await newPage(b); await pilotLogin(pb, "0600000015");
 await pb.goto(BASE + "/admin"); await pb.waitForLoadState("networkidle");
 check("pilote refusé dans le Control Center", /\/admin\/login/.test(pb.url()), pb.url());
 const an = await newPage(b); await an.goto(BASE + "/admin/drivers"); await an.waitForLoadState("networkidle");

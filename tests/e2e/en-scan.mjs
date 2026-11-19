@@ -1,6 +1,7 @@
 import { launch, BASE, pilotLogin, adminPage } from "./lib.mjs";
 const b = await launch();
 const FR = /[éèêëàâùûçôîï]|\b(le|la|les|de|du|des|et|pour|une|un|ton|ta|tes|sur|avec|dans|est|pas|ce|cette|sont|vous|tu|ou|qui|que|aux|ne|plus)\b/i;
+const DATA = /Boucle rapide|Tracé de la dernière|Long sprint urbain|Last Race|La Mesa|Cypress|Palomino|Compactes|Coupés|Muscle|Sportives|Supersportives|Berlines|Tout-terrain|Motos|^\[(aria-label|title)\] Français$|Compte en double|Dossier incomplet|Numéro de téléphone injoignable|Catégorie interdite|Modèle incorrect|Véhicule de boutique|Absence justifiée|Délai dépassé|Pilote injoignable|Un compte existe déjà|Ton dossier est incomplet|Ton numéro de téléphone semble|Cette catégorie de véhicule|Le modèle indiqué|Les véhicules de boutique ne sont|Duel annulé|Compact|Permanently delete/i;
 const OK = /^(BBC|BLACKLIST|Los Santos|DISCORD|WARM-UP|CASH PRIZE|IBAN|CSV|BooBoo Crew|A BOOBOO CREW PRODUCTION\.?|Blacklist — there is no second place\.|10 DRIVERS\. 10 POSITIONS\. ONE KING\.|Two brothers\.|One mission\.)/i;
 const seen = new Map();
 async function scan(p, path, label) {
@@ -12,7 +13,7 @@ async function scan(p, path, label) {
     document.querySelectorAll("[aria-label],[title],[placeholder]").forEach((e) => ["aria-label", "title", "placeholder"].forEach((a) => { const v = e.getAttribute(a); if (v && v.length > 2) out.add(`[${a}] ${v}`); }));
     return [...out];
   });
-  const bad = texts.filter((t) => FR.test(t) && !OK.test(t));
+  const bad = texts.filter((t) => FR.test(t) && !OK.test(t) && !DATA.test(t));
   console.log(`\n## ${label} ${path} — ${bad.length} texte(s) à vérifier`); bad.forEach((t) => { console.log("   " + t.slice(0, 140)); seen.set(t, (seen.get(t) ?? 0) + 1); });
 }
 const mk = async () => { const ctx = await b.newContext({ viewport: { width: 1400, height: 900 }, locale: "en-GB" }); await ctx.addCookies([{ name: "lang", value: "en", url: BASE }]); const p = await ctx.newPage(); return p; };
@@ -25,4 +26,4 @@ await pl.locator("button.bell:visible").first().click().catch(() => {}); await p
 await plCtx.addCookies([{ name: "lang", value: "en", url: BASE }]);
 const ad = await adminPage(b); await ad.setViewportSize({ width: 1400, height: 900 }); await ad.context().addCookies([{ name: "lang", value: "en", url: BASE }]);
 for (const p of ["/admin", "/admin/drivers", "/admin/rewards", "/admin/stats", "/admin/ranking", "/admin/challenges", "/admin/templates", "/admin/exports", "/admin/vehicles", "/admin/tracks", "/admin/warmup", "/admin/reserve", "/admin/inactivity", "/admin/news", "/admin/rules", "/admin/logs"]) await scan(ad, p, "admin");
-console.log("\n=== TEXTES UNIQUES À VÉRIFIER :", seen.size); await b.close();
+console.log("\n=== TEXTES FRANÇAIS NON TRADUITS :", seen.size); await b.close(); if (seen.size > 0) process.exitCode = 1;

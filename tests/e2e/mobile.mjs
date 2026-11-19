@@ -29,3 +29,4 @@ const ctxA = await b.newContext({ viewport: { width: 390, height: 844 }, deviceS
 const adm = await adminPage(b); await ctxA.close(); const actx = adm.context(); await adm.setViewportSize({ width: 390, height: 844 }); await setLang(adm, lang);
 for (const [path, name] of [["/admin", "adm-dash"], ["/admin/drivers", "adm-drivers"], ["/admin/rewards", "adm-rewards"], ["/admin/stats", "adm-stats"], ["/admin/ranking", "adm-ranking"], ["/admin/challenges", "adm-challenges"], ["/admin/templates", "adm-templates"]]) await scan(adm, path, name);
 console.log("\nPages avec débordement :", report.filter((r) => r.over || r.bad.length).map((r) => r.path).join(", ") || "aucune"); await b.close();
+if (report.some((r) => (r.over || r.bad.length) && r.path !== "/")) process.exitCode = 1;

@@ -1,4 +1,6 @@
+import { execSync } from "node:child_process";
 import { launch, newPage, BASE, SHOT, pilotLogin, adminPage, text, check } from "./lib.mjs";
+execSync(`su postgres -c "psql -d bl_e2e -qc \\"update challenges set scheduled_at = now() + interval '23 hours' where status='scheduled' and challenger_id in (select id from profiles where first_name in ('Mika','Lio'))\\""`);
 const b = await launch();
 // Rappel : le duel est dans 23 h -> rappel 24 h apparaît dans la cloche
 const n = await newPage(b, { width: 1500, height: 800 }); await pilotLogin(n, "0600000015");

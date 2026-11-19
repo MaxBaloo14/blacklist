@@ -1,1 +1,10 @@
-{ "regions": ["fra1"] }
+{
+  "regions": [
+    "fra1"
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "staging": false
+    }
+  }
+}

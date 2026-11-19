@@ -1,5 +1,6 @@
 import { launch, BASE, SHOT, adminPage, text, check } from "./lib.mjs";
 import { execSync } from "node:child_process";
+execSync(`su postgres -c "psql -d bl_e2e -qc \\"update profiles set bank_iban=null where first_name='Lio'\\""`);
 const b = await launch(); const ad = await adminPage(b); await ad.setViewportSize({ width: 1400, height: 900 });
 await ad.goto(BASE + "/admin"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(900);
 const t0 = await text(ad); check("tableau de bord : 1 prime sans IBAN", /1 \| PRIMES À VERSER SANS IBAN/.test(t0), (t0.match(/.{20}PRIMES À VERSER SANS IBAN/) ?? [""])[0]);

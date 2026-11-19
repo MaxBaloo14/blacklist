@@ -42,6 +42,7 @@ export default async function BlacklistPage() {
             <DuelCard d={EXAMPLE_DUEL} example rewards={rewards} />
             {duels.map((d) => <DuelCard key={d.id} d={d} rewards={rewards} prediction={predictions.get(d.id)} />)}
           </div>
+          <Link href="/clips" className="font-cond mt-6 inline-block text-xs font-semibold tracking-[.2em] text-[#cfcfcf] underline decoration-red decoration-2 underline-offset-[6px] hover:text-white">{t("VOIR TOUS LES CLIPS")} →</Link>
         </div>
       </section>
     </>

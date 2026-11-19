@@ -10,6 +10,8 @@ export async function clientIp() {
 }
 
 export async function rateLimit(bucket: string, max: number, windowMs: number, key?: string): Promise<boolean> {
+  // Uniquement pour les tests automatiques (jamais défini en production) : sinon des dizaines de connexions depuis la même adresse seraient bloquées.
+  if (process.env.DISABLE_RATE_LIMIT === "1" && process.env.VERCEL_ENV !== "production") return true;
   const id = `${bucket}:${key ?? (await clientIp())}`;
   const now = Date.now();
   const arr = (hits.get(id) ?? []).filter((t) => now - t < windowMs);

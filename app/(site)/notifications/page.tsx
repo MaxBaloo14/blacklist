@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ActionForm from "@/components/ActionForm";
 import PageHead from "@/components/PageHead";
+import PushPanel from "@/components/PushPanel";
 import { markAllRead } from "@/app/actions/driver";
 import { requireDriver } from "@/lib/auth";
 import { dateTime } from "@/lib/format";
@@ -20,6 +21,7 @@ export default async function Notifications() {
       <PageHead kicker={t("BOÎTE DE RÉCEPTION")} title={t("Mes")} em={t("notifications")} />
       <section className="py-14">
         <div className="wrap [&>*]:max-w-3xl">
+          <PushPanel className="mb-6" />
           {unread > 0 && <ActionForm action={markAllRead} label={t("MARQUER {n} COMME LU(ES)", { n: unread })} variant="ghost" small className="mb-6" />}
           {!data?.length && <p className="panel text-[#a5a9b0]">{t("Aucune notification.")}</p>}
           <ul className="grid gap-2.5">

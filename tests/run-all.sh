@@ -5,6 +5,7 @@
 #   bash tests/run-all.sh quick    # sans le build ni les parcours navigateur (unitaires + base de données)
 cd "$(dirname "$0")/.."
 MODE="${1:-full}"
+for c in $(pg_lsclusters -h 2>/dev/null | awk '{print $1"/"$2}'); do pg_ctlcluster "${c%/*}" "${c#*/}" start 2>/dev/null; done   # démarre PostgreSQL s'il est arrêté
 FAILED=(); PASSED=(); T0=$(date +%s)
 run() {
   local name="$1"; shift

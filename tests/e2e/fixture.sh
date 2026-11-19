@@ -1,7 +1,7 @@
 #!/bin/bash
 # Prépare l'environnement de test complet : base, faux Supabase, serveur, pilotes, duels, historique.
 cd "$(dirname "$0")/../.."
-pg_ctlcluster 16 main start 2>/dev/null; sleep 2
+for c in $(pg_lsclusters -h 2>/dev/null | awk '{print $1"/"$2}'); do pg_ctlcluster "${c%/*}" "${c#*/}" start 2>/dev/null; done; sleep 2
 pkill -f "next start"; pkill -f next-server; pkill -f mock-supabase
 tests/e2e/db.sh >/dev/null 2>&1
 su postgres -c "psql -d bl_e2e -q -c 'delete from challenges' -c 'delete from ranking_history' -c \"delete from auth.users where email like 'demo-%'\""

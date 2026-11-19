@@ -8,8 +8,9 @@ psql(`update challenges set clip_url='https://clips.twitch.tv/FunnyBraveCatPJSal
 psql(`update challenges set clip_url='https://exemple-inconnu.fr/mon-clip' where id='${ids[2]}'`);
 await new Promise((r) => setTimeout(r, 16000));   // le site garde les duels en mémoire 15 s : on laisse le cache expirer
 const b = await launch(); const p = await newPage(b, { width: 1300, height: 900 });
-await p.goto(BASE + "/clips"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3800);
-const n = await p.locator(".clip-card").count();
+// le site sert d'abord la version en mémoire puis la rafraîchit en arrière-plan : on recharge jusqu'à voir les clips
+let n = 0;
+for (let i = 0; i < 6 && n === 0; i++) { await p.goto(BASE + "/clips"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(i === 0 ? 3800 : 2500); n = await p.locator(".clip-card").count(); }
 check("page Clips : seuls les clips reconnus sont listés (2 sur 3)", n === 2, String(n));
 await p.screenshot({ path: `${SHOT}/230-clips.png`, fullPage: true });
 check("aucun cadre externe n'est chargé avant le clic", (await p.locator("iframe").count()) === 0);

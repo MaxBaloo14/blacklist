@@ -14,7 +14,7 @@ rm -f /tmp/e2e-admin-state.json; rm -rf .next/types .next/cache/fetch-cache
 [ -f /tmp/e2e-push-cert.pem ] || openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes -keyout /tmp/e2e-push-key.pem -out /tmp/e2e-push-cert.pem -days 3 -subj "/CN=127.0.0.1" -addext "subjectAltName=IP:127.0.0.1" >/dev/null 2>&1
 export NODE_EXTRA_CA_CERTS=/tmp/e2e-push-cert.pem PUSH_ALLOW_HOSTS=127.0.0.1:9443 DISABLE_RATE_LIMIT=${DISABLE_RATE_LIMIT:-1}
 (setsid nohup npx next start -p 3100 >/tmp/next.log 2>&1 &); sleep 4
-node tests/e2e/seed.mjs 2>&1 | head -3
+node tests/e2e/seed.mjs || { echo "ÉCHEC du jeu de données de test (seed)"; tail -20 /tmp/next.log; exit 1; }
 su postgres -c "psql -d bl_e2e -q" <<'SQL'
 insert into challenges(challenger_id, defender_id, challenger_position, defender_position, is_podium, week_start, status, respond_by, scheduled_at, validated_at, winner_id, champion_wins, challenger_wins)
 select l.id, m.id, 5, 4, false, current_date-30, 'completed'::challenge_status, now()-interval '25 days', now()-interval '24 days', now()-interval '24 days', m.id, 0, 0 from (select id from profiles where first_name='Lio') l, (select id from profiles where first_name='Mika') m

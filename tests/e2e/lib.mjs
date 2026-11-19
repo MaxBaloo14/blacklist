@@ -1,10 +1,16 @@
 import { createRequire } from "node:module";
-const require = createRequire((process.env.PW_ROOT ?? "/opt/node22/lib/node_modules") + "/");
-const { chromium } = require("playwright");
+// Playwright : installé dans le projet (CI) ou globalement (poste de travail)
+const { chromium } = (() => {
+  for (const base of [process.env.PW_ROOT, process.cwd(), "/opt/node22/lib/node_modules"].filter(Boolean)) {
+    try { return createRequire(base.replace(/\/?$/, "/"))("playwright"); } catch { /* suivant */ }
+  }
+  throw new Error("Playwright introuvable : npm i --no-save playwright && npx playwright install chromium");
+})();
 export const BASE = "http://127.0.0.1:3100";
 export const SHOT = "/tmp/shots/e2e";
 export async function launch() {
-  const browser = await chromium.launch();
+  // En tant que root (CI, conteneur) Chromium exige --no-sandbox
+  const browser = await chromium.launch({ args: process.getuid?.() === 0 ? ["--no-sandbox"] : [] });
   return browser;
 }
 export async function newPage(browser, vp = { width: 1280, height: 800 }) {
@@ -48,3 +54,6 @@ export async function pilotLogin(p, phone) {
   await p.locator('button:visible:has-text("CONNEXION"), button:visible:has-text("ENTRER"), button:visible:has-text("SE CONNECTER")').first().click();
   await p.waitForURL(/\/profile|\/challenges/, { timeout: 15000 });
 }
+
+// Un seul échec suffit à faire échouer le script (utilisé par l'exécution automatique et la CI)
+process.on("exit", (code) => { if (!code && results.some((r) => !r.ok)) process.exitCode = 1; });

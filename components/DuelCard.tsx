@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
+import ClipButton from "@/components/ClipButton";
 import PredictionBar from "@/components/PredictionBar";
 import type { PredictionInfo } from "@/lib/predictions";
 import type { Row } from "@/lib/types";
@@ -81,7 +82,7 @@ export default async function DuelCard({ d, example, rewards, prediction }: { d:
         ) : (
           <div className="font-cond flex items-center justify-between text-[13px] tracking-[.14em] text-[#a5a9b0]">
             <span>{done ? (chWin ? t("PLACE PRISE") : t("TITRE CONSERVÉ")) : `${t("DUEL")} · ${dateTime(d.scheduled_at, locale)}`}</span>
-            {d.clip_url && <a href={d.clip_url} target="_blank" rel="noopener noreferrer" className="text-red hover:text-white">{t("CLIP")} →</a>}
+            {d.clip_url && <ClipButton url={d.clip_url} title={`${ch} vs ${df}`} />}
           </div>
         )}
       </div>

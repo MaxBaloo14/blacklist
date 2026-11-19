@@ -6,6 +6,7 @@ import JourneyPanel from "@/components/JourneyPanel";
 import DuelCard from "@/components/DuelCard";
 import Field from "@/components/Field";
 import PageHead from "@/components/PageHead";
+import PushPanel from "@/components/PushPanel";
 import { BadgeGrid } from "@/components/PilotBadges";
 import Tabs from "@/components/Tabs";
 import { cancelProposal, proposeVehicle, updateProfile } from "@/app/actions/driver";
@@ -105,6 +106,8 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 {profile.registration_note && <p className="panel-flat text-sm text-[#a5a9b0]"><b className="text-bone">{t("Note de l'organisation :")}</b> {profile.registration_note}</p>}
               </div>
 
+              <div className="grid content-start gap-6">
+              <PushPanel />
               <ActionForm action={updateProfile} label="ENREGISTRER" reset={false} className="panel">
                 <div className="kicker mb-4">{t("MES INFORMATIONS")}</div>
                 <div className="grid gap-4">
@@ -115,6 +118,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                   <Field label={t("IBAN bancaire")} hint={t("Compte sur lequel l'organisation te verse ton Cash Prize. Visible uniquement par toi et l'organisation.")}><input name="bank_iban" defaultValue={profile.bank_iban ?? ""} maxLength={40} autoComplete="off" spellCheck={false} placeholder="XX00 0000 0000" className="input font-mono tracking-wider" /></Field>
                 </div>
               </ActionForm>
+              </div>
 
             </div>
           )}

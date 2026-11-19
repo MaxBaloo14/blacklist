@@ -14,6 +14,7 @@ export default async function Footer() {
         <Link href="/blacklist" className="hover:text-white">{t("LA BLACKLIST")}</Link>
         <Link href="/calendar" className="hover:text-white">{t("CALENDRIER")}</Link>
         <Link href="/hall-of-fame" className="hover:text-white">HALL OF FAME</Link>
+        <Link href="/clips" className="hover:text-white">CLIPS</Link>
         <Link href="/race-network" className="hover:text-white">{t("CIRCUITS")}</Link>
         <Link href="/guide" className="hover:text-white">{t("GUIDE")}</Link>
         <Link href="/rules" className="hover:text-white">{t("RÈGLEMENT")}</Link>

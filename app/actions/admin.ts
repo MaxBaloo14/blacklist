@@ -82,7 +82,7 @@ export async function updateDriverInfo(_: ActionState, f: FormData): Promise<Act
 
 const trackSchema = z.object({
   name: z.string().min(2).max(80), start_point: z.string().min(1).max(120), end_point: z.string().min(1).max(120),
-  distance_km: z.coerce.number().positive().max(999), difficulty: z.enum(["Easy", "Medium", "Hard", "Extreme"]),
+  distance_km: z.preprocess((v) => (v === "" || v === null || v === undefined ? undefined : v), z.coerce.number().positive().max(999).optional()), difficulty: z.enum(["Easy", "Medium", "Hard", "Extreme"]),
   race_type: z.enum(["Sprint urbain", "Circuit", "Last Race", "Warm-up"]), status: z.enum(["active", "inactive"]), description: z.string().max(1000).optional(),
 });
 
@@ -103,7 +103,7 @@ export async function saveTrack(_: ActionState, f: FormData): Promise<ActionStat
   if (!parsed.success) return await fail(parsed.error.issues[0]?.message ?? "Données invalides.");
   const supabase = await createClient();
   const existing = str(f, "id");
-  const row: Record<string, unknown> = { ...parsed.data, description: parsed.data.description || null };
+  const row: Record<string, unknown> = { ...parsed.data, distance_km: parsed.data.distance_km ?? null, description: parsed.data.description || null };
 
   const file = f.get("image") as File | null;
   if (file && file.size > 0) {
@@ -113,6 +113,7 @@ export async function saveTrack(_: ActionState, f: FormData): Promise<ActionStat
     const { error: upErr } = await supabase.storage.from("track-images").upload(path, img.bytes, { contentType: img.type });
     if (upErr) return await fail("Envoi de l'image impossible.");
     row.image_path = path;
+    row.route_path = null; row.route_w = null; row.route_h = null;   // le tracé animé ne correspond plus à la nouvelle image
   }
   // Vidéo : le fichier est déjà dans le stockage (envoi direct) ; on ne garde que son chemin, strictement contrôlé
   const videoPath = str(f, "video_path");

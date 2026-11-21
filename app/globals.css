@@ -364,3 +364,13 @@ a.underline { text-decoration-line: underline; }
 .bottombar-fade.on { opacity: 1; }
 .bottombar-fade-l { left: 0; background: linear-gradient(90deg, #090a0c, transparent); }
 .bottombar-fade-r { right: 0; background: linear-gradient(270deg, #090a0c, transparent); }
+
+/* ---------- Carte de circuit avec voiture animée ---------- */
+.route-zoom { position: absolute; right: .6rem; bottom: .6rem; z-index: 3; display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .65rem; font-family: var(--font-cond); font-size: 11px; font-weight: 700; letter-spacing: .16em; color: #f4f4f4; background: #090a0ccc; box-shadow: inset 0 0 0 1px #ffffff33; clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%); transition: .2s; cursor: pointer; backdrop-filter: blur(4px); }
+.route-zoom:hover { background: #c62828; box-shadow: none; }
+.route-dialog { margin: auto; max-height: 94vh; width: min(760px, 96vw); padding: 0; background: #0d0e11; color: #f4f4f4; border: 1px solid #ffffff1f; border-top: 3px solid #c62828; overflow: hidden; }
+.route-dialog::backdrop { background: #000d; backdrop-filter: blur(4px); }
+.route-dialog-head { display: flex; align-items: center; justify-content: space-between; padding: .6rem 1rem; border-bottom: 1px solid #ffffff14; }
+.route-dialog-close { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #ffffff44; }
+.route-dialog-close:hover { background: #c62828; }
+.route-dialog-body { max-height: calc(94vh - 58px); overflow: auto; overscroll-behavior: contain; }

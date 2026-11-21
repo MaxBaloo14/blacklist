@@ -16,6 +16,13 @@ export function photoUrl(path?: string | null, bucket = "vehicle-photos") {
   return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/${path}`;
 }
 
+/** Image d'un circuit : un chemin commençant par « / » est un fichier du site (public/img/…), sinon un fichier du stockage. */
+export function trackImageUrl(path?: string | null) {
+  if (!path) return null;
+  return path.startsWith("/") ? path : photoUrl(path, "track-images");
+}
+export const kmLabel = (v: unknown) => (v === null || v === undefined || v === "" || Number(v) <= 0 ? "—" : `${Number(v)} km`);
+
 export const rankLabel = (n?: number | null) => (n ? `#${n}` : "—");
 
 /** valeur <input type=datetime-local> → ISO (heure de Paris) */

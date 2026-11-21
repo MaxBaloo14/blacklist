@@ -1,4 +1,4 @@
-import { launch, newPage, BASE, act, text, adminPage, pilotLogin } from "./lib.mjs";
+import { launch, newPage, BASE, act, text, adminPage, pilotLogin, parisSoon } from "./lib.mjs";
 import { execSync } from "node:child_process";
 const b = await launch();
 const names = [["Nova","Kael","0600000011"],["Vex","Ryn","0600000012"],["Drift","Zane","0600000013"],["Cobra","Mika","0600000014"],["Saber","Lio","0600000015"]];
@@ -20,8 +20,7 @@ await ad.fill('[name=reason]', "Mise en place"); await act(ad, "APPLIQUER LA MOD
 // duel #5 (Lio) défie #4 (Mika), Mika fixe la date, résultat : Lio gagne -> mouvement
 const lio = await newPage(b); await pilotLogin(lio, "0600000015"); await lio.goto(BASE + "/challenges"); await lio.waitForLoadState("networkidle"); await act(lio, "DÉFIER LE #4");
 const mika = await newPage(b); await pilotLogin(mika, "0600000014"); await mika.goto(BASE + "/challenges"); await mika.waitForLoadState("networkidle");
-const d = new Date(Date.now() + 2 * 864e5), pad = (n) => String(n).padStart(2, "0");
-await mika.fill('[name=when]', `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T21:00`); await act(mika, "FIXER LA DATE DU DUEL");
+await mika.fill('[name=when]', parisSoon(2 * 3600_000)); await act(mika, "FIXER LA DATE DU DUEL");
 await ad.goto(BASE + "/admin/challenges");
 const form = ad.locator("form", { has: ad.locator('button:visible:has-text("ENREGISTRER")') }).first();
 await form.locator('[name=winner]').selectOption({ index: 1 }); await form.locator('button:has-text("ENREGISTRER")').click(); await ad.waitForTimeout(1500);
@@ -30,5 +29,5 @@ await ad.goto(BASE + "/admin/challenges"); await act(ad, "VALIDER LE RÉSULTAT")
 // nouveau duel programmé : Mika (maintenant #5) défie Lio (#4) -> "EN DUEL"
 await mika.goto(BASE + "/challenges"); await mika.waitForLoadState("networkidle"); await act(mika, "DÉFIER LE #4");
 await lio.goto(BASE + "/challenges"); await lio.waitForLoadState("networkidle");
-await lio.fill('[name=when]', `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T22:00`); await act(lio, "FIXER LA DATE DU DUEL");
+await lio.fill('[name=when]', parisSoon(3 * 3600_000)); await act(lio, "FIXER LA DATE DU DUEL");
 console.log("seed ok"); await b.close();

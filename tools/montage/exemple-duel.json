@@ -1,0 +1,10 @@
+{
+  "kicker": "DUEL OFFICIEL · PLACE #3",
+  "challenger": { "name": "LIO SABER", "rank": 4, "car": "BRAVADO GAUNTLET" },
+  "defender":   { "name": "ZANE DRIFT", "rank": 3, "car": "KARIN SULTAN RS" },
+  "circuit": "CYPRESS LOOP",
+  "distance": "7.8 KM",
+  "format": "1 COURSE",
+  "winner": "challenger",
+  "prize": "1 000 000 $"
+}

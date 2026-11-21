@@ -57,3 +57,12 @@ export async function pilotLogin(p, phone) {
 
 // Un seul échec suffit à faire échouer le script (utilisé par l'exécution automatique et la CI)
 process.on("exit", (code) => { if (!code && results.some((r) => !r.ok)) process.exitCode = 1; });
+/** Heure de Paris (format datetime-local) dans `ms` millisecondes, sans jamais passer à la semaine suivante :
+ *  le site exige un duel dans la semaine en cours, donc le test doit marcher n'importe quel jour (même un dimanche soir). */
+export function parisSoon(ms = 3600_000) {
+  const fmt = (d) => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(d).replace(" ", "T");
+  const wd = (d) => new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Paris", weekday: "short" }).format(d);
+  let t = new Date(Date.now() + ms);
+  if (wd(t) === "Mon" && wd(new Date()) !== "Mon") t = new Date(Date.now() + 120_000);
+  return fmt(t);
+}

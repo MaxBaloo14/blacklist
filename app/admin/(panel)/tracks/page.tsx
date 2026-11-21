@@ -3,7 +3,7 @@ import { AdminHead, Details } from "@/components/AdminUI";
 import TrackForm from "@/components/TrackForm";
 import { deleteTrack } from "@/app/actions/admin";
 import { requireAdmin } from "@/lib/auth";
-import { photoUrl } from "@/lib/format";
+import { kmLabel, trackImageUrl } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 import { labels } from "@/lib/labels";
 
@@ -22,10 +22,10 @@ export default async function TracksAdmin() {
         {tracks?.map((tk) => (
           <article key={tk.id} className="flex flex-wrap gap-4 border border-white/10 bg-ink2 p-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {tk.image_path ? <img src={photoUrl(tk.image_path, "track-images")!} alt="" className="h-24 w-40 object-cover" /> : <div className="grid h-24 w-40 place-items-center bg-ink3 text-xs text-metal">{t("PAS DE CARTE")}</div>}
+            {tk.image_path ? <img src={trackImageUrl(tk.image_path)!} alt="" className="h-24 w-40 object-cover" /> : <div className="grid h-24 w-40 place-items-center bg-ink3 text-xs text-metal">{t("PAS DE CARTE")}</div>}
             <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center gap-2"><h2 className="font-display text-2xl uppercase">{tk.name}</h2><span className={`badge ${tk.status === "active" ? "badge-ok" : "badge-metal"}`}>{L.track(tk.status)}</span><span className="badge badge-metal">{L.difficulty(tk.difficulty)}</span>{tk.video_path && <span className="badge badge-ok">{t("Vidéo")}</span>}</div>
-              <div className="text-sm text-[#a5a9b0]">{t(tk.race_type)} · {tk.start_point} → {tk.end_point} · {Number(tk.distance_km)} km</div>
+              <div className="flex flex-wrap items-center gap-2"><h2 className="font-display text-2xl uppercase">{tk.name}</h2><span className={`badge ${tk.status === "active" ? "badge-ok" : "badge-metal"}`}>{L.track(tk.status)}</span>{tk.route_path && <span className="badge badge-red">{t("Tracé animé")}</span>}<span className="badge badge-metal">{L.difficulty(tk.difficulty)}</span>{tk.video_path && <span className="badge badge-ok">{t("Vidéo")}</span>}</div>
+              <div className="text-sm text-[#a5a9b0]">{t(tk.race_type)} · {tk.start_point} → {tk.end_point} · {kmLabel(tk.distance_km)}</div>
               <div className="mt-3 grid gap-2 lg:grid-cols-2">
                 <Details summary={t("Modifier")}><TrackForm track={tk} /></Details>
                 <Details summary={t("Supprimer")} tone="text-red"><ActionForm action={deleteTrack} label="SUPPRIMER" variant="ghost" small confirm={t("Supprimer définitivement « {n} » ?", { n: tk.name })}><input type="hidden" name="id" value={tk.id} /><p className="text-sm text-[#a5a9b0]">{t("Impossible si le circuit est déjà utilisé : désactive-le dans ce cas.")}</p></ActionForm></Details>

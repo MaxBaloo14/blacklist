@@ -53,6 +53,7 @@ await z.goto(BASE + "/suggestion"); await z.waitForLoadState("networkidle"); awa
 const mapOk = await z.locator(".route-drawer img").evaluate((i) => i.complete && i.naturalWidth > 500);
 check("carte de tracé chargée", mapOk);
 await z.locator(".route-drawer").scrollIntoViewIfNeeded(); await z.waitForTimeout(400);
+await z.locator('button:has-text("SUIVRE LES ROUTES")').click();   // tracé libre : les clics ne dépendent pas des routes
 const box = await z.locator(".route-drawer").boundingBox();
 const pts = [[0.2, 0.25], [0.4, 0.2], [0.6, 0.4], [0.7, 0.65], [0.5, 0.8]];
 for (const [fx, fy] of pts) { await z.mouse.click(box.x + box.width * fx, box.y + box.height * fy); await z.waitForTimeout(150); }
@@ -76,7 +77,8 @@ check("admin : suggestion avec aperçu du tracé", /Boucle du port/i.test(await 
 await ad.screenshot({ path: `${SHOT}/314-admin-suggestions.png`, fullPage: false });
 await ad.locator("article", { hasText: "Boucle du port" }).locator("input[name=note]").first().fill("Super idée, on la retient pour la saison.");
 await act(ad, "RETENIR ET CRÉER LE CIRCUIT", { form: "article:has-text('Boucle du port') form:has(button:has-text('RETENIR'))" });
-await z.goto(BASE + "/suggestion"); await z.waitForLoadState("networkidle");
+// la fabrication du plan (image + envoi) peut prendre quelques secondes à froid : on attend la décision
+for (let i = 0; i < 12; i++) { await z.goto(BASE + "/suggestion"); await z.waitForLoadState("networkidle"); if (/RETENUE/i.test(await text(z))) break; await z.waitForTimeout(2000); }
 check("pilote : suggestion retenue avec le message", /RETENUE/i.test(await text(z)) && /on la retient pour la saison/i.test(await text(z)));
 // le circuit officiel existe avec son plan (carte + cadre) et la voiture animée
 const pub = await newPage(b, { width: 1300, height: 1000 });
@@ -91,6 +93,7 @@ await pub.screenshot({ path: `${SHOT}/315-circuit-cree.png`, fullPage: false });
 // Éditeur de circuit (Control Center) : trace → circuit officiel
 await ad.goto(BASE + "/admin/editor"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(1500);
 await ad.locator(".route-drawer").scrollIntoViewIfNeeded(); await ad.waitForTimeout(400);
+await ad.locator('button:has-text("SUIVRE LES ROUTES")').click();
 const bx = await ad.locator(".route-drawer").boundingBox();
 for (const [fx, fy] of [[0.15, 0.3], [0.35, 0.2], [0.55, 0.45], [0.8, 0.5]]) { await ad.mouse.click(bx.x + bx.width * fx, bx.y + bx.height * fy); await ad.waitForTimeout(120); }
 check("éditeur admin : 4 points posés", /4 point/.test(await text(ad)));
@@ -106,10 +109,41 @@ await ad.screenshot({ path: `${SHOT}/316-admin-editeur.png`, fullPage: false });
 await act(ad, "CRÉER LE CIRCUIT");
 await pub.goto(BASE + "/race-network"); await pub.waitForLoadState("networkidle"); await pub.waitForTimeout(4000);
 check("circuit créé depuis l'éditeur : visible avec tracé animé", (await pub.locator("article", { hasText: "Circuit de l'éditeur" }).locator(".route-zoom").count()) === 1);
+
+// Mode « Suivre les routes » : deux clics suffisent, le parcours épouse la route
+{
+  const sharp = (await import("sharp")).default;
+  const { data, info } = await sharp("public/img/map-roads.png").greyscale().raw().toBuffer({ resolveWithObject: true });
+  const W = info.width, H = info.height; const road = (x, y) => x >= 0 && y >= 0 && x < W && y < H && data[y * W + x] > 127;
+  const nearest = (x, y, r = 40) => { let best = null, bd = 1e9; for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (road(x + dx, y + dy) && dx * dx + dy * dy < bd) { bd = dx * dx + dy * dy; best = [x + dx, y + dy]; } return best; };
+  await ad.goto(BASE + "/admin/editor"); await ad.waitForSelector('.route-drawer[data-roads="ready"]', { timeout: 15000 }); await ad.waitForTimeout(1500);
+  await ad.locator(".route-drawer").scrollIntoViewIfNeeded(); await ad.waitForTimeout(400);
+  check("mode « Suivre les routes » actif par défaut", /SUIVRE LES ROUTES : OUI/i.test(await text(ad)));
+  const cont = await ad.locator(".route-drawer").boundingBox(); const inner = await ad.locator(".route-drawer > div").boundingBox();
+  const toMap = (sx, sy) => [Math.round(((sx - inner.x) / inner.width) * W), Math.round(((sy - inner.y) / inner.height) * H)];
+  const toScr = ([mx, my]) => [inner.x + (mx / W) * inner.width, inner.y + (my / H) * inner.height];
+  const ptsMap = [[0.25, 0.45], [0.55, 0.5], [0.75, 0.3]].map(([fx, fy]) => nearest(...toMap(cont.x + cont.width * fx, cont.y + cont.height * fy)));
+  check("des routes existent près des points choisis", ptsMap.every(Boolean), JSON.stringify(ptsMap));
+  for (const m of ptsMap) { const [sx, sy] = toScr(m); await ad.mouse.click(sx + 2, sy + 1); await ad.waitForTimeout(400); }
+  check("3 points posés en suivant les routes", /3 point/.test(await text(ad)), (await text(ad)).slice(0, 0));
+  const d = await ad.locator("input[name=path]").inputValue();
+  const nums = (d.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number); const ends = []; for (let i = 0; i + 1 < nums.length; i += 2) ends.push([nums[i], nums[i + 1]]);
+  const on = ends.filter(([x, y]) => nearest(Math.round(x), Math.round(y), 6)).length;
+  check("le parcours suit la route : nombreuses courbes (pas une ligne droite)", (d.match(/C/g) ?? []).length >= 8, `${(d.match(/C/g) ?? []).length} courbes`);
+  check("le parcours reste sur les routes (≥ 90 % des points à moins de 6 px d'une route)", ends.length > 10 && on / ends.length >= 0.9, `${on}/${ends.length}`);
+  await ad.screenshot({ path: `${SHOT}/317-editeur-routes.png`, fullPage: false });
+  // clic dans la mer : aucune route -> message, aucun point ajouté
+  const sea = toScr([60, 1800]);
+  await ad.locator(".route-drawer").evaluate((e) => { e.scrollLeft = 0; e.scrollTop = e.scrollHeight; });
+  const innerB = await ad.locator(".route-drawer > div").boundingBox(); const contB = await ad.locator(".route-drawer").boundingBox();
+  await ad.mouse.click(innerB.x + (20 / W) * innerB.width, innerB.y + (1900 / H) * innerB.height);
+  check("clic loin de toute route : message clair, aucun point ajouté", /Aucune route à cet endroit/.test(await text(ad)) && /3 point/.test(await text(ad)));
+}
 // parcours trop étendu (d'un bout à l'autre de la carte)
 await ad.goto(BASE + "/admin/editor"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(1500);
 for (let i = 0; i < 6; i++) await ad.locator('button[aria-label="Dézoomer"]').click();
 await ad.locator(".route-drawer").scrollIntoViewIfNeeded(); await ad.waitForTimeout(400);
+await ad.locator('button:has-text("SUIVRE LES ROUTES")').click();
 const b2 = await ad.locator(".route-drawer").boundingBox();
 await ad.mouse.click(b2.x + 5, b2.y + 5); await ad.mouse.click(b2.x + b2.width - 40, b2.y + Math.min(b2.height - 40, 600));
 await ad.fill("[name=name]", "Trop grand"); await act(ad, "CRÉER LE CIRCUIT");

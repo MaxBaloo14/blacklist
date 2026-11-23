@@ -361,6 +361,13 @@ const EN_SITE: Record<string, string> = {
   "Suggestion envoyée. L'organisation étudie ton parcours.": "Suggestion sent. The organisation is reviewing your route.",
   "Trace ton parcours sur la carte : place au moins 2 points (départ puis arrivée).": "Draw your route on the map: place at least 2 points (start then finish).",
   "5 liens au maximum.": "5 links maximum.",
+  "SUIVRE LES ROUTES : OUI": "FOLLOW ROADS: ON",
+  "SUIVRE LES ROUTES : NON": "FOLLOW ROADS: OFF",
+  "Ces deux points ne sont pas reliés par la route : choisis un autre endroit, ou désactive « Suivre les routes ».": "These two points are not connected by road: pick another spot, or turn off “Follow roads”.",
+  "60 points au maximum : supprime-en ou termine le parcours.": "60 points maximum: delete some or finish the route.",
+  "Chargement du réseau routier…": "Loading the road network…",
+  "Aucune route à cet endroit : clique plus près d'une route, ou désactive « Suivre les routes ».": "No road here: click closer to a road, or turn off “Follow roads”.",
+  "Clique sur une route pour poser un point : le parcours suit les routes tout seul jusqu'au point précédent (le premier point est le DÉPART, le dernier est l'ARRIVÉE). Pour passer par une route précise, pose un point dessus. Glisse un point pour le déplacer, clique dessus puis « Supprimer le point » pour l'enlever.": "Click on a road to place a point: the route follows the roads by itself up to the previous point (the first point is the START, the last is the FINISH). To go through a specific road, place a point on it. Drag a point to move it, click it then “Delete point” to remove it.",
 };
 
 export const EN: Record<string, string> = { ...EN_SITE, ...EN_ADMIN };

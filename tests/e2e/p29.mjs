@@ -58,6 +58,9 @@ const box = await z.locator(".route-drawer").boundingBox();
 const pts = [[0.2, 0.25], [0.4, 0.2], [0.6, 0.4], [0.7, 0.65], [0.5, 0.8]];
 for (const [fx, fy] of pts) { await z.mouse.click(box.x + box.width * fx, box.y + box.height * fy); await z.waitForTimeout(150); }
 check("5 points posés : tracé rouge, départ et arrivée", /5 point/.test(await text(z)) && (await z.locator('.route-drawer svg path[stroke="#e03232"]').count()) === 1 && (await z.locator(".route-drawer svg rect").count()) === 1);
+check("joueur : aperçu du plan (cadre + voiture animée) avant d'envoyer", (await z.locator("[data-plan-preview]").count()) === 1 && (await z.locator("[data-plan-preview] animateMotion").count()) >= 1 && (await z.locator('[data-plan-preview] image[href*="plan-frame"]').count()) === 1);
+await z.locator("[data-plan-preview]").scrollIntoViewIfNeeded(); await z.waitForTimeout(1200);
+await z.screenshot({ path: `${SHOT}/318-apercu-joueur.png`, fullPage: false });
 await z.locator('button:has-text("ANNULER LE DERNIER POINT")').click();
 check("annuler le dernier point", /4 point/.test(await text(z)));
 await z.mouse.click(box.x + box.width * 0.5, box.y + box.height * 0.8);
@@ -104,10 +107,14 @@ const moved = await ad.locator('[data-point="1"] circle').first().boundingBox();
 check("éditeur : un point se déplace en le glissant", Math.abs(moved.x - p2.x) > 20 && /4 point/.test(await text(ad)), `${p2.x}->${moved.x}`);
 await ad.locator('[data-point="2"] circle').first().click({ force: true }); await ad.locator('button:has-text("SUPPRIMER LE POINT")').click();
 check("éditeur : suppression du point sélectionné", /3 point/.test(await text(ad)));
+check("admin : aperçu du plan (cadre + voiture animée) avant de créer le circuit", (await ad.locator("[data-plan-preview]").count()) === 1 && (await ad.locator("[data-plan-preview] animateMotion").count()) >= 1);
+await ad.locator("[data-plan-preview]").scrollIntoViewIfNeeded(); await ad.waitForTimeout(1200);
+await ad.screenshot({ path: `${SHOT}/319-apercu-admin.png`, fullPage: false });
 await ad.fill("[name=name]", "Circuit de l'éditeur");
 await ad.screenshot({ path: `${SHOT}/316-admin-editeur.png`, fullPage: false });
 await act(ad, "CRÉER LE CIRCUIT");
-await pub.goto(BASE + "/race-network"); await pub.waitForLoadState("networkidle"); await pub.waitForTimeout(4000);
+// la fabrication du plan peut prendre quelques secondes : on attend l'apparition du circuit
+for (let i = 0; i < 10; i++) { await pub.goto(BASE + "/race-network"); await pub.waitForLoadState("networkidle"); await pub.waitForTimeout(3500); if (await pub.locator("article", { hasText: "Circuit de l'éditeur" }).count()) break; await pub.waitForTimeout(1500); }
 check("circuit créé depuis l'éditeur : visible avec tracé animé", (await pub.locator("article", { hasText: "Circuit de l'éditeur" }).locator(".route-zoom").count()) === 1);
 
 // Mode « Suivre les routes » : deux clics suffisent, le parcours épouse la route

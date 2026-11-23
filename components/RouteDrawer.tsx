@@ -4,6 +4,7 @@ import { Minus, Plus, RotateCcw, Route as RouteIcon, Trash2, Undo2 } from "lucid
 import { useT } from "@/components/LangProvider";
 import { smoothPath, type Pt } from "@/lib/route";
 import { RoadNet, simplify } from "@/lib/roadnet";
+import PlanPreview from "@/components/PlanPreview";
 
 const MAX_POINTS = 60;
 type Wp = { p: Pt; seg: Pt[] };   // point de passage + tracé depuis le point précédent (suit la route, ou ligne droite en mode libre)
@@ -40,6 +41,10 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
   let path = "";
   if (poly.length >= 2) { for (const tol of [1.6, 2.5, 4, 7, 12]) { path = smoothPath(simplify(poly, tol)); if (path.length < 50000) break; } }
   const u = size ? size.w / 1000 : 1;
+  // le réseau routier peut avoir une autre résolution que la carte (carte haute définition) : on convertit dans les deux sens
+  const f = net && size ? net.w / size.w : 1;
+  const nt = (q: Pt): Pt => [q[0] * f, q[1] * f];
+  const mp = (q: Pt): Pt => [Math.round(q[0] / f), Math.round(q[1] / f)];
 
   const toMap = (e: { clientX: number; clientY: number }): Pt | null => {
     if (!size || !wrap.current) return null;
@@ -50,7 +55,8 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
   /** Tronçon entre deux points : suit la route si le mode est actif, sinon ligne droite. Renvoie null (avec message) si impossible. */
   const link = (a: Pt, b: Pt): Pt[] | null => {
     if (!follow || !net) return [a, b];
-    const s = net.route(a, b);
+    const r = net.route(nt(a).map(Math.round) as Pt, nt(b).map(Math.round) as Pt);
+    const s = r ? r.map(mp) : null;
     if (!s) { setMsg(t("Ces deux points ne sont pas reliés par la route : choisis un autre endroit, ou désactive « Suivre les routes ».")); return null; }
     return s;
   };
@@ -63,7 +69,8 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
     let p = raw;
     if (follow) {
       if (!net) { setMsg(t("Chargement du réseau routier…")); return; }
-      const sp = net.snap(raw);
+      const sn = net.snap(nt(raw), Math.round(48 * f));
+      const sp = sn ? mp(sn) : null;
       if (!sp) { setMsg(t("Aucune route à cet endroit : clique plus près d'une route, ou désactive « Suivre les routes ».")); return; }
       p = sp;
     }
@@ -88,7 +95,7 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
     if (!d?.moved) return;
     // le point est reposé sur la route puis les deux tronçons voisins sont recalculés
     const i = d.i; let list = wps.slice();
-    let p = list[i].p; if (follow && net) { const sp = net.snap(p); if (sp) p = sp; }
+    let p = list[i].p; if (follow && net) { const sn = net.snap(nt(p), Math.round(48 * f)); if (sn) p = mp(sn); }
     list[i] = { ...list[i], p };
     if (i > 0) { const s = link(list[i - 1].p, p); if (s) list[i] = { p, seg: s }; }
     if (i + 1 < list.length) { const s = link(p, list[i + 1].p); if (s) list[i + 1] = { ...list[i + 1], seg: s }; }
@@ -122,13 +129,13 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
             <img ref={img} src={src} alt="" draggable={false} onLoad={(e) => setSize({ w: e.currentTarget.naturalWidth, h: e.currentTarget.naturalHeight })} onError={() => setBroken(true)} className="block h-auto w-full select-none" />
             {size && (
               <svg viewBox={`0 0 ${size.w} ${size.h}`} className="absolute inset-0 h-full w-full" style={{ pointerEvents: "none" }} aria-hidden>
-                {path && <><path d={path} fill="none" stroke="#000" strokeOpacity=".6" strokeWidth={u * 7} strokeLinecap="round" strokeLinejoin="round" /><path d={path} fill="none" stroke="#e03232" strokeWidth={u * 4} strokeLinecap="round" strokeLinejoin="round" /></>}
+                {path && <><path d={path} fill="none" stroke="#000" strokeOpacity=".6" strokeWidth={u * 5.5} strokeLinecap="round" strokeLinejoin="round" /><path d={path} fill="none" stroke="#e03232" strokeWidth={u * 3} strokeLinecap="round" strokeLinejoin="round" /></>}
                 {wps.map((w, i) => (
                   <g key={i} onPointerDown={down(i)} data-point={i} style={{ pointerEvents: "all", cursor: "grab", touchAction: "none" }}>
-                    <circle cx={w.p[0]} cy={w.p[1]} r={u * 11} fill="transparent" />
-                    {i === 0 ? <><circle cx={w.p[0]} cy={w.p[1]} r={u * 8} fill="#c62828" stroke={sel === i ? "#ffd84a" : "#fff"} strokeWidth={u * 2.2} /><text x={w.p[0] + u * 13} y={w.p[1] + u * 5} fontSize={u * 16} fontWeight={700} fill="#fff" stroke="#000" strokeWidth={u * 2.6} paintOrder="stroke" fontFamily="sans-serif">START</text></>
-                      : i === last ? <rect x={w.p[0] - u * 8} y={w.p[1] - u * 8} width={u * 16} height={u * 16} fill="#fff" stroke={sel === i ? "#ffd84a" : "#c62828"} strokeWidth={u * 2.4} />
-                      : <circle cx={w.p[0]} cy={w.p[1]} r={u * 4.2} fill={sel === i ? "#ffd84a" : "#fff"} stroke="#c62828" strokeWidth={u * 1.8} />}
+                    <circle cx={w.p[0]} cy={w.p[1]} r={u * 9} fill="transparent" />
+                    {i === 0 ? <><circle cx={w.p[0]} cy={w.p[1]} r={u * 4.2} fill="#c62828" stroke={sel === i ? "#ffd84a" : "#fff"} strokeWidth={u * 1.4} /><text x={w.p[0] + u * 7.5} y={w.p[1] + u * 3.6} fontSize={u * 11} fontWeight={700} fill="#fff" stroke="#000" strokeWidth={u * 2} paintOrder="stroke" fontFamily="sans-serif">START</text></>
+                      : i === last ? <rect x={w.p[0] - u * 4.2} y={w.p[1] - u * 4.2} width={u * 8.4} height={u * 8.4} fill="#fff" stroke={sel === i ? "#ffd84a" : "#c62828"} strokeWidth={u * 1.6} />
+                      : <circle cx={w.p[0]} cy={w.p[1]} r={u * 2.6} fill={sel === i ? "#ffd84a" : "#fff"} stroke="#c62828" strokeWidth={u * 1.3} />}
                   </g>
                 ))}
               </svg>
@@ -136,6 +143,13 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
           </div>
         )}
       </div>
+      {size && path && (
+        <div className="mt-8">
+          <div className="kicker mb-1">{t("APERÇU DU PLAN")}</div>
+          <p className="mb-3 text-sm text-[#a5a9b0]">{t("Voici le plan tel qu'il sera publié, avec le cadre BooBoo Crew et la petite voiture qui suit ton parcours. Il se met à jour à chaque point.")}</p>
+          <PlanPreview path={path} w={size.w} h={size.h} src={src} />
+        </div>
+      )}
       <input type="hidden" name="path" value={path} /><input type="hidden" name="w" value={size?.w ?? ""} /><input type="hidden" name="h" value={size?.h ?? ""} />
       <p className="mt-2 text-xs text-metal">{t("Clique sur une route pour poser un point : le parcours suit les routes tout seul jusqu'au point précédent (le premier point est le DÉPART, le dernier est l'ARRIVÉE). Pour passer par une route précise, pose un point dessus. Glisse un point pour le déplacer, clique dessus puis « Supprimer le point » pour l'enlever.")}</p>
     </div>

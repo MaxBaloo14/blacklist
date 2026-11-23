@@ -368,6 +368,9 @@ const EN_SITE: Record<string, string> = {
   "Chargement du réseau routier…": "Loading the road network…",
   "Aucune route à cet endroit : clique plus près d'une route, ou désactive « Suivre les routes ».": "No road here: click closer to a road, or turn off “Follow roads”.",
   "Clique sur une route pour poser un point : le parcours suit les routes tout seul jusqu'au point précédent (le premier point est le DÉPART, le dernier est l'ARRIVÉE). Pour passer par une route précise, pose un point dessus. Glisse un point pour le déplacer, clique dessus puis « Supprimer le point » pour l'enlever.": "Click on a road to place a point: the route follows the roads by itself up to the previous point (the first point is the START, the last is the FINISH). To go through a specific road, place a point on it. Drag a point to move it, click it then “Delete point” to remove it.",
+  "APERÇU DU PLAN": "PLAN PREVIEW",
+  "Aperçu du plan": "Plan preview",
+  "Voici le plan tel qu'il sera publié, avec le cadre BooBoo Crew et la petite voiture qui suit ton parcours. Il se met à jour à chaque point.": "This is the plan as it will be published, with the BooBoo Crew frame and the little car following your route. It updates with every point.",
 };
 
 export const EN: Record<string, string> = { ...EN_SITE, ...EN_ADMIN };

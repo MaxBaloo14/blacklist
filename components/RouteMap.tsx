@@ -4,13 +4,13 @@ import { Maximize2, X } from "lucide-react";
 import { useT } from "@/components/LangProvider";
 import { routeEnd, routeLength, routeStart } from "@/lib/route";
 
-type Props = { name: string; src: string; srcSet?: string; sizes?: string; w: number; h: number; path: string; active?: boolean; big?: boolean };
+type Props = { name: string; src: string; underlay?: React.ReactNode; srcSet?: string; sizes?: string; w: number; h: number; path: string; active?: boolean; big?: boolean };
 
 const SPEED = 140;      // vitesse de la voiture, en pixels de l'image par seconde (tranquille : on suit la course)
 const HOLD = 3.2;       // pause à l'arrivée avant de repartir
 
 /** Carte d'un circuit : l'image du plan + une petite voiture qui suit le tracé rouge du DÉPART à l'ARRIVÉE, en boucle. */
-function RouteCar({ name, src, srcSet, sizes, w, h, path, active = true, big }: Props) {
+export function RouteCar({ name, src, srcSet, sizes, w, h, path, active = true, big, underlay }: Props) {
   const id = useId().replace(/:/g, "");
   const box = useRef<HTMLDivElement>(null);
   const svg = useRef<SVGSVGElement>(null);
@@ -72,8 +72,8 @@ function RouteCar({ name, src, srcSet, sizes, w, h, path, active = true, big }: 
   const animated = active && !reduced;
   return (
     <div ref={box} className="relative w-full overflow-hidden bg-ink3" style={{ aspectRatio: `${w} / ${h}` }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} srcSet={srcSet} sizes={sizes} alt={name} loading={big ? "eager" : "lazy"} decoding="async" className={`absolute inset-0 size-full object-cover ${active ? "" : "grayscale opacity-70"}`} />
+      {underlay ? <svg viewBox={`0 0 ${w} ${h}`} className="absolute inset-0 size-full" role="img" aria-label={name}>{underlay}</svg> : /* eslint-disable-next-line @next/next/no-img-element */
+      <img src={src} srcSet={srcSet} sizes={sizes} alt={name} loading={big ? "eager" : "lazy"} decoding="async" className={`absolute inset-0 size-full object-cover ${active ? "" : "grayscale opacity-70"}`} />}
       <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className="absolute inset-0 size-full" aria-hidden focusable="false">
         <defs><path id={`r${id}`} d={path} /></defs>
         {animated ? (

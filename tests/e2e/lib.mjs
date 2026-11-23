@@ -71,7 +71,14 @@ export function parisSoon(ms = 3600_000) {
   return fmt(t);
 }
 
-/** Remplit les 3 créneaux du formulaire de défi : dernier jour de la semaine (dimanche), 22 h 30 / 23 h 00 / 23 h 30 (heure de Paris). */
+/** Le défié choisit lui-même le jour (dernier jour de la semaine) et l'heure (22 h 30, heure de Paris). */
+export async function pickWhen(page) {
+  const days = await page.locator("[name=day] option:not([disabled])").evaluateAll((o) => o.map((x) => x.value).filter(Boolean));
+  await page.selectOption("[name=day]", days[days.length - 1]);
+  await page.selectOption("[name=time]", "22:30");
+}
+
+/** Le lanceur propose 3 créneaux : dernier jour de la semaine, 22 h 30 / 23 h 00 / 23 h 30 (heure de Paris). */
 export async function fillSlots(page) {
   for (const [i, time] of [[1, "22:30"], [2, "23:00"], [3, "23:30"]]) {
     const days = await page.locator(`[name=slot_day_${i}] option:not([disabled])`).evaluateAll((o) => o.map((x) => x.value).filter(Boolean));

@@ -21,7 +21,7 @@ await ad.fill('[name=reason]', "Mise en place"); await act(ad, "APPLIQUER LA MOD
 const lio = await newPage(b); await pilotLogin(lio, "0600000015"); await lio.goto(BASE + "/challenges"); await lio.waitForLoadState("networkidle"); await fillSlots(lio); await act(lio, "DÉFIER LE #4");
 const mika = await newPage(b); await pilotLogin(mika, "0600000014"); await mika.goto(BASE + "/challenges"); await mika.waitForLoadState("networkidle");
 await pickSlot(mika); await act(mika, "CONFIRMER CE CRÉNEAU");
-// les créneaux se proposent entre 21 h et 00 h : pour les tests, on avance le duel à « dans 2 h » directement en base
+// les jour et l'heure se choisissent entre 21 h et 00 h : pour les tests, on avance le duel à « dans 2 h » directement en base
 const sql = (q) => execSync(`su postgres -c "psql -d bl_e2e -qc \\"${q}\\""`);
 sql("update challenges set scheduled_at = now() + interval '2 hours' where status = 'scheduled'");
 await ad.goto(BASE + "/admin/challenges");

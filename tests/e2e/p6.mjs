@@ -20,6 +20,8 @@ check("badge Vidéo dans la liste admin", /VIDÉO/i.test(tt));
 // Page publique
 const pub = await newPage(b, { width: 1280, height: 900 });
 await pub.goto(BASE + "/race-network"); await pub.waitForLoadState("networkidle"); await pub.waitForTimeout(2500);
+// la vidéo se met en pause hors écran (économie de batterie) : avec les plans de course au-dessus, on la fait défiler dans la vue
+await pub.locator("video").first().scrollIntoViewIfNeeded(); await pub.waitForTimeout(2000);
 const info = await pub.evaluate(() => [...document.querySelectorAll("video")].map((v) => ({ src: v.currentSrc.slice(-30), muted: v.muted, loop: v.loop, ready: v.readyState, t: v.currentTime, paused: v.paused, w: v.videoWidth })));
 console.log(info);
 check("lecteur vidéo affiché sur la page Circuits", info.length >= 1);

@@ -24,7 +24,7 @@ export async function createChallenge(_: ActionState, f: FormData): Promise<Acti
   if (!(await rateLimit("challenge", 6, 60_000, uid))) return await fail("Trop de requêtes. Patiente un instant.");
   const target = uuid.safeParse(str(f, "target"));
   if (!target.success) return await fail("Cible invalide.");
-  // 3 créneaux différents proposés par le challenger : un jour de la semaine + une heure entre 21 h et 23 h 30 (heure de Paris)
+  // Le lanceur propose 3 créneaux possibles (jour + heure entre 21 h et 23 h 30, heure de Paris) ; seul le défié en choisit un
   const slots: string[] = [];
   for (const i of [1, 2, 3]) {
     const day = str(f, `slot_day_${i}`), time = str(f, `slot_time_${i}`);
@@ -32,14 +32,14 @@ export async function createChallenge(_: ActionState, f: FormData): Promise<Acti
     slots.push(parisLocalToISO(`${day}T${time}`));
   }
   if (new Set(slots).size !== 3) return await fail("Propose exactement 3 créneaux différents.");
-  return callRpc("create_challenge", { p_target: target.data, p_slots: slots }, (await getT())("Défi lancé ! Le pilote défié choisit parmi tes 3 créneaux."), ["/challenges", "/profile"]);
+  return callRpc("create_challenge", { p_target: target.data, p_slots: slots }, (await getT())("Défi lancé ! Le pilote défié choisit l'un de tes 3 créneaux."), ["/challenges", "/profile"]);
 }
 
 export async function scheduleChallenge(_: ActionState, f: FormData): Promise<ActionState> {
   const id = uuid.safeParse(str(f, "challenge"));
-  const when = str(f, "when"), slot = str(f, "slot");
-  // créneau choisi parmi ceux proposés (valeur ISO exacte) ; saisie libre seulement si le challenger n'en a proposé aucun
-  const iso = slot ? (Number.isNaN(Date.parse(slot)) ? null : new Date(slot).toISOString()) : /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(when) ? parisLocalToISO(when) : null;
+  // Le pilote défié choisit l'un des créneaux proposés (valeur ISO exacte) ; la base refuse tout autre horaire
+  const slot = str(f, "slot");
+  const iso = slot && !Number.isNaN(Date.parse(slot)) ? new Date(slot).toISOString() : null;
   if (!id.success || !iso) return await fail("Date invalide.");
   return callRpc("schedule_challenge", { p_challenge: id.data, p_at: iso }, (await getT())("Date du duel enregistrée. Les deux pilotes sont prévenus."), ["/challenges", "/profile"]);
 }

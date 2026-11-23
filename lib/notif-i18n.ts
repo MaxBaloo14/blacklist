@@ -1,10 +1,11 @@
 import type { Lang } from "@/lib/i18n-core";
+import { EN } from "@/lib/i18n-en";
 
 // Les notifications sont enregistrées en anglais par la base (texte fixe, valable pour tous).
 // En français, on traduit à l'affichage les messages connus ; les motifs écrits par l'organisation restent tels quels.
 const TITLES: [RegExp, string][] = [
-  [/^Points added to your balance$/, "Des points ont été ajoutés à ton solde"],
-  [/^Points removed from your balance$/, "Des points ont été retirés de ton solde"],
+  [/^Zigollars added to your balance$/, "Des zigollars ont été ajoutés à ton solde"],
+  [/^Zigollars removed from your balance$/, "Des zigollars ont été retirés de ton solde"],
   [/^New shop order$/, "Nouvelle commande boutique"],
   [/^Your order has been cancelled and refunded$/, "Ta commande a été annulée et remboursée"],
   [/^Your order has been delivered$/, "Ta commande a été remise"],
@@ -51,7 +52,7 @@ const BODIES: [RegExp, string][] = [
   [/^(.+) \(#(\d+)\) challenges you\.$/, "$1 (#$2) te défie."],
   [/^Your challenge against (.+) is live\.$/, "Ton défi contre $1 est lancé."],
   [/^\$(\d+)$/, "$1 $"],
-  [/^([+-]\d+) pts$/, "$1 pts"],
+  [/^([+-]\d+) zigollars$/, "$1 zigollars"],
   [/^(.+) \(set by the organisation\)$/, "$1 (fixé par l'organisation)"],
 ];
 const KINDS: Record<string, string> = {
@@ -72,7 +73,11 @@ const money = (body: string | null, lang: Lang) => body && (lang === "en"
   : body.replace(/(\d{4,}) \$/g, (_, d) => Number(d).toLocaleString("fr-FR").replace(/\u202f|\u00a0/g, " ") + " $"));
 
 export function localizeNotif(n: { kind: string; title: string; body: string | null }, lang: Lang) {
-  if (lang === "en") return { kind: n.kind.replace(/_/g, " ").toUpperCase(), title: n.title, body: money(n.body, lang) };
+  if (lang === "en") {
+    // les noms d'articles de la boutique sont enregistrés en français : on traduit ceux qu'on connaît
+    const body = n.body && /^shop/.test(n.kind) ? n.body.split(" — ").map((p) => EN[p] ?? p).join(" — ") : n.body;
+    return { kind: n.kind.replace(/_/g, " ").toUpperCase(), title: n.title, body: money(body, lang) };
+  }
   return { kind: KINDS[n.kind] ?? n.kind.replace(/_/g, " ").toUpperCase(), title: apply(n.title, TITLES), body: money(n.body ? apply(n.body, BODIES) : n.body, lang) };
 }
 

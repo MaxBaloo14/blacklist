@@ -14,9 +14,13 @@ type Props = {
   className?: string;
   reset?: boolean;
   encType?: string;
+  /** Bouton grisé (ex. solde insuffisant). */
+  disabled?: boolean;
+  /** Appelé après une action réussie. */
+  onDone?: () => void;
 };
 
-export default function ActionForm({ action, children, label, confirm, variant = "red", small, className = "", reset = true, encType }: Props) {
+export default function ActionForm({ action, children, label, confirm, variant = "red", small, className = "", reset = true, encType, disabled, onDone }: Props) {
   const t = useT();
   const [state, formAction, pending] = useActionState(action, {});
   const formRef = useRef<HTMLFormElement>(null);
@@ -25,7 +29,8 @@ export default function ActionForm({ action, children, label, confirm, variant =
 
   useEffect(() => {
     if (state.ok && reset) formRef.current?.reset();
-  }, [state.nonce, state.ok, reset]);
+    if (state.ok) onDone?.();
+  }, [state.nonce, state.ok, reset]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form
@@ -43,7 +48,7 @@ export default function ActionForm({ action, children, label, confirm, variant =
     >
       {children}
       <div className="mt-3 flex flex-wrap items-center gap-3">
-        <button type="submit" disabled={pending} className={`btn btn-${variant} ${small ? "btn-sm" : ""}`}>
+        <button type="submit" disabled={pending || disabled} className={`btn btn-${variant} ${small ? "btn-sm" : ""}`}>
           {pending ? <span className="spin" aria-label="…" /> : t(label)}
         </button>
         {state.message && (

@@ -4,6 +4,8 @@ import { Coins } from "lucide-react";
 import ActionForm from "@/components/ActionForm";
 import BetCard from "@/components/BetCard";
 import PageHead from "@/components/PageHead";
+import ShopGrid from "@/components/ShopGrid";
+import { WalletBalance, WalletProvider } from "@/components/Wallet";
 import Tabs from "@/components/Tabs";
 import { buyItem } from "@/app/actions/economy";
 import { getSession } from "@/lib/auth";
@@ -27,7 +29,7 @@ export default async function Boutique({ searchParams }: { searchParams: Promise
   ]);
   const balance = loggedPilot ? Number(bal?.balance ?? 0) : null;
 
-  const tabs: [string, string][] = [["boutique", t("BOUTIQUE")], ["paris", t("PARIS")], ...(loggedPilot ? [["historique", t("MES POINTS")] as [string, string]] : [])];
+  const tabs: [string, string][] = [["boutique", t("BOUTIQUE")], ["paris", t("PARIS")], ...(loggedPilot ? [["historique", t("MES ZIGOLLARS")] as [string, string]] : [])];
 
   // --- Paris : cotes de chaque duel programmé + mes paris
   let odds = new Map<string, { ch: number; df: number }>();
@@ -54,54 +56,30 @@ export default async function Boutique({ searchParams }: { searchParams: Promise
 
   return (
     <>
-      <PageHead kicker={t("POINTS BBC")} title={t("Boutique")} em={t("& paris")}>{t("Chaque pilote reçoit 10 000 points à l'inscription. Dépense-les dans la boutique ou mise-les sur les duels programmés.")}</PageHead>
+      <PageHead kicker={t("ZIGOLLARS BBC")} title={t("Boutique")} em={t("& paris")}>{t("Chaque pilote reçoit 10 000 zigollars à l'inscription. Dépense-les dans la boutique ou mise-les sur les duels programmés.")}</PageHead>
       <section className="py-14">
+        <WalletProvider initial={balance}>
         <div className="wrap">
           <div className="wallet mb-8">
             <span className="wallet-icon" aria-hidden><Coins size={26} /></span>
             <div>
               <div className="label !mb-0">{t("TON SOLDE")}</div>
-              {balance !== null ? <div className="font-display text-5xl leading-none">{points(balance, locale)}</div>
-                : <div className="font-cond text-lg">{t("Inscris-toi pour recevoir 10 000 points offerts.")} <Link href="/register" className="text-red underline underline-offset-4 hover:text-white">{t("INSCRIPTION")}</Link> · <Link href="/login" className="text-red underline underline-offset-4 hover:text-white">{t("CONNEXION")}</Link></div>}
+              {balance !== null ? <div className="font-display text-5xl leading-none"><WalletBalance /></div>
+                : <div className="font-cond text-lg">{t("Inscris-toi pour recevoir 10 000 zigollars offerts.")} <Link href="/register" className="text-red underline underline-offset-4 hover:text-white">{t("INSCRIPTION")}</Link> · <Link href="/login" className="text-red underline underline-offset-4 hover:text-white">{t("CONNEXION")}</Link></div>}
             </div>
           </div>
           <Tabs base="/boutique" tabs={tabs} current={tab} />
 
           {tab === "boutique" && (
-            <div className="grid gap-10">
-              <p className="text-sm text-[#a5a9b0]">{t("Les articles sont remis en jeu par l'organisation après ta commande. Une commande annulée est remboursée en points.")}</p>
-              {[...byCat.entries()].map(([cat, list]) => (
-                <div key={cat}>
-                  <div className="kicker mb-3">{cat.toUpperCase()}</div>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {list.map((it) => {
-                      const out = it.stock !== null && it.stock <= 0;
-                      const poor = balance !== null && balance < Number(it.price);
-                      return (
-                        <article key={it.id} className="shop-card">
-                          <div className="flex items-start justify-between gap-3"><h3 className="font-display text-2xl uppercase leading-tight">{it.name}</h3>{it.stock !== null && <span className={`badge ${out ? "badge-red" : "badge-warn"}`}>{out ? t("ÉPUISÉ") : t("{n} restant(s)", { n: it.stock })}</span>}</div>
-                          {it.description && <p className="mt-1 text-sm text-[#a5a9b0]">{it.description}</p>}
-                          <div className="mt-auto flex items-end justify-between gap-3 pt-4">
-                            <div className="font-display text-3xl text-red">{points(it.price, locale)}</div>
-                            {loggedPilot ? (out ? null : (
-                              <ActionForm action={buyItem} label={poor ? "SOLDE INSUFFISANT" : "ACHETER"} small variant={poor ? "ghost" : "red"} confirm={t("Acheter « {n} » pour {p} ?", { n: it.name, p: points(it.price, locale) })} className="[&>div]:mt-0">
-                                <input type="hidden" name="item" value={it.id} />
-                              </ActionForm>
-                            )) : <Link href="/login" className="btn btn-ghost btn-sm">{t("CONNEXION")}</Link>}
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-              {!items?.length && <p className="panel text-[#a5a9b0]">{t("La boutique est vide pour le moment.")}</p>}
+            <div className="grid gap-6">
+              <p className="text-sm text-[#a5a9b0]">{t("Les articles sont remis en jeu par l'organisation après ta commande. Une commande annulée est remboursée en zigollars.")}</p>
+              <ShopGrid items={(items ?? []) as never} loggedPilot={loggedPilot} />
             </div>
           )}
 
           {tab === "paris" && (
             <div className="grid gap-10">
-              <p className="max-w-3xl text-sm text-[#a5a9b0]">{t("Mise entre 500 et 50 000 points (montants ronds, par pas de 500) sur un duel programmé. Les cotes se basent sur le bilan des deux pilotes et l'avantage du défié. Le gain (mise × cote) est versé quand l'organisation valide le résultat ; si le duel est annulé, ta mise est remboursée. Tu ne peux pas parier sur ton propre duel.")}</p>
+              <p className="max-w-3xl text-sm text-[#a5a9b0]">{t("Mise entre 500 et 50 000 zigollars (montants ronds, par pas de 500) sur un duel programmé. Les cotes se basent sur le bilan des deux pilotes et l'avantage du défié. Le gain (mise × cote) est versé quand l'organisation valide le résultat ; si le duel est annulé, ta mise est remboursée. Tu ne peux pas parier sur ton propre duel.")}</p>
               <div className="grid gap-4 md:grid-cols-2">
                 {(duels ?? []).map((d: Row) => {
                   const o = odds.get(d.id) ?? { ch: 2, df: 2 };
@@ -136,19 +114,20 @@ export default async function Boutique({ searchParams }: { searchParams: Promise
                 <div className="kicker mb-3">{t("MES COMMANDES")}</div>
                 {(orders ?? []).length ? (
                   <div className="overflow-x-auto"><table className="tbl"><thead><tr><th>{t("Date")}</th><th>{t("Article")}</th><th>{t("Prix")}</th><th>{t("Statut")}</th></tr></thead><tbody>
-                    {(orders ?? []).map((o: Row) => <tr key={o.id}><td>{dateTime(o.created_at, locale)}</td><td>{o.item_name}</td><td>{points(o.price, locale)}</td><td><span className={`badge ${o.status === "delivered" ? "badge-ok" : o.status === "cancelled" ? "badge-metal" : "badge-warn"}`}>{ORDER[o.status]}</span>{o.note ? <span className="ml-2 text-xs text-metal">{o.note}</span> : null}</td></tr>)}
+                    {(orders ?? []).map((o: Row) => <tr key={o.id}><td>{dateTime(o.created_at, locale)}</td><td>{t(o.item_name)}</td><td>{points(o.price, locale)}</td><td><span className={`badge ${o.status === "delivered" ? "badge-ok" : o.status === "cancelled" ? "badge-metal" : "badge-warn"}`}>{ORDER[o.status]}</span>{o.note ? <span className="ml-2 text-xs text-metal">{o.note}</span> : null}</td></tr>)}
                   </tbody></table></div>
                 ) : <p className="panel text-[#a5a9b0]">{t("Aucune commande.")}</p>}
               </div>
               <div>
-                <div className="kicker mb-3">{t("HISTORIQUE DES POINTS")}</div>
-                <div className="overflow-x-auto"><table className="tbl"><thead><tr><th>{t("Date")}</th><th>{t("Motif")}</th><th className="text-right">{t("Points")}</th></tr></thead><tbody>
+                <div className="kicker mb-3">{t("HISTORIQUE DES ZIGOLLARS")}</div>
+                <div className="overflow-x-auto"><table className="tbl"><thead><tr><th>{t("Date")}</th><th>{t("Motif")}</th><th className="text-right">{t("Zigollars")}</th></tr></thead><tbody>
                   {(ledger ?? []).map((l: Row) => <tr key={l.id}><td>{dateTime(l.created_at, locale)}</td><td>{t(l.reason)}</td><td className={`text-right font-bold ${l.delta > 0 ? "text-ok" : "text-[#ff6b6b]"}`}>{l.delta > 0 ? "+" : ""}{points(l.delta, locale).replace(" pts", "")}</td></tr>)}
                 </tbody></table></div>
               </div>
             </div>
           )}
         </div>
+        </WalletProvider>
       </section>
     </>
   );

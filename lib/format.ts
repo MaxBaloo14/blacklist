@@ -38,7 +38,7 @@ export function parisLocalToISO(local: string): string {
 }
 
 export const points = (n: number | string | null | undefined, locale = "fr-FR") =>
-  new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Number(n ?? 0)).replace(/[  ]/g, " ") + " pts";
+  new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Number(n ?? 0)).replace(/[  ]/g, " ") + " zigollars";
 
 /** Jours proposables pour un créneau de duel : d'aujourd'hui (heure de Paris) jusqu'au dimanche de la semaine en cours. */
 export function weekSlotDays(locale = "fr-FR"): { value: string; label: string }[] {

@@ -64,7 +64,7 @@ export const grantPoints = rpc("admin_grant_points", (f) => {
   const n = Math.trunc(Number(str(f, "delta")));
   if (!Number.isFinite(n) || n === 0 || Math.abs(n) > 1_000_000) throw new Invalid("Montant invalide.");
   return { p_user: id(f, "driver"), p_delta: n, p_reason: str(f, "reason") };
-}, "Points mis à jour.");
+}, "Zigollars mis à jour.");
 
 const itemSchema = z.object({
   name: z.string().min(2, "Nom trop court.").max(80), description: z.string().max(300), category: z.string().min(2, "Catégorie requise.").max(40),

@@ -24,6 +24,6 @@ export async function placeBet(_: ActionState, f: FormData): Promise<ActionState
   const id = z.string().uuid().safeParse(str(f, "challenge")), side = z.enum(["challenger", "defender"]).safeParse(str(f, "side"));
   const stake = Math.trunc(Number(str(f, "stake")));
   if (!id.success || !side.success) return await fail("Choix invalide.");
-  if (!Number.isFinite(stake) || stake < 500 || stake > 50000 || stake % 500 !== 0) return await fail("La mise doit être un montant rond (multiple de 500) compris entre 500 et 50 000 points.");
+  if (!Number.isFinite(stake) || stake < 500 || stake > 50000 || stake % 500 !== 0) return await fail("La mise doit être un montant rond (multiple de 500) compris entre 500 et 50 000 zigollars.");
   return callRpc("place_bet", { p_challenge: id.data, p_side: side.data, p_stake: stake }, (await getT())("Pari enregistré. Bonne chance !"), ["/boutique", "/blacklist"]);
 }

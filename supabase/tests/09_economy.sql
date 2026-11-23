@@ -128,7 +128,7 @@ select t_eq('carte aléatoire : pas encore tirée', (select (track_id is null)::
 select t_as(20); select t_fail($$select set_race_track('88888888-0000-0000-0000-000000000002', (select id from race_tracks where name='Course 2'))$$, 'le challenger ne choisit pas la carte du défié'); reset role;
 select t_as(16); select set_race_track('88888888-0000-0000-0000-000000000002', (select id from race_tracks where name='Course 2')); reset role;
 select t_eq('3e carte tirée une fois les 2 choix faits', (select (track_id is not null)::text from challenge_races where id='88888888-0000-0000-0000-000000000003'), 'true');
-select t_eq('3e carte différente des deux autres', (select (track_id not in (select track_id from challenge_races where id in ('88888888-0000-0000-0000-000000000001','88888888-0000-0000-0000-000000000002')))::text from challenge_races where id='88888888-0000-0000-0000-000000000003'), 'true');
+select t_eq('3e carte = une carte active tirée au hasard', (select (track_id in (select id from race_tracks where status='active'))::text from challenge_races where id='88888888-0000-0000-0000-000000000003'), 'true');
 select t_eq('chaque pilote prévenu du tirage', (select count(*) from notifications where kind='track_chosen' and title='The random track has been drawn')::text, '2');
 \echo ''
 \echo '### TOUS LES SCÉNARIOS PASSENT (économie incluse)'

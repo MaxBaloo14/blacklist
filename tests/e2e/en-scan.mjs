@@ -8,9 +8,9 @@ async function scan(p, path, label) {
   await p.goto(BASE + path); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3600);
   const texts = await p.evaluate(() => {
     const out = new Set(); const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    while (w.nextNode()) { const n = w.currentNode; const t = n.textContent.replace(/\s+/g, " ").trim(); if (!t || t.length < 3) continue; const el = n.parentElement; if (!el || el.closest("script,style,noscript,.sr-only-ignore")) continue; const cs = getComputedStyle(el); if (cs.display === "none" || cs.visibility === "hidden") continue; out.add(t); }
+    while (w.nextNode()) { const n = w.currentNode; const t = n.textContent.replace(/\s+/g, " ").trim(); if (!t || t.length < 3 || /^\{.*\}$/.test(t)) continue; const el = n.parentElement; if (!el || el.closest("script,style,noscript,.sr-only-ignore")) continue; const cs = getComputedStyle(el); if (cs.display === "none" || cs.visibility === "hidden") continue; out.add(t); }
     // attributs visibles à l'utilisateur
-    document.querySelectorAll("[aria-label],[title],[placeholder]").forEach((e) => ["aria-label", "title", "placeholder"].forEach((a) => { const v = e.getAttribute(a); if (v && v.length > 2) out.add(`[${a}] ${v}`); }));
+    document.querySelectorAll("[aria-label],[title],[placeholder]").forEach((e) => ["aria-label", "title", "placeholder"].forEach((a) => { const v = e.getAttribute(a); if (v && v.length > 2 && !/^\{.*\}$/.test(v)) out.add(`[${a}] ${v}`); }));
     return [...out];
   });
   const bad = texts.filter((t) => FR.test(t) && !OK.test(t) && !DATA.test(t));

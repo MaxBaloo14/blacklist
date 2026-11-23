@@ -1,7 +1,8 @@
 "use client";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { placeBet } from "@/app/actions/economy";
 import { useT } from "@/components/LangProvider";
+import { useWallet } from "@/components/Wallet";
 
 type Props = { challengeId: string; challenger: string; defender: string; chOdds: number; dfOdds: number; balance: number | null; mine: { side: string; stake: number; odds: number } | null; locked: string | null };
 
@@ -10,12 +11,15 @@ const MIN = 500, MAX = 50000, STEP = 500;
 const fmt = (n: number) => new Intl.NumberFormat("fr-FR").format(n).replace(/[  ]/g, " ");
 
 /** Paris à cotes fixes : la cote est figée au moment du pari ; le gain est versé à la validation officielle du résultat. */
-export default function BetCard({ challengeId, challenger, defender, chOdds, dfOdds, balance, mine, locked }: Props) {
+export default function BetCard({ challengeId, challenger, defender, chOdds, dfOdds, balance: initialBalance, mine, locked }: Props) {
   const t = useT();
+  const wallet = useWallet();
+  const balance = wallet.balance ?? initialBalance;
   const [state, action, pending] = useActionState(placeBet, {});
   const [side, setSide] = useState<"challenger" | "defender">("defender");
   const [stake, setStake] = useState(1000);
   const [custom, setCustom] = useState("");
+  useEffect(() => { if (state.ok) wallet.refresh(); }, [state.nonce]); // eslint-disable-line react-hooks/exhaustive-deps
   const odds = side === "challenger" ? chOdds : dfOdds;
   const round = Number.isInteger(stake) && stake >= MIN && stake <= MAX && stake % STEP === 0;
   const cannot = balance !== null && stake > balance;
@@ -29,7 +33,7 @@ export default function BetCard({ challengeId, challenger, defender, chOdds, dfO
     <div className="bet">
       <div className="mb-2 flex items-center justify-between"><span className="font-cond text-[11px] font-bold tracking-[.26em] text-red">{t("COTES")}</span><span className="font-cond text-[11px] tracking-[.14em] text-metal">{t("Cote figée au moment du pari")}</span></div>
       {mine ? (
-        <p className="text-sm text-[#cfcfcf]">✓ {t("Ton pari")} : <b>{fmt(mine.stake)} pts</b> {t("sur")} <b>{mine.side === "challenger" ? challenger : defender}</b> (× {Number(mine.odds).toFixed(2)}) — {t("gain possible")} <b className="text-ok">{fmt(Math.floor(mine.stake * Number(mine.odds)))} pts</b></p>
+        <p className="text-sm text-[#cfcfcf]">✓ {t("Ton pari")} : <b>{fmt(mine.stake)} zigollars</b> {t("sur")} <b>{mine.side === "challenger" ? challenger : defender}</b> (× {Number(mine.odds).toFixed(2)}) — {t("gain possible")} <b className="text-ok">{fmt(Math.floor(mine.stake * Number(mine.odds)))} zigollars</b></p>
       ) : locked ? (
         <div>
           <div className="grid grid-cols-2 gap-2">
@@ -50,10 +54,10 @@ export default function BetCard({ challengeId, challenger, defender, chOdds, dfO
               className={`bet-input ${custom ? "bet-chip-on" : ""}`} />
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm text-[#cfcfcf]">{t("Gain possible")} : <b className="text-ok">{fmt(Math.floor(stake * odds))} pts</b></p>
+            <p className="text-sm text-[#cfcfcf]">{t("Gain possible")} : <b className="text-ok">{fmt(Math.floor(stake * odds))} zigollars</b></p>
             <button disabled={pending || cannot || !round} className="btn btn-red btn-sm">{pending ? <span className="spin" aria-label="…" /> : t("PARIER")}</button>
           </div>
-          {!round && <p className="mt-2 text-xs text-[#ff6b6b]">{t("Mise : montant rond (multiple de 500), de 500 à 50 000 points.")}</p>}
+          {!round && <p className="mt-2 text-xs text-[#ff6b6b]">{t("Mise : montant rond (multiple de 500), de 500 à 50 000 zigollars.")}</p>}
           {cannot && <p className="mt-2 text-xs text-[#ff6b6b]">{t("Solde insuffisant.")}</p>}
         </form>
       )}

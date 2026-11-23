@@ -1,4 +1,5 @@
 // Points, boutique, paris à cotes, choix de la carte, Hall of Fame (statistiques) et retrait du faux duel d'exemple.
+import { execSync } from "node:child_process";
 import { launch, newPage, BASE, SHOT, check, adminPage, text, act, pilotLogin } from "./lib.mjs";
 const b = await launch();
 
@@ -11,7 +12,7 @@ check("plus de faux duel d'exemple (ni « EXEMPLE » ni Coby/Oby)", !/EXEMPLE/.t
 // Visiteur : boutique lisible, paris réservés aux pilotes
 await v.goto(BASE + "/boutique"); await v.waitForLoadState("networkidle");
 const tb = await text(v);
-check("visiteur : boutique et articles visibles", /FUSÉE DE DÉTRESSE/i.test(tb) && /PÉTOIRE/i.test(tb) && /10 000 points offerts/.test(tb), tb.slice(0, 200));
+check("visiteur : boutique et articles visibles", /FUSÉE DE DÉTRESSE/i.test(tb) && /PÉTOIRE/i.test(tb) && /10 000 zigollars offerts/.test(tb), tb.slice(0, 200));
 check("visiteur : pas de bouton d'achat", (await v.locator('button:has-text("ACHETER")').count()) === 0);
 await v.goto(BASE + "/boutique?tab=paris"); await v.waitForLoadState("networkidle");
 const tvp = await text(v);
@@ -37,7 +38,7 @@ await mika.screenshot({ path: `${SHOT}/282-challenger-carte.png`, fullPage: true
 // Paris : Zane (spectateur) mise, un participant ne peut pas miser sur son duel
 const zane = await newPage(b, { width: 1280, height: 900 }); await pilotLogin(zane, "0600000013");
 await zane.goto(BASE + "/boutique"); await zane.waitForLoadState("networkidle");
-check("10 000 points offerts à l'inscription", /10 000 pts/.test(await text(zane)), (await text(zane)).slice(0, 200));
+check("10 000 points offerts à l'inscription", /10 000 zigollars/.test(await text(zane)), (await text(zane)).slice(0, 200));
 await zane.goto(BASE + "/boutique?tab=paris"); await zane.waitForLoadState("networkidle");
 check("2 duels programmés avec des cotes", (await zane.locator(".bet").count()) === 2, String(await zane.locator(".bet").count()));
 await zane.screenshot({ path: `${SHOT}/283-paris-zane.png`, fullPage: true });
@@ -52,7 +53,7 @@ await zane.screenshot({ path: `${SHOT}/283b-paris-montant-libre.png`, fullPage: 
 await bet0.locator('button:has-text("PARIER")').click(); await zane.waitForTimeout(2200);
 await zane.goto(BASE + "/boutique?tab=paris"); await zane.waitForLoadState("networkidle");
 const tz = await text(zane);
-check("pari placé (2 500 pts libres) : solde débité de la mise", /7 500 pts/.test(tz), tz.slice(0, 250));
+check("pari placé (2 500 pts libres) : solde débité de la mise", /7 500 zigollars/.test(tz), tz.slice(0, 250));
 check("pari visible : « Ton pari » et ligne dans « Mes paris »", /Ton pari/i.test(tz) && /MES PARIS/i.test(tz) && /En cours/i.test(tz));
 await zane.screenshot({ path: `${SHOT}/284-pari-place.png`, fullPage: true });
 await mika.goto(BASE + "/boutique?tab=paris"); await mika.waitForLoadState("networkidle");
@@ -65,8 +66,22 @@ await zane.locator("article", { hasText: "Fusée de détresse" }).locator('butto
 await zane.locator('dialog[open] button:has-text("CONFIRMER")').click(); await zane.waitForTimeout(2200);
 await zane.goto(BASE + "/boutique?tab=historique"); await zane.waitForLoadState("networkidle");
 const th = await text(zane);
-check("achat : solde 7 000 pts, commande en attente et historique", /7 000 pts/i.test(th) && /Fusée de détresse/i.test(th) && /En attente de remise/i.test(th) && /Bonus de bienvenue/i.test(th), th.slice(0, 400));
+check("achat : solde 7 000 pts, commande en attente et historique", /7 000 zigollars/i.test(th) && /Fusée de détresse/i.test(th) && /En attente de remise/i.test(th) && /Bonus de bienvenue/i.test(th), th.slice(0, 400));
 await zane.screenshot({ path: `${SHOT}/286-historique.png`, fullPage: true });
+
+// Bouton ACHETER grisé quand le solde ne suffit pas, puis réactivé tout seul quand le solde remonte
+const sql = (q) => execSync(`su postgres -c "psql -d bl_e2e -qc \\"${q}\\""`);
+sql("update shop_items set price = 20000 where name = 'Pétoire'");
+await zane.goto(BASE + "/boutique"); await zane.waitForLoadState("networkidle");
+const gun = zane.locator("article", { hasText: "Pétoire" });
+check("solde insuffisant : ACHETER grisé + « Il te manque … zigollars »", (await gun.locator('button:has-text("ACHETER")').isDisabled()) && /Il te manque 13 000 zigollars/.test(await gun.innerText()), await gun.innerText());
+await zane.screenshot({ path: `${SHOT}/285b-achat-grise.png`, fullPage: false });
+sql("update point_balances set balance = 30000 where user_id = (select id from profiles where first_name = 'Zane')");
+await zane.waitForFunction(() => { const a = [...document.querySelectorAll("article")].find((x) => /Pétoire/i.test(x.textContent)); return Boolean(a) && a.querySelector("button")?.disabled === false; }, null, { timeout: 18000 }).catch(() => {});
+check("solde remonté : ACHETER se réactive sans recharger la page", await gun.locator('button:has-text("ACHETER")').isEnabled(), await gun.innerText());
+check("le solde affiché se met à jour tout seul", /30 000 zigollars/.test(await text(zane)));
+sql("update point_balances set balance = 7000 where user_id = (select id from profiles where first_name = 'Zane')");
+sql("update shop_items set price = 4000 where name = 'Pétoire'");
 
 // Organisation : nouvel article, remise de la commande
 const ad = await adminPage(b);

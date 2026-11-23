@@ -5,7 +5,7 @@ import ActionForm from "@/components/ActionForm";
 import BetCard from "@/components/BetCard";
 import PageHead from "@/components/PageHead";
 import ShopGrid from "@/components/ShopGrid";
-import { WalletBalance, WalletProvider } from "@/components/Wallet";
+import { WalletBalance, WalletLock, WalletProvider } from "@/components/Wallet";
 import Tabs from "@/components/Tabs";
 import { buyItem } from "@/app/actions/economy";
 import { getSession } from "@/lib/auth";
@@ -23,11 +23,13 @@ export default async function Boutique({ searchParams }: { searchParams: Promise
   const loggedPilot = Boolean(user && profile);
 
   const [{ data: bal }, { data: items }, { data: duels }] = await Promise.all([
-    loggedPilot ? sb.from("point_balances").select("balance").eq("user_id", user!.id).maybeSingle() : Promise.resolve({ data: null }),
+    loggedPilot ? sb.from("point_balances").select("balance,locked").eq("user_id", user!.id).maybeSingle() : Promise.resolve({ data: null }),
     sb.from("shop_items").select("*").eq("active", true).order("sort").order("name"),
     tab === "paris" ? sb.from("public_duels").select("*").eq("status", "scheduled").gt("scheduled_at", new Date().toISOString()).order("scheduled_at") : Promise.resolve({ data: [] as Row[] }),
   ]);
   const balance = loggedPilot ? Number(bal?.balance ?? 0) : null;
+  const locked = loggedPilot ? Number(bal?.locked ?? 0) : 0;
+  const available = balance === null ? null : Math.max(0, balance - locked);
 
   const tabs: [string, string][] = [["boutique", t("BOUTIQUE")], ["paris", t("PARIS")], ...(loggedPilot ? [["historique", t("MES ZIGOLLARS")] as [string, string]] : [])];
 
@@ -56,15 +58,15 @@ export default async function Boutique({ searchParams }: { searchParams: Promise
 
   return (
     <>
-      <PageHead kicker={t("ZIGOLLARS BBC")} title={t("Boutique")} em={t("& paris")}>{t("Chaque pilote reçoit 10 000 zigollars à l'inscription. Dépense-les dans la boutique ou mise-les sur les duels programmés.")}</PageHead>
+      <PageHead kicker={t("ZIGOLLARS BBC")} title={t("Boutique")} em={t("& paris")}>{t("Chaque pilote reçoit 10 000 zigollars à l'inscription, verrouillés jusqu'à son premier gain. Ensuite, dépense-les dans la boutique ou mise-les sur les duels programmés.")}</PageHead>
       <section className="py-14">
-        <WalletProvider initial={balance}>
+        <WalletProvider initial={balance} initialLocked={locked}>
         <div className="wrap">
           <div className="wallet mb-8">
             <span className="wallet-icon" aria-hidden><Coins size={26} /></span>
             <div>
               <div className="label !mb-0">{t("TON SOLDE")}</div>
-              {balance !== null ? <div className="font-display text-5xl leading-none"><WalletBalance /></div>
+              {balance !== null ? <><div className="font-display text-5xl leading-none"><WalletBalance /></div><WalletLock template={t("dont {n} zigollars de bienvenue verrouillés jusqu'à ton premier gain (victoire en duel, Warm-up Race…)")} /></>
                 : <div className="font-cond text-lg">{t("Inscris-toi pour recevoir 10 000 zigollars offerts.")} <Link href="/register" className="text-red underline underline-offset-4 hover:text-white">{t("INSCRIPTION")}</Link> · <Link href="/login" className="text-red underline underline-offset-4 hover:text-white">{t("CONNEXION")}</Link></div>}
             </div>
           </div>
@@ -91,7 +93,7 @@ export default async function Boutique({ searchParams }: { searchParams: Promise
                     <article key={d.id} className="panel">
                       <div className="font-cond mb-1 text-xs tracking-[.25em] text-metal">{d.is_podium ? t("DUEL DU PODIUM · MEILLEUR DES 3") : t("DUEL STANDARD · 1 COURSE")} · {dateTime(d.scheduled_at, locale)}</div>
                       <div className="font-display mb-4 text-2xl uppercase tracking-wide"><span className="text-metal">#{d.challenger_position}</span> {ch} <span className="font-marker text-lg text-red">vs</span> <span className="text-metal">#{d.defender_position}</span> {df}</div>
-                      <BetCard challengeId={d.id} challenger={ch} defender={df} chOdds={o.ch} dfOdds={o.df} balance={balance} mine={mine ? { side: mine.side, stake: Number(mine.stake), odds: Number(mine.odds) } : null} locked={locked} />
+                      <BetCard challengeId={d.id} challenger={ch} defender={df} chOdds={o.ch} dfOdds={o.df} balance={available} mine={mine ? { side: mine.side, stake: Number(mine.stake), odds: Number(mine.odds) } : null} locked={locked} />
                     </article>
                   );
                 })}

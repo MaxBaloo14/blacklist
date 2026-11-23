@@ -24,6 +24,9 @@ export async function submitSuggestion(_: ActionState, f: FormData): Promise<Act
   if (!(await rateLimit("suggestion", 6, 60_000, user.id))) return await fail("Trop de requêtes. Patiente un instant.");
   const path = str(f, "path"), w = dim.safeParse(str(f, "w")), h = dim.safeParse(str(f, "h"));
   if (!path || !/^M[-0-9. ,CL]+$/.test(path) || !w.success || !h.success) return await fail("Trace ton parcours sur la carte : place au moins 2 points (départ puis arrivée).");
+  // les joueurs sont limités à 60 points de passage (l'organisation ne l'est pas) : contrôle côté serveur, pas seulement dans l'interface
+  let nPts = 0; try { const j = JSON.parse(str(f, "points") || "[]"); nPts = Array.isArray(j) ? j.length : 0; } catch { nPts = 0; }
+  if (nPts > 60) return await fail("60 points de passage au maximum pour une suggestion.");
   return callRpc("submit_suggestion", { p_name: str(f, "name"), p_description: str(f, "description"), p_path: path, p_w: w.data, p_h: h.data }, (await getT())("Suggestion envoyée. L'organisation étudie ton parcours."), ["/suggestion"]);
 }
 

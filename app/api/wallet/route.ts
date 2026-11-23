@@ -7,6 +7,6 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   const { supabase, user } = await getSession();
   if (!supabase || !user) return NextResponse.json({ balance: null }, { status: 401, headers: { "Cache-Control": "no-store" } });
-  const { data } = await supabase.from("point_balances").select("balance").eq("user_id", user.id).maybeSingle();
-  return NextResponse.json({ balance: Number(data?.balance ?? 0) }, { headers: { "Cache-Control": "no-store" } });
+  const { data } = await supabase.from("point_balances").select("balance,locked").eq("user_id", user.id).maybeSingle();
+  return NextResponse.json({ balance: Number(data?.balance ?? 0), locked: Number(data?.locked ?? 0) }, { headers: { "Cache-Control": "no-store" } });
 }

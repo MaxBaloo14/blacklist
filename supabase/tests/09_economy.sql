@@ -15,6 +15,8 @@ select t_as(2); select admin_grant_points(t_uid(12), 500, 'Geste de l''organisat
 select t_eq('points ajoutés par un organisateur', (select balance::text from point_balances where user_id=t_uid(12)), '10500');
 select t_as(2); select t_fail($$select admin_grant_points(t_uid(12), -999999, 'trop')$$, 'montant excessif refusé'); reset role;
 
+-- (les pilotes de ce scénario ont déjà eu un premier gain : leurs zigollars de bienvenue sont débloqués ; le verrouillage est testé au scénario 25)
+update point_balances set locked = 0;
 -- Boutique
 select t_anon();
 select t_eq('un visiteur voit la boutique', (select count(*) from shop_items where active)::text, '9');

@@ -1,12 +1,14 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { callRpc, cleanError, str } from "@/lib/action";
 import { checkImage } from "@/lib/upload";
 import { createServiceClient } from "@/lib/supabase/admin";
 import { parisLocalToISO } from "@/lib/format";
-import { getT } from "@/lib/i18n";
+import { getLang, getT } from "@/lib/i18n";
+import { translateDb } from "@/lib/i18n-en";
 import type { ActionState } from "@/lib/types";
 
 const fail = async (message: string): Promise<ActionState> => ({ ok: false, message: (await getT())(message), nonce: Date.now() });
@@ -61,16 +63,28 @@ export const setRewardClip = rpc("admin_set_reward_clip", (f) => ({ p_reward: id
 
 export const handleClaim = rpc("admin_handle_claim", (f) => ({ p_claim: id(f, "claim"), p_status: str(f, "status"), p_reply: opt(f, "reply") }), "Réclamation mise à jour.");
 export const handleSuggestion = rpc("admin_handle_suggestion", (f) => ({ p_id: id(f, "suggestion"), p_status: str(f, "status"), p_note: opt(f, "note") }), "Suggestion traitée.");
+/** Suppression définitive d'un compte pilote (super administrateur) : saisie de « SUPPRIMER » obligatoire ; la base refuse un organisateur, soi-même ou un duel en cours. */
+export async function deleteAccount(_: ActionState, f: FormData): Promise<ActionState> {
+  let driver: string;
+  try { driver = id(f, "driver"); } catch { return await fail("Sélection invalide."); }
+  if (str(f, "confirm").toUpperCase() !== "SUPPRIMER") return await fail("Tape SUPPRIMER pour confirmer la suppression.");
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("admin_delete_account", { p_driver: driver, p_force: f.get("force") === "on" });
+  if (error) return { ok: false, message: translateDb(cleanError(error.message), await getLang()), nonce: Date.now() };
+  revalidatePath("/", "layout");
+  redirect("/admin/drivers");
+}
+
 export const shopOrder = rpc("admin_shop_order", (f) => ({ p_order: id(f, "order"), p_status: str(f, "status"), p_note: opt(f, "note") }), "Commande traitée.");
 export const grantPoints = rpc("admin_grant_points", (f) => {
   const n = Math.trunc(Number(str(f, "delta")));
-  if (!Number.isFinite(n) || n === 0 || Math.abs(n) > 1_000_000) throw new Invalid("Montant invalide.");
+  if (!Number.isSafeInteger(n) || n === 0) throw new Invalid("Montant invalide.");   // aucun plafond pour l'organisation
   return { p_user: id(f, "driver"), p_delta: n, p_reason: str(f, "reason") };
 }, "Zigollars mis à jour.");
 
 const itemSchema = z.object({
   name: z.string().min(2, "Nom trop court.").max(80), description: z.string().max(300), category: z.string().min(2, "Catégorie requise.").max(40),
-  price: z.coerce.number().int("Prix invalide.").positive("Prix invalide.").max(1_000_000),
+  price: z.coerce.number().int("Prix invalide.").positive("Prix invalide.").max(Number.MAX_SAFE_INTEGER),
   stock: z.preprocess((v) => (v === "" ? undefined : v), z.coerce.number().int().min(0).max(100000).optional()),
   sort: z.preprocess((v) => (v === "" ? 0 : v), z.coerce.number().int().min(0).max(9999)),
 });
@@ -229,8 +243,8 @@ const settingSchemas: Record<string, z.ZodType> = {
   vehicle_loss_scope: z.enum(["defender", "both"]),
   require_clip_for_validation: z.boolean(),
   forfeit_gives_reward: z.boolean(),
-  warmup_participation_zigollars: z.number().int().min(0).max(100000),
-  duel_win_zigollars: z.number().int().min(0).max(1000000),
+  warmup_participation_zigollars: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
+  duel_win_zigollars: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   map_scale_m_per_px: z.number().min(1).max(40),
 };
 

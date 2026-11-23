@@ -16,7 +16,7 @@ const meta = z.object({
   difficulty: z.enum(["Easy", "Medium", "Hard", "Extreme"]), status: z.enum(["active", "inactive"]), description: z.string().max(1000),
 });
 
-const pts = z.array(z.tuple([z.number().min(0).max(20000), z.number().min(0).max(20000)])).max(60);
+const pts = z.array(z.tuple([z.number().min(0).max(20000), z.number().min(0).max(20000)])).max(100000);   // l'organisation n'est pas limitée en points de passage
 const manualKm = (f: FormData) => { const v = Number(str(f, "distance_km").replace(",", ".")); return Number.isFinite(v) && v > 0 && v < 1000 ? Math.round(v * 10) / 10 : null; };
 const readPoints = (f: FormData) => { try { const r = pts.safeParse(JSON.parse(str(f, "points") || "[]")); return r.success ? r.data : []; } catch { return []; } };
 

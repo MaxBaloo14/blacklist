@@ -47,7 +47,7 @@ export default function PlanEditorForm({ mPerPx, initial = {} }: { mPerPx?: numb
       </div>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="accent-[#d12b2b]" defaultChecked={initial.status !== "inactive"} onChange={(e) => { const h = e.currentTarget.form?.elements.namedItem("status") as HTMLInputElement | null; if (h) h.value = e.currentTarget.checked ? "active" : "inactive"; }} /> {t("Circuit actif (choisissable pour les duels)")}<input type="hidden" name="status" defaultValue={initial.status ?? "active"} /></label>
       {updating && !initial.points?.length && <p className="text-sm text-[#ffd48a]">{t("Ce circuit n'a pas été créé avec l'éditeur : retrace son parcours sur la carte. À l'enregistrement, son image et son tracé sont remplacés ; le circuit et ses duels sont conservés.")}</p>}
-      <RouteDrawer key={k} mPerPx={mPerPx} initial={initial.points?.length ? { points: initial.points, follow: initial.follow ?? true } : undefined} />
+      <RouteDrawer key={k} mPerPx={mPerPx} maxPoints={Number.POSITIVE_INFINITY} initial={initial.points?.length ? { points: initial.points, follow: initial.follow ?? true } : undefined} />
       <div className="flex flex-wrap items-center gap-3 border-t border-white/10 pt-4">
         <button type="button" onClick={draft} disabled={pending} className="btn btn-ghost btn-sm">{pending ? <span className="spin" aria-label="…" /> : t("ENREGISTRER LE BROUILLON")}</button>
         {msg && <span role="status" className={`toast ${msg.ok ? "toast-ok" : "toast-err"}`}>{msg.text}</span>}

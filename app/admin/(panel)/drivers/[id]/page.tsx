@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, Details } from "@/components/AdminUI";
 import Field from "@/components/Field";
-import { addReserve, markVehicleLost, recordAbsence, resetDriverPassword, setAccountStatus, updateDriverInfo, validateRegistration } from "@/app/actions/admin";
+import { addReserve, deleteAccount, markVehicleLost, recordAbsence, resetDriverPassword, setAccountStatus, updateDriverInfo, validateRegistration } from "@/app/actions/admin";
 import { requireAdmin } from "@/lib/auth";
 import { dateOnly, dateTime, fullName, photoUrl } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
@@ -17,7 +17,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
   const L = labels(t);
   const { id } = await params;
   if (!uuid.test(id)) notFound();
-  const { supabase } = await requireAdmin();
+  const { supabase, isSuperAdmin } = await requireAdmin();
   const { data: d } = await supabase.from("profiles").select("*").eq("id", id).maybeSingle();
   if (!d) notFound();
   const [{ data: vehicles }, { data: rank }, { data: chal }, { data: absences }, { data: sanctions }, { data: inact }] = await Promise.all([
@@ -28,6 +28,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
     supabase.from("sanctions").select("*").eq("driver_id", id).order("created_at", { ascending: false }),
     supabase.rpc("inactivity_days", { p_driver: id }),
   ]);
+  const { data: delInfo } = isSuperAdmin ? await supabase.rpc("driver_deletion_info", { p_driver: id }) : { data: null };
   const { data: regTpls } = await supabase.from("message_templates").select("id,title,body").eq("kind", "registration").order("title");
   const approved = vehicles?.find((v) => v.status === "approved");
   return (
@@ -54,6 +55,24 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
               <Field label={t("Motif (obligatoire)")}><input name="reason" required minLength={3} className="input" /></Field>
             </div>
           </ActionForm>
+          {isSuperAdmin && delInfo && (
+            <div className="mt-6 border-t border-white/10 pt-4">
+              <Details summary={t("Supprimer ce compte")} tone="text-red">
+                <p className="mb-3 text-sm text-[#a5a9b0]">{t("Suppression définitive du compte et de toutes ses données (véhicules, zigollars, commandes, notifications). Cette action est irréversible. Pour garder l'historique tout en bloquant le pilote, utilise plutôt le statut « Banni ».")}</p>
+                <p className="mb-3 font-cond text-sm tracking-wide text-[#cfcfcf]" data-deletion-info>{t("Historique")} : {delInfo.duels} {t("duel(s)")} · {delInfo.rewards} Cash Prize · {delInfo.sanctions} {t("sanction(s)")}{delInfo.ranked ? ` · ${t("classé dans la Blacklist")}` : ""}</p>
+                {delInfo.is_admin ? <p className="text-sm text-[#ffd48a]">{t("Ce compte est un organisateur : retire d'abord ses droits.")}</p>
+                  : delInfo.active > 0 ? <p className="text-sm text-[#ffd48a]">{t("Un duel est en cours pour ce pilote : annule-le d'abord.")}</p> : (
+                  <ActionForm action={deleteAccount} label="SUPPRIMER DÉFINITIVEMENT" variant="ghost" small reset={false} confirm={t("Supprimer définitivement le compte de {n} ? Cette action est irréversible.", { n: fullName(d) })}>
+                    <input type="hidden" name="driver" value={d.id} />
+                    {(delInfo.duels + delInfo.rewards + delInfo.sanctions) > 0 && (
+                      <label className="mb-3 flex items-start gap-2 text-sm"><input type="checkbox" name="force" className="mt-1 accent-[#d12b2b]" /> <span>{t("Supprimer aussi son historique (ses duels, Cash Prize et sanctions disparaissent des statistiques et du Hall of Fame)")}</span></label>
+                    )}
+                    <Field label={t("Tape SUPPRIMER pour confirmer")}><input name="confirm" required autoComplete="off" className="input" placeholder="SUPPRIMER" /></Field>
+                  </ActionForm>
+                )}
+              </Details>
+            </div>
+          )}
         </div>
         <ActionForm action={updateDriverInfo} label="METTRE À JOUR" reset={false} className="panel">
           <div className="kicker mb-3">{t("INFORMATIONS")}</div>

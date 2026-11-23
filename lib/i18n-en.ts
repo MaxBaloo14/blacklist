@@ -212,7 +212,7 @@ const EN_SITE: Record<string, string> = {
   "CHOISIS TA CARTE": "PICK YOUR MAP",
   "CONFIRMER CE CRÉNEAU": "CONFIRM THIS SLOT",
   "COTES": "ODDS",
-  "Chaque pilote reçoit 10 000 zigollars à l'inscription. Dépense-les dans la boutique ou mise-les sur les duels programmés.": "Every driver gets 10,000 zigollars on registration. Spend them in the shop or bet them on scheduled duels.",
+  "Chaque pilote reçoit 10 000 zigollars à l'inscription, verrouillés jusqu'à son premier gain. Ensuite, dépense-les dans la boutique ou mise-les sur les duels programmés.": "Every driver gets 10,000 zigollars on registration, locked until their first gain. Then spend them in the shop or bet them on scheduled duels.",
   "Choisis l'un des créneaux proposés par le challenger": "Pick one of the slots proposed by the challenger",
   "Confirmer ce créneau ? Il sera communiqué aux deux pilotes et à l'organisation.": "Confirm this slot? It will be shared with both drivers and the organisation.",
   "Connecte-toi avec un compte pilote pour parier.": "Log in with a driver account to bet.",
@@ -414,6 +414,12 @@ const EN_SITE: Record<string, string> = {
   "{n} zigollars offerts au vainqueur de chaque duel disputé, une fois le résultat validé (pas pour un forfait)": "{n} zigollars given to the winner of every duel raced, once the result is validated (not for a forfeit)",
   "Victoire en duel": "Duel victory",
   "Participation à la Warm-up Race": "Warm-up Race participation",
+  "Tes zigollars de bienvenue se débloquent à ton premier gain.": "Your welcome zigollars unlock with your first gain.",
+  "dont {n} zigollars de bienvenue verrouillés jusqu'à ton premier gain (victoire en duel, Warm-up Race…)": "of which {n} welcome zigollars are locked until your first gain (duel victory, Warm-up Race…)",
+  "{n} points au maximum : supprime-en ou termine le parcours.": "{n} points maximum: delete some or finish the route.",
+  "60 points de passage au maximum pour une suggestion.": "60 waypoints maximum for a suggestion.",
+  "Chaque pilote reçoit 10 000 zigollars à l'inscription : ils sont verrouillés et ne se dépensent qu'à partir de son premier gain (victoire en duel, participation à une Warm-up Race…)": "Every driver gets 10,000 zigollars on registration: they are locked and can only be spent from their first gain (duel victory, Warm-up Race participation…)",
+  "Tout pilote peut suggérer une course en traçant son parcours sur la carte (60 points de passage au maximum) ; les autres pilotes peuvent voter": "Any driver can suggest a race by drawing its route on the map (60 waypoints maximum); other drivers can vote",
 };
 
 export const EN: Record<string, string> = { ...EN_SITE, ...EN_ADMIN };
@@ -477,8 +483,12 @@ const DB: Record<string, string> = {
   "Suggestion introuvable.": "Suggestion not found.",
   "Cette suggestion n'est plus ouverte au vote.": "This suggestion is no longer open for voting.",
   "Tu ne peux pas voter pour ta propre suggestion.": "You cannot vote for your own suggestion.",
+  "Tes zigollars de bienvenue sont verrouillés : ils se débloquent à ton premier gain (victoire en duel, Warm-up Race…).": "Your welcome zigollars are locked: they unlock with your first gain (duel victory, Warm-up Race…).",
+  "Seul un super administrateur peut supprimer un compte.": "Only a super administrator can delete an account.",
+  "Tu ne peux pas supprimer ton propre compte.": "You cannot delete your own account.",
 };
 const DB_RE: [RegExp, string][] = [
+  [/^Ce pilote a un historique \((\d+) duel\(s\), (\d+) Cash Prize, (\d+) sanction\(s\)\)\. Bannis-le plutôt pour le conserver, ou supprime-le avec son historique\.$/, "This driver has a history ($1 duel(s), $2 Cash Prize(s), $3 sanction(s)). Ban them instead to keep it, or delete them with their history."],
   [/^Chaque créneau doit tomber dans la semaine en cours \(avant le (.+)\)\.$/, "Every slot must fall within the current week (before $1)."],
   [/^Le pilote en position (\d+) n'est pas valide\.$/, "The driver in position $1 is not valid."],
   [/^Tu ne peux défier que le pilote directement au-dessus de toi \(#(\d+)\)\.$/, "You can only challenge the driver directly above you (#$1)."],

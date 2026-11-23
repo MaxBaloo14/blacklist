@@ -11,7 +11,7 @@ export default async function ShopItemForm({ item }: { item?: Row }) {
       {item && <input type="hidden" name="id" value={item.id} />}
       <Field label={t("Nom")}><input name="name" required minLength={2} maxLength={80} defaultValue={item?.name} className="input" /></Field>
       <Field label={t("Catégorie")}><input name="category" required maxLength={40} defaultValue={item?.category ?? "Divers"} className="input" /></Field>
-      <Field label={t("Prix (zigollars)")}><input name="price" type="number" min={1} max={1000000} required defaultValue={item?.price} className="input" /></Field>
+      <Field label={t("Prix (zigollars)")}><input name="price" type="number" min={1} required defaultValue={item?.price} className="input" /></Field>
       <Field label={t("Stock")} hint={t("Laisser vide = illimité.")}><input name="stock" type="number" min={0} defaultValue={item?.stock ?? ""} className="input" /></Field>
       <Field label={t("Description")} className="sm:col-span-2"><input name="description" maxLength={300} defaultValue={item?.description ?? ""} className="input" /></Field>
       <Field label={t("Ordre d'affichage")}><input name="sort" type="number" min={0} defaultValue={item?.sort ?? 100} className="input" /></Field>

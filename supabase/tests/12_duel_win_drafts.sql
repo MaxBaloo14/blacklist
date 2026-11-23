@@ -15,10 +15,9 @@ select t_eq('un pilote ne voit aucun brouillon', (select count(*)::text from tra
 reset role;
 select t_as(2);
 select t_ok($$insert into track_drafts(created_by, name, points, map_w, map_h, distance_km) values (t_uid(2), 'Brouillon', '[[100,100],[200,250]]', 1280, 1920, 4.2)$$, 'un organisateur crée un brouillon');
-select t_fail($$insert into track_drafts(created_by, name, points, map_w, map_h) values (t_uid(2), 'Trop', (select jsonb_agg(jsonb_build_array(i, i)) from generate_series(1, 70) i), 1280, 1920)$$, 'plus de 60 points refusé');
-select t_eq('l''organisateur retrouve son brouillon', (select count(*)::text from track_drafts), '1');
+select t_ok($$insert into track_drafts(created_by, name, points, map_w, map_h) values (t_uid(2), 'Long', (select jsonb_agg(jsonb_build_array(i, i)) from generate_series(1, 400) i), 1280, 1920)$$, 'l''organisation n''est pas limitée à 60 points');
+select t_fail($$insert into track_drafts(created_by, name, points, map_w, map_h) values (t_uid(2), 'Énorme', (select jsonb_agg(jsonb_build_array(i, i)) from generate_series(1, 100001) i), 1280, 1920)$$, 'au-delà de 100 000 points refusé');
+select t_eq('l''organisateur retrouve ses brouillons', (select count(*)::text from track_drafts), '2');
 select t_ok($$update race_tracks set editor_points = '[[1,1],[2,2]]', editor_follow = true, editor_w = 1280, editor_h = 1920 where name = 'Course 1'$$, 'les points de passage se conservent sur un circuit');
 reset role;
 select t_as(12); select t_rows('un pilote ne modifie pas les points d''un circuit', $$update race_tracks set editor_points = '[]' where name = 'Course 1'$$, 0); reset role;
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (gains de duel et brouillons inclus)'

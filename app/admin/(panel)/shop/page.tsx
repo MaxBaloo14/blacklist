@@ -15,10 +15,11 @@ export default async function ShopAdmin() {
     supabase.from("shop_items").select("*").order("sort").order("name"),
     supabase.from("shop_orders").select("*").order("created_at", { ascending: false }).limit(80),
     supabase.from("profiles").select("id,first_name,last_name").order("first_name"),
-    supabase.from("point_balances").select("user_id,balance"),
+    supabase.from("point_balances").select("user_id,balance,locked"),
   ]);
   const people = new Map<string, Row>((drivers ?? []).map((d: Row) => [d.id, d]));
   const balance = new Map<string, number>((bals ?? []).map((b: Row) => [b.user_id, Number(b.balance)]));
+  const lockedOf = new Map<string, number>((bals ?? []).map((b: Row) => [b.user_id, Number(b.locked)]));
   const pending = (orders ?? []).filter((o: Row) => o.status === "pending");
   const done = (orders ?? []).filter((o: Row) => o.status !== "pending");
   return (
@@ -62,7 +63,7 @@ export default async function ShopAdmin() {
           <input name="delta" type="number" required placeholder={t("Montant (négatif pour retirer)")} className="input" />
           <input name="reason" required minLength={3} placeholder={t("Motif")} className="input" />
         </ActionForm>
-        <p className="mt-3 text-xs text-metal">{t("Soldes")} : {[...balance.entries()].slice(0, 12).map(([id, b]) => `${fullName(people.get(id))} ${points(b, locale)}`).join(" · ") || "—"}</p>
+        <p className="mt-3 text-xs text-metal">{t("Soldes")} : {[...balance.entries()].slice(0, 40).map(([id, b]) => `${fullName(people.get(id))} ${points(b, locale)}${lockedOf.get(id) ? ` (${t("dont {n} verrouillés", { n: points(lockedOf.get(id) ?? 0, locale).replace(" zigollars", "") })})` : ""}`).join(" · ") || "—"}</p>
       </div>
 
       {done.length > 0 && (

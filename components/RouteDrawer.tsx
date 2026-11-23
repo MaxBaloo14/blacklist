@@ -7,14 +7,14 @@ import { RoadNet, simplify } from "@/lib/roadnet";
 import PlanPreview from "@/components/PlanPreview";
 import { routeKm } from "@/lib/plan-geom";
 
-const MAX_POINTS = 60;
+const PLAYER_MAX_POINTS = 60;   // limite des joueurs ; l'organisation passe maxPoints={Infinity}
 type Wp = { p: Pt; seg: Pt[] };   // point de passage + tracé depuis le point précédent (suit la route, ou ligne droite en mode libre)
 
 /** Éditeur de tracé sur la carte en noir et blanc.
  *  Mode « Suivre les routes » (par défaut) : chaque clic s'accroche à la route la plus proche et le parcours épouse automatiquement les routes
  *  (plus court chemin) jusqu'au point précédent. Mode libre : ligne droite entre les points.
  *  Glisser un point le déplace, clic sur un point + « Supprimer » l'enlève. Premier point = départ, dernier = arrivée. */
-export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/map-roads.png", mPerPx = 6.5, initial }: { src?: string; roads?: string; mPerPx?: number; initial?: { points: Pt[]; follow: boolean } }) {
+export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/map-roads.png", mPerPx = 6.5, initial, maxPoints = PLAYER_MAX_POINTS }: { src?: string; roads?: string; mPerPx?: number; maxPoints?: number; initial?: { points: Pt[]; follow: boolean } }) {
   const t = useT();
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const [wps, setWps] = useState<Wp[]>([]);
@@ -85,7 +85,7 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
     if (swallow.current) { swallow.current = false; return; }
     const raw = toMap(e); if (!raw) return;
     setMsg(null); setSel(null);
-    if (wps.length >= MAX_POINTS) { setMsg(t("60 points au maximum : supprime-en ou termine le parcours.")); return; }
+    if (wps.length >= maxPoints) { setMsg(t("{n} points au maximum : supprime-en ou termine le parcours.", { n: maxPoints })); return; }
     let p = raw;
     if (follow) {
       if (!net) { setMsg(t("Chargement du réseau routier…")); return; }

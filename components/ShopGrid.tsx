@@ -25,7 +25,7 @@ function iconFor(it: Item): LucideIcon {
 
 export default function ShopGrid({ items, loggedPilot }: { items: Item[]; loggedPilot: boolean }) {
   const t = useT();
-  const { balance, refresh } = useWallet();
+  const { available: balance, locked, refresh } = useWallet();
   const cats = useMemo(() => [...new Set(items.map((i) => i.category))], [items]);
   const [cat, setCat] = useState<string>("*");
 
@@ -66,7 +66,7 @@ export default function ShopGrid({ items, loggedPilot }: { items: Item[]; logged
                           <ActionForm action={buyItem} label="ACHETER" small variant={poor ? "ghost" : "red"} disabled={poor} onDone={refresh} className="w-full [&_.btn]:w-full [&>div]:mt-2"
                             confirm={t("Acheter « {n} » pour {p} zigollars ?", { n: t(it.name), p: fmt(price) })}>
                             <input type="hidden" name="item" value={it.id} />
-                            {poor && <p className="shop-missing">{t("Il te manque {n} zigollars", { n: fmt(missing) })}</p>}
+                            {poor && <p className="shop-missing">{locked > 0 ? t("Tes zigollars de bienvenue se débloquent à ton premier gain.") : t("Il te manque {n} zigollars", { n: fmt(missing) })}</p>}
                           </ActionForm>
                         )
                       ) : <Link href="/login" className="btn btn-ghost btn-sm w-full">{t("CONNEXION")}</Link>}

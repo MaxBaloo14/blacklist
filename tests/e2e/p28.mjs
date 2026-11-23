@@ -2,6 +2,8 @@
 import { execSync } from "node:child_process";
 import { launch, newPage, BASE, SHOT, check, adminPage, text, act, pilotLogin } from "./lib.mjs";
 const b = await launch();
+// Zane a déjà eu un premier gain (ses zigollars de bienvenue sont débloqués) : le verrouillage lui-même est testé dans p32
+execSync(`su postgres -c "psql -d bl_e2e -qc \\"update point_balances set locked = 0 where user_id = (select id from profiles where first_name = 'Zane')\\""`);
 
 // Retrait du duel d'exemple
 const v = await newPage(b);

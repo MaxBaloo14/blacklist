@@ -14,7 +14,7 @@ const fmt = (n: number) => new Intl.NumberFormat("fr-FR").format(n).replace(/[�
 export default function BetCard({ challengeId, challenger, defender, chOdds, dfOdds, balance: initialBalance, mine, locked }: Props) {
   const t = useT();
   const wallet = useWallet();
-  const balance = wallet.balance ?? initialBalance;
+  const balance = wallet.available ?? initialBalance;
   const [state, action, pending] = useActionState(placeBet, {});
   const [side, setSide] = useState<"challenger" | "defender">("defender");
   const [stake, setStake] = useState(1000);
@@ -58,7 +58,7 @@ export default function BetCard({ challengeId, challenger, defender, chOdds, dfO
             <button disabled={pending || cannot || !round} className="btn btn-red btn-sm">{pending ? <span className="spin" aria-label="…" /> : t("PARIER")}</button>
           </div>
           {!round && <p className="mt-2 text-xs text-[#ff6b6b]">{t("Mise : montant rond (multiple de 500), de 500 à 50 000 zigollars.")}</p>}
-          {cannot && <p className="mt-2 text-xs text-[#ff6b6b]">{t("Solde insuffisant.")}</p>}
+          {cannot && <p className="mt-2 text-xs text-[#ff6b6b]">{wallet.locked > 0 ? t("Tes zigollars de bienvenue se débloquent à ton premier gain.") : t("Solde insuffisant.")}</p>}
         </form>
       )}
       {state.message && <p role="status" className={`mt-2 text-xs ${state.ok ? "text-ok" : "text-[#ff6b6b]"}`}>{state.message}</p>}

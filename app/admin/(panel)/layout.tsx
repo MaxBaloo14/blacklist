@@ -9,7 +9,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const [{ isSuperAdmin }, t] = await Promise.all([requireAdmin(), getT()]);
   const NAV: [string, string][] = [
     ["/admin", t("TABLEAU DE BORD")], ["/admin/drivers", t("PILOTES")], ["/admin/ranking", t("CLASSEMENT")], ["/admin/vehicles", t("VÉHICULES")], ["/admin/challenges", t("DÉFIS")],
-    ["/admin/tracks", t("CIRCUITS")], ["/admin/shop", t("BOUTIQUE")], ["/admin/warmup", "WARM-UP"], ["/admin/rewards", "CASH PRIZE"], ["/admin/reserve", t("RÉSERVE")],
+    ["/admin/tracks", t("CIRCUITS")], ["/admin/editor", t("ÉDITEUR DE CIRCUIT")], ["/admin/shop", t("BOUTIQUE")], ["/admin/claims", t("RÉCLAMATIONS")], ["/admin/suggestions", t("SUGGESTIONS")], ["/admin/warmup", "WARM-UP"], ["/admin/rewards", "CASH PRIZE"], ["/admin/reserve", t("RÉSERVE")],
     ["/admin/inactivity", t("INACTIVITÉ")], ["/admin/stats", t("CHIFFRES")], ["/admin/templates", t("MODÈLES")], ["/admin/exports", "EXPORTS"], ["/admin/news", t("ACTUALITÉS")], ["/admin/rules", t("RÈGLES")], ["/admin/logs", t("JOURNAL D'AUDIT")],
   ];
   return (

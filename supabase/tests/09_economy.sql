@@ -130,5 +130,3 @@ select t_as(16); select set_race_track('88888888-0000-0000-0000-000000000002', (
 select t_eq('3e carte tirée une fois les 2 choix faits', (select (track_id is not null)::text from challenge_races where id='88888888-0000-0000-0000-000000000003'), 'true');
 select t_eq('3e carte = une carte active tirée au hasard', (select (track_id in (select id from race_tracks where status='active'))::text from challenge_races where id='88888888-0000-0000-0000-000000000003'), 'true');
 select t_eq('chaque pilote prévenu du tirage', (select count(*) from notifications where kind='track_chosen' and title='The random track has been drawn')::text, '2');
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (économie incluse)'

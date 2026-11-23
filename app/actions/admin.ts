@@ -59,6 +59,8 @@ export const enterBlacklist = rpc("admin_enter_blacklist", (f) => ({ p_driver: i
 export const confirmPayment = rpc("admin_confirm_payment", (f) => ({ p_reward: id(f, "reward"), p_proof: url(f, "proof"), p_note: opt(f, "note") }), "Paiement confirmé.");
 export const setRewardClip = rpc("admin_set_reward_clip", (f) => ({ p_reward: id(f, "reward"), p_clip: url(f, "clip") }), "Clip enregistré.");
 
+export const handleClaim = rpc("admin_handle_claim", (f) => ({ p_claim: id(f, "claim"), p_status: str(f, "status"), p_reply: opt(f, "reply") }), "Réclamation mise à jour.");
+export const handleSuggestion = rpc("admin_handle_suggestion", (f) => ({ p_id: id(f, "suggestion"), p_status: str(f, "status"), p_note: opt(f, "note") }), "Suggestion traitée.");
 export const shopOrder = rpc("admin_shop_order", (f) => ({ p_order: id(f, "order"), p_status: str(f, "status"), p_note: opt(f, "note") }), "Commande traitée.");
 export const grantPoints = rpc("admin_grant_points", (f) => {
   const n = Math.trunc(Number(str(f, "delta")));

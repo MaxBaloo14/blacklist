@@ -5,7 +5,7 @@ import PageHead from "@/components/PageHead";
 import PilotBadges from "@/components/PilotBadges";
 import { driverBadges } from "@/lib/badges";
 import { bestRank, daysSince, driverStats } from "@/lib/driver-stats";
-import { dateOnly, photoUrl } from "@/lib/format";
+import { dateOnly } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 import type { Row } from "@/lib/types";
 
@@ -13,7 +13,6 @@ import type { Row } from "@/lib/types";
 export default async function DriverSheet({ d, duels, moves }: { d: Row; duels: Row[]; moves: Row[] }) {
   const { t, locale } = await getI18n();
   const st = driverStats(d.id, duels);
-  const photo = photoUrl(d.photo_path);
   const total = d.wins + d.losses;
   const pct = total ? Math.round((d.wins / total) * 100) : 0;
   const best = bestRank(d.position, moves);
@@ -36,8 +35,6 @@ export default async function DriverSheet({ d, duels, moves }: { d: Row; duels: 
         <div className="wrap"><PilotBadges badges={badges} label={t("Badges")} className="mb-8" /></div>
         <div className="wrap grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           <div className="border border-white/10 bg-ink2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            {photo ? <img src={photo} alt={d.make_model ?? ""} className="aspect-video w-full object-cover" /> : <div className="grid aspect-video place-items-center bg-ink3 font-cond tracking-[.3em] text-metal">{d.make_model ? t("PAS DE PHOTO") : t("AUCUN VÉHICULE ENGAGÉ")}</div>}
             <div className="flex flex-wrap items-center justify-between gap-3 p-5">
               <div><div className="label">{t("Véhicule engagé")}</div><div className="font-cond text-2xl font-bold uppercase tracking-wide">{d.make_model ?? "—"}</div></div>
               {d.vehicle_class && <span className="badge badge-metal">{t(d.vehicle_class)}</span>}

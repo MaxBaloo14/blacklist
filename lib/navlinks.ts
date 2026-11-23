@@ -14,7 +14,7 @@ export function buildNavLinks(t: (s: string) => string, o: { loggedIn: boolean; 
     { href: "/rules", label: t("RÈGLEMENT") },
     { href: DISCORD_URL, label: "DISCORD", external: true },
     ...(o.loggedIn
-      ? [{ href: "/profile", label: t("MON PROFIL") }, { href: "/challenges", label: t("MES DÉFIS") }]
+      ? [{ href: "/profile", label: t("MON PROFIL") }, { href: "/challenges", label: t("MES DÉFIS") }, { href: "/reclamation", label: t("RÉCLAMATION") }, { href: "/suggestion", label: t("SUGGESTION") }]
       : o.isAdmin ? [{ href: "/admin", label: "CONTROL CENTER" }] : [{ href: "/login", label: t("CONNEXION"), login: true }]),
   ];
 }

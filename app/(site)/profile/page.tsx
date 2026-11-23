@@ -14,7 +14,7 @@ import { requireDriver } from "@/lib/auth";
 import { badgeCatalog } from "@/lib/badges";
 import { bestRank } from "@/lib/driver-stats";
 import { getPublicSettings, getTracks, getWarmups } from "@/lib/data";
-import { dateOnly, dateTime, money, photoUrl } from "@/lib/format";
+import { dateOnly, dateTime, money } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 import { localizeReason } from "@/lib/notif-i18n";
 import type { Row } from "@/lib/types";
@@ -172,8 +172,6 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 <div className="kicker">{t("VÉHICULE ENGAGÉ")}</div>
                 {current ? (
                   <div className="overflow-hidden border border-white/10 bg-ink2">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    {current.photo_path ? <img src={photoUrl(current.photo_path)!} alt="" className="aspect-video w-full object-cover" /> : <div className="grid aspect-video w-full place-items-center bg-ink3 font-cond text-xs tracking-[.3em] text-metal">{t("PAS DE PHOTO")}</div>}
                     <div className="flex flex-wrap items-center justify-between gap-3 p-5"><div className="font-cond text-2xl font-bold uppercase tracking-wide">{current.make_model}<div className="text-sm font-normal text-metal">{t(current.vehicle_class)}</div></div><span className="badge badge-ok">{VSTATUS.approved[0]}</span></div>
                   </div>
                 ) : <p className="panel text-[#a5a9b0]">{t("Aucun véhicule homologué.")} {vehicles?.some((v) => v.status === "lost") && <b className="text-[#ff6b6b]">{t("Ton ancien véhicule a été confisqué : enregistre-en un nouveau et fais-le homologuer.")}</b>}</p>}
@@ -197,7 +195,6 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 <fieldset disabled={!!pending} className="grid gap-4">
                   <Field label={t("Marque et modèle")}><input name="make_model" required maxLength={80} className="input" /></Field>
                   <Field label={t("Catégorie")}><select name="vehicle_class" required defaultValue="" className="input"><option value="" disabled>{t("Choisir…")}</option>{classes.map((c) => <option key={c} value={c}>{t(c)}</option>)}</select></Field>
-                  <Field label={t("Photographie (facultatif)")} hint={t("JPEG, PNG ou WebP — 5 Mo max.")}><input name="photo" type="file" accept="image/jpeg,image/png,image/webp" className="input file:mr-3 file:border-0 file:bg-red file:px-3 file:py-1 file:font-cond file:text-xs file:font-bold file:uppercase file:text-white" /></Field>
                 </fieldset>
               </ActionForm>
             </div>

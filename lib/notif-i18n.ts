@@ -4,6 +4,10 @@ import { EN } from "@/lib/i18n-en";
 // Les notifications sont enregistrées en anglais par la base (texte fixe, valable pour tous).
 // En français, on traduit à l'affichage les messages connus ; les motifs écrits par l'organisation restent tels quels.
 const TITLES: [RegExp, string][] = [
+  [/^New claim$/, "Nouvelle réclamation"],
+  [/^Your claim has been updated$/, "Ta réclamation a été mise à jour"],
+  [/^New course suggestion$/, "Nouvelle suggestion de course"],
+  [/^Your course suggestion has been reviewed$/, "Ta suggestion de course a été étudiée"],
   [/^Zigollars added to your balance$/, "Des zigollars ont été ajoutés à ton solde"],
   [/^Zigollars removed from your balance$/, "Des zigollars ont été retirés de ton solde"],
   [/^New shop order$/, "Nouvelle commande boutique"],
@@ -59,7 +63,7 @@ const KINDS: Record<string, string> = {
   challenge_new: "DÉFI", challenge_deadline: "DÉLAI", challenge_sent: "DÉFI", challenge_scheduled: "DUEL PROGRAMMÉ", challenge_cancelled: "DUEL ANNULÉ",
   registration: "INSCRIPTION", account: "COMPTE", vehicle_approved: "VÉHICULE", vehicle_rejected: "VÉHICULE", vehicle_disqualified: "VÉHICULE", vehicle_lost: "VÉHICULE CONFISQUÉ",
   reward: "CASH PRIZE", reward_paid: "CASH PRIZE", duel_won: "VICTOIRE", duel_lost: "DÉFAITE", duel_validated: "COURSE VALIDÉE", ranking_changed: "CLASSEMENT",
-  points: "POINTS", shop: "BOUTIQUE", shop_order: "BOUTIQUE", bet: "PARI", track_chosen: "CARTE", sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", iban_missing: "IBAN MANQUANT", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
+  claim: "RÉCLAMATION", claim_new: "RÉCLAMATION", suggestion: "SUGGESTION", suggestion_new: "SUGGESTION", points: "POINTS", shop: "BOUTIQUE", shop_order: "BOUTIQUE", bet: "PARI", track_chosen: "CARTE", sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", iban_missing: "IBAN MANQUANT", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
 };
 
 const apply = (s: string, rules: [RegExp, string][]) => {

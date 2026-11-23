@@ -3,6 +3,16 @@ import type { Lang } from "@/lib/i18n-core";
 // Les notifications sont enregistrées en anglais par la base (texte fixe, valable pour tous).
 // En français, on traduit à l'affichage les messages connus ; les motifs écrits par l'organisation restent tels quels.
 const TITLES: [RegExp, string][] = [
+  [/^Points added to your balance$/, "Des points ont été ajoutés à ton solde"],
+  [/^Points removed from your balance$/, "Des points ont été retirés de ton solde"],
+  [/^New shop order$/, "Nouvelle commande boutique"],
+  [/^Your order has been cancelled and refunded$/, "Ta commande a été annulée et remboursée"],
+  [/^Your order has been delivered$/, "Ta commande a été remise"],
+  [/^You won your bet$/, "Tu as gagné ton pari"],
+  [/^You lost your bet$/, "Tu as perdu ton pari"],
+  [/^Your bet has been refunded$/, "Ton pari a été remboursé"],
+  [/^The random track has been drawn$/, "La carte aléatoire a été tirée"],
+  [/^A track has been chosen for your duel$/, "Une carte a été choisie pour ton duel"],
   [/^Add your IBAN to receive your Cash Prize$/, "Ajoute ton IBAN pour recevoir ton Cash Prize"],
   [/^Your duel starts in 24 hours$/, "Ton duel commence dans 24 h"],
   [/^Your duel starts in 1 hour$/, "Ton duel commence dans 1 h"],
@@ -41,13 +51,14 @@ const BODIES: [RegExp, string][] = [
   [/^(.+) \(#(\d+)\) challenges you\.$/, "$1 (#$2) te défie."],
   [/^Your challenge against (.+) is live\.$/, "Ton défi contre $1 est lancé."],
   [/^\$(\d+)$/, "$1 $"],
+  [/^([+-]\d+) pts$/, "$1 pts"],
   [/^(.+) \(set by the organisation\)$/, "$1 (fixé par l'organisation)"],
 ];
 const KINDS: Record<string, string> = {
   challenge_new: "DÉFI", challenge_deadline: "DÉLAI", challenge_sent: "DÉFI", challenge_scheduled: "DUEL PROGRAMMÉ", challenge_cancelled: "DUEL ANNULÉ",
   registration: "INSCRIPTION", account: "COMPTE", vehicle_approved: "VÉHICULE", vehicle_rejected: "VÉHICULE", vehicle_disqualified: "VÉHICULE", vehicle_lost: "VÉHICULE CONFISQUÉ",
   reward: "CASH PRIZE", reward_paid: "CASH PRIZE", duel_won: "VICTOIRE", duel_lost: "DÉFAITE", duel_validated: "COURSE VALIDÉE", ranking_changed: "CLASSEMENT",
-  sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", iban_missing: "IBAN MANQUANT", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
+  points: "POINTS", shop: "BOUTIQUE", shop_order: "BOUTIQUE", bet: "PARI", track_chosen: "CARTE", sanction: "SANCTION", duel_reminder: "RAPPEL DE DUEL", iban_missing: "IBAN MANQUANT", absence: "ABSENCE", warmup_won: "WARM-UP RACE", inactivity: "INACTIVITÉ",
 };
 
 const apply = (s: string, rules: [RegExp, string][]) => {

@@ -230,10 +230,10 @@ async function rest(req, res, url, body) {
     const out = await withRole(role, who.claims, async (c) => {
       if (rel.startsWith("rpc/")) {
         const fn = rel.slice(4);
-        const meta = await c.query("select prorettype::regtype::text as t, proretset from pg_proc where pronamespace='public'::regnamespace and proname=$1 limit 1", [fn]);
+        const meta = await c.query("select prorettype::regtype::text as t, proretset, proargnames, (select array_agg(format_type(x, null) order by o) from unnest(proargtypes::oid[]) with ordinality as u(x, o)) as argtypes from pg_proc where pronamespace='public'::regnamespace and proname=$1 limit 1", [fn]);
         if (!meta.rows[0]) throw httpErr(404, "PGRST202", `Could not find the function public.${fn}`);
         const src = req.method === "GET" ? Object.fromEntries(url.searchParams) : (body ?? {});
-        const keys = Object.keys(src); const params = keys.map((k) => (src[k] !== null && typeof src[k] === "object" ? JSON.stringify(src[k]) : src[k]));
+        const keys = Object.keys(src); const params = keys.map((k) => (src[k] !== null && typeof src[k] === "object" && !(Array.isArray(src[k]) && String(meta.rows[0].argtypes?.[(meta.rows[0].proargnames ?? []).indexOf(k)] ?? "").endsWith("[]")) ? JSON.stringify(src[k]) : src[k]));
         const r = await c.query(`select * from public.${q(fn)}(${keys.map((k, i) => `${q(k)} => $${i + 1}`).join(", ")})`, params);
         if (meta.rows[0].t === "void") return { status: 204 };
         if (meta.rows[0].proretset) return { status: 200, body: r.rows };

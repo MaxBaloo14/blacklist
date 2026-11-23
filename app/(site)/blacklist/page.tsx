@@ -11,9 +11,6 @@ import { getT } from "@/lib/i18n";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "The Blacklist" };
 
-// Duel d'exemple fixe, affiché en permanence pour montrer à quoi ressemble une confrontation (ce n'est pas un vrai duel).
-const EXAMPLE_DUEL = { id: "example", status: "completed", is_podium: false, challenger_position: 5, defender_position: 4, challenger_first: "Coby", challenger_last: "", defender_first: "Oby", defender_last: "", challenger_id: "c", defender_id: "d", winner_id: "c", challenger_wins: 1, champion_wins: 0, scheduled_at: null, clip_url: null };
-
 export default async function BlacklistPage() {
   const [t, list, rewards, duels] = await Promise.all([getT(), getBlacklistLive(), getRewards(), getLatestDuels(6)]);
   const predictions = await getPredictions(duels);
@@ -39,9 +36,9 @@ export default async function BlacklistPage() {
           <div className="kicker mb-2.5">{t("DERNIÈRES CONFRONTATIONS")}</div>
           <h2 className="h2 mb-8">{t("Sur")} <em>{t("l'asphalte")}</em></h2>
           <div className="grid gap-4 md:grid-cols-3">
-            <DuelCard d={EXAMPLE_DUEL} example rewards={rewards} />
             {duels.map((d) => <DuelCard key={d.id} d={d} rewards={rewards} prediction={predictions.get(d.id)} />)}
           </div>
+          {!duels.length && <p className="panel text-[#a5a9b0]">{t("Aucun duel pour le moment : les confrontations apparaîtront ici dès le premier défi.")}</p>}
           <Link href="/clips" className="font-cond mt-6 inline-block text-xs font-semibold tracking-[.2em] text-[#cfcfcf] underline decoration-red decoration-2 underline-offset-[6px] hover:text-white">{t("VOIR TOUS LES CLIPS")} →</Link>
         </div>
       </section>

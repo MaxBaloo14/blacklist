@@ -10,6 +10,7 @@ export function buildNavLinks(t: (s: string) => string, o: { loggedIn: boolean; 
     ...(o.loggedIn ? [] : [{ href: "/register", label: t("INSCRIPTION") }]),
     { href: "/calendar", label: t("CALENDRIER") },
     { href: "/race-network", label: t("CIRCUITS") },
+    { href: "/boutique", label: t("BOUTIQUE") },
     { href: "/rules", label: t("RÈGLEMENT") },
     { href: DISCORD_URL, label: "DISCORD", external: true },
     ...(o.loggedIn

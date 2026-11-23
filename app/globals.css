@@ -374,3 +374,25 @@ a.underline { text-decoration-line: underline; }
 .route-dialog-close { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #ffffff44; }
 .route-dialog-close:hover { background: #c62828; }
 .route-dialog-body { max-height: calc(94vh - 58px); overflow: auto; overscroll-behavior: contain; }
+
+/* ===== Boutique, paris, cartes ===== */
+.wallet { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; background: var(--grain), linear-gradient(160deg, #1b1d22, #0d0e11); border-left: 4px solid #c62828; }
+.wallet-icon { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; color: #ffcf40; background: #ffcf4018; box-shadow: inset 0 0 0 1px #ffcf4055; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
+.shop-card { display: flex; flex-direction: column; padding: 1.25rem; background: var(--grain), linear-gradient(160deg, #181a1f, #0d0e11); border-top: 3px solid #781818; transition: transform .2s, border-color .2s; }
+.shop-card:hover { transform: translateY(-3px); border-top-color: #c62828; }
+.bet { padding: .9rem; background: #0b0c0f; box-shadow: inset 0 0 0 1px #ffffff14; }
+.bet-side { padding: .7rem .8rem; text-align: left; color: #f4f4f4; background: #14161a; box-shadow: inset 0 0 0 1px #ffffff1f; transition: .2s; cursor: pointer; }
+button.bet-side:hover { box-shadow: inset 0 0 0 1px #c62828; }
+.bet-side-on { background: #c6282826; box-shadow: inset 0 0 0 2px #c62828; }
+.bet-chip { padding: .35rem .8rem; font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: .1em; color: #cfcfcf; background: #14161a; box-shadow: inset 0 0 0 1px #ffffff22; cursor: pointer; }
+.bet-chip-on { color: #fff; background: #c62828; box-shadow: none; }
+.slot-choice { display: flex; align-items: center; gap: .75rem; padding: .7rem .9rem; background: #0b0c0f; box-shadow: inset 0 0 0 1px #ffffff1f; cursor: pointer; transition: .2s; }
+.slot-choice:has(input:checked) { box-shadow: inset 0 0 0 2px #c62828; background: #c628281a; }
+.track-pick { display: block; overflow: hidden; cursor: pointer; background: #0b0c0f; box-shadow: inset 0 0 0 1px #ffffff1f; transition: .2s; }
+.track-pick:hover { box-shadow: inset 0 0 0 1px #c62828; }
+.track-pick:has(input:checked) { box-shadow: inset 0 0 0 3px #c62828; background: #c628281a; }
+.track-pick:has(input:focus-visible) { outline: 2px solid #fff; outline-offset: 2px; }
+.track-pick-img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #14161a; }
+.bet-input { width: 9.5rem; padding: .35rem .6rem; font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #fff; background: #14161a; box-shadow: inset 0 0 0 1px #ffffff22; }
+.bet-input:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.bet-input.bet-chip-on { background: #c62828; }

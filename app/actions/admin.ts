@@ -59,6 +59,42 @@ export const enterBlacklist = rpc("admin_enter_blacklist", (f) => ({ p_driver: i
 export const confirmPayment = rpc("admin_confirm_payment", (f) => ({ p_reward: id(f, "reward"), p_proof: url(f, "proof"), p_note: opt(f, "note") }), "Paiement confirmé.");
 export const setRewardClip = rpc("admin_set_reward_clip", (f) => ({ p_reward: id(f, "reward"), p_clip: url(f, "clip") }), "Clip enregistré.");
 
+export const shopOrder = rpc("admin_shop_order", (f) => ({ p_order: id(f, "order"), p_status: str(f, "status"), p_note: opt(f, "note") }), "Commande traitée.");
+export const grantPoints = rpc("admin_grant_points", (f) => {
+  const n = Math.trunc(Number(str(f, "delta")));
+  if (!Number.isFinite(n) || n === 0 || Math.abs(n) > 1_000_000) throw new Invalid("Montant invalide.");
+  return { p_user: id(f, "driver"), p_delta: n, p_reason: str(f, "reason") };
+}, "Points mis à jour.");
+
+const itemSchema = z.object({
+  name: z.string().min(2, "Nom trop court.").max(80), description: z.string().max(300), category: z.string().min(2, "Catégorie requise.").max(40),
+  price: z.coerce.number().int("Prix invalide.").positive("Prix invalide.").max(1_000_000),
+  stock: z.preprocess((v) => (v === "" ? undefined : v), z.coerce.number().int().min(0).max(100000).optional()),
+  sort: z.preprocess((v) => (v === "" ? 0 : v), z.coerce.number().int().min(0).max(9999)),
+});
+export async function saveShopItem(_: ActionState, f: FormData): Promise<ActionState> {
+  try {
+    const p = itemSchema.safeParse({ name: str(f, "name"), description: str(f, "description"), category: str(f, "category"), price: str(f, "price"), stock: str(f, "stock"), sort: str(f, "sort") });
+    if (!p.success) return await fail(p.error.issues[0]?.message ?? "Données invalides.");
+    const supabase = await createClient();
+    const existing = str(f, "id");
+    const row = { ...p.data, description: p.data.description || null, stock: p.data.stock ?? null, active: f.get("active") === "on" };
+    const { error } = existing ? await supabase.from("shop_items").update(row).eq("id", id(f, "id")) : await supabase.from("shop_items").insert(row);
+    if (error) return await fail(cleanError(error.message));
+    revalidatePath("/", "layout");
+    return await ok(existing ? "Article modifié." : "Article ajouté.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+}
+export async function deleteShopItem(_: ActionState, f: FormData): Promise<ActionState> {
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase.from("shop_items").delete().eq("id", id(f, "id"));
+    if (error) return await fail(cleanError(error.message));
+    revalidatePath("/", "layout");
+    return await ok("Article supprimé.");
+  } catch (e) { return await fail(e instanceof Invalid ? e.message : "Requête invalide."); }
+}
+
 export async function setRanking(_: ActionState, f: FormData): Promise<ActionState> {
   try {
     const arr = Array.from({ length: 10 }, (_, i) => str(f, `pos${i + 1}`) || null);

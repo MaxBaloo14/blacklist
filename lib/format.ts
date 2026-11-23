@@ -36,3 +36,20 @@ export function parisLocalToISO(local: string): string {
   const offset = asParis - guess.getTime();
   return new Date(guess.getTime() - offset).toISOString();
 }
+
+export const points = (n: number | string | null | undefined, locale = "fr-FR") =>
+  new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Number(n ?? 0)).replace(/[  ]/g, " ") + " pts";
+
+/** Jours proposables pour un créneau de duel : d'aujourd'hui (heure de Paris) jusqu'au dimanche de la semaine en cours. */
+export function weekSlotDays(locale = "fr-FR"): { value: string; label: string }[] {
+  const parts = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const g = (t: string) => Number(parts.find((p) => p.type === t)!.value);
+  const base = Date.UTC(g("year"), g("month") - 1, g("day"));
+  const left = (7 - new Date(base).getUTCDay()) % 7;   // jours restants jusqu'au dimanche
+  const fmt = new Intl.DateTimeFormat(locale, { timeZone: "UTC", weekday: "long", day: "numeric", month: "short" });
+  return Array.from({ length: left + 1 }, (_, i) => {
+    const d = new Date(base + i * 864e5);
+    return { value: d.toISOString().slice(0, 10), label: fmt.format(d) };
+  });
+}
+export const SLOT_TIMES = ["21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];

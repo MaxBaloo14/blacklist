@@ -18,7 +18,7 @@ async function scan(p, path, label) {
 }
 const mk = async () => { const ctx = await b.newContext({ viewport: { width: 1400, height: 900 }, locale: "en-GB" }); await ctx.addCookies([{ name: "lang", value: "en", url: BASE }]); const p = await ctx.newPage(); return p; };
 const pub = await mk();
-for (const p of ["/", "/blacklist", "/calendar", "/hall-of-fame", "/race-network", "/rules", "/login", "/register", "/warmup", "/news", "/guide", "/crew"]) await scan(pub, p, "public");
+for (const p of ["/", "/blacklist", "/calendar", "/hall-of-fame", "/race-network", "/boutique", "/boutique?tab=paris", "/rules", "/login", "/register", "/warmup", "/news", "/guide", "/crew"]) await scan(pub, p, "public");
 const href = await pub.goto(BASE + "/blacklist").then(() => pub.locator('a[href^="/blacklist/"]').first().getAttribute("href")); await scan(pub, href, "fiche");
 const plCtx = await b.newContext({ viewport: { width: 1400, height: 900 } }); const pl = await plCtx.newPage(); await pilotLogin(pl, "0600000015"); await pl.context().addCookies([{ name: "lang", value: "en", url: BASE }]);
 for (const p of ["/profile", "/profile?tab=challenges", "/profile?tab=history", "/profile?tab=rewards", "/profile?tab=garage", "/profile?tab=badges", "/challenges", "/notifications"]) await scan(pl, p, "pilote");

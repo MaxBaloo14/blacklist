@@ -151,8 +151,9 @@ select t_as(16); select create_challenge(t_uid(15)); reset role;
 select t_as(18); select create_challenge(t_uid(17)); reset role;
 select t_eq('défi du podium = 3 manches', (select count(*) from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)))::text, '3');
 select t_eq('manche 3 = Last Race', (select kind from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)) and race_no=3), 'last_race');
-select t_eq('manche 1 choisie par le champion', (select chosen_by from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)) and race_no=1), 'champion');
-select t_eq('manche 2 choisie par le challenger', (select chosen_by from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)) and race_no=2), 'challenger');
+select t_eq('manche 1 choisie par le challenger', (select chosen_by from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)) and race_no=1), 'challenger');
+select t_eq('manche 2 choisie par le défié', (select chosen_by from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)) and race_no=2), 'champion');
+select t_eq('manche 3 tirée au sort', (select chosen_by from challenge_races where challenge_id=(select id from challenges where challenger_id=t_uid(14)) and race_no=3), 'random');
 -- #1 ne peut pas défier
 select t_as(11); select t_fail($$select create_challenge(t_uid(12))$$, '#1 n''a personne à défier (et #2 est au-dessus ? non : en dessous)'); reset role;
 -- compte suspendu / véhicule non homologué => défi impossible

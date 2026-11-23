@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Crown, Flame, Swords, Trophy } from "lucide-react";
+import { Banknote, Crown, Flame, Percent, Swords, Trophy } from "lucide-react";
 import PageHead from "@/components/PageHead";
 import { getHallData } from "@/lib/hall";
-import { dateOnly } from "@/lib/format";
+import { dateOnly, money } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 
 export const metadata: Metadata = { title: "Hall of Fame" };
@@ -42,7 +42,30 @@ export default async function HallOfFame() {
             {rec(<Swords size={22} />, t("Plus de duels disputés"), h.mostDuels ? String(h.mostDuels.n) : "—", h.mostDuels?.who)}
             {rec(<Crown size={22} />, t("Règne le plus long"), h.longestReign ? `${h.longestReign.days} ${t("j")}` : "—", h.longestReign?.who)}
           </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {rec(<Swords size={22} />, t("Plus de courses disputées"), h.mostRaces ? String(h.mostRaces.n) : "—", h.mostRaces?.who)}
+            {rec(<Percent size={22} />, t("Meilleur taux de victoire"), h.bestRate ? `${h.bestRate.n} %` : "—", h.bestRate?.who, t("3 duels minimum"))}
+            {rec(<Banknote size={22} />, t("Plus gros gains en Cash Prize"), h.topEarner ? money(h.topEarner.n, locale) : "—", h.topEarner?.who)}
+          </div>
           {h.topPrize ? <p className="font-cond mt-4 text-sm tracking-[.14em] text-metal">{t("Cash Prize du #1 à remporter")} : <b className="text-red">{h.topPrize}</b></p> : null}
+
+          <div className="kicker mb-3 mt-14">{t("STATISTIQUES DES PILOTES")}</div>
+          {h.players.length ? (
+            <div className="overflow-x-auto">
+              <table className="tbl">
+                <thead><tr><th>{t("Pilote")}</th><th title={t("Victoires")}>V</th><th title={t("Défaites")}>D</th><th>{t("Duels")}</th><th>{t("Courses")}</th><th>{t("Courses gagnées")}</th><th>{t("% victoires")}</th><th>{t("Série en cours")}</th><th>{t("Meilleure série")}</th><th>{t("Cash Prize")}</th></tr></thead>
+                <tbody>
+                  {h.players.map((p) => (
+                    <tr key={p.id}>
+                      <td><Link href={`/blacklist/${p.id}`} className="font-cond font-bold uppercase tracking-wide hover:text-red">{p.position ? <span className="text-red">#{p.position} </span> : null}{p.name}</Link></td>
+                      <td className="font-bold text-ok">{p.wins}</td><td className="font-bold text-[#ff6b6b]">{p.losses}</td><td>{p.duels}</td><td>{p.races}</td><td>{p.raceWins}</td>
+                      <td>{p.rate === null ? "—" : `${p.rate} %`}</td><td>{p.streak || "—"}</td><td>{p.bestStreak || "—"}</td><td>{p.cash ? money(p.cash) : "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : <p className="panel text-[#a5a9b0]">{t("Les statistiques apparaîtront dès les premiers duels.")}</p>}
 
           <div className="kicker mb-3 mt-14">{t("LES ROIS DE LA BLACKLIST")}</div>
           {h.kings.length ? (

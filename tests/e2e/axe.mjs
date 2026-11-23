@@ -12,7 +12,7 @@ async function scan(page, path, label) {
 }
 let total = 0;
 const pub = await newPage(b, { width: 1400, height: 900 });
-for (const p of ["/", "/blacklist", "/calendar", "/hall-of-fame", "/race-network", "/rules", "/login", "/register", "/warmup", "/news", "/guide"]) total += await scan(pub, p, "public");
+for (const p of ["/", "/blacklist", "/calendar", "/hall-of-fame", "/race-network", "/boutique", "/boutique?tab=paris", "/rules", "/login", "/register", "/warmup", "/news", "/guide"]) total += await scan(pub, p, "public");
 const lio = await newPage(b, { width: 1400, height: 900 }); await pilotLogin(lio, "0600000015");
 for (const p of ["/profile", "/profile?tab=badges", "/challenges", "/notifications"]) total += await scan(lio, p, "pilote");
 const ad = await adminPage(b); await ad.setViewportSize({ width: 1400, height: 900 });

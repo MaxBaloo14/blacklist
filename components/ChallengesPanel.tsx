@@ -2,7 +2,7 @@ import Link from "next/link";
 import ActionForm from "@/components/ActionForm";
 import Countdown from "@/components/Countdown";
 import { createChallenge, scheduleChallenge, setRaceTrack } from "@/app/actions/driver";
-import { dateTime, fullName } from "@/lib/format";
+import { dateTime, fullName, SLOT_TIMES, trackImageUrl, weekSlotDays } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
 import type { Row } from "@/lib/types";
 
@@ -13,7 +13,7 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
     completed: [t("Terminé"), "badge-metal"], cancelled: [t("Annulé"), "badge-metal"], forfeited: [t("Forfait"), "badge-red"],
   };
   const { data: active } = await supabase.from("challenges")
-    .select("*, challenge_races(*, race_results(winner_id))").in("status", ["awaiting_schedule", "scheduled", "awaiting_validation"]).order("created_at", { ascending: false });
+    .select("*, challenge_slots(starts_at), challenge_races(*, race_results(winner_id))").in("status", ["awaiting_schedule", "scheduled", "awaiting_validation"]).order("created_at", { ascending: false });
   const ids = [...new Set<string>((active ?? []).flatMap((c: Row) => [c.challenger_id, c.defender_id]))];
   const [{ data: people }, target] = await Promise.all([
     ids.length ? supabase.from("public_driver").select("id,first_name,last_name,position").in("id", ids) : Promise.resolve({ data: [] }),
@@ -23,7 +23,8 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
   const hasActive = (active ?? []).length > 0;
   const activeTracks = tracks.filter((x) => x.status === "active");
   const kindLabel = (k: string) => (k === "last_race" ? "Last Race" : k === "sprint" ? t("Sprint urbain") : t("Standard"));
-  const chosenLabel = (c: string) => (c === "champion" ? t("Champion") : c === "challenger" ? t("Challenger") : t("Organisation"));
+  const chosenLabel = (c: string) => (c === "champion" ? t("Défié") : c === "challenger" ? t("Challenger") : c === "random" ? t("Tirage au sort") : t("Organisation"));
+  const days = weekSlotDays(locale);
 
   return (
     <div className="grid gap-8">
@@ -42,6 +43,15 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
                 {ready && <p className="mb-2 text-[#ff6b6b]">{ready}</p>}
                 <ActionForm action={createChallenge} label={t("DÉFIER LE #{n}", { n: target.position })} confirm={t("Défier {name} (#{n}) ? Il aura 48 h pour fixer le duel. Un seul défi par semaine : le règlement ne permet pas de l'annuler librement.", { name: `${target.first_name} ${target.last_name}`, n: target.position })}>
                   <input type="hidden" name="target" value={target.driver_id} />
+                  <fieldset className="mb-2 mt-3 grid gap-2">
+                    <legend className="label">{t("Propose 3 créneaux (21 h – 00 h, heure de Paris) : le défié en choisit un")}</legend>
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="grid grid-cols-[1fr_auto] gap-2">
+                        <select name={`slot_day_${i}`} required defaultValue="" aria-label={`${t("Jour")} ${i}`} className="input !py-2"><option value="" disabled>{t("Jour")} {i}…</option>{days.map((d) => <option key={d.value} value={d.value}>{d.label}</option>)}</select>
+                        <select name={`slot_time_${i}`} required defaultValue="" aria-label={`${t("Heure")} ${i}`} className="input !py-2"><option value="" disabled>{t("Heure")}</option>{SLOT_TIMES.map((x) => <option key={x} value={x}>{x.replace(":", " h ")}</option>)}</select>
+                      </div>
+                    ))}
+                  </fieldset>
                 </ActionForm>
               </div>
             </div>
@@ -58,6 +68,7 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
             const ch = who(c.challenger_id), df = who(c.defender_id);
             const [label, cls] = STATUS[c.status];
             const races = [...(c.challenge_races ?? [])].sort((a: Row, b: Row) => a.race_no - b.race_no);
+            const slots: string[] = [...(c.challenge_slots ?? [])].map((x: Row) => x.starts_at).sort().filter((x: string) => c.status === "awaiting_schedule" ? new Date(x) > new Date() : true);
             return (
               <article key={c.id} className="panel">
                 <div className="flex flex-wrap items-start justify-between gap-4">
@@ -75,12 +86,28 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
                   <div className="mt-5 border-t border-white/10 pt-5">
                     <Countdown to={c.respond_by} label="pour fixer la date" />
                     {iAmDefender ? (
-                      <ActionForm action={scheduleChallenge} label="FIXER LA DATE DU DUEL" confirm="Confirmer cette date ? Elle sera communiquée aux deux pilotes et à l'organisation." className="mt-4 max-w-md">
-                        <input type="hidden" name="challenge" value={c.id} />
-                        <label className="label" htmlFor={`w-${c.id}`}>{t("Date et heure du duel (semaine en cours, heure de Paris)")}</label>
-                        <input id={`w-${c.id}`} name="when" type="datetime-local" required className="input" />
-                      </ActionForm>
-                    ) : <p className="mt-3 text-sm text-[#a5a9b0]">{t("En attente : le pilote défié doit fixer une date dans les 48 h. Passé ce délai, l'organisation est alertée.")}</p>}
+                      slots.length ? (
+                        <ActionForm action={scheduleChallenge} label="CONFIRMER CE CRÉNEAU" confirm="Confirmer ce créneau ? Il sera communiqué aux deux pilotes et à l'organisation." className="mt-4 max-w-md">
+                          <input type="hidden" name="challenge" value={c.id} />
+                          <fieldset className="grid gap-2"><legend className="label">{t("Choisis l'un des créneaux proposés par le challenger")}</legend>
+                            {slots.map((sl: string) => (
+                              <label key={sl} className="slot-choice"><input type="radio" name="slot" value={sl} required className="accent-[#d12b2b]" /><span className="font-display text-xl">{dateTime(sl, locale)}</span></label>
+                            ))}
+                          </fieldset>
+                        </ActionForm>
+                      ) : (
+                        <ActionForm action={scheduleChallenge} label="FIXER LA DATE DU DUEL" confirm="Confirmer cette date ? Elle sera communiquée aux deux pilotes et à l'organisation." className="mt-4 max-w-md">
+                          <input type="hidden" name="challenge" value={c.id} />
+                          <label className="label" htmlFor={`w-${c.id}`}>{t("Date et heure du duel (semaine en cours, heure de Paris)")}</label>
+                          <input id={`w-${c.id}`} name="when" type="datetime-local" required className="input" />
+                        </ActionForm>
+                      )
+                    ) : (
+                      <div className="mt-3 text-sm text-[#a5a9b0]">
+                        <p>{t("En attente : le pilote défié doit fixer une date dans les 48 h. Passé ce délai, l'organisation est alertée.")}</p>
+                        {slots.length > 0 && <p className="mt-2">{t("Tes créneaux proposés")} : {slots.map((sl: string) => dateTime(sl, locale)).join(" · ")}</p>}
+                      </div>
+                    )}
                   </div>
                 )}
                 {c.status !== "awaiting_schedule" && c.scheduled_at && (
@@ -102,12 +129,7 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
                             <td>{kindLabel(r.kind)}</td>
                             <td>{chosenLabel(r.chosen_by)}</td>
                             <td>
-                              {track ? track.name : mine && ["awaiting_schedule", "scheduled"].includes(c.status) ? (
-                                <ActionForm action={setRaceTrack} label="OK" small variant="dark" className="flex items-start gap-2 [&>div]:mt-0">
-                                  <input type="hidden" name="race" value={r.id} />
-                                  <select name="track" required defaultValue="" className="input !py-1.5"><option value="" disabled>{t("Choisir…")}</option>{activeTracks.map((x) => <option key={x.id} value={x.id}>{x.name}</option>)}</select>
-                                </ActionForm>
-                              ) : <span className="text-metal">{r.chosen_by === "organisation" ? t("Organisation") : t("À choisir")}</span>}
+                              {track ? track.name : <span className="text-metal">{r.chosen_by === "random" ? t("Tirée au sort après les 2 choix") : mine ? t("À toi de choisir") : t("À choisir")}</span>}
                             </td>
                             <td>{w ? fullName(who(w)) : "—"}</td>
                           </tr>
@@ -115,6 +137,26 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
                       })}
                     </tbody>
                   </table>
+                  {races.filter((r: Row) => !r.track_id && ((r.chosen_by === "champion" && iAmDefender) || (r.chosen_by === "challenger" && !iAmDefender))).map((r: Row) => (
+                    <div key={r.id} className="mt-5 border-t border-white/10 pt-5">
+                      <div className="kicker mb-2">{t("CHOISIS TA CARTE")} — {t("Course")} #{r.race_no}</div>
+                      {c.status === "scheduled" ? (
+                        <ActionForm action={setRaceTrack} label="VALIDER MA CARTE" confirm="Valider cette carte ? Le choix est définitif." className="">
+                          <input type="hidden" name="race" value={r.id} />
+                          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+                            {activeTracks.map((x) => (
+                              <label key={x.id} className="track-pick">
+                                <input type="radio" name="track" value={x.id} required className="sr-only" />
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                {x.image_path ? <img src={trackImageUrl(x.image_path)!} alt="" loading="lazy" className="track-pick-img" /> : <span className="track-pick-img grid place-items-center text-xs text-metal">—</span>}
+                                <span className="font-cond block truncate px-2 py-1.5 text-sm font-bold uppercase tracking-wide">{x.name}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </ActionForm>
+                      ) : <p className="text-sm text-[#a5a9b0]">{t("Tu pourras choisir ta carte dès que la date du duel sera validée.")}</p>}
+                    </div>
+                  ))}
                   {c.is_podium && <div className="font-cond mt-3 text-lg tracking-wide">{t("Score")} — {t("Champion")} <b className="text-white">{c.champion_wins}</b> : <b className="text-white">{c.challenger_wins}</b> {t("Challenger")}</div>}
                 </div>
               </article>

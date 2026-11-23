@@ -14,5 +14,3 @@ select t_rows('un visiteur ne modifie pas un tracé', $$update race_tracks set r
 select t_as(22);
 select t_rows('un pilote ne modifie pas un tracé', $$update race_tracks set route_path = 'M0 0 C1 1 2 2 3 3' where name = 'Course 1'$$, 0);
 reset role;
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (plans de course inclus)'

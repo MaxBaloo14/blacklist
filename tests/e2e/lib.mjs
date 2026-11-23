@@ -25,6 +25,10 @@ export const results = [];
 export function check(name, ok, info = "") { results.push({ name, ok: !!ok, info }); console.log(`${ok ? "PASS" : "FAIL"}  ${name}${info ? "  — " + info : ""}`); }
 /** Clique un bouton d'action et confirme la boîte de dialogue éventuelle. */
 export async function act(page, label, { form } = {}) {
+  const t0 = Date.now();
+  try { return await act_(page, label, { form }); } finally { if (process.env.ACT_TRACE) console.log(`act ${label} ${Date.now() - t0} ms`); }
+}
+async function act_(page, label, { form } = {}) {
   const scope = form ? page.locator(form) : page;
   await scope.locator(`button:visible:has-text("${label}")`).first().click();
   await page.waitForTimeout(500);
@@ -66,3 +70,14 @@ export function parisSoon(ms = 3600_000) {
   if (wd(t) === "Mon" && wd(new Date()) !== "Mon") t = new Date(Date.now() + 120_000);
   return fmt(t);
 }
+
+/** Remplit les 3 créneaux du formulaire de défi : dernier jour de la semaine (dimanche), 22 h 30 / 23 h 00 / 23 h 30 (heure de Paris). */
+export async function fillSlots(page) {
+  for (const [i, time] of [[1, "22:30"], [2, "23:00"], [3, "23:30"]]) {
+    const days = await page.locator(`[name=slot_day_${i}] option:not([disabled])`).evaluateAll((o) => o.map((x) => x.value).filter(Boolean));
+    await page.selectOption(`[name=slot_day_${i}]`, days[days.length - 1]);
+    await page.selectOption(`[name=slot_time_${i}]`, time);
+  }
+}
+/** Le défié choisit le premier créneau proposé. */
+export async function pickSlot(page) { await page.locator("input[name=slot]").first().check(); }

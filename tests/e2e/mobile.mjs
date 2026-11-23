@@ -20,7 +20,7 @@ async function scan(p, path, name) {
   console.log(`${over || r.bad.length ? "✗" : "✓"} ${path.padEnd(28)} scrollW=${r.scrollW}/${r.vw}  petitsCibles=${r.small}${r.bad.length ? "  DÉBORDE: " + r.bad.join(" | ") : ""}`);
 }
 const pub = await mk(); await setLang(pub, lang);
-const pubPages = [["/", "home"], ["/blacklist", "blacklist"], ["/calendar", "calendar"], ["/hall-of-fame", "hall"], ["/race-network", "circuits"], ["/rules", "rules"], ["/login", "login"], ["/register", "register"], ["/warmup", "warmup"], ["/news", "news"], ["/guide", "guide"], ["/crew", "crew"]];
+const pubPages = [["/", "home"], ["/blacklist", "blacklist"], ["/calendar", "calendar"], ["/hall-of-fame", "hall"], ["/race-network", "circuits"], ["/boutique", "shop"], ["/boutique?tab=paris", "bets"], ["/rules", "rules"], ["/login", "login"], ["/register", "register"], ["/warmup", "warmup"], ["/news", "news"], ["/guide", "guide"], ["/crew", "crew"]];
 for (const [path, name] of pubPages) await scan(pub, path, name);
 const href = await pub.goto(BASE + "/blacklist").then(() => pub.locator('a[href^="/blacklist/"]').first().getAttribute("href")); await scan(pub, href, "fiche");
 const pl = await mk(); await setLang(pl, lang); await pilotLogin(pl, "0600000015");

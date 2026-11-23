@@ -27,4 +27,3 @@ select t_eq('le pilote et ses duels ont disparu', (select count(*)::text from pr
 select t_eq('ses récompenses aussi', (select count(*)::text from rewards where driver_id = t_uid(17)), '0');
 select t_eq('l''adversaire est conservé', (select count(*)::text from profiles where id = t_uid(18)), '1');
 \echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (suppression de compte incluse)'

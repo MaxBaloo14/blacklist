@@ -1,6 +1,9 @@
 import CopyButton from "@/components/CopyButton";
 import Link from "next/link";
-import { AdminHead } from "@/components/AdminUI";
+import ActionForm from "@/components/ActionForm";
+import Field from "@/components/Field";
+import { createObserver } from "@/app/actions/admin";
+import { AdminHead, Details } from "@/components/AdminUI";
 import { requireAdmin } from "@/lib/auth";
 import { dateOnly } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
@@ -12,7 +15,7 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
   const { t, locale } = await getI18n();
   const L = labels(t);
   const sp = await searchParams;
-  const { supabase } = await requireAdmin();
+  const { supabase, isSuperAdmin } = await requireAdmin();
   let q = supabase.from("profiles").select("*").order("created_at", { ascending: false });
   if (sp.filter === "pending") q = q.eq("registration_status", "pending");
   if (sp.q) { const s = sp.q.replace(/[%,()]/g, ""); q = q.or(`first_name.ilike.%${s}%,last_name.ilike.%${s}%,discord_tag.ilike.%${s}%,phone.ilike.%${s}%`); }
@@ -24,6 +27,18 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
   return (
     <>
       <AdminHead kicker={t("GESTION")} title={t("Pilotes")}>{t("Tous les pilotes inscrits : validation des inscriptions, modification, suspension ou bannissement.")}</AdminHead>
+      {isSuperAdmin && (
+        <div className="mb-5 max-w-2xl">
+          <Details summary={t("Créer un compte observateur")}>
+            <p className="mb-3 text-sm text-[#a5a9b0]">{t("Compte discret pour une personne précise : il consulte le site (classement, courses, pilotes, duels, calendrier) et peut parier, mais n'a aucun accès au Control Center, n'apparaît nulle part côté joueurs et ne peut participer à rien. Seul le staff le voit ici.")}</p>
+            <ActionForm action={createObserver} label={t("CRÉER LE COMPTE")} small>
+              <Field label={t("Nom interne (staff uniquement)")}><input name="alias" required minLength={2} maxLength={60} className="input" autoComplete="off" /></Field>
+              <Field label={t("Identifiant de connexion (numéro)")}><input name="phone" required inputMode="tel" className="input" autoComplete="off" /></Field>
+              <Field label={t("Mot de passe (8 caractères min.)")}><input name="password" type="text" required minLength={8} className="input" autoComplete="off" /></Field>
+            </ActionForm>
+          </Details>
+        </div>
+      )}
       <form className="mb-5 flex flex-wrap gap-3">
         <input name="q" defaultValue={sp.q} placeholder={t("Rechercher nom, prénom, téléphone…")} className="input max-w-sm" />
         <select name="filter" aria-label={t("Filtrer les pilotes")} defaultValue={sp.filter ?? ""} className="input max-w-[200px]"><option value="">{t("Tous")}</option><option value="pending">{t("Inscriptions à valider")}</option></select>
@@ -38,7 +53,7 @@ export default async function Drivers({ searchParams }: { searchParams: Promise<
               const r = ranks?.find((x) => x.driver_id === d.id);
               return (
                 <tr key={d.id}>
-                  <td className="whitespace-nowrap"><Link href={`/admin/drivers/${d.id}`} className="font-cond text-lg font-bold uppercase tracking-wide hover:text-red">{d.first_name} {d.last_name}</Link></td>
+                  <td className="whitespace-nowrap"><Link href={`/admin/drivers/${d.id}`} className="font-cond text-lg font-bold uppercase tracking-wide hover:text-red">{d.first_name} {d.last_name}</Link>{d.is_observer && <span className="badge badge-warn ml-2">{t("INVISIBLE")}</span>}</td>
                   <td>{d.phone}</td>
                   <td>{d.bank_iban ? <span className="inline-flex flex-wrap items-center gap-2"><code className="font-mono text-[13px] tracking-wider">{d.bank_iban}</code><CopyButton value={d.bank_iban} /></span> : <span className="badge badge-red">{t("MANQUANT")}</span>}</td>
                   <td>{r ? `#${r.position}` : "—"}</td>

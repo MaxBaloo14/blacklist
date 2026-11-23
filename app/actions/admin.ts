@@ -75,6 +75,26 @@ export async function deleteAccount(_: ActionState, f: FormData): Promise<Action
   redirect("/admin/drivers");
 }
 
+/** Crée un compte « observateur » (super administrateur) : identifiant téléphone + mot de passe, invisible des joueurs, sans accès au Control Center. */
+export async function createObserver(_: ActionState, f: FormData): Promise<ActionState> {
+  const supabase = await createClient();
+  const { data: isSuper } = await supabase.rpc("is_super_admin");
+  if (!isSuper) return await fail("Accès réservé au super administrateur.");
+  const alias = str(f, "alias").slice(0, 60), phone = str(f, "phone"), password = str(f, "password");
+  if (alias.length < 2) return await fail("Donne un nom interne (visible du staff uniquement).");
+  if (phone.replace(/\D/g, "").length < 4) return await fail("Identifiant invalide (4 chiffres minimum).");
+  if (password.length < 8) return await fail("Mot de passe : 8 caractères minimum.");
+  const admin = createServiceClient();
+  const { data: taken } = await admin.from("profiles").select("id").eq("phone_key", phone.replace(/\D/g, "")).maybeSingle();
+  if (taken) return await fail("Ce numéro de téléphone est déjà utilisé.");
+  const { data: created, error: uErr } = await admin.auth.admin.createUser({ email: `${crypto.randomUUID()}@pilote.blacklist-bbc.app`, password, email_confirm: true });
+  if (uErr || !created.user) return await fail("Création du compte impossible.");
+  const { error: pErr } = await admin.from("profiles").insert({ id: created.user.id, first_name: "Observateur", last_name: alias, phone, discord_tag: "observateur", registration_status: "validated", is_observer: true });
+  if (pErr) { await admin.auth.admin.deleteUser(created.user.id); return { ok: false, message: translateDb(cleanError(pErr.message), await getLang()), nonce: Date.now() }; }
+  revalidatePath("/admin/drivers");
+  return await ok("Compte observateur créé. Il se connecte avec son identifiant et son mot de passe sur la page de connexion des pilotes.");
+}
+
 export const shopOrder = rpc("admin_shop_order", (f) => ({ p_order: id(f, "order"), p_status: str(f, "status"), p_note: opt(f, "note") }), "Commande traitée.");
 export const grantPoints = rpc("admin_grant_points", (f) => {
   const n = Math.trunc(Number(str(f, "delta")));

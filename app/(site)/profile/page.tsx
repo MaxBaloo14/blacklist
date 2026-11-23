@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import ChallengesPanel from "@/components/ChallengesPanel";
 import JourneyPanel from "@/components/JourneyPanel";
@@ -32,6 +33,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
   const tab = TABS.some(([k]) => k === sp.tab) ? sp.tab! : "overview";
   const { supabase, user, profile } = await requireDriver();
   const uid = user.id;
+  if (profile.is_observer) redirect("/boutique");   // compte observateur : pas d'espace pilote
 
   const [{ data: rank }, { data: stats }, { data: vehicles }, { data: rewards }, { data: duels }, { data: moves }, tracks, settings, { data: inact }, { data: activeCh }, warmups] = await Promise.all([
     supabase.from("blacklist_rankings").select("position").eq("driver_id", uid).maybeSingle(),

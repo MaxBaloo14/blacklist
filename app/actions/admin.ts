@@ -230,6 +230,7 @@ const settingSchemas: Record<string, z.ZodType> = {
   require_clip_for_validation: z.boolean(),
   forfeit_gives_reward: z.boolean(),
   warmup_participation_zigollars: z.number().int().min(0).max(100000),
+  duel_win_zigollars: z.number().int().min(0).max(1000000),
   map_scale_m_per_px: z.number().min(1).max(40),
 };
 

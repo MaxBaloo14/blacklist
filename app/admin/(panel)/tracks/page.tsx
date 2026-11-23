@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, Details } from "@/components/AdminUI";
 import TrackForm from "@/components/TrackForm";
@@ -27,7 +28,7 @@ export default async function TracksAdmin() {
               <div className="flex flex-wrap items-center gap-2"><h2 className="font-display text-2xl uppercase">{tk.name}</h2><span className={`badge ${tk.status === "active" ? "badge-ok" : "badge-metal"}`}>{L.track(tk.status)}</span>{tk.route_path && <span className="badge badge-red">{t("Tracé animé")}</span>}<span className="badge badge-metal">{L.difficulty(tk.difficulty)}</span>{tk.video_path && <span className="badge badge-ok">{t("Vidéo")}</span>}</div>
               <div className="text-sm text-[#a5a9b0]">{t(tk.race_type)} · {tk.start_point} → {tk.end_point} · {kmLabel(tk.distance_km)}</div>
               <div className="mt-3 grid gap-2 lg:grid-cols-2">
-                <Details summary={t("Modifier")}><TrackForm track={tk} /></Details>
+                <Details summary={t("Modifier")}><TrackForm track={tk} />{tk.route_path && <Link href={`/admin/editor?track=${tk.id}`} className="btn btn-ghost btn-sm mt-3">{t("RETRACER / MODIFIER")}</Link>}</Details>
                 <Details summary={t("Supprimer")} tone="text-red"><ActionForm action={deleteTrack} label="SUPPRIMER" variant="ghost" small confirm={t("Supprimer définitivement « {n} » ?", { n: tk.name })}><input type="hidden" name="id" value={tk.id} /><p className="text-sm text-[#a5a9b0]">{t("Impossible si le circuit est déjà utilisé : désactive-le dans ce cas.")}</p></ActionForm></Details>
               </div>
             </div>

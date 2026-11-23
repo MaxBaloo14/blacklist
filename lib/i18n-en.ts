@@ -411,6 +411,9 @@ const EN_SITE: Record<string, string> = {
   "VOTER POUR CETTE COURSE": "VOTE FOR THIS RACE",
   "Ton vote est enregistré.": "Your vote is recorded.",
   "Échelle enregistrée : {n} m par pixel.": "Scale saved: {n} m per pixel.",
+  "{n} zigollars offerts au vainqueur de chaque duel disputé, une fois le résultat validé (pas pour un forfait)": "{n} zigollars given to the winner of every duel raced, once the result is validated (not for a forfeit)",
+  "Victoire en duel": "Duel victory",
+  "Participation à la Warm-up Race": "Warm-up Race participation",
 };
 
 export const EN: Record<string, string> = { ...EN_SITE, ...EN_ADMIN };

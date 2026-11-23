@@ -14,7 +14,7 @@ type Wp = { p: Pt; seg: Pt[] };   // point de passage + tracé depuis le point p
  *  Mode « Suivre les routes » (par défaut) : chaque clic s'accroche à la route la plus proche et le parcours épouse automatiquement les routes
  *  (plus court chemin) jusqu'au point précédent. Mode libre : ligne droite entre les points.
  *  Glisser un point le déplace, clic sur un point + « Supprimer » l'enlève. Premier point = départ, dernier = arrivée. */
-export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/map-roads.png", mPerPx = 6.5 }: { src?: string; roads?: string; mPerPx?: number }) {
+export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/map-roads.png", mPerPx = 6.5, initial }: { src?: string; roads?: string; mPerPx?: number; initial?: { points: Pt[]; follow: boolean } }) {
   const t = useT();
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const [wps, setWps] = useState<Wp[]>([]);
@@ -33,8 +33,26 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
   // l'image peut déjà être chargée avant l'hydratation (cache) : l'événement onLoad serait alors manqué
   useEffect(() => { const i = img.current; if (i?.complete) { if (i.naturalWidth) setSize({ w: i.naturalWidth, h: i.naturalHeight }); else setBroken(true); } }, []);
   useEffect(() => { let on = true; RoadNet.load(roads).then((n) => on && setNet(n)).catch(() => on && setFollow(false)); return () => { on = false; }; }, [roads]);
+  // reprise d'un brouillon ou d'un circuit : les points de passage sont reposés et les tronçons recalculés
+  const restored = useRef(false);
+  useEffect(() => {
+    if (restored.current || !initial?.points.length || !size) return;
+    if (initial.follow && !net) return;   // on attend le réseau routier
+    restored.current = true; setFollow(initial.follow);
+    const list: Wp[] = [];
+    for (const p of initial.points) {
+      if (!list.length) { list.push({ p, seg: [] }); continue; }
+      const prev = list[list.length - 1].p;
+      let seg: Pt[] = [prev, p];
+      if (initial.follow && net) { const f2 = net.w / size.w; const r = net.route([Math.round(prev[0] * f2), Math.round(prev[1] * f2)], [Math.round(p[0] * f2), Math.round(p[1] * f2)]); if (r) seg = r.map((q) => [Math.round(q[0] / f2), Math.round(q[1] / f2)] as Pt); }
+      list.push({ p, seg });
+    }
+    setWps(list);
+    // la carte se centre sur le parcours repris
+    requestAnimationFrame(() => { const b = box.current; if (!b) return; const xs = initial.points.map((q) => q[0]), ys = initial.points.map((q) => q[1]); const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2; b.scrollLeft = (cx / size.w) * b.scrollWidth - b.clientWidth / 2; b.scrollTop = (cy / size.h) * b.scrollHeight - b.clientHeight / 2; });
+  }, [initial, net, size]);
   // à l'ouverture, la carte est centrée sur la ville (là où se font la plupart des courses)
-  useEffect(() => { const b = box.current; if (size && b) { b.scrollLeft = b.scrollWidth * 0.55 - b.clientWidth / 2; b.scrollTop = b.scrollHeight * 0.74 - b.clientHeight / 2; } }, [size]);
+  useEffect(() => { const b = box.current; if (size && b && !initial?.points.length) { b.scrollLeft = b.scrollWidth * 0.55 - b.clientWidth / 2; b.scrollTop = b.scrollHeight * 0.74 - b.clientHeight / 2; } }, [size]);
 
   // ligne brisée complète (pendant un déplacement, les deux tronçons voisins sont provisoirement droits)
   const dragI = drag.current?.moved ? drag.current.i : -1;
@@ -153,7 +171,7 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
           {km > 0 && <p className="mt-3 text-center text-sm text-[#a5a9b0]">{t("Distance estimée")} : <b className="text-white">≈ {km.toFixed(1).replace(".", ",")} km</b></p>}
         </div>
       )}
-      <input type="hidden" name="path" value={path} /><input type="hidden" name="w" value={size?.w ?? ""} /><input type="hidden" name="h" value={size?.h ?? ""} />
+      <input type="hidden" name="points" value={JSON.stringify(wps.map((w) => w.p))} /><input type="hidden" name="follow" value={follow ? "1" : "0"} /><input type="hidden" name="path" value={path} /><input type="hidden" name="w" value={size?.w ?? ""} /><input type="hidden" name="h" value={size?.h ?? ""} />
       <p className="mt-2 text-xs text-metal">{t("Clique sur une route pour poser un point : le parcours suit les routes tout seul jusqu'au point précédent (le premier point est le DÉPART, le dernier est l'ARRIVÉE). Pour passer par une route précise, pose un point dessus. Glisse un point pour le déplacer, clique dessus puis « Supprimer le point » pour l'enlever.")}</p>
     </div>
   );

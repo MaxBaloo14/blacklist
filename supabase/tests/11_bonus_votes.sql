@@ -38,5 +38,3 @@ select t_as(15); select t_eq('un pilote ne lit que ses votes', (select count(*):
 select t_as(2); select admin_handle_suggestion('77777777-7777-7777-7777-777777777777', 'declined', 'Non retenue pour le test'); reset role;
 select t_as(15); select t_fail($$select vote_suggestion('77777777-7777-7777-7777-777777777777')$$, 'plus de vote sur une suggestion traitée'); reset role;
 select t_eq('une suggestion traitée sort du tableau', (select count(*)::text from suggestion_board where id = '77777777-7777-7777-7777-777777777777'), '0');
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (bonus Warm-up, parieurs et votes inclus)'

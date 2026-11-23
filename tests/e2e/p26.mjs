@@ -8,7 +8,7 @@ async function run(label, logged) {
   await p.goto(BASE + "/"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(4200);
   check(`${label} : plus de bouton menu en haut`, (await p.locator('button[aria-label="Menu"]:visible').count()) === 0);
   const names = await p.locator(".bottombar-item:not(.bottombar-logout *)").evaluateAll((a) => a.map((x) => x.innerText.trim().toUpperCase()));
-  const want = logged ? ["ACCUEIL", "LA BLACKLIST", "CALENDRIER", "CIRCUITS", "RÈGLEMENT", "DISCORD", "MON PROFIL", "MES DÉFIS", "NOTIFICATIONS"] : ["ACCUEIL", "LA BLACKLIST", "INSCRIPTION", "CALENDRIER", "CIRCUITS", "RÈGLEMENT", "DISCORD", "CONNEXION"];
+  const want = logged ? ["ACCUEIL", "LA BLACKLIST", "CALENDRIER", "CIRCUITS", "RÈGLEMENT", "DISCORD", "MON PROFIL", "RÉCLAMATION", "NOTIFICATIONS"] : ["ACCUEIL", "LA BLACKLIST", "INSCRIPTION", "CALENDRIER", "CIRCUITS", "RÈGLEMENT", "DISCORD", "CONNEXION"];
   check(`${label} : toutes les rubriques, mêmes noms`, want.every((n) => names.some((x) => x.includes(n))), names.join(" | "));
   const m = await p.evaluate(() => { const u = document.querySelector(".bottombar-scroll"); return { sw: u.scrollWidth, cw: u.clientWidth }; });
   check(`${label} : la barre défile (contenu plus large que l'écran)`, m.sw > m.cw + 20, JSON.stringify(m));

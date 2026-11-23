@@ -15,7 +15,7 @@ const pctx = await b.newContext(mobile); const p = await pctx.newPage(); await p
 await p.goto(BASE + "/notifications"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3800);
 const tn = await text(p);
 check("notification « Ajoute ton IBAN » reçue par le gagnant sans IBAN", /Ajoute ton IBAN pour recevoir ton Cash Prize/.test(tn) && /ne peut pas être versé/.test(tn), (tn.match(/Ajoute ton IBAN.{0,120}/) ?? [""])[0]);
-check("pilote : barre du bas avec Mes défis, Notifications, Mon profil", (await p.locator('.bottombar-item:has-text("MES DÉFIS"), .bottombar-item:has-text("NOTIFICATIONS"), .bottombar-item:has-text("MON PROFIL")').count()) === 3);
+check("pilote : barre du bas avec Réclamation, Notifications, Mon profil", (await p.locator('.bottombar-item:has-text("RÉCLAMATION"), .bottombar-item:has-text("NOTIFICATIONS"), .bottombar-item:has-text("MON PROFIL")').count()) === 3);
 await p.screenshot({ path: `${SHOT}/201-bottom-pilot-notif.png` });
 // Après saisie de l'IBAN, plus de relance au prochain gain (pas testé ici) ; version anglaise
 await p.context().addCookies([{ name: "lang", value: "en", url: BASE }]); await p.goto(BASE + "/notifications"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3800);

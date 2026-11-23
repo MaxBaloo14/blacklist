@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-import { FRAME, planCrop, toPlanPath, type Crop } from "@/lib/plan-geom";
+import { FRAME, overlaySvg, planCrop, toPlanPath, type Crop } from "@/lib/plan-geom";
 export { FRAME, planCrop, toPlanPath };
 export type { Crop };
 const nums = (d: string) => (d.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
@@ -18,16 +18,9 @@ async function asset(name: string): Promise<Buffer> {
   return Buffer.from(await r.arrayBuffer());
 }
 
-/** Repères dessinés dans l'image (sans texte, pour ne dépendre d'aucune police) : départ = petite pastille rouge ▶, arrivée = petit damier. */
-function markers(sx: number, sy: number, ex: number, ey: number): Buffer {
-  const cell = 5, grid = 4; const g = cell * grid;
-  let checker = "";
-  for (let i = 0; i < grid; i++) for (let j = 0; j < grid; j++) if ((i + j) % 2 === 0) checker += `<rect x="${ex - g / 2 + i * cell}" y="${ey - g / 2 + j * cell}" width="${cell}" height="${cell}" fill="#111"/>`;
-  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${FRAME.w}" height="${FRAME.h}">
-    <rect x="${sx - 20}" y="${sy - 13}" width="40" height="26" rx="4" fill="#a31919" stroke="#fff" stroke-width="2"/>
-    <polygon points="${sx - 5},${sy - 7} ${sx + 8},${sy} ${sx - 5},${sy + 7}" fill="#fff"/>
-    <rect x="${ex - g / 2 - 3}" y="${ey - g / 2 - 3}" width="${g + 6}" height="${g + 6}" rx="3" fill="#fff" stroke="#c62828" stroke-width="2"/>
-    <rect x="${ex - g / 2}" y="${ey - g / 2}" width="${g}" height="${g}" fill="#fff"/>${checker}</svg>`);
+/** Calque du plan (tracé rouge, flèches, panneau START, arrivée) : le même rendu que l'aperçu du navigateur. */
+function markers(d: string): Buffer {
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${FRAME.w}" height="${FRAME.h}">${overlaySvg(d)}</svg>`);
 }
 
 /** Fabrique l'image du plan : carte recadrée autour du parcours, cadre BooBoo Crew par-dessus, repères de départ et d'arrivée. */
@@ -42,9 +35,8 @@ export async function renderPlan(d: string, mapW: number, mapH: number): Promise
   const crop = await sharp(map).extract({ left: Math.round(c.x * k), top: Math.round(c.y * k), width: Math.round(c.w * k), height: Math.round(c.h * k) })
     .resize(FRAME.hole.w, FRAME.hole.h, { fit: "fill", kernel: "lanczos3" }).sharpen({ sigma: 1.6, m1: 1.2, m2: 3 }).linear(1.12, -10).toBuffer();
   const planPath = toPlanPath(d, c);
-  const n = nums(planPath);
   const webp = await sharp({ create: { width: FRAME.w, height: FRAME.h, channels: 3, background: "#000" } })
-    .composite([{ input: crop, left: FRAME.hole.x, top: FRAME.hole.y }, { input: frame, left: 0, top: 0 }, { input: markers(n[0], n[1], n[n.length - 2], n[n.length - 1]), left: 0, top: 0 }])
+    .composite([{ input: crop, left: FRAME.hole.x, top: FRAME.hole.y }, { input: frame, left: 0, top: 0 }, { input: markers(planPath), left: 0, top: 0 }])
     .webp({ quality: 84 }).toBuffer();
   return { webp, path: planPath };
 }

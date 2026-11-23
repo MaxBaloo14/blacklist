@@ -58,6 +58,7 @@ const box = await z.locator(".route-drawer").boundingBox();
 const pts = [[0.2, 0.25], [0.4, 0.2], [0.6, 0.4], [0.7, 0.65], [0.5, 0.8]];
 for (const [fx, fy] of pts) { await z.mouse.click(box.x + box.width * fx, box.y + box.height * fy); await z.waitForTimeout(150); }
 check("5 points posés : tracé rouge, départ et arrivée", /5 point/.test(await text(z)) && (await z.locator('.route-drawer svg path[stroke="#e03232"]').count()) === 1 && (await z.locator(".route-drawer svg rect").count()) === 1);
+check("joueur : aperçu avec tracé rouge visible, flèches et bouton Agrandir", (await z.locator('[data-plan-preview] path[stroke="#e01919"]').count()) >= 1 && (await z.locator("[data-plan-preview] .route-zoom").count()) === 1);
 check("joueur : aperçu du plan (cadre + voiture animée) avant d'envoyer", (await z.locator("[data-plan-preview]").count()) === 1 && (await z.locator("[data-plan-preview] animateMotion").count()) >= 1 && (await z.locator('[data-plan-preview] image[href*="plan-frame"]').count()) === 1);
 await z.locator("[data-plan-preview]").scrollIntoViewIfNeeded(); await z.waitForTimeout(1200);
 await z.screenshot({ path: `${SHOT}/318-apercu-joueur.png`, fullPage: false });
@@ -92,6 +93,15 @@ await card.scrollIntoViewIfNeeded(); await pub.waitForTimeout(1500);
 const dims = await card.locator("img").first().evaluate((i) => ({ ok: i.complete && i.naturalWidth > 500, w: i.naturalWidth, src: i.currentSrc.slice(-24) }));
 check("le plan fabriqué se charge (image du cadre BooBoo Crew)", dims.ok, JSON.stringify(dims));
 await pub.screenshot({ path: `${SHOT}/315-circuit-cree.png`, fullPage: false });
+{
+  // le tracé rouge est bien dessiné DANS l'image publiée (comme sur les plans d'origine)
+  const sharp = (await import("sharp")).default;
+  const url = await card.locator("img").first().evaluate((i) => i.currentSrc);
+  const buf = Buffer.from(await (await fetch(url)).arrayBuffer());
+  const { data, info } = await sharp(buf).raw().toBuffer({ resolveWithObject: true });
+  let red = 0; for (let i = 0; i < data.length; i += info.channels) if (data[i] > 200 && data[i + 1] < 60 && data[i + 2] < 60) red++;
+  check("le tracé rouge est visible dans l'image du plan publié", red > 3000, `${red} pixels rouges`);
+}
 
 // Éditeur de circuit (Control Center) : trace → circuit officiel
 await ad.goto(BASE + "/admin/editor"); await ad.waitForLoadState("networkidle"); await ad.waitForTimeout(1500);

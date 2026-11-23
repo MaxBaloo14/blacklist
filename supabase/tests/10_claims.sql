@@ -48,5 +48,3 @@ select t_fail($$select admin_handle_suggestion((select id from course_suggestion
 select t_as(2); select admin_handle_suggestion((select id from course_suggestions where name = 'Boucle du port'), 'accepted', 'Retenue pour la saison.'); reset role;
 select t_eq('suggestion acceptée', (select status from course_suggestions where name = 'Boucle du port'), 'accepted');
 select t_eq('le pilote est prévenu de la décision', (select count(*)::text from notifications where user_id = t_uid(13) and kind = 'suggestion'), '1');
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (réclamations et suggestions incluses)'

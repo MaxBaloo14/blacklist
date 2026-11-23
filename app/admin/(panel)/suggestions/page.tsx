@@ -6,27 +6,31 @@ import { createTrackFromSuggestion } from "@/app/actions/editor";
 import { requireAdmin } from "@/lib/auth";
 import { dateTime, fullName } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
-import { routeLength } from "@/lib/route";
+import { getMapScale } from "@/lib/data";
+import { routeKm } from "@/lib/plan-geom";
 import type { Row } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function SuggestionsAdmin() {
   const [{ t, locale }, { supabase }] = await Promise.all([getI18n(), requireAdmin()]);
+  const scale = await getMapScale();
+  const { data: vts } = await supabase.from("suggestion_votes").select("suggestion_id");
+  const votes = new Map<string, number>(); for (const v of vts ?? []) votes.set(v.suggestion_id, (votes.get(v.suggestion_id) ?? 0) + 1);
   const [{ data: list }, { data: people }] = await Promise.all([
     supabase.from("course_suggestions").select("*").order("created_at", { ascending: false }).limit(100),
     supabase.from("profiles").select("id,first_name,last_name"),
   ]);
   const who = new Map<string, Row>((people ?? []).map((p: Row) => [p.id, p]));
   const ST: Record<string, [string, string]> = { pending: [t("En attente"), "badge-warn"], accepted: [t("Retenue"), "badge-ok"], declined: [t("Non retenue"), "badge-metal"] };
-  const todo = (list ?? []).filter((s: Row) => s.status === "pending");
+  const todo = (list ?? []).filter((s: Row) => s.status === "pending").sort((a: Row, b: Row) => (votes.get(b.id) ?? 0) - (votes.get(a.id) ?? 0));
   const done = (list ?? []).filter((s: Row) => s.status !== "pending");
   const card = (s: Row) => (
     <article key={s.id} className="border border-white/10 bg-ink2">
       <RoutePreview path={s.route_path} w={s.route_w} h={s.route_h} label={s.name} />
       <div className="p-5">
         <div className="flex flex-wrap items-center justify-between gap-3"><h2 className="font-display text-2xl uppercase leading-tight">{s.name}</h2><span className={`badge ${ST[s.status][1]}`}>{ST[s.status][0]}</span></div>
-        <div className="text-sm text-[#a5a9b0]">{fullName(who.get(s.user_id))} · {dateTime(s.created_at, locale)} · {t("longueur du tracé")} ≈ {Math.round(routeLength(s.route_path))} px</div>
+        <div className="text-sm text-[#a5a9b0]">{fullName(who.get(s.user_id))} · {dateTime(s.created_at, locale)} · ≈ {routeKm(s.route_path, scale).toFixed(1).replace(".", ",")} km · <b data-votes className="text-white">{t("{n} vote(s)", { n: votes.get(s.id) ?? 0 })}</b></div>
         {s.description && <p className="mt-2 text-[15px]">{s.description}</p>}
         {s.admin_note && <p className="mt-2 text-sm text-[#a5a9b0]">{t("Réponse envoyée")} : {s.admin_note}</p>}
         {s.status === "pending" ? (

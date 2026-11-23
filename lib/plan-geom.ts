@@ -84,3 +84,16 @@ export function overlaySvg(d: string): string {
   for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if ((i + j) % 2 === 0) s += `<rect x="${r(ex - g / 2 + i * cell)}" y="${r(ey - g / 2 + j * cell)}" width="${cell}" height="${cell}" fill="#111"/>`;
   return s;
 }
+
+/** Distance d'un tracé en kilomètres (longueur de la courbe × échelle de la carte en mètres par pixel), arrondie à 0,1 km. */
+export function routeKm(d: string, mPerPx: number): number {
+  const pts = samplePath(d, 10); let px = 0;
+  for (let i = 1; i < pts.length; i++) px += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+  return Math.round((px * mPerPx) / 100) / 10;
+}
+/** Longueur d'un tracé en pixels de la carte. */
+export function routePx(d: string): number {
+  const pts = samplePath(d, 10); let px = 0;
+  for (let i = 1; i < pts.length; i++) px += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+  return px;
+}

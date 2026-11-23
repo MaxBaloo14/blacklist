@@ -6,7 +6,7 @@ import { useT } from "@/components/LangProvider";
 import RouteDrawer from "@/components/RouteDrawer";
 import { createPlanTrack } from "@/app/actions/editor";
 
-export default function PlanEditorForm() {
+export default function PlanEditorForm({ mPerPx }: { mPerPx?: number }) {
   const t = useT();
   const [k, setK] = useState(0);
   return (
@@ -18,7 +18,7 @@ export default function PlanEditorForm() {
       </div>
       <Field label={t("Description (facultatif)")}><input name="description" maxLength={1000} className="input" /></Field>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="accent-[#d12b2b]" defaultChecked onChange={(e) => { const h = e.currentTarget.form?.elements.namedItem("status") as HTMLInputElement | null; if (h) h.value = e.currentTarget.checked ? "active" : "inactive"; }} /> {t("Circuit actif (choisissable pour les duels)")}<input type="hidden" name="status" defaultValue="active" /></label>
-      <RouteDrawer key={k} />
+      <RouteDrawer key={k} mPerPx={mPerPx} />
     </ActionForm>
   );
 }

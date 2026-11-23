@@ -4,6 +4,7 @@ import { EN } from "@/lib/i18n-en";
 // Les notifications sont enregistrées en anglais par la base (texte fixe, valable pour tous).
 // En français, on traduit à l'affichage les messages connus ; les motifs écrits par l'organisation restent tels quels.
 const TITLES: [RegExp, string][] = [
+  [/^You earned zigollars for the Warm-up Race$/, "Tu as gagné des zigollars grâce à la Warm-up Race"],
   [/^New claim$/, "Nouvelle réclamation"],
   [/^Your claim has been updated$/, "Ta réclamation a été mise à jour"],
   [/^New course suggestion$/, "Nouvelle suggestion de course"],

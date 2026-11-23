@@ -229,6 +229,8 @@ const settingSchemas: Record<string, z.ZodType> = {
   vehicle_loss_scope: z.enum(["defender", "both"]),
   require_clip_for_validation: z.boolean(),
   forfeit_gives_reward: z.boolean(),
+  warmup_participation_zigollars: z.number().int().min(0).max(100000),
+  map_scale_m_per_px: z.number().min(1).max(40),
 };
 
 export async function saveSetting(_: ActionState, f: FormData): Promise<ActionState> {

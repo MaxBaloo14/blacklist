@@ -26,3 +26,12 @@ export async function submitSuggestion(_: ActionState, f: FormData): Promise<Act
   if (!path || !/^M[-0-9. ,CL]+$/.test(path) || !w.success || !h.success) return await fail("Trace ton parcours sur la carte : place au moins 2 points (départ puis arrivée).");
   return callRpc("submit_suggestion", { p_name: str(f, "name"), p_description: str(f, "description"), p_path: path, p_w: w.data, p_h: h.data }, (await getT())("Suggestion envoyée. L'organisation étudie ton parcours."), ["/suggestion"]);
 }
+
+export async function voteSuggestion(_: ActionState, f: FormData): Promise<ActionState> {
+  const { user } = await getSession();
+  if (!user) return await fail("Connexion requise.");
+  if (!(await rateLimit("vote", 20, 60_000, user.id))) return await fail("Trop de requêtes. Patiente un instant.");
+  const id = z.string().uuid().safeParse(str(f, "suggestion"));
+  if (!id.success) return await fail("Choix invalide.");
+  return callRpc("vote_suggestion", { p_id: id.data }, (await getT())("Ton vote est enregistré."), ["/suggestion"]);
+}

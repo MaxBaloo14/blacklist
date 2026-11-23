@@ -5,6 +5,7 @@ import { useT } from "@/components/LangProvider";
 import { smoothPath, type Pt } from "@/lib/route";
 import { RoadNet, simplify } from "@/lib/roadnet";
 import PlanPreview from "@/components/PlanPreview";
+import { routeKm } from "@/lib/plan-geom";
 
 const MAX_POINTS = 60;
 type Wp = { p: Pt; seg: Pt[] };   // point de passage + tracé depuis le point précédent (suit la route, ou ligne droite en mode libre)
@@ -13,7 +14,7 @@ type Wp = { p: Pt; seg: Pt[] };   // point de passage + tracé depuis le point p
  *  Mode « Suivre les routes » (par défaut) : chaque clic s'accroche à la route la plus proche et le parcours épouse automatiquement les routes
  *  (plus court chemin) jusqu'au point précédent. Mode libre : ligne droite entre les points.
  *  Glisser un point le déplace, clic sur un point + « Supprimer » l'enlève. Premier point = départ, dernier = arrivée. */
-export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/map-roads.png" }: { src?: string; roads?: string }) {
+export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/map-roads.png", mPerPx = 6.5 }: { src?: string; roads?: string; mPerPx?: number }) {
   const t = useT();
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
   const [wps, setWps] = useState<Wp[]>([]);
@@ -41,6 +42,7 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
   let path = "";
   if (poly.length >= 2) { for (const tol of [1.6, 2.5, 4, 7, 12]) { path = smoothPath(simplify(poly, tol)); if (path.length < 50000) break; } }
   const u = size ? size.w / 1000 : 1;
+  const km = path ? routeKm(path, mPerPx) : 0;
   // le réseau routier peut avoir une autre résolution que la carte (carte haute définition) : on convertit dans les deux sens
   const f = net && size ? net.w / size.w : 1;
   const nt = (q: Pt): Pt => [q[0] * f, q[1] * f];
@@ -119,7 +121,7 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
         <button type="button" onClick={() => { setWps((p) => p.slice(0, -1)); setSel(null); setMsg(null); }} disabled={!wps.length} className="btn btn-ghost btn-sm"><Undo2 size={16} /> {t("ANNULER LE DERNIER POINT")}</button>
         <button type="button" onClick={removeSel} disabled={sel === null} className="btn btn-ghost btn-sm"><Trash2 size={16} /> {t("SUPPRIMER LE POINT")}</button>
         <button type="button" onClick={() => { setWps([]); setSel(null); setMsg(null); }} disabled={!wps.length} className="btn btn-ghost btn-sm"><RotateCcw size={16} /> {t("TOUT EFFACER")}</button>
-        <span className="font-cond ml-auto text-sm tracking-[.14em] text-metal">{wps.length ? t("{n} point(s) posé(s)", { n: wps.length }) : t("Clique sur la carte pour poser le départ")}</span>
+        <span className="font-cond ml-auto text-sm tracking-[.14em] text-metal">{wps.length ? t("{n} point(s) posé(s)", { n: wps.length }) : t("Clique sur la carte pour poser le départ")}{km > 0 && <b data-distance className="ml-3 text-white">≈ {km.toFixed(1).replace(".", ",")} km</b>}</span>
       </div>
       {msg && <p role="status" className="mb-2 text-sm text-[#ffb3b3]">{msg}</p>}
       <div ref={box} className="route-drawer" tabIndex={0} data-roads={net ? "ready" : "loading"} aria-label={t("Carte à tracer : clique ou touche pour poser les points du parcours")}>
@@ -148,6 +150,7 @@ export default function RouteDrawer({ src = "/img/map-base.webp", roads = "/img/
           <div className="kicker mb-1">{t("APERÇU DU PLAN")}</div>
           <p className="mb-3 text-sm text-[#a5a9b0]">{t("Voici le plan tel qu'il sera publié, avec le cadre BooBoo Crew et la petite voiture qui suit ton parcours. Il se met à jour à chaque point.")}</p>
           <PlanPreview path={path} w={size.w} h={size.h} src={src} />
+          {km > 0 && <p className="mt-3 text-center text-sm text-[#a5a9b0]">{t("Distance estimée")} : <b className="text-white">≈ {km.toFixed(1).replace(".", ",")} km</b></p>}
         </div>
       )}
       <input type="hidden" name="path" value={path} /><input type="hidden" name="w" value={size?.w ?? ""} /><input type="hidden" name="h" value={size?.h ?? ""} />

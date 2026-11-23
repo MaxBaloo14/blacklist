@@ -6,6 +6,7 @@ import { money } from "@/lib/format";
 import type { Row } from "@/lib/types";
 
 const pub = () => createSb(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { persistSession: false, autoRefreshToken: false } });
+export type Bettor = { id: string; name: string; bets: number; won: number; rate: number; profit: number };
 export type PlayerStat = { id: string; name: string; position: number | null; duels: number; wins: number; losses: number; races: number; raceWins: number; rate: number | null; streak: number; bestStreak: number; cash: number };
 const days = (a: string | Date, b: string | Date) => Math.max(0, Math.floor((+new Date(b) - +new Date(a)) / 864e5));
 
@@ -15,13 +16,14 @@ export async function getHallData() {
     bestStreak: null as null | { n: number; who: { id: string; name: string } }, mostWins: null as null | { n: number; who: { id: string; name: string } }, mostDuels: null as null | { n: number; who: { id: string; name: string } },
     longestReign: null as null | { days: number; who: { id: string; name: string } }, topPrize: "",
     mostRaces: null as null | { n: number; who: { id: string; name: string } }, bestRate: null as null | { n: number; who: { id: string; name: string } }, topEarner: null as null | { n: number; who: { id: string; name: string } },
-    players: [] as PlayerStat[] };
+    players: [] as PlayerStat[], bettors: [] as Bettor[] };
   if (!hasSupabase) return empty;
   const [{ data: hist }, duels, board, rewards, { data: raceRows }] = await Promise.all([
     pub().from("ranking_history").select("driver_id,from_position,to_position,created_at").eq("to_position", 1).not("driver_id", "is", null).order("created_at", { ascending: true }).limit(300),
     getLatestDuels(500), getBlacklist(), getRewards(),
     pub().from("public_race_results").select("winner_id,challenger_id,defender_id").limit(2000),
   ]);
+  const { data: bet } = await pub().from("public_bettors").select("driver_id,first_name,last_name,bets,won,profit").limit(200);
   const ids = [...new Set([...(hist ?? []).map((h) => h.driver_id), ...duels.flatMap((d) => [d.challenger_id, d.defender_id]), ...board.map((b) => b.driver_id).filter(Boolean)])] as string[];
   const { data: people } = ids.length ? await pub().from("public_driver").select("id,first_name,last_name").in("id", ids) : { data: [] as Row[] };
   const nameOf = new Map<string, string>((people ?? []).map((p) => [p.id, `${p.first_name} ${p.last_name}`.trim()]));
@@ -70,5 +72,7 @@ export async function getHallData() {
     topPrize: prize1 ? money(Number(prize1)) : "",
     mostRaces: top((p) => p.races), bestRate: top((p) => (p.duels >= 3 ? p.rate ?? 0 : 0)), topEarner: top((p) => p.cash),
     players,
+    bettors: (bet ?? []).map((b) => ({ id: b.driver_id, name: `${b.first_name} ${b.last_name}`.trim(), bets: b.bets, won: b.won, rate: b.bets ? Math.round((b.won / b.bets) * 100) : 0, profit: Number(b.profit) }))
+      .sort((a, b) => b.profit - a.profit || b.rate - a.rate || b.bets - a.bets).slice(0, 20),
   };
 }

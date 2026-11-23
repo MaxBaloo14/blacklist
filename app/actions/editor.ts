@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { callRpc, cleanError, str } from "@/lib/action";
 import { getSession } from "@/lib/auth";
 import { renderPlan } from "@/lib/plan";
+import { routeKm, routePx } from "@/lib/plan-geom";
 import { getT } from "@/lib/i18n";
 import type { ActionState } from "@/lib/types";
 
@@ -23,12 +24,14 @@ async function publishPlan(m: z.infer<typeof meta>, path: string, w: number, h: 
   const plan = await renderPlan(path, w, h);
   if ("error" in plan) return await fail(plan.error);
   const supabase = await createClient();
+  const { data: sc } = await supabase.from("settings").select("value").eq("key", "map_scale_m_per_px").maybeSingle();
+  const km = routeKm(path, Number(sc?.value) > 0 ? Number(sc?.value) : 6.5);   // distance recalculée par le serveur : jamais reprise du navigateur
   const file = `${crypto.randomUUID()}.webp`;
   const { error: upErr } = await supabase.storage.from("track-images").upload(file, plan.webp, { contentType: "image/webp" });
   if (upErr) return await fail("Envoi de l'image impossible.");
   const { error } = await supabase.from("race_tracks").insert({
     name: m.name, race_type: m.race_type, difficulty: m.difficulty, status: m.status, description: m.description || null, start_point: "START", end_point: "FINISH",
-    distance_km: null, image_path: file, route_path: plan.path, route_w: 1432, route_h: 2000,
+    distance_km: km > 0 ? km : null, image_path: file, route_path: plan.path, route_w: 1432, route_h: 2000,
   });
   if (error) { await supabase.storage.from("track-images").remove([file]); return await fail(cleanError(error.message)); }
   revalidatePath("/", "layout");
@@ -55,4 +58,19 @@ export async function createTrackFromSuggestion(_: ActionState, f: FormData): Pr
   const res = await publishPlan({ ...p.data, name: str(f, "name") || s.name, description: s.description ?? "" }, s.route_path, s.route_w, s.route_h);
   if (!res.ok) return res;
   return callRpc("admin_handle_suggestion", { p_id: id.data, p_status: "accepted", p_note: str(f, "note") || "Retenue : ton parcours est maintenant un circuit officiel." }, (await getT())("Circuit créé à partir de la suggestion. Le pilote est prévenu."), ["/admin/suggestions", "/suggestion"]);
+}
+
+/** Calibre l'échelle de la carte : le tracé dessiné correspond à une distance connue (en kilomètres, relevée en jeu). Super administrateur uniquement (règle protégée par la base). */
+export async function calibrateScale(_: ActionState, f: FormData): Promise<ActionState> {
+  const path = str(f, "path"), km = Number(str(f, "km").replace(",", "."));
+  if (!/^M[-0-9. ,CL]+$/.test(path) || routePx(path) < 50) return await fail("Trace d'abord un parcours d'au moins quelques centaines de mètres sur la carte.");
+  if (!Number.isFinite(km) || km < 0.2 || km > 200) return await fail("Distance invalide (entre 0,2 et 200 km).");
+  const scale = Math.round(((km * 1000) / routePx(path)) * 1000) / 1000;
+  if (scale < 1 || scale > 40) return await fail("Échelle incohérente : vérifie la distance saisie.");
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("settings").update({ value: scale, updated_at: new Date().toISOString() }).eq("key", "map_scale_m_per_px").select("key");
+  if (error) return await fail(cleanError(error.message));
+  if (!data?.length) return await fail("Seul un super administrateur peut modifier l'échelle.");
+  revalidatePath("/", "layout");
+  return { ok: true, message: (await getT())("Échelle enregistrée : {n} m par pixel.", { n: scale }), nonce: Date.now() };
 }

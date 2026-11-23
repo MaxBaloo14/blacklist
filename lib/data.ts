@@ -55,3 +55,10 @@ export const getDriverDuels = (id: string) =>
 export const getWarmups = () => safe<Row[]>((s) => s.from("warmup_events").select("*, race_tracks(name,start_point,end_point)").order("scheduled_at", { ascending: false }).limit(20), []);
 export const getWarmupParticipants = () => safe<Row[]>((s) => s.from("public_warmup_participants").select("*"), []);
 export const getPublicSettings = () => safe<Row[]>((s) => s.from("settings").select("key,value"), []);
+
+/** Échelle de la carte (mètres par pixel), réglage calibré par l'organisation. */
+export async function getMapScale(): Promise<number> {
+  const rows = await getPublicSettings();
+  const v = Number(rows.find((x) => x.key === "map_scale_m_per_px")?.value);
+  return Number.isFinite(v) && v > 0 ? v : 6.5;
+}

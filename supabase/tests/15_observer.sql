@@ -22,5 +22,3 @@ reset role;
 select t_as(1);
 select t_eq('le staff voit le compte observateur', (select count(*)::text from profiles where id = t_uid(70) and is_observer), '1');
 reset role;
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (suppression de compte incluse)'

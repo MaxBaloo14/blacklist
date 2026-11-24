@@ -1,0 +1,45 @@
+# Test de restauration : prouve que la dernière sauvegarde chiffrée est lisible ET complète.
+# Elle est déchiffrée dans le runner, rejouée dans une base PostgreSQL jetable (jamais la vraie base), puis chaque table est comparée
+# à la sauvegarde. Aucun contenu n'est affiché. Secret nécessaire : BACKUP_PASSPHRASE (le même que pour la sauvegarde).
+name: Test de restauration
+on:
+  schedule:
+    - cron: "41 4 1 * *"        # le 1er de chaque mois, 04h41 UTC
+  workflow_dispatch:
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: restore
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: restore
+      BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier la phrase secrète
+        run: |
+          if [ -z "$BACKUP_PASSPHRASE" ]; then echo "::error::Le secret BACKUP_PASSPHRASE est absent : impossible de déchiffrer la sauvegarde."; exit 1; fi
+      - name: Récupérer la dernière sauvegarde chiffrée
+        run: |
+          run_id=$(gh run list --workflow "Sauvegarde de la base" --status success --json databaseId,event --limit 20 --jq '[.[] | select(.event != null)][0].databaseId')
+          [ -n "$run_id" ] || { echo "::error::Aucune sauvegarde réussie trouvée."; exit 1; }
+          mkdir -p bk
+          gh run download "$run_id" --name sauvegarde-chiffree --dir bk || { echo "::error::La dernière exécution n'a pas conservé de sauvegarde (test à blanc ou phrase secrète absente ?)."; exit 1; }
+          ls -la bk
+      - run: sudo apt-get install -y -qq postgresql-client >/dev/null
+      - name: Restaurer et comparer
+        run: bash scripts/restore-test.sh bk

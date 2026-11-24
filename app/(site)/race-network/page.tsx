@@ -40,6 +40,7 @@ export default async function RaceNetwork() {
                     <h2 className="font-display text-3xl uppercase tracking-wide">{tk.name}</h2>
                     <div className="font-cond mt-1 text-sm uppercase tracking-[.16em] text-metal">{t(tk.race_type)}</div>
                     {tk.description && <p className="mt-3 min-h-10 text-sm text-[#a5a9b0]">{tk.description}</p>}
+                    {tk.suggested_by_name && <p data-suggested-by className="font-cond mt-2 text-xs font-bold uppercase tracking-[.2em] text-red">{t("Circuit proposé par {n}", { n: tk.suggested_by_name })}</p>}
                     <dl className="font-cond mt-4 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-white/10 pt-4 text-[15px] tracking-wide">
                       {!routed && <div><dt className="label !mb-0">{t("Départ")}</dt><dd>{tk.start_point}</dd></div>}
                       {!routed && <div><dt className="label !mb-0">{t("Arrivée")}</dt><dd>{tk.end_point}</dd></div>}

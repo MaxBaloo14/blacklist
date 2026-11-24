@@ -114,7 +114,9 @@ export async function saveShopItem(_: ActionState, f: FormData): Promise<ActionS
     if (!p.success) return await fail(p.error.issues[0]?.message ?? "Données invalides.");
     const supabase = await createClient();
     const existing = str(f, "id");
-    const row = { ...p.data, description: p.data.description || null, stock: p.data.stock ?? null, active: f.get("active") === "on" };
+    const endsRaw = str(f, "ends_at");
+    if (endsRaw && !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(endsRaw)) return await fail("Date de fin invalide.");
+    const row = { ...p.data, description: p.data.description || null, stock: p.data.stock ?? null, active: f.get("active") === "on", limited: f.get("limited") === "on", ends_at: endsRaw ? parisLocalToISO(endsRaw) : null };
     const { error } = existing ? await supabase.from("shop_items").update(row).eq("id", id(f, "id")) : await supabase.from("shop_items").insert(row);
     if (error) return await fail(cleanError(error.message));
     revalidatePath("/", "layout");
@@ -265,6 +267,7 @@ const settingSchemas: Record<string, z.ZodType> = {
   forfeit_gives_reward: z.boolean(),
   warmup_participation_zigollars: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   duel_win_zigollars: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
+  suggestion_reward_zigollars: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   map_scale_m_per_px: z.number().min(1).max(40),
 };
 

@@ -99,7 +99,7 @@ await act(ad, "REMIS EN JEU");
 await ad.goto(BASE + "/admin/shop"); await ad.waitForLoadState("networkidle");
 check("admin : commande marquée remise", /COMMANDES À REMETTRE \(0\)/.test(await text(ad)) && /COMMANDES TRAITÉES/.test(await text(ad)));
 await zane.goto(BASE + "/boutique"); await zane.waitForLoadState("networkidle");
-check("nouvel article visible en boutique avec son stock", /PNEUS NEUFS/i.test(await text(zane)) && /2 restant/i.test(await text(zane)));
+check("nouvel article visible en boutique avec son stock", /PNEUS NEUFS/i.test(await text(zane)) && /(2 restant|Plus que 2)/i.test(await text(zane)));
 await zane.goto(BASE + "/boutique?tab=historique"); await zane.waitForLoadState("networkidle");
 check("pilote : commande remise", /Remis/i.test(await text(zane)));
 

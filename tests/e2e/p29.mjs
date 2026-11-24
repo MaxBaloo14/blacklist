@@ -1,6 +1,8 @@
 // Réclamations (titre, message, plusieurs liens) et suggestions de course (tracé rouge sur la carte).
 import { execSync } from "node:child_process";
 import { launch, newPage, BASE, SHOT, check, adminPage, text, act, pilotLogin } from "./lib.mjs";
+const sql = (q) => execSync(`su postgres -c "psql -d bl_e2e -qc \\"${q}\\""`);
+const sqlv = (q) => execSync(`su postgres -c "psql -d bl_e2e -Atc \\"${q}\\""`).toString().trim();
 const b = await launch();
 
 const v = await newPage(b); await v.goto(BASE + "/reclamation"); await v.waitForLoadState("networkidle");
@@ -92,6 +94,9 @@ check("circuit officiel créé depuis la suggestion (tracé animé + voiture)", 
 await card.scrollIntoViewIfNeeded(); await pub.waitForTimeout(1500);
 const dims = await card.locator("img").first().evaluate((i) => ({ ok: i.complete && i.naturalWidth > 500, w: i.naturalWidth, src: i.currentSrc.slice(-24) }));
 check("le plan fabriqué se charge (image du cadre BooBoo Crew)", dims.ok, JSON.stringify(dims));
+check("la carte du circuit indique « Circuit proposé par … »", (await card.locator("[data-suggested-by]").count()) === 1 && /Circuit proposé par/i.test(await card.locator("[data-suggested-by]").innerText()), await card.locator("[data-suggested-by]").allInnerTexts().then((a) => a.join("|")).catch(() => ""));
+check("l'auteur a reçu 5 000 zigollars (une seule fois, au registre)", sqlv("select count(*) from point_ledger where kind = 'suggestion' and delta = 5000") === "1");
+check("l'auteur est prévenu de son gain", sqlv("select count(*) from notifications where title = 'Your course suggestion has been accepted' and body like '%+5000 zigollars'") === "1");
 await pub.screenshot({ path: `${SHOT}/315-circuit-cree.png`, fullPage: false });
 {
   // le tracé rouge est bien dessiné DANS l'image publiée (comme sur les plans d'origine)
@@ -171,7 +176,7 @@ const en = await text(z);
 check("version anglaise de la page suggestion", /Selected|DRAW MY RACE|MY SUGGESTIONS/i.test(en) && !/TRACER MA COURSE/.test(en));
 check("aucune erreur JavaScript", ![v, z, ad].some((p) => p.errors.length), JSON.stringify([v.errors, z.errors, ad.errors]));
 // ménage : les contrôles d'anglais qui suivent ne doivent pas voir ces données de test (noms et descriptions écrits en français)
-const sql = (q) => execSync(`su postgres -c "psql -d bl_e2e -qc \\"${q}\\""`);
 sql("delete from race_tracks where name in ('Boucle du port', 'Circuit de l''éditeur', 'Trop grand')");
+sql("update point_balances b set balance = balance - l.delta from point_ledger l where l.user_id = b.user_id and l.kind = 'suggestion'; delete from point_ledger where kind = 'suggestion';");
 sql("delete from course_suggestions; delete from claims; delete from notifications where kind in ('claim','claim_new','suggestion','suggestion_new');");
 await b.close();

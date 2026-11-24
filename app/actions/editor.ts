@@ -20,7 +20,7 @@ const pts = z.array(z.tuple([z.number().min(0).max(20000), z.number().min(0).max
 const manualKm = (f: FormData) => { const v = Number(str(f, "distance_km").replace(",", ".")); return Number.isFinite(v) && v > 0 && v < 1000 ? Math.round(v * 10) / 10 : null; };
 const readPoints = (f: FormData) => { try { const r = pts.safeParse(JSON.parse(str(f, "points") || "[]")); return r.success ? r.data : []; } catch { return []; } };
 
-type Extra = { points?: [number, number][]; follow?: boolean; km?: number | null; trackId?: string; draftId?: string };
+type Extra = { points?: [number, number][]; follow?: boolean; km?: number | null; trackId?: string; draftId?: string; suggestedBy?: string };
 
 /** Fabrique le plan (carte + cadre + tracé), l'envoie dans le stockage puis crée (ou remplace) le circuit officiel (voiture animée comprise). Organisateurs uniquement. */
 async function publishPlan(m: z.infer<typeof meta>, path: string, w: number, h: number, x: Extra = {}): Promise<ActionState> {
@@ -39,6 +39,7 @@ async function publishPlan(m: z.infer<typeof meta>, path: string, w: number, h: 
   const row = {
     name: m.name, race_type: m.race_type, difficulty: m.difficulty, status: m.status, description: m.description || null, start_point: "START", end_point: "FINISH",
     distance_km: km, image_path: file, route_path: plan.path, route_w: 1432, route_h: 2000,
+    suggested_by_name: x.suggestedBy ?? undefined,
     editor_points: x.points?.length ? x.points : null, editor_follow: x.follow ?? null, editor_w: x.points?.length ? w : null, editor_h: x.points?.length ? h : null,
   };
   let oldImage: string | null = null;
@@ -108,9 +109,10 @@ export async function createTrackFromSuggestion(_: ActionState, f: FormData): Pr
   const { data: s } = await supabase.from("course_suggestions").select("*").eq("id", id.data).maybeSingle();
   if (!s) return await fail("Suggestion introuvable.");
   if (s.status !== "pending") return await fail("Cette suggestion est déjà traitée.");
-  const res = await publishPlan({ ...p.data, name: str(f, "name") || s.name, description: s.description ?? "" }, s.route_path, s.route_w, s.route_h);
+  const { data: author } = await supabase.from("profiles").select("first_name,last_name").eq("id", s.user_id).maybeSingle();
+  const res = await publishPlan({ ...p.data, name: str(f, "name") || s.name, description: s.description ?? "" }, s.route_path, s.route_w, s.route_h, { suggestedBy: author ? `${author.first_name} ${author.last_name}` : undefined });
   if (!res.ok) return res;
-  return callRpc("admin_handle_suggestion", { p_id: id.data, p_status: "accepted", p_note: str(f, "note") || "Retenue : ton parcours est maintenant un circuit officiel." }, (await getT())("Circuit créé à partir de la suggestion. Le pilote est prévenu."), ["/admin/suggestions", "/suggestion"]);
+  return callRpc("admin_handle_suggestion", { p_id: id.data, p_status: "accepted", p_note: str(f, "note") || "Retenue : ton parcours est maintenant un circuit officiel." }, (await getT())("Circuit créé à partir de la suggestion. Le pilote est prévenu et reçoit ses zigollars."), ["/admin/suggestions", "/suggestion"]);
 }
 
 /** Calibre l'échelle de la carte : le tracé dessiné correspond à une distance connue (en kilomètres, relevée en jeu). Super administrateur uniquement (règle protégée par la base). */

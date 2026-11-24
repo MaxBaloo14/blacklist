@@ -52,6 +52,7 @@ export async function login(_: ActionState, f: FormData): Promise<ActionState> {
     return { ok: false, message: t("Ce compte a été banni.") };
   }
   await supabase.rpc("touch_activity");
+  await supabase.rpc("log_observer_login");   // sans effet pour un compte ordinaire
   redirect(safeNext(str(f, "next")));
 }
 

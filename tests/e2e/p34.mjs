@@ -36,6 +36,12 @@ for (const p of ["/blacklist", "/calendar", "/race-network", "/warmup", "/challe
 const r2 = await o.goto(BASE + "/admin/drivers"); await o.waitForLoadState("networkidle");
 check("aucun accès au Control Center", /\/admin\/login/.test(o.url()), o.url());
 
+// le staff voit l'activité de l'observateur (connexion tracée)
+const oid = sqlv("select id from profiles where is_observer");
+await ad.goto(BASE + `/admin/drivers/${oid}`); await ad.waitForLoadState("networkidle");
+check("fiche : activité de l'observateur (connexion tracée)", (await ad.locator("[data-observer-events]").count()) === 1 && /CONNEXION/i.test(await ad.locator("[data-observer-events]").innerText()), await ad.locator("[data-observer-events]").allInnerTexts().then((a) => a.join("|")));
+await ad.screenshot({ path: `${SHOT}/393-observateur-activite.png`, fullPage: false });
+
 // invisible pour les joueurs
 const id = sqlv("select id from profiles where is_observer");
 const pub = await newPage(b);

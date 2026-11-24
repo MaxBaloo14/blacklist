@@ -7,6 +7,7 @@ import { addReserve, deleteAccount, markVehicleLost, recordAbsence, resetDriverP
 import { requireAdmin } from "@/lib/auth";
 import { dateOnly, dateTime, fullName, photoUrl } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
+import type { Row } from "@/lib/types";
 import { labels } from "@/lib/labels";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
   const { supabase, isSuperAdmin } = await requireAdmin();
   const { data: d } = await supabase.from("profiles").select("*").eq("id", id).maybeSingle();
   if (!d) notFound();
+  const { data: obsEvents } = d.is_observer ? await supabase.from("observer_events").select("*").eq("user_id", id).order("created_at", { ascending: false }).limit(50) : { data: null };
   const [{ data: vehicles }, { data: rank }, { data: chal }, { data: absences }, { data: sanctions }, { data: inact }] = await Promise.all([
     supabase.from("vehicles").select("*").eq("owner_id", id).order("created_at", { ascending: false }),
     supabase.from("blacklist_rankings").select("position").eq("driver_id", id).maybeSingle(),
@@ -46,6 +48,23 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
             </div>
           </ActionForm>
         </div>
+        {d.is_observer && (
+          <div className="panel" data-observer-events>
+            <div className="kicker mb-3">{t("COMPTE OBSERVATEUR — ACTIVITÉ")}</div>
+            <p className="mb-3 text-sm text-[#a5a9b0]">{t("Invisible des joueurs. Connexions, paris et commandes de ce compte (50 derniers événements).")}</p>
+            {obsEvents?.length ? (
+              <ul className="grid gap-1 text-sm">
+                {obsEvents.map((e: Row) => (
+                  <li key={e.id} className="flex flex-wrap gap-x-3 border-b border-white/5 py-1.5">
+                    <span className="font-cond w-40 shrink-0 text-metal">{dateTime(e.created_at, locale)}</span>
+                    <span className="font-cond w-24 shrink-0 font-bold tracking-wider text-red">{e.kind === "login" ? t("CONNEXION") : e.kind === "bet" ? t("PARI") : t("COMMANDE")}</span>
+                    <span>{e.detail ?? ""}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : <p className="text-[#a5a9b0]">{t("Aucune activité enregistrée pour l'instant.")}</p>}
+          </div>
+        )}
         <div className="panel">
           <div className="kicker mb-3">{t("COMPTE —")} <span className={d.account_status === "active" ? "text-ok" : "text-red"}>{L.account(d.account_status).toUpperCase()}</span></div>
           <ActionForm action={setAccountStatus} label="APPLIQUER" variant="dark" reset={false} confirm="Modifier le statut de ce compte ? Le pilote en sera informé.">

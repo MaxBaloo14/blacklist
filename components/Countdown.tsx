@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useT } from "@/components/LangProvider";
 
 /** Compte à rebours. `big` : grands chiffres façon tableau d'affichage (J / H / MIN / SEC), qui pulsent en rouge sous 24 h. */
-export default function Countdown({ to, label = "Temps restant", big }: { to: string; label?: string; big?: boolean }) {
+export default function Countdown({ to, label = "Temps restant", big, endedLabel = "Délai dépassé" }: { to: string; label?: string; big?: boolean; endedLabel?: string }) {
   const t = useT();
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Countdown({ to, label = "Temps restant", big }: { to: st
   }, []);
   if (now === null) return big ? <div className="cd-board" aria-hidden>{[0, 1, 2, 3].map((i) => <div key={i} className="cd-cell"><span className="cd-digits">––</span></div>)}</div> : <span className="font-cond text-metal">…</span>;
   const ms = new Date(to).getTime() - now;
-  if (ms <= 0) return <span className="badge badge-red">{t("Délai dépassé")}</span>;
+  if (ms <= 0) return <span className="badge badge-red">{t(endedLabel)}</span>;
   const d = Math.floor(ms / 864e5), h = Math.floor((ms % 864e5) / 3.6e6), m = Math.floor((ms % 3.6e6) / 6e4), s = Math.floor((ms % 6e4) / 1000);
   const p = (n: number) => String(n).padStart(2, "0");
   if (!big) {

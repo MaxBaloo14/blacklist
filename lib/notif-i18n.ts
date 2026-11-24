@@ -10,6 +10,8 @@ const TITLES: [RegExp, string][] = [
   [/^Your claim has been updated$/, "Ta réclamation a été mise à jour"],
   [/^New course suggestion$/, "Nouvelle suggestion de course"],
   [/^Your course suggestion has been reviewed$/, "Ta suggestion de course a été étudiée"],
+  [/^Your course suggestion has been accepted$/, "Ta suggestion de course a été retenue"],
+  [/^A duel you bet on starts in 1 hour$/, "Un duel sur lequel tu as parié commence dans 1 h"],
   [/^Zigollars added to your balance$/, "Des zigollars ont été ajoutés à ton solde"],
   [/^Zigollars removed from your balance$/, "Des zigollars ont été retirés de ton solde"],
   [/^New shop order$/, "Nouvelle commande boutique"],
@@ -59,6 +61,9 @@ const BODIES: [RegExp, string][] = [
   [/^Your challenge against (.+) is live\.$/, "Ton défi contre $1 est lancé."],
   [/^\$(\d+)$/, "$1 $"],
   [/^([+-]\d+) zigollars$/, "$1 zigollars"],
+  [/^(.+) — \+(\d+) zigollars$/, "$1 — +$2 zigollars"],
+  [/^(.+ vs .+) · odds x([\d.]+) · ([+-]\d+) zigollars$/, "$1 · cote x$2 · $3 zigollars"],
+  [/^(.+ vs .+) · \+(\d+) zigollars$/, "$1 · +$2 zigollars"],
   [/^(.+) \(set by the organisation\)$/, "$1 (fixé par l'organisation)"],
 ];
 const KINDS: Record<string, string> = {

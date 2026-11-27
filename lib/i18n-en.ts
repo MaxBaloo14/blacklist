@@ -423,6 +423,11 @@ const EN_SITE: Record<string, string> = {
   "autorisés": "allowed", "Véhicules autorisés": "Allowed vehicles",
   "Seuls les véhicules de cette liste peuvent s'engager en duel. Les véhicules des offres premium de la boutique sont interdits.": "Only the vehicles on this list may be entered in a duel. Vehicles from the shop's premium offers are banned.",
   "Rechercher un véhicule": "Search a vehicle", "Rechercher un véhicule ou une marque…": "Search a vehicle or a brand…",
+  "Par puissance": "By power", "Voir la fiche de {n}": "View {n} details", "Marque": "Brand", "Toutes les marques": "All brands", "Trier": "Sort",
+  "Nom (A → Z)": "Name (A → Z)", "Puissance décroissante": "Power (high to low)", "Puissance croissante": "Power (low to high)", "Présentation": "Layout", "Cartes": "Cards", "Liste compacte": "Compact list",
+  "RÉINITIALISER": "RESET", "AUTORISÉ EN DUEL": "ALLOWED IN DUELS", "Puissance": "Power", "Places": "Seats", "Coffre": "Trunk", "Boîte": "Gearbox", "Carburant": "Fuel",
+  "Manuelle": "Manual", "Automatique": "Automatic", "Essence": "Petrol", "Électrique": "Electric", "Hybride": "Hybrid",
+  "Ce véhicule peut être engagé en duel une fois homologué par l'organisation.": "This vehicle may be entered in a duel once approved by the organisation.",
   "{n} véhicule(s)": "{n} vehicle(s)", "Voir la liste des véhicules autorisés": "See the list of allowed vehicles", "Liste des véhicules autorisés": "List of allowed vehicles", "VOIR LA LISTE": "VIEW THE LIST", "{n} véhicules à consulter avant de t'inscrire. Les véhicules de boutique sont interdits.": "{n} vehicles to check before you register. Shop vehicles are banned.", "CH": "HP", "Aucun véhicule ne correspond à ta recherche.": "No vehicle matches your search.",
   "Sportives Classiques": "Classic sports cars", "Super sportives": "Supercars", "Grosse cylindrées": "Muscle cars", "Lowrider": "Lowriders", "Drift": "Drift", "Rallye": "Rally", "Vans": "Vans",
 };

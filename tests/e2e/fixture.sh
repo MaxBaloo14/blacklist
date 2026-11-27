@@ -5,6 +5,7 @@ for c in $(pg_lsclusters -h 2>/dev/null | awk '{print $1"/"$2}'); do pg_ctlclust
 pkill -f "next start"; pkill -f next-server; pkill -f mock-supabase
 tests/e2e/db.sh >/dev/null 2>&1
 su postgres -c "psql -d bl_e2e -q -c 'delete from challenges' -c 'delete from ranking_history' -c \"delete from auth.users where email like 'demo-%'\""
+export VEHICLE_IMG_TEST_ORIGIN=http://127.0.0.1:54321
 export NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_e2e SUPABASE_SERVICE_ROLE_KEY=sb_secret_e2e
 (setsid nohup node tests/e2e/mock-supabase.mjs >/tmp/mock.log 2>&1 &); sleep 1
 node scripts/create-admin.mjs orga@test.local "MotDePasseOrga123" super_admin >/dev/null

@@ -440,3 +440,21 @@ button.bet-side:hover { box-shadow: inset 0 0 0 1px #c62828; }
 .rules-card-icon { display: grid; place-items: center; flex: none; width: 76px; height: 76px; color: #c62828; background: #c628281a; clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%); }
 .rules-card-sm { padding: 1.1rem 1.25rem; }
 .rules-card-sm .rules-card-icon { width: 56px; height: 56px; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.veh-toolbar { position: sticky; top: 68px; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 0 -1rem 1.25rem; padding: .85rem 1rem; background: #0a0b0dee; backdrop-filter: blur(8px); border-bottom: 1px solid #ffffff14; }
+.veh-view { display: grid; place-items: center; width: 46px; height: 46px; color: #a5a9b0; background: #14161a; box-shadow: inset 0 0 0 1px #ffffff22; transition: .2s; }
+.veh-view:hover { color: #fff; }
+.veh-view-on { color: #fff; background: #c62828; box-shadow: none; }
+.veh-card { display: flex; align-items: center; gap: 1rem; cursor: pointer; }
+.veh-card-icon { display: grid; place-items: center; flex: none; width: 88px; height: 56px; overflow: hidden; color: #c62828; background: #c628281a; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.veh-img { width: 100%; height: 100%; object-fit: cover; background: #14161a; }
+.veh-hero { display: grid; place-items: center; width: 100%; height: 260px; overflow: hidden; color: #c62828; background: radial-gradient(circle at 50% 40%, #c628281f, #0d0e11 70%); }
+.veh-hero .veh-img { width: auto; max-width: 100%; height: 100%; object-fit: contain; background: transparent; }
+.veh-card-row { padding: .65rem 1.1rem; }
+.veh-card-row .veh-card-icon { width: 72px; height: 44px; }
+.veh-card:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.veh-bar { display: block; height: 4px; background: #ffffff14; overflow: hidden; }
+.veh-bar > i { display: block; height: 100%; background: linear-gradient(90deg, #7a1515, #e53935); }
+.veh-bar-lg { height: 8px; }
+.veh-dialog { margin: auto; width: min(680px, 96vw); max-height: 94vh; padding: 0; overflow: auto; background: var(--grain), #0d0e11; color: #f4f4f4; border: 1px solid #ffffff1f; border-top: 3px solid #c62828; }
+.veh-dialog::backdrop { background: #000d; backdrop-filter: blur(4px); }
+.veh-spec { padding: .9rem 1rem; background: #ffffff08; box-shadow: inset 0 0 0 1px #ffffff10; }

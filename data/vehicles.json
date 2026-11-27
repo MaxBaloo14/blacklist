@@ -8,7 +8,12 @@
    "model": "Maxwell Asbo",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "maxwell-maxwell-asbo",
+   "img": true
   },
   {
    "name": "Blista",
@@ -16,7 +21,12 @@
    "model": "Dinka Blista",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-dinka-blista",
+   "img": true
   },
   {
    "name": "Blista Kanjo",
@@ -24,7 +34,12 @@
    "model": "Dinka Blista Kanjo",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-dinka-blista-kanjo",
+   "img": true
   },
   {
    "name": "Brioso 300",
@@ -32,7 +47,12 @@
    "model": "Grotti Brioso 300",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-grotti-brioso-300",
+   "img": true
   },
   {
    "name": "Brioso 300 Large",
@@ -40,7 +60,12 @@
    "model": "Grotti Brioso 300 Large",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-grotti-brioso-300-large",
+   "img": true
   },
   {
    "name": "Brioso R/A",
@@ -48,7 +73,12 @@
    "model": "Grotti Brioso R/A",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-grotti-brioso-r-a",
+   "img": true
   },
   {
    "name": "Club",
@@ -56,7 +86,12 @@
    "model": "BF Club",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bf-bf-club",
+   "img": true
   },
   {
    "name": "Dilettante",
@@ -64,7 +99,12 @@
    "model": "Karin Dilettante",
    "category": "Compactes",
    "hp": 120,
-   "seats": 4
+   "seats": 4,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-karin-dilettante",
+   "img": true
   },
   {
    "name": "Issi",
@@ -72,7 +112,12 @@
    "model": "Weeny Issi",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "weeny-weeny-issi",
+   "img": true
   },
   {
    "name": "Issi Classique",
@@ -80,7 +125,12 @@
    "model": "Weeny Issi Classique",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "weeny-weeny-issi-classique",
+   "img": true
   },
   {
    "name": "Panto",
@@ -88,7 +138,12 @@
    "model": "Benefactor Panto",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "benefactor-benefactor-panto",
+   "img": true
   },
   {
    "name": "Prairie",
@@ -96,7 +151,12 @@
    "model": "Bollokan Prairie",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bollokan-bollokan-prairie",
+   "img": true
   },
   {
    "name": "Rhapsody",
@@ -104,7 +164,12 @@
    "model": "Declasse Rhapsody",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-declasse-rhapsody",
+   "img": true
   },
   {
    "name": "Uranus Lozspeed",
@@ -112,7 +177,12 @@
    "model": "Vapid Uranus Lozspeed",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-vapid-uranus-lozspeed",
+   "img": true
   },
   {
    "name": "Weevil",
@@ -120,7 +190,12 @@
    "model": "BF Weevil",
    "category": "Compactes",
    "hp": 120,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bf-bf-weevil",
+   "img": true
   },
   {
    "name": "Asea",
@@ -128,7 +203,12 @@
    "model": "Asea Sedan",
    "category": "Berlines",
    "hp": 140,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-asea-sedan",
+   "img": true
   },
   {
    "name": "Asea (neige)",
@@ -136,7 +216,12 @@
    "model": "Asea Snow & Stickerbomb Spec",
    "category": "Berlines",
    "hp": 140,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-asea-snow-stickerbomb-spec",
+   "img": true
   },
   {
    "name": "Asterope",
@@ -144,7 +229,12 @@
    "model": "Asterope Comfort Sedan",
    "category": "Berlines",
    "hp": 180,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "karin-asterope-comfort-sedan",
+   "img": true
   },
   {
    "name": "Asterope GZ",
@@ -152,7 +242,12 @@
    "model": "Asterope GZ Modern Sedan",
    "category": "Berlines",
    "hp": 220,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "karin-asterope-gz-modern-sedan",
+   "img": true
   },
   {
    "name": "Chavos V6",
@@ -160,7 +255,12 @@
    "model": "Chavos V6 Executive",
    "category": "Berlines",
    "hp": 320,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dundreary-chavos-v6-executive",
+   "img": true
   },
   {
    "name": "Cinquemila",
@@ -168,7 +268,12 @@
    "model": "Cinquemila Sport Sedan",
    "category": "Berlines",
    "hp": 580,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "lampadati-cinquemila-sport-sedan",
+   "img": true
   },
   {
    "name": "Cognoscenti",
@@ -176,7 +281,12 @@
    "model": "Cognoscenti Luxury V12",
    "category": "Berlines",
    "hp": 500,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-cognoscenti-luxury-v12",
+   "img": true
   },
   {
    "name": "Cognoscenti 55",
@@ -184,7 +294,12 @@
    "model": "Cognoscenti 55 Short Wheelbase",
    "category": "Berlines",
    "hp": 500,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-cognoscenti-55-short-wheelbase",
+   "img": true
   },
   {
    "name": "Deity",
@@ -192,7 +307,12 @@
    "model": "Deity Modern Luxury Sedan",
    "category": "Berlines",
    "hp": 550,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-deity-modern-luxury-sedan",
+   "img": true
   },
   {
    "name": "Emperor",
@@ -200,7 +320,12 @@
    "model": "Emperor Classic Sedan",
    "category": "Berlines",
    "hp": 180,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-emperor-classic-sedan",
+   "img": true
   },
   {
    "name": "Emperor (neige)",
@@ -208,7 +333,12 @@
    "model": "Emperor Beater & Patina Spec",
    "category": "Berlines",
    "hp": 175,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-emperor-beater-patina-spec",
+   "img": true
   },
   {
    "name": "Fugitive",
@@ -216,7 +346,12 @@
    "model": "Fugitive V8 Performance",
    "category": "Berlines",
    "hp": 350,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "cheval-fugitive-v8-performance",
+   "img": true
   },
   {
    "name": "Glendale",
@@ -224,7 +359,12 @@
    "model": "Glendale Classic Sedan",
    "category": "Berlines",
    "hp": 160,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Diesel",
+   "gearbox": "Automatique",
+   "slug": "benefactor-glendale-classic-sedan",
+   "img": true
   },
   {
    "name": "Glendale Custom",
@@ -232,7 +372,12 @@
    "model": "Glendale Custom Lowrider",
    "category": "Berlines",
    "hp": 200,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-glendale-custom-lowrider",
+   "img": true
   },
   {
    "name": "Hardy Way",
@@ -240,7 +385,12 @@
    "model": "Hardy Way Cruiser",
    "category": "Berlines",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dundreary-hardy-way-cruiser",
+   "img": true
   },
   {
    "name": "Ingot",
@@ -248,7 +398,12 @@
    "model": "Ingot Wagon Estate",
    "category": "Berlines",
    "hp": 150,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vulcar-ingot-wagon-estate",
+   "img": true
   },
   {
    "name": "Intruder",
@@ -256,7 +411,12 @@
    "model": "Intruder Sport Sedan",
    "category": "Berlines",
    "hp": 210,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "karin-intruder-sport-sedan",
+   "img": true
   },
   {
    "name": "Minimus",
@@ -264,7 +424,12 @@
    "model": "Minimus Modern Luxury Sedan",
    "category": "Berlines",
    "hp": 600,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-minimus-modern-luxury-sedan",
+   "img": true
   },
   {
    "name": "Premier",
@@ -272,7 +437,12 @@
    "model": "Premier Sedan",
    "category": "Berlines",
    "hp": 170,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-premier-sedan",
+   "img": true
   },
   {
    "name": "Regina",
@@ -280,7 +450,12 @@
    "model": "Regina Station Wagon",
    "category": "Berlines",
    "hp": 150,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dundreary-regina-station-wagon",
+   "img": true
   },
   {
    "name": "Revolter",
@@ -288,7 +463,12 @@
    "model": "Revolter Luxury Sport Sedan",
    "category": "Berlines",
    "hp": 480,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-revolter-luxury-sport-sedan",
+   "img": true
   },
   {
    "name": "Rhinehart",
@@ -296,7 +476,12 @@
    "model": "Rhinehart Touring Wagon",
    "category": "Berlines",
    "hp": 450,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-rhinehart-touring-wagon",
+   "img": true
   },
   {
    "name": "Schafter",
@@ -304,7 +489,12 @@
    "model": "Schafter Sedan Sport",
    "category": "Berlines",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-schafter-sedan-sport",
+   "img": true
   },
   {
    "name": "Schafter LWB",
@@ -312,7 +502,12 @@
    "model": "Schafter Long Wheelbase",
    "category": "Berlines",
    "hp": 450,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-schafter-long-wheelbase",
+   "img": true
   },
   {
    "name": "Stafford",
@@ -320,7 +515,12 @@
    "model": "Stafford Classic Limousine",
    "category": "Berlines",
    "hp": 200,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "enus-stafford-classic-limousine",
+   "img": true
   },
   {
    "name": "Stanier",
@@ -328,7 +528,12 @@
    "model": "Stanier V8 Sedan",
    "category": "Berlines",
    "hp": 240,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-stanier-v8-sedan",
+   "img": true
   },
   {
    "name": "Stratum",
@@ -336,7 +541,12 @@
    "model": "Stratum Twin-Turbo Wagon",
    "category": "Berlines",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "zirconium-stratum-twin-turbo-wagon",
+   "img": true
   },
   {
    "name": "Stretch",
@@ -344,7 +554,12 @@
    "model": "Stretch Presidential Limousine",
    "category": "Berlines",
    "hp": 300,
-   "seats": 6
+   "seats": 6,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dundreary-stretch-presidential-limousine",
+   "img": true
   },
   {
    "name": "Super Diamond",
@@ -352,7 +567,12 @@
    "model": "Super Diamond V12",
    "category": "Berlines",
    "hp": 450,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-super-diamond-v12",
+   "img": true
   },
   {
    "name": "Surge",
@@ -360,7 +580,12 @@
    "model": "Surge Electric Sedan",
    "category": "Berlines",
    "hp": 180,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "cheval-surge-electric-sedan",
+   "img": true
   },
   {
    "name": "Tailgater",
@@ -368,7 +593,12 @@
    "model": "Tailgater V6 Sedan",
    "category": "Berlines",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-tailgater-v6-sedan",
+   "img": true
   },
   {
    "name": "Tailgater S",
@@ -376,7 +606,12 @@
    "model": "Tailgater S Performance",
    "category": "Berlines",
    "hp": 450,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-tailgater-s-performance",
+   "img": true
   },
   {
    "name": "Vorschlaghammer",
@@ -384,7 +619,12 @@
    "model": "Vorschlaghammer AMG Classic",
    "category": "Berlines",
    "hp": 385,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-vorschlaghammer-amg-classic",
+   "img": true
   },
   {
    "name": "Warrener",
@@ -392,7 +632,12 @@
    "model": "Warrener Sedan Heritage",
    "category": "Berlines",
    "hp": 160,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-warrener-sedan-heritage",
+   "img": true
   },
   {
    "name": "Washington",
@@ -400,7 +645,12 @@
    "model": "Washington V8 Sedan",
    "category": "Berlines",
    "hp": 240,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-washington-v8-sedan",
+   "img": true
   },
   {
    "name": "Buffalo EVX",
@@ -408,7 +658,12 @@
    "model": "Buffalo EVX Muscle Coupe",
    "category": "Coupés",
    "hp": 800,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "bravado-buffalo-evx-muscle-coupe",
+   "img": true
   },
   {
    "name": "Cognoscenti Cabrio",
@@ -416,7 +671,12 @@
    "model": "Cognoscenti Cabrio GT",
    "category": "Coupés",
    "hp": 560,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-cognoscenti-cabrio-gt",
+   "img": true
   },
   {
    "name": "Exemplar",
@@ -424,7 +684,12 @@
    "model": "Exemplar 4-Door Coupe GT",
    "category": "Coupés",
    "hp": 470,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-exemplar-4-door-coupe-gt",
+   "img": true
   },
   {
    "name": "F620",
@@ -432,7 +697,12 @@
    "model": "F620 Sport Coupe",
    "category": "Coupés",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ocelot-f620-sport-coupe",
+   "img": true
   },
   {
    "name": "Felon",
@@ -440,7 +710,12 @@
    "model": "Felon Grand Tourer",
    "category": "Coupés",
    "hp": 400,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "lampadati-felon-grand-tourer",
+   "img": true
   },
   {
    "name": "Felon GT",
@@ -448,7 +723,12 @@
    "model": "Felon GT Convertible",
    "category": "Coupés",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "lampadati-felon-gt-convertible",
+   "img": true
   },
   {
    "name": "FR36",
@@ -456,7 +736,12 @@
    "model": "FR36 Drift Coupe",
    "category": "Coupés",
    "hp": 480,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "fathom-fr36-drift-coupe",
+   "img": true
   },
   {
    "name": "Jackal",
@@ -464,7 +749,12 @@
    "model": "Jackal Executive Coupe",
    "category": "Coupés",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ocelot-jackal-executive-coupe",
+   "img": true
   },
   {
    "name": "Kanjo SJ",
@@ -472,7 +762,12 @@
    "model": "Kanjo SJ Japanese Coupe",
    "category": "Coupés",
    "hp": 220,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-kanjo-sj-japanese-coupe",
+   "img": true
   },
   {
    "name": "Oracle",
@@ -480,7 +775,12 @@
    "model": "Oracle Gen 2 Luxury Coupe",
    "category": "Coupés",
    "hp": 350,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-oracle-gen-2-luxury-coupe",
+   "img": true
   },
   {
    "name": "Oracle XS",
@@ -488,7 +788,12 @@
    "model": "Oracle XS Classic",
    "category": "Coupés",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-oracle-xs-classic",
+   "img": true
   },
   {
    "name": "Postlude",
@@ -496,7 +801,12 @@
    "model": "Postlude Vintage Coupe",
    "category": "Coupés",
    "hp": 160,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-postlude-vintage-coupe",
+   "img": true
   },
   {
    "name": "Previon",
@@ -504,7 +814,12 @@
    "model": "Previon 90s Coupe",
    "category": "Coupés",
    "hp": 250,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-previon-90s-coupe",
+   "img": true
   },
   {
    "name": "Sentinel",
@@ -512,7 +827,12 @@
    "model": "Sentinel Convertible",
    "category": "Coupés",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-sentinel-convertible",
+   "img": true
   },
   {
    "name": "Sentinel XS",
@@ -520,7 +840,12 @@
    "model": "Sentinel XS Tuner Coupe",
    "category": "Coupés",
    "hp": 343,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "ubermacht-sentinel-xs-tuner-coupe",
+   "img": true
   },
   {
    "name": "Sultan RS",
@@ -528,7 +853,12 @@
    "model": "Sultan RS Super Coupe",
    "category": "Coupés",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-sultan-rs-super-coupe",
+   "img": true
   },
   {
    "name": "Windsor",
@@ -536,7 +866,12 @@
    "model": "Windsor V12 Luxury Coupe",
    "category": "Coupés",
    "hp": 624,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-windsor-v12-luxury-coupe",
+   "img": true
   },
   {
    "name": "Windsor Drop",
@@ -544,7 +879,12 @@
    "model": "Windsor Drop Convertible 4-Door",
    "category": "Coupés",
    "hp": 624,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-windsor-drop-convertible-4-door",
+   "img": true
   },
   {
    "name": "Zion",
@@ -552,7 +892,12 @@
    "model": "Zion Grand Tourer",
    "category": "Coupés",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-zion-grand-tourer",
+   "img": true
   },
   {
    "name": "Zion Cabrio",
@@ -560,7 +905,12 @@
    "model": "Zion Cabrio",
    "category": "Coupés",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-zion-cabrio",
+   "img": true
   },
   {
    "name": "10F",
@@ -568,7 +918,12 @@
    "model": "10F R8 Sport",
    "category": "Sportives",
    "hp": 560,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-10f-r8-sport",
+   "img": true
   },
   {
    "name": "10F Widebody",
@@ -576,7 +931,12 @@
    "model": "10F Widebody Edition",
    "category": "Sportives",
    "hp": 620,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-10f-widebody-edition",
+   "img": true
   },
   {
    "name": "300R",
@@ -584,7 +944,12 @@
    "model": "300R Modern Sport",
    "category": "Sportives",
    "hp": 400,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-300r-modern-sport",
+   "img": true
   },
   {
    "name": "8F Drafter",
@@ -592,7 +957,12 @@
    "model": "8F Drafter Quattro",
    "category": "Sportives",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-8f-drafter-quattro",
+   "img": true
   },
   {
    "name": "9F",
@@ -600,7 +970,12 @@
    "model": "9F V10 Sport",
    "category": "Sportives",
    "hp": 525,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-9f-v10-sport",
+   "img": true
   },
   {
    "name": "9F Cabrio",
@@ -608,7 +983,12 @@
    "model": "9F Cabrio Spyder",
    "category": "Sportives",
    "hp": 525,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "obey-9f-cabrio-spyder",
+   "img": true
   },
   {
    "name": "Alpha",
@@ -616,7 +996,12 @@
    "model": "Alpha Sport Coupe",
    "category": "Sportives",
    "hp": 430,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-alpha-sport-coupe",
+   "img": true
   },
   {
    "name": "Banshee",
@@ -624,7 +1009,12 @@
    "model": "Banshee Roadster",
    "category": "Sportives",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-banshee-roadster",
+   "img": true
   },
   {
    "name": "Banshee 900R",
@@ -632,7 +1022,12 @@
    "model": "Banshee 900R Widebody",
    "category": "Sportives",
    "hp": 560,
-   "seats": 2
+   "seats": 2,
+   "trunk": 25,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-banshee-900r-widebody",
+   "img": true
   },
   {
    "name": "Bestia GTS",
@@ -640,7 +1035,12 @@
    "model": "Bestia GTS Shooting Brake",
    "category": "Sportives",
    "hp": 680,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "grotti-bestia-gts-shooting-brake",
+   "img": true
   },
   {
    "name": "Blista Go Go Monkey",
@@ -648,7 +1048,12 @@
    "model": "Dinka Blista Go Go Monkey",
    "category": "Sportives",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dinka-dinka-blista-go-go-monkey",
+   "img": true
   },
   {
    "name": "Buffalo",
@@ -656,7 +1061,12 @@
    "model": "Buffalo Classic V8",
    "category": "Sportives",
    "hp": 340,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-buffalo-classic-v8",
+   "img": true
   },
   {
    "name": "Buffalo S",
@@ -664,7 +1074,12 @@
    "model": "Buffalo S Performance",
    "category": "Sportives",
    "hp": 470,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-buffalo-s-performance",
+   "img": true
   },
   {
    "name": "Buffalo Sprunk",
@@ -672,7 +1087,12 @@
    "model": "Buffalo Sprunk Race Edition",
    "category": "Sportives",
    "hp": 480,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-buffalo-sprunk-race-edition",
+   "img": true
   },
   {
    "name": "Buffalo STX",
@@ -680,7 +1100,12 @@
    "model": "Buffalo STX Hellfire",
    "category": "Sportives",
    "hp": 707,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-buffalo-stx-hellfire",
+   "img": true
   },
   {
    "name": "Carbonizzare",
@@ -688,7 +1113,12 @@
    "model": "Carbonizzare Hardtop Convertible",
    "category": "Sportives",
    "hp": 570,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "grotti-carbonizzare-hardtop-convertible",
+   "img": true
   },
   {
    "name": "Comet",
@@ -696,7 +1126,12 @@
    "model": "Comet Classic Coupe",
    "category": "Sportives",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pfister-comet-classic-coupe",
+   "img": true
   },
   {
    "name": "Comet S2",
@@ -704,7 +1139,12 @@
    "model": "Comet S2 Modern Coupe",
    "category": "Sportives",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pfister-comet-s2-modern-coupe",
+   "img": true
   },
   {
    "name": "Comet S2 Cabrio",
@@ -712,7 +1152,12 @@
    "model": "Comet S2 Cabrio",
    "category": "Sportives",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pfister-comet-s2-cabrio",
+   "img": true
   },
   {
    "name": "Comet SR",
@@ -720,7 +1165,12 @@
    "model": "Comet SR Track Weapon",
    "category": "Sportives",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pfister-comet-sr-track-weapon",
+   "img": true
   },
   {
    "name": "Coquette",
@@ -728,7 +1178,12 @@
    "model": "Coquette C7 Sport",
    "category": "Sportives",
    "hp": 460,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "invetero-coquette-c7-sport",
+   "img": true
   },
   {
    "name": "Cypher",
@@ -736,7 +1191,12 @@
    "model": "Cypher M Coupe",
    "category": "Sportives",
    "hp": 510,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-cypher-m-coupe",
+   "img": true
   },
   {
    "name": "Elegy Rétro Custom",
@@ -744,7 +1204,12 @@
    "model": "Elegy Retro Custom",
    "category": "Sportives",
    "hp": 550,
-   "seats": 2
+   "seats": 2,
+   "trunk": 50,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-elegy-retro-custom",
+   "img": true
   },
   {
    "name": "Elegy RH8",
@@ -752,7 +1217,12 @@
    "model": "Elegy RH8 Modern GT",
    "category": "Sportives",
    "hp": 545,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "annis-elegy-rh8-modern-gt",
+   "img": true
   },
   {
    "name": "Envisage",
@@ -760,7 +1230,12 @@
    "model": "Envisage Concept Coupe",
    "category": "Sportives",
    "hp": 650,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "overflod-envisage-concept-coupe",
+   "img": true
   },
   {
    "name": "Euros",
@@ -768,7 +1243,12 @@
    "model": "Euros Sport Coupe",
    "category": "Sportives",
    "hp": 300,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-euros-sport-coupe",
+   "img": true
   },
   {
    "name": "Euros X32",
@@ -776,7 +1256,12 @@
    "model": "Annis Euros X32",
    "category": "Sportives",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "annis-annis-euros-x32",
+   "img": true
   },
   {
    "name": "Feltzer",
@@ -784,7 +1269,12 @@
    "model": "Feltzer DTM Sport",
    "category": "Sportives",
    "hp": 520,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-feltzer-dtm-sport",
+   "img": true
   },
   {
    "name": "Furore GT",
@@ -792,7 +1282,12 @@
    "model": "Furore GT Sports",
    "category": "Sportives",
    "hp": 480,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "lampadati-furore-gt-sports",
+   "img": true
   },
   {
    "name": "Fusiade",
@@ -800,7 +1295,12 @@
    "model": "Schyster Fusiade",
    "category": "Sportives",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "schyster-schyster-fusiade",
+   "img": true
   },
   {
    "name": "Fusilade",
@@ -808,7 +1308,12 @@
    "model": "Fusilade V6 Sport",
    "category": "Sportives",
    "hp": 300,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "schyster-fusilade-v6-sport",
+   "img": true
   },
   {
    "name": "Growler",
@@ -816,7 +1321,12 @@
    "model": "Growler Cayman Coupe",
    "category": "Sportives",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pfister-growler-cayman-coupe",
+   "img": true
   },
   {
    "name": "Hotring Everon",
@@ -824,7 +1334,12 @@
    "model": "Hotring Everon Stock Car",
    "category": "Sportives",
    "hp": 750,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-hotring-everon-stock-car",
+   "img": true
   },
   {
    "name": "Imorgon",
@@ -832,7 +1347,12 @@
    "model": "Imorgon Electric Sports",
    "category": "Sportives",
    "hp": 600,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "overflod-imorgon-electric-sports",
+   "img": true
   },
   {
    "name": "Jester",
@@ -840,7 +1360,12 @@
    "model": "Jester Modern Hybrid Sports",
    "category": "Sportives",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Hybride",
+   "gearbox": "Automatique",
+   "slug": "dinka-jester-modern-hybrid-sports",
+   "img": true
   },
   {
    "name": "Jester (Racecar)",
@@ -848,7 +1373,12 @@
    "model": "Jester Race Edition",
    "category": "Sportives",
    "hp": 530,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Hybride",
+   "gearbox": "Automatique",
+   "slug": "dinka-jester-race-edition",
+   "img": true
   },
   {
    "name": "Jester RR",
@@ -856,7 +1386,12 @@
    "model": "Jester RR Modern Coupe",
    "category": "Sportives",
    "hp": 382,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dinka-jester-rr-modern-coupe",
+   "img": true
   },
   {
    "name": "Jugular",
@@ -864,7 +1399,12 @@
    "model": "Jugular V8 Performance",
    "category": "Sportives",
    "hp": 600,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ocelot-jugular-v8-performance",
+   "img": true
   },
   {
    "name": "Khamelion",
@@ -872,7 +1412,12 @@
    "model": "Khamelion Electric GT",
    "category": "Sportives",
    "hp": 400,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "hijak-khamelion-electric-gt",
+   "img": true
   },
   {
    "name": "Komoda",
@@ -880,7 +1425,12 @@
    "model": "Komoda V6 Sport Sedan",
    "category": "Sportives",
    "hp": 505,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "lampadati-komoda-v6-sport-sedan",
+   "img": true
   },
   {
    "name": "Kuruma",
@@ -888,7 +1438,12 @@
    "model": "Kuruma Sport AWD",
    "category": "Sportives",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-kuruma-sport-awd",
+   "img": true
   },
   {
    "name": "Locust",
@@ -896,7 +1451,12 @@
    "model": "Locust Open-Top Roadcar",
    "category": "Sportives",
    "hp": 400,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "ocelot-locust-open-top-roadcar",
+   "img": true
   },
   {
    "name": "LSCM Jester RR",
@@ -904,7 +1464,12 @@
    "model": "Jester RR Car Meet Edition",
    "category": "Sportives",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dinka-jester-rr-car-meet-edition",
+   "img": true
   },
   {
    "name": "Lynx",
@@ -912,7 +1477,12 @@
    "model": "Lynx GT Sport",
    "category": "Sportives",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ocelot-lynx-gt-sport",
+   "img": true
   },
   {
    "name": "Massacro",
@@ -920,7 +1490,12 @@
    "model": "Massacro GT Coupe",
    "category": "Sportives",
    "hp": 520,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-massacro-gt-coupe",
+   "img": true
   },
   {
    "name": "Massacro (Racecar)",
@@ -928,7 +1503,12 @@
    "model": "Massacro Race Version",
    "category": "Sportives",
    "hp": 550,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-massacro-race-version",
+   "img": true
   },
   {
    "name": "Neon",
@@ -936,7 +1516,12 @@
    "model": "Neon EV Performance Sedan",
    "category": "Sportives",
    "hp": 760,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "pfister-neon-ev-performance-sedan",
+   "img": true
   },
   {
    "name": "Niobe",
@@ -944,7 +1529,12 @@
    "model": "Niobe Hybrid Sport",
    "category": "Sportives",
    "hp": 820,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Hybride",
+   "gearbox": "Automatique",
+   "slug": "enus-niobe-hybrid-sport",
+   "img": true
   },
   {
    "name": "Omnis e-GT",
@@ -952,7 +1542,12 @@
    "model": "Omnis e-GT Electric RS",
    "category": "Sportives",
    "hp": 637,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "obey-omnis-e-gt-electric-rs",
+   "img": true
   },
   {
    "name": "Panthere",
@@ -960,7 +1555,12 @@
    "model": "Panthere Sport Coupe",
    "category": "Sportives",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "annis-panthere-sport-coupe",
+   "img": true
   },
   {
    "name": "Pariah",
@@ -968,7 +1568,12 @@
    "model": "Pariah Ultra Sport",
    "category": "Sportives",
    "hp": 550,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ocelot-pariah-ultra-sport",
+   "img": true
   },
   {
    "name": "Penumbra",
@@ -976,7 +1581,12 @@
    "model": "Penumbra Street Coupe",
    "category": "Sportives",
    "hp": 260,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "maibatsu-penumbra-street-coupe",
+   "img": true
   },
   {
    "name": "Penumbra FF",
@@ -984,7 +1594,12 @@
    "model": "Penumbra FF Tuner Edition",
    "category": "Sportives",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "maibatsu-penumbra-ff-tuner-edition",
+   "img": true
   },
   {
    "name": "Raiden",
@@ -992,7 +1607,12 @@
    "model": "Raiden EV Sport Sedan",
    "category": "Sportives",
    "hp": 700,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "coil-raiden-ev-sport-sedan",
+   "img": true
   },
   {
    "name": "Rapid GT",
@@ -1000,7 +1620,12 @@
    "model": "Rapid GT Coupe",
    "category": "Sportives",
    "hp": 510,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-rapid-gt-coupe",
+   "img": true
   },
   {
    "name": "Rapid GT (variante)",
@@ -1008,7 +1633,12 @@
    "model": "Rapid GT Convertible",
    "category": "Sportives",
    "hp": 510,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-rapid-gt-convertible",
+   "img": true
   },
   {
    "name": "Rapid GT X",
@@ -1016,7 +1646,12 @@
    "model": "Rapid GT X Performance",
    "category": "Sportives",
    "hp": 580,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-rapid-gt-x-performance",
+   "img": true
   },
   {
    "name": "Ruston",
@@ -1024,7 +1659,12 @@
    "model": "Ruston Track Lightweight",
    "category": "Sportives",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "hijak-ruston-track-lightweight",
+   "img": true
   },
   {
    "name": "Schafter V12",
@@ -1032,7 +1672,12 @@
    "model": "Schafter V12 Performance",
    "category": "Sportives",
    "hp": 520,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-schafter-v12-performance",
+   "img": true
   },
   {
    "name": "Schwartzer",
@@ -1040,7 +1685,12 @@
    "model": "Schwartzer V8 Sport",
    "category": "Sportives",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-schwartzer-v8-sport",
+   "img": true
   },
   {
    "name": "Sentinel XS4",
@@ -1048,7 +1698,12 @@
    "model": "Sentinel XS4 Sports Sedan",
    "category": "Sportives",
    "hp": 510,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-sentinel-xs4-sports-sedan",
+   "img": true
   },
   {
    "name": "Seven-70",
@@ -1056,7 +1711,12 @@
    "model": "Seven-70 Super Coupe",
    "category": "Sportives",
    "hp": 730,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-seven-70-super-coupe",
+   "img": true
   },
   {
    "name": "SM722",
@@ -1064,7 +1724,12 @@
    "model": "SM722 Roadster Speedster",
    "category": "Sportives",
    "hp": 650,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-sm722-roadster-speedster",
+   "img": true
   },
   {
    "name": "Specter",
@@ -1072,7 +1737,12 @@
    "model": "Specter GT",
    "category": "Sportives",
    "hp": 550,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-specter-gt",
+   "img": true
   },
   {
    "name": "Specter Custom",
@@ -1080,7 +1750,12 @@
    "model": "Specter Custom Widebody",
    "category": "Sportives",
    "hp": 600,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dewbauchee-specter-custom-widebody",
+   "img": true
   },
   {
    "name": "Sugoi",
@@ -1088,7 +1763,12 @@
    "model": "Sugoi Type-R Hatchback",
    "category": "Sportives",
    "hp": 320,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-sugoi-type-r-hatchback",
+   "img": true
   },
   {
    "name": "Sultan",
@@ -1096,7 +1776,12 @@
    "model": "Sultan 4WD Sport",
    "category": "Sportives",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-sultan-4wd-sport",
+   "img": true
   },
   {
    "name": "Sultan Classic",
@@ -1104,7 +1789,12 @@
    "model": "Sultan Classic 90s Rally",
    "category": "Sportives",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-sultan-classic-90s-rally",
+   "img": true
   },
   {
    "name": "Surano",
@@ -1112,7 +1802,12 @@
    "model": "Surano Roadster V8",
    "category": "Sportives",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-surano-roadster-v8",
+   "img": true
   },
   {
    "name": "V-STR",
@@ -1120,7 +1815,12 @@
    "model": "V-STR Performance Sedan",
    "category": "Sportives",
    "hp": 640,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-v-str-performance-sedan",
+   "img": true
   },
   {
    "name": "Vectre",
@@ -1128,7 +1828,12 @@
    "model": "Vectre F Sport Coupe",
    "category": "Sportives",
    "hp": 472,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "emperor-vectre-f-sport-coupe",
+   "img": true
   },
   {
    "name": "Verlierer",
@@ -1136,7 +1841,12 @@
    "model": "Verlierer GT Sports",
    "category": "Sportives",
    "hp": 480,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-verlierer-gt-sports",
+   "img": true
   },
   {
    "name": "190Z",
@@ -1144,7 +1854,12 @@
    "model": "190Z Fairlady GT",
    "category": "Sportives Classiques",
    "hp": 270,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-190z-fairlady-gt",
+   "img": true
   },
   {
    "name": "Ardent",
@@ -1152,7 +1867,12 @@
    "model": "Ardent Classic GT",
    "category": "Sportives Classiques",
    "hp": 310,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "ocelot-ardent-classic-gt",
+   "img": true
   },
   {
    "name": "Astrale",
@@ -1160,7 +1880,12 @@
    "model": "Astrale Classic V12",
    "category": "Sportives Classiques",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "pegassi-astrale-classic-v12",
+   "img": true
   },
   {
    "name": "Casco",
@@ -1168,7 +1893,12 @@
    "model": "Casco GT V8",
    "category": "Sportives Classiques",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "lampadati-casco-gt-v8",
+   "img": true
   },
   {
    "name": "Cheburek",
@@ -1176,7 +1906,12 @@
    "model": "Cheburek Classic Rally",
    "category": "Sportives Classiques",
    "hp": 160,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "rune-cheburek-classic-rally",
+   "img": true
   },
   {
    "name": "Cheetah Classic",
@@ -1184,7 +1919,12 @@
    "model": "Cheetah Classic 80s",
    "category": "Sportives Classiques",
    "hp": 390,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-cheetah-classic-80s",
+   "img": true
   },
   {
    "name": "Coquette Classic",
@@ -1192,7 +1932,12 @@
    "model": "Coquette Classic Convertible",
    "category": "Sportives Classiques",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "invetero-coquette-classic-convertible",
+   "img": true
   },
   {
    "name": "Coquette D1",
@@ -1200,7 +1945,12 @@
    "model": "Coquette D1 Roadster",
    "category": "Sportives Classiques",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "invetero-coquette-d1-roadster",
+   "img": true
   },
   {
    "name": "Coquette D5",
@@ -1208,7 +1958,12 @@
    "model": "Coquette D5 Grand Sport",
    "category": "Sportives Classiques",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "invetero-coquette-d5-grand-sport",
+   "img": true
   },
   {
    "name": "Dynasty",
@@ -1216,7 +1971,12 @@
    "model": "Dynasty Taxi Vintage",
    "category": "Sportives Classiques",
    "hp": 110,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "weeny-dynasty-taxi-vintage",
+   "img": true
   },
   {
    "name": "Fagaloa",
@@ -1224,7 +1984,12 @@
    "model": "Fagaloa Wagon Estate",
    "category": "Sportives Classiques",
    "hp": 120,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vulcar-fagaloa-wagon-estate",
+   "img": true
   },
   {
    "name": "Fränken Stange",
@@ -1232,7 +1997,12 @@
    "model": "Fränken Stange Hotrod",
    "category": "Sportives Classiques",
    "hp": 400,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "albany-franken-stange-hotrod",
+   "img": true
   },
   {
    "name": "GT500",
@@ -1240,7 +2010,12 @@
    "model": "GT500 Berlinetta",
    "category": "Sportives Classiques",
    "hp": 300,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-gt500-berlinetta",
+   "img": true
   },
   {
    "name": "GT750",
@@ -1248,7 +2023,12 @@
    "model": "GT750 Competizione",
    "category": "Sportives Classiques",
    "hp": 370,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-gt750-competizione",
+   "img": true
   },
   {
    "name": "Infernus Classic",
@@ -1256,7 +2036,12 @@
    "model": "Infernus Classic V12",
    "category": "Sportives Classiques",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "pegassi-infernus-classic-v12",
+   "img": true
   },
   {
    "name": "Itali Classic",
@@ -1264,7 +2049,12 @@
    "model": "Itali GT Classic",
    "category": "Sportives Classiques",
    "hp": 340,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "progen-itali-gt-classic",
+   "img": true
   },
   {
    "name": "JB 700W",
@@ -1272,7 +2062,12 @@
    "model": "JB 700W Secret Agent",
    "category": "Sportives Classiques",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dewbauchee-jb-700w-secret-agent",
+   "img": true
   },
   {
    "name": "Mamba",
@@ -1280,7 +2075,12 @@
    "model": "Mamba V8 Roadster",
    "category": "Sportives Classiques",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-mamba-v8-roadster",
+   "img": true
   },
   {
    "name": "Michelli GT",
@@ -1288,7 +2088,12 @@
    "model": "Michelli GT Veloce",
    "category": "Sportives Classiques",
    "hp": 220,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "lampadati-michelli-gt-veloce",
+   "img": true
   },
   {
    "name": "Monroe",
@@ -1296,7 +2101,12 @@
    "model": "Monroe V12 Miura",
    "category": "Sportives Classiques",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "pegassi-monroe-v12-miura",
+   "img": true
   },
   {
    "name": "Nebula Turbo",
@@ -1304,7 +2114,12 @@
    "model": "Nebula Turbo Rally",
    "category": "Sportives Classiques",
    "hp": 240,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vulcar-nebula-turbo-rally",
+   "img": true
   },
   {
    "name": "Peyote",
@@ -1312,7 +2127,12 @@
    "model": "Peyote Convertible",
    "category": "Sportives Classiques",
    "hp": 200,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-peyote-convertible",
+   "img": true
   },
   {
    "name": "Peyote Custom",
@@ -1320,7 +2140,12 @@
    "model": "Peyote Custom Lowrider",
    "category": "Sportives Classiques",
    "hp": 250,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-peyote-custom-lowrider",
+   "img": true
   },
   {
    "name": "Pigalle",
@@ -1328,7 +2153,12 @@
    "model": "Pigalle GT Coupe",
    "category": "Sportives Classiques",
    "hp": 210,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "lampadati-pigalle-gt-coupe",
+   "img": true
   },
   {
    "name": "Rapid GT Classic",
@@ -1336,7 +2166,12 @@
    "model": "Rapid GT Classic V8",
    "category": "Sportives Classiques",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dewbauchee-rapid-gt-classic-v8",
+   "img": true
   },
   {
    "name": "Retinue",
@@ -1344,7 +2179,12 @@
    "model": "Retinue Mk1 Rally",
    "category": "Sportives Classiques",
    "hp": 180,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-retinue-mk1-rally",
+   "img": true
   },
   {
    "name": "Retinue MK II",
@@ -1352,7 +2192,12 @@
    "model": "Retinue Mk2 Escort",
    "category": "Sportives Classiques",
    "hp": 210,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-retinue-mk2-escort",
+   "img": true
   },
   {
    "name": "Roosevelt",
@@ -1360,7 +2205,12 @@
    "model": "Roosevelt Gangster Vintage",
    "category": "Sportives Classiques",
    "hp": 180,
-   "seats": 6
+   "seats": 6,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "albany-roosevelt-gangster-vintage",
+   "img": true
   },
   {
    "name": "Roosevelt Valor",
@@ -1368,7 +2218,12 @@
    "model": "Roosevelt Valor Executive",
    "category": "Sportives Classiques",
    "hp": 210,
-   "seats": 6
+   "seats": 6,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "albany-roosevelt-valor-executive",
+   "img": true
   },
   {
    "name": "Savestra",
@@ -1376,7 +2231,12 @@
    "model": "Savestra Rotary Coupe",
    "category": "Sportives Classiques",
    "hp": 230,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-savestra-rotary-coupe",
+   "img": true
   },
   {
    "name": "Stinger",
@@ -1384,7 +2244,12 @@
    "model": "Stinger Convertible",
    "category": "Sportives Classiques",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-stinger-convertible",
+   "img": true
   },
   {
    "name": "Stinger GT",
@@ -1392,7 +2257,12 @@
    "model": "Stinger GT Berlinetta",
    "category": "Sportives Classiques",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-stinger-gt-berlinetta",
+   "img": true
   },
   {
    "name": "Stinger TT",
@@ -1400,7 +2270,12 @@
    "model": "Stinger TT Twin Turbo",
    "category": "Sportives Classiques",
    "hp": 410,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-stinger-tt-twin-turbo",
+   "img": true
   },
   {
    "name": "Stirling GT",
@@ -1408,7 +2283,12 @@
    "model": "Stirling GT Gullwing",
    "category": "Sportives Classiques",
    "hp": 330,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "benefactor-stirling-gt-gullwing",
+   "img": true
   },
   {
    "name": "Swinger",
@@ -1416,7 +2296,12 @@
    "model": "Swinger Endurance Le Mans",
    "category": "Sportives Classiques",
    "hp": 460,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "ocelot-swinger-endurance-le-mans",
+   "img": true
   },
   {
    "name": "Torero",
@@ -1424,7 +2309,12 @@
    "model": "Torero Countach V12",
    "category": "Sportives Classiques",
    "hp": 430,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "pegassi-torero-countach-v12",
+   "img": true
   },
   {
    "name": "Turismo Classic",
@@ -1432,7 +2322,12 @@
    "model": "Turismo Classic F40",
    "category": "Sportives Classiques",
    "hp": 478,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "grotti-turismo-classic-f40",
+   "img": true
   },
   {
    "name": "Viseris",
@@ -1440,7 +2335,12 @@
    "model": "Viseris GT V8",
    "category": "Sportives Classiques",
    "hp": 390,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "lampadati-viseris-gt-v8",
+   "img": true
   },
   {
    "name": "Z-Type",
@@ -1448,7 +2348,12 @@
    "model": "Z-Type Atlantic 1937",
    "category": "Sportives Classiques",
    "hp": 230,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "truffade-z-type-atlantic-1937",
+   "img": true
   },
   {
    "name": "Zion Classic",
@@ -1456,7 +2361,12 @@
    "model": "Zion Classic M Coupe",
    "category": "Sportives Classiques",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "ubermacht-zion-classic-m-coupe",
+   "img": true
   },
   {
    "name": "Brigham",
@@ -1464,7 +2374,12 @@
    "model": "Brigham Classic Estate",
    "category": "Grosse cylindrées",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-brigham-classic-estate",
+   "img": true
   },
   {
    "name": "Broadway",
@@ -1472,7 +2387,12 @@
    "model": "Broadway Vintage Coupe",
    "category": "Grosse cylindrées",
    "hp": 220,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "classique-broadway-vintage-coupe",
+   "img": true
   },
   {
    "name": "Clique",
@@ -1480,7 +2400,12 @@
    "model": "Clique 50s Muscle",
    "category": "Grosse cylindrées",
    "hp": 300,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-clique-50s-muscle",
+   "img": true
   },
   {
    "name": "Clique Wagon",
@@ -1488,7 +2413,12 @@
    "model": "Clique Wagon",
    "category": "Grosse cylindrées",
    "hp": 330,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-clique-wagon",
+   "img": true
   },
   {
    "name": "Deviant",
@@ -1496,7 +2426,12 @@
    "model": "Deviant Custom Hemi",
    "category": "Grosse cylindrées",
    "hp": 480,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "schyster-deviant-custom-hemi",
+   "img": true
   },
   {
    "name": "Dominator",
@@ -1504,7 +2439,12 @@
    "model": "Dominator V8 Muscle",
    "category": "Grosse cylindrées",
    "hp": 435,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-dominator-v8-muscle",
+   "img": true
   },
   {
    "name": "Dominator ASP",
@@ -1512,7 +2452,12 @@
    "model": "Dominator ASP SVT",
    "category": "Grosse cylindrées",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-dominator-asp-svt",
+   "img": true
   },
   {
    "name": "Dominator FX",
@@ -1520,7 +2465,12 @@
    "model": "Dominator FX Foxbody",
    "category": "Grosse cylindrées",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-dominator-fx-foxbody",
+   "img": true
   },
   {
    "name": "Dominator GT",
@@ -1528,7 +2478,12 @@
    "model": "Dominator GT Convertible",
    "category": "Grosse cylindrées",
    "hp": 510,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-dominator-gt-convertible",
+   "img": true
   },
   {
    "name": "Dominator GTT",
@@ -1536,7 +2491,12 @@
    "model": "Dominator GTT Fastback",
    "category": "Grosse cylindrées",
    "hp": 490,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-dominator-gtt-fastback",
+   "img": true
   },
   {
    "name": "Dominator GTX",
@@ -1544,7 +2504,12 @@
    "model": "Dominator GTX Widebody",
    "category": "Grosse cylindrées",
    "hp": 520,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-dominator-gtx-widebody",
+   "img": true
   },
   {
    "name": "Dukes",
@@ -1552,7 +2517,12 @@
    "model": "Dukes Charger V8",
    "category": "Grosse cylindrées",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "imponte-dukes-charger-v8",
+   "img": true
   },
   {
    "name": "Ellie",
@@ -1560,7 +2530,12 @@
    "model": "Ellie GT500 Eleonor",
    "category": "Grosse cylindrées",
    "hp": 550,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-ellie-gt500-eleonor",
+   "img": true
   },
   {
    "name": "Eudora",
@@ -1568,7 +2543,12 @@
    "model": "Eudora Deluxe Hardtop",
    "category": "Grosse cylindrées",
    "hp": 260,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "classique-eudora-deluxe-hardtop",
+   "img": true
   },
   {
    "name": "Gauntlet",
@@ -1576,7 +2556,12 @@
    "model": "Gauntlet V8 SRT",
    "category": "Grosse cylindrées",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-gauntlet-v8-srt",
+   "img": true
   },
   {
    "name": "Gauntlet Classic",
@@ -1584,7 +2569,12 @@
    "model": "Gauntlet Classic 1970",
    "category": "Grosse cylindrées",
    "hp": 410,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-gauntlet-classic-1970",
+   "img": true
   },
   {
    "name": "Gauntlet Classic Custom",
@@ -1592,7 +2582,12 @@
    "model": "Gauntlet Classic Superbird",
    "category": "Grosse cylindrées",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-gauntlet-classic-superbird",
+   "img": true
   },
   {
    "name": "Gauntlet Hellfire",
@@ -1600,7 +2595,12 @@
    "model": "Gauntlet Hellfire SRT Demon",
    "category": "Grosse cylindrées",
    "hp": 707,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-gauntlet-hellfire-srt-demon",
+   "img": true
   },
   {
    "name": "Gauntlet Redwood",
@@ -1608,7 +2608,12 @@
    "model": "Gauntlet Redwood Race Spec",
    "category": "Grosse cylindrées",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-gauntlet-redwood-race-spec",
+   "img": true
   },
   {
    "name": "Greenwood",
@@ -1616,7 +2621,12 @@
    "model": "Greenwood Sedan V8",
    "category": "Grosse cylindrées",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-greenwood-sedan-v8",
+   "img": true
   },
   {
    "name": "Hermes",
@@ -1624,7 +2634,12 @@
    "model": "Hermes Lead Sled",
    "category": "Grosse cylindrées",
    "hp": 400,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "albany-hermes-lead-sled",
+   "img": true
   },
   {
    "name": "Hotknife",
@@ -1632,7 +2647,12 @@
    "model": "Hotknife Hot Rod",
    "category": "Grosse cylindrées",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-hotknife-hot-rod",
+   "img": true
   },
   {
    "name": "Hotring Hellfire",
@@ -1640,7 +2660,12 @@
    "model": "Hotring Hellfire Stockcar",
    "category": "Grosse cylindrées",
    "hp": 750,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-hotring-hellfire-stockcar",
+   "img": true
   },
   {
    "name": "Hustler",
@@ -1648,7 +2673,12 @@
    "model": "Hustler Coupe 30s",
    "category": "Grosse cylindrées",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-hustler-coupe-30s",
+   "img": true
   },
   {
    "name": "Impaler",
@@ -1656,7 +2686,12 @@
    "model": "Impaler V8 Hardtop",
    "category": "Grosse cylindrées",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-impaler-v8-hardtop",
+   "img": true
   },
   {
    "name": "Impaler Anticipation",
@@ -1664,7 +2699,12 @@
    "model": "Impaler Anticipation Edition",
    "category": "Grosse cylindrées",
    "hp": 390,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-impaler-anticipation-edition",
+   "img": true
   },
   {
    "name": "Impaler LX",
@@ -1672,7 +2712,12 @@
    "model": "Impaler LX Coupe",
    "category": "Grosse cylindrées",
    "hp": 370,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-impaler-lx-coupe",
+   "img": true
   },
   {
    "name": "Impaler-SZ",
@@ -1680,7 +2725,12 @@
    "model": "Impaler SZ SS Sedan",
    "category": "Grosse cylindrées",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-impaler-sz-ss-sedan",
+   "img": true
   },
   {
    "name": "Imperator Apocalypse",
@@ -1688,7 +2738,12 @@
    "model": "Imperator Interceptor",
    "category": "Grosse cylindrées",
    "hp": 500,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-imperator-interceptor",
+   "img": true
   },
   {
    "name": "Nightshade",
@@ -1696,7 +2751,12 @@
    "model": "Nightshade V8 Coupe",
    "category": "Grosse cylindrées",
    "hp": 400,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "imponte-nightshade-v8-coupe",
+   "img": true
   },
   {
    "name": "Peyote Gasser",
@@ -1704,7 +2764,12 @@
    "model": "Vapid Peyote Gasser",
    "category": "Grosse cylindrées",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-vapid-peyote-gasser",
+   "img": true
   },
   {
    "name": "Phoenix",
@@ -1712,7 +2777,12 @@
    "model": "Phoenix Trans-Am V8",
    "category": "Grosse cylindrées",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "imponte-phoenix-trans-am-v8",
+   "img": true
   },
   {
    "name": "Picador",
@@ -1720,7 +2790,12 @@
    "model": "Picador El Camino Pickup",
    "category": "Grosse cylindrées",
    "hp": 290,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "cheval-picador-el-camino-pickup",
+   "img": true
   },
   {
    "name": "Rat-Truck",
@@ -1728,7 +2803,12 @@
    "model": "Rat-Truck Restored V8",
    "category": "Grosse cylindrées",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "rat-rat-truck-restored-v8",
+   "img": true
   },
   {
    "name": "Ruiner",
@@ -1736,7 +2816,12 @@
    "model": "Ruiner 450 T-Top",
    "category": "Grosse cylindrées",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "imponte-ruiner-450-t-top",
+   "img": true
   },
   {
    "name": "Ruiner ZZ-8",
@@ -1744,7 +2829,12 @@
    "model": "Ruiner ZZ-8 Ram Air",
    "category": "Grosse cylindrées",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "imponte-ruiner-zz-8-ram-air",
+   "img": true
   },
   {
    "name": "Slamvan",
@@ -1752,7 +2842,12 @@
    "model": "Vapid Slamvan",
    "category": "Grosse cylindrées",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-vapid-slamvan",
+   "img": true
   },
   {
    "name": "Slamvan Custom",
@@ -1760,7 +2855,12 @@
    "model": "Vapid Slamvan Custom",
    "category": "Grosse cylindrées",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-vapid-slamvan-custom",
+   "img": true
   },
   {
    "name": "Slamvan Du Lost",
@@ -1768,7 +2868,12 @@
    "model": "Vapid Slamvan Du Lost",
    "category": "Grosse cylindrées",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-vapid-slamvan-du-lost",
+   "img": true
   },
   {
    "name": "Stallion",
@@ -1776,7 +2881,12 @@
    "model": "Stallion Convertible V8",
    "category": "Grosse cylindrées",
    "hp": 340,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-stallion-convertible-v8",
+   "img": true
   },
   {
    "name": "Stallion Burger Shot",
@@ -1784,7 +2894,12 @@
    "model": "Stallion Burger Shot Race",
    "category": "Grosse cylindrées",
    "hp": 390,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-stallion-burger-shot-race",
+   "img": true
   },
   {
    "name": "Tahoma Coupe",
@@ -1792,7 +2907,12 @@
    "model": "Tahoma Coupe Lowrider",
    "category": "Grosse cylindrées",
    "hp": 310,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-tahoma-coupe-lowrider",
+   "img": true
   },
   {
    "name": "Tampa",
@@ -1800,7 +2920,12 @@
    "model": "Tampa Muscle Coupe",
    "category": "Grosse cylindrées",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-tampa-muscle-coupe",
+   "img": true
   },
   {
    "name": "Tampa GT",
@@ -1808,7 +2933,12 @@
    "model": "Tampa GT Supercharged",
    "category": "Grosse cylindrées",
    "hp": 580,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-tampa-gt-supercharged",
+   "img": true
   },
   {
    "name": "Tulip",
@@ -1816,7 +2946,12 @@
    "model": "Tulip 4-Door V8",
    "category": "Grosse cylindrées",
    "hp": 350,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-tulip-4-door-v8",
+   "img": true
   },
   {
    "name": "Tulip M-100",
@@ -1824,7 +2959,12 @@
    "model": "Tulip M-100 Coupe",
    "category": "Grosse cylindrées",
    "hp": 330,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-tulip-m-100-coupe",
+   "img": true
   },
   {
    "name": "Vamos",
@@ -1832,7 +2972,12 @@
    "model": "Vamos SS 396",
    "category": "Grosse cylindrées",
    "hp": 390,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-vamos-ss-396",
+   "img": true
   },
   {
    "name": "Vigero",
@@ -1840,7 +2985,12 @@
    "model": "Vigero 1st Gen",
    "category": "Grosse cylindrées",
    "hp": 370,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-vigero-1st-gen",
+   "img": true
   },
   {
    "name": "Vigero ZX",
@@ -1848,7 +2998,12 @@
    "model": "Vigero ZX Widebody SS",
    "category": "Grosse cylindrées",
    "hp": 650,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-vigero-zx-widebody-ss",
+   "img": true
   },
   {
    "name": "Vigero ZX Décapotable",
@@ -1856,7 +3011,12 @@
    "model": "Vigero ZX Convertible SS",
    "category": "Grosse cylindrées",
    "hp": 650,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-vigero-zx-convertible-ss",
+   "img": true
   },
   {
    "name": "Virgo",
@@ -1864,7 +3024,12 @@
    "model": "Virgo Coupe V8",
    "category": "Grosse cylindrées",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-virgo-coupe-v8",
+   "img": true
   },
   {
    "name": "Weevil Custom",
@@ -1872,7 +3037,12 @@
    "model": "Weevil Custom Hot Rod",
    "category": "Grosse cylindrées",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bf-weevil-custom-hot-rod",
+   "img": true
   },
   {
    "name": "Yosemite",
@@ -1880,7 +3050,12 @@
    "model": "Yosemite Slammed Truck",
    "category": "Grosse cylindrées",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-yosemite-slammed-truck",
+   "img": true
   },
   {
    "name": "Blade",
@@ -1888,7 +3063,12 @@
    "model": "Blade Gasser Special",
    "category": "Lowrider",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-blade-gasser-special",
+   "img": true
   },
   {
    "name": "Buccaneer",
@@ -1896,7 +3076,12 @@
    "model": "Buccaneer Hardtop V8",
    "category": "Lowrider",
    "hp": 340,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "albany-buccaneer-hardtop-v8",
+   "img": true
   },
   {
    "name": "Buccaneer Custom",
@@ -1904,7 +3089,12 @@
    "model": "Buccaneer Lowrider Custom",
    "category": "Lowrider",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-buccaneer-lowrider-custom",
+   "img": true
   },
   {
    "name": "Chino",
@@ -1912,7 +3102,12 @@
    "model": "Chino Classic V8",
    "category": "Lowrider",
    "hp": 310,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-chino-classic-v8",
+   "img": true
   },
   {
    "name": "Chino Custom",
@@ -1920,7 +3115,12 @@
    "model": "Chino Custom Lowrider",
    "category": "Lowrider",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-chino-custom-lowrider",
+   "img": true
   },
   {
    "name": "Faction",
@@ -1928,7 +3128,12 @@
    "model": "Faction Turbo Coupe",
    "category": "Lowrider",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "willard-faction-turbo-coupe",
+   "img": true
   },
   {
    "name": "Faction Custom",
@@ -1936,7 +3141,12 @@
    "model": "Faction Custom Lowrider",
    "category": "Lowrider",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "willard-faction-custom-lowrider",
+   "img": true
   },
   {
    "name": "Manana",
@@ -1944,7 +3154,12 @@
    "model": "Manana Hardtop Coupe",
    "category": "Lowrider",
    "hp": 190,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-manana-hardtop-coupe",
+   "img": true
   },
   {
    "name": "Manana Custom",
@@ -1952,7 +3167,12 @@
    "model": "Manana Custom Lowrider",
    "category": "Lowrider",
    "hp": 230,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-manana-custom-lowrider",
+   "img": true
   },
   {
    "name": "Moonbeam",
@@ -1960,7 +3180,12 @@
    "model": "Moonbeam Minivan V8",
    "category": "Lowrider",
    "hp": 200,
-   "seats": 4
+   "seats": 4,
+   "trunk": 200,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-moonbeam-minivan-v8",
+   "img": true
   },
   {
    "name": "Moonbeam Custom",
@@ -1968,7 +3193,12 @@
    "model": "Moonbeam Custom Lowrider",
    "category": "Lowrider",
    "hp": 260,
-   "seats": 4
+   "seats": 4,
+   "trunk": 200,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-moonbeam-custom-lowrider",
+   "img": true
   },
   {
    "name": "Primo",
@@ -1976,7 +3206,12 @@
    "model": "Primo Classic Sedan",
    "category": "Lowrider",
    "hp": 190,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-primo-classic-sedan",
+   "img": true
   },
   {
    "name": "Primo Custom",
@@ -1984,7 +3219,12 @@
    "model": "Primo Custom Lowrider",
    "category": "Lowrider",
    "hp": 220,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-primo-custom-lowrider",
+   "img": true
   },
   {
    "name": "Sabre Turbo",
@@ -1992,7 +3232,12 @@
    "model": "Sabre Turbo 454",
    "category": "Lowrider",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-sabre-turbo-454",
+   "img": true
   },
   {
    "name": "Sabre Turbo Custom",
@@ -2000,7 +3245,12 @@
    "model": "Sabre Turbo Custom Benny's",
    "category": "Lowrider",
    "hp": 480,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-sabre-turbo-custom-benny-s",
+   "img": true
   },
   {
    "name": "Tornado (V1)",
@@ -2008,7 +3258,12 @@
    "model": "Tornado Classic Coupe",
    "category": "Lowrider",
    "hp": 180,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-tornado-classic-coupe",
+   "img": true
   },
   {
    "name": "Tornado (V2)",
@@ -2016,7 +3271,12 @@
    "model": "Tornado Convertible V8",
    "category": "Lowrider",
    "hp": 210,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-tornado-convertible-v8",
+   "img": true
   },
   {
    "name": "Tornado Custom",
@@ -2024,7 +3284,12 @@
    "model": "Tornado Custom Lowrider",
    "category": "Lowrider",
    "hp": 240,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-tornado-custom-lowrider",
+   "img": true
   },
   {
    "name": "Virgo Classic",
@@ -2032,7 +3297,12 @@
    "model": "Virgo Classic Edition",
    "category": "Lowrider",
    "hp": 300,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-virgo-classic-edition",
+   "img": true
   },
   {
    "name": "Virgo Classic Custom",
@@ -2040,7 +3310,12 @@
    "model": "Virgo Classic Custom Benny's",
    "category": "Lowrider",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-virgo-classic-custom-benny-s",
+   "img": true
   },
   {
    "name": "Voodoo",
@@ -2048,7 +3323,12 @@
    "model": "Voodoo Vintage Patina",
    "category": "Lowrider",
    "hp": 250,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-voodoo-vintage-patina",
+   "img": true
   },
   {
    "name": "Voodoo Custom",
@@ -2056,7 +3336,12 @@
    "model": "Voodoo Custom Lowrider",
    "category": "Lowrider",
    "hp": 310,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-voodoo-custom-lowrider",
+   "img": true
   },
   {
    "name": "Chavos V6",
@@ -2064,7 +3349,12 @@
    "model": "Chavos V6 Sport Drift",
    "category": "Drift",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dundreary-chavos-v6-sport-drift",
+   "img": true
   },
   {
    "name": "Cheburek",
@@ -2072,7 +3362,12 @@
    "model": "Cheburek Tuning Drift",
    "category": "Drift",
    "hp": 250,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "rune-cheburek-tuning-drift",
+   "img": true
   },
   {
    "name": "Dominator FX",
@@ -2080,7 +3375,12 @@
    "model": "Dominator FX Fox Drift",
    "category": "Drift",
    "hp": 510,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-dominator-fx-fox-drift",
+   "img": true
   },
   {
    "name": "Euros",
@@ -2088,7 +3388,12 @@
    "model": "Euros Drift Tuned",
    "category": "Drift",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-euros-drift-tuned",
+   "img": true
   },
   {
    "name": "FR36",
@@ -2096,7 +3401,12 @@
    "model": "FR36 Drift Spec",
    "category": "Drift",
    "hp": 480,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "fathom-fr36-drift-spec",
+   "img": true
   },
   {
    "name": "Futo",
@@ -2104,7 +3414,12 @@
    "model": "Futo Classic Drift",
    "category": "Drift",
    "hp": 290,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-futo-classic-drift",
+   "img": true
   },
   {
    "name": "Futo GTX",
@@ -2112,7 +3427,12 @@
    "model": "Futo GTX Drift Master",
    "category": "Drift",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-futo-gtx-drift-master",
+   "img": true
   },
   {
    "name": "Gauntlet Hellfire",
@@ -2120,7 +3440,12 @@
    "model": "Gauntlet Hellfire Drift Spec",
    "category": "Drift",
    "hp": 700,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-gauntlet-hellfire-drift-spec",
+   "img": true
   },
   {
    "name": "Hardy",
@@ -2128,7 +3453,12 @@
    "model": "Hardy Drift Sedan",
    "category": "Drift",
    "hp": 420,
-   "seats": 4
+   "seats": 4,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-hardy-drift-sedan",
+   "img": true
   },
   {
    "name": "Jester Classic",
@@ -2136,7 +3466,12 @@
    "model": "Jester Classic Twin-Turbo",
    "category": "Drift",
    "hp": 430,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-jester-classic-twin-turbo",
+   "img": true
   },
   {
    "name": "Jester RR",
@@ -2144,7 +3479,12 @@
    "model": "Jester RR Track & Drift",
    "category": "Drift",
    "hp": 520,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dinka-jester-rr-track-drift",
+   "img": true
   },
   {
    "name": "Keitora",
@@ -2152,7 +3492,12 @@
    "model": "Keitora Mini Drift Truck",
    "category": "Drift",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-keitora-mini-drift-truck",
+   "img": true
   },
   {
    "name": "Remus",
@@ -2160,7 +3505,12 @@
    "model": "Remus Silvia Drift",
    "category": "Drift",
    "hp": 410,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-remus-silvia-drift",
+   "img": true
   },
   {
    "name": "RT3000",
@@ -2168,7 +3518,12 @@
    "model": "RT3000 Roadster Drift",
    "category": "Drift",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "dinka-rt3000-roadster-drift",
+   "img": true
   },
   {
    "name": "Sentinel XS",
@@ -2176,7 +3531,12 @@
    "model": "Sentinel XS Drift Line",
    "category": "Drift",
    "hp": 460,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-sentinel-xs-drift-line",
+   "img": true
   },
   {
    "name": "Tampa Drift",
@@ -2184,7 +3544,12 @@
    "model": "Tampa Drift V8 Muscle",
    "category": "Drift",
    "hp": 550,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-tampa-drift-v8-muscle",
+   "img": true
   },
   {
    "name": "Walton L35 de Drift",
@@ -2192,7 +3557,12 @@
    "model": "Walton L35 Custom Drift",
    "category": "Drift",
    "hp": 530,
-   "seats": 2
+   "seats": 2,
+   "trunk": 100,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-walton-l35-custom-drift",
+   "img": true
   },
   {
    "name": "Yosemite Drift",
@@ -2200,7 +3570,12 @@
    "model": "Yosemite Drift Truck",
    "category": "Drift",
    "hp": 580,
-   "seats": 2
+   "seats": 2,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-yosemite-drift-truck",
+   "img": true
   },
   {
    "name": "ZR350",
@@ -2208,7 +3583,12 @@
    "model": "ZR350 Rotary Drift",
    "category": "Drift",
    "hp": 440,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "annis-zr350-rotary-drift",
+   "img": true
   },
   {
    "name": "Calico GTF",
@@ -2216,7 +3596,12 @@
    "model": "Calico GTF Rally Turbo",
    "category": "Rallye",
    "hp": 300,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-calico-gtf-rally-turbo",
+   "img": true
   },
   {
    "name": "Comet Safari",
@@ -2224,7 +3609,12 @@
    "model": "Comet Safari Offroad GT",
    "category": "Rallye",
    "hp": 380,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "pfister-comet-safari-offroad-gt",
+   "img": true
   },
   {
    "name": "Flash GT",
@@ -2232,7 +3622,12 @@
    "model": "Flash GT Rally Spec",
    "category": "Rallye",
    "hp": 350,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-flash-gt-rally-spec",
+   "img": true
   },
   {
    "name": "GB200",
@@ -2240,7 +3635,12 @@
    "model": "GB200 Group B Rally",
    "category": "Rallye",
    "hp": 450,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-gb200-group-b-rally",
+   "img": true
   },
   {
    "name": "Issi Rallye",
@@ -2248,7 +3648,12 @@
    "model": "Issi Rallye Cross SUV",
    "category": "Rallye",
    "hp": 320,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "weeny-issi-rallye-cross-suv",
+   "img": true
   },
   {
    "name": "Issi Sport",
@@ -2256,7 +3661,12 @@
    "model": "Issi Sport AWD Rally",
    "category": "Rallye",
    "hp": 280,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "weeny-issi-sport-awd-rally",
+   "img": true
   },
   {
    "name": "La Coureuse",
@@ -2264,7 +3674,12 @@
    "model": "La Coureuse EV Rally Spec",
    "category": "Rallye",
    "hp": 420,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "penaud-la-coureuse-ev-rally-spec",
+   "img": true
   },
   {
    "name": "Omnis",
@@ -2272,7 +3687,12 @@
    "model": "Omnis Group B Legend",
    "category": "Rallye",
    "hp": 460,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "obey-omnis-group-b-legend",
+   "img": true
   },
   {
    "name": "Sentinel Classic Widebody",
@@ -2280,7 +3700,12 @@
    "model": "Sentinel Classic Widebody Rally",
    "category": "Rallye",
    "hp": 360,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "ubermacht-sentinel-classic-widebody-rally",
+   "img": true
   },
   {
    "name": "Sultan RS Classic",
@@ -2288,7 +3713,12 @@
    "model": "Sultan RS Classic 2-Door Rally",
    "category": "Rallye",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-sultan-rs-classic-2-door-rally",
+   "img": true
   },
   {
    "name": "Tropos Rallye",
@@ -2296,7 +3726,12 @@
    "model": "Tropos Rallye Stratos",
    "category": "Rallye",
    "hp": 310,
-   "seats": 2
+   "seats": 2,
+   "trunk": 75,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "lampadati-tropos-rallye-stratos",
+   "img": true
   },
   {
    "name": "Aleutian",
@@ -2304,7 +3739,12 @@
    "model": "Vapid Aleutian",
    "category": "SUV",
    "hp": 350,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-vapid-aleutian",
+   "img": true
   },
   {
    "name": "Astron",
@@ -2312,7 +3752,12 @@
    "model": "Astron Sport SUV",
    "category": "SUV",
    "hp": 440,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pfister-astron-sport-suv",
+   "img": true
   },
   {
    "name": "Baller",
@@ -2320,7 +3765,12 @@
    "model": "Baller Gen 1 Luxury SUV",
    "category": "SUV",
    "hp": 375,
-   "seats": 4
+   "seats": 4,
+   "trunk": 250,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "gallivanter-baller-gen-1-luxury-suv",
+   "img": true
   },
   {
    "name": "Baller II",
@@ -2328,7 +3778,12 @@
    "model": "Baller Modern Edition",
    "category": "SUV",
    "hp": 400,
-   "seats": 4
+   "seats": 4,
+   "trunk": 250,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "gallivanter-baller-modern-edition",
+   "img": true
   },
   {
    "name": "Baller LE",
@@ -2336,7 +3791,12 @@
    "model": "Baller LE Executive",
    "category": "SUV",
    "hp": 510,
-   "seats": 4
+   "seats": 4,
+   "trunk": 250,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "gallivanter-baller-le-executive",
+   "img": true
   },
   {
    "name": "Baller LE LWB",
@@ -2344,7 +3804,12 @@
    "model": "Baller LE Long Wheelbase",
    "category": "SUV",
    "hp": 510,
-   "seats": 5
+   "seats": 5,
+   "trunk": 250,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "gallivanter-baller-le-long-wheelbase",
+   "img": true
   },
   {
    "name": "Baller ST",
@@ -2352,7 +3817,12 @@
    "model": "Baller ST Sport",
    "category": "SUV",
    "hp": 575,
-   "seats": 4
+   "seats": 4,
+   "trunk": 250,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "gallivanter-baller-st-sport",
+   "img": true
   },
   {
    "name": "Baller ST-D",
@@ -2360,7 +3830,12 @@
    "model": "Baller ST-D Performance Edition",
    "category": "SUV",
    "hp": 600,
-   "seats": 4
+   "seats": 4,
+   "trunk": 250,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "gallivanter-baller-st-d-performance-edition",
+   "img": true
   },
   {
    "name": "Beejay XL",
@@ -2368,7 +3843,12 @@
    "model": "Beejay XL All-Terrain",
    "category": "SUV",
    "hp": 260,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "karin-beejay-xl-all-terrain",
+   "img": true
   },
   {
    "name": "Cavalcade (new)",
@@ -2376,7 +3856,12 @@
    "model": "Cavalcade Gen 2",
    "category": "SUV",
    "hp": 360,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-cavalcade-gen-2",
+   "img": true
   },
   {
    "name": "Cavalcade (old)",
@@ -2384,7 +3869,12 @@
    "model": "Cavalcade Classic V8",
    "category": "SUV",
    "hp": 320,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-cavalcade-classic-v8",
+   "img": true
   },
   {
    "name": "Cavalcade XL",
@@ -2392,7 +3882,12 @@
    "model": "Cavalcade XL Executive",
    "category": "SUV",
    "hp": 420,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "albany-cavalcade-xl-executive",
+   "img": true
   },
   {
    "name": "Dubsta",
@@ -2400,7 +3895,12 @@
    "model": "Dubsta V8 4x4",
    "category": "SUV",
    "hp": 400,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-dubsta-v8-4x4",
+   "img": true
   },
   {
    "name": "Dubsta Luxury",
@@ -2408,7 +3908,12 @@
    "model": "Dubsta Luxury Edition",
    "category": "SUV",
    "hp": 500,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-dubsta-luxury-edition",
+   "img": true
   },
   {
    "name": "FQ 2",
@@ -2416,7 +3921,12 @@
    "model": "FQ 2 Crossover",
    "category": "SUV",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "fathom-fq-2-crossover",
+   "img": true
   },
   {
    "name": "Granger",
@@ -2424,7 +3934,12 @@
    "model": "Granger 3500 V8",
    "category": "SUV",
    "hp": 350,
-   "seats": 8
+   "seats": 8,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-granger-3500-v8",
+   "img": true
   },
   {
    "name": "Granger 3600LX",
@@ -2432,7 +3947,12 @@
    "model": "Granger 3600LX Executive",
    "category": "SUV",
    "hp": 420,
-   "seats": 8
+   "seats": 8,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-granger-3600lx-executive",
+   "img": true
   },
   {
    "name": "Gresley",
@@ -2440,7 +3960,12 @@
    "model": "Gresley V6 All-Wheel-Drive",
    "category": "SUV",
    "hp": 290,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "bravado-gresley-v6-all-wheel-drive",
+   "img": true
   },
   {
    "name": "Habanero",
@@ -2448,7 +3973,12 @@
    "model": "Habanero Crossover",
    "category": "SUV",
    "hp": 250,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "emperor-habanero-crossover",
+   "img": true
   },
   {
    "name": "Huntley S",
@@ -2456,7 +3986,12 @@
    "model": "Huntley S Sport Luxury",
    "category": "SUV",
    "hp": 450,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-huntley-s-sport-luxury",
+   "img": true
   },
   {
    "name": "I-Wagen",
@@ -2464,7 +3999,12 @@
    "model": "I-Wagen EV SUV",
    "category": "SUV",
    "hp": 408,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Électrique",
+   "gearbox": "Automatique",
+   "slug": "obey-i-wagen-ev-suv",
+   "img": true
   },
   {
    "name": "Jubilee",
@@ -2472,7 +4012,12 @@
    "model": "Jubilee Ultra Luxury SUV",
    "category": "SUV",
    "hp": 563,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "enus-jubilee-ultra-luxury-suv",
+   "img": true
   },
   {
    "name": "Landstalker",
@@ -2480,7 +4025,12 @@
    "model": "Landstalker V8 Classic",
    "category": "SUV",
    "hp": 300,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dundreary-landstalker-v8-classic",
+   "img": true
   },
   {
    "name": "Landstalker XL",
@@ -2488,7 +4038,12 @@
    "model": "Landstalker XL modern",
    "category": "SUV",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "dundreary-landstalker-xl-modern",
+   "img": true
   },
   {
    "name": "Mesa",
@@ -2496,7 +4051,12 @@
    "model": "Mesa 4x4 Offroad",
    "category": "SUV",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "canis-mesa-4x4-offroad",
+   "img": true
   },
   {
    "name": "Novak",
@@ -2504,7 +4064,12 @@
    "model": "Novak Sport Crossover",
    "category": "SUV",
    "hp": 550,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "lampadati-novak-sport-crossover",
+   "img": true
   },
   {
    "name": "Patriot",
@@ -2512,7 +4077,12 @@
    "model": "Patriot Military SUV",
    "category": "SUV",
    "hp": 350,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "mammoth-patriot-military-suv",
+   "img": true
   },
   {
    "name": "Patriot Stretch",
@@ -2520,7 +4090,12 @@
    "model": "Patriot Stretch Limousine",
    "category": "SUV",
    "hp": 400,
-   "seats": 6
+   "seats": 6,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "mammoth-patriot-stretch-limousine",
+   "img": true
   },
   {
    "name": "Radius",
@@ -2528,7 +4103,12 @@
    "model": "Radius Crossover V6",
    "category": "SUV",
    "hp": 285,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-radius-crossover-v6",
+   "img": true
   },
   {
    "name": "Rebla GTS",
@@ -2536,7 +4116,12 @@
    "model": "Rebla GTS Performance",
    "category": "SUV",
    "hp": 600,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "ubermacht-rebla-gts-performance",
+   "img": true
   },
   {
    "name": "Rocoto",
@@ -2544,7 +4129,12 @@
    "model": "Rocoto Sport SUV",
    "category": "SUV",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pegassi-rocoto-sport-suv",
+   "img": true
   },
   {
    "name": "Seminole",
@@ -2552,7 +4142,12 @@
    "model": "Seminole V8 4WD",
    "category": "SUV",
    "hp": 305,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "canis-seminole-v8-4wd",
+   "img": true
   },
   {
    "name": "Serrano",
@@ -2560,7 +4155,12 @@
    "model": "Serrano V6 Luxury",
    "category": "SUV",
    "hp": 270,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-serrano-v6-luxury",
+   "img": true
   },
   {
    "name": "Toros",
@@ -2568,7 +4168,12 @@
    "model": "Toros Super SUV V12",
    "category": "SUV",
    "hp": 650,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "pegassi-toros-super-suv-v12",
+   "img": true
   },
   {
    "name": "Vivanite",
@@ -2576,7 +4181,12 @@
    "model": "Vivanite Modern SUV",
    "category": "SUV",
    "hp": 450,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "karin-vivanite-modern-suv",
+   "img": true
   },
   {
    "name": "Vivanite (Platinum)",
@@ -2584,7 +4194,12 @@
    "model": "Vivanite Platinum Edition",
    "category": "SUV",
    "hp": 500,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "karin-vivanite-platinum-edition",
+   "img": true
   },
   {
    "name": "Woodlander",
@@ -2592,7 +4207,12 @@
    "model": "Woodlander Classic 4x4",
    "category": "SUV",
    "hp": 380,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-woodlander-classic-4x4",
+   "img": true
   },
   {
    "name": "XLS",
@@ -2600,7 +4220,12 @@
    "model": "XLS Executive SUV",
    "category": "SUV",
    "hp": 440,
-   "seats": 4
+   "seats": 4,
+   "trunk": 150,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "benefactor-xls-executive-suv",
+   "img": true
   },
   {
    "name": "Burrito",
@@ -2608,7 +4233,12 @@
    "model": "Burrito Standard",
    "category": "Vans",
    "hp": 220,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-burrito-standard",
+   "img": true
   },
   {
    "name": "Burrito de Gang (V1)",
@@ -2616,7 +4246,12 @@
    "model": "Burrito Gang Edition",
    "category": "Vans",
    "hp": 210,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "declasse-burrito-gang-edition",
+   "img": true
   },
   {
    "name": "Burrito de Gang (V2)",
@@ -2624,7 +4259,12 @@
    "model": "Burrito Gang Custom Heavy",
    "category": "Vans",
    "hp": 260,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "declasse-burrito-gang-custom-heavy",
+   "img": true
   },
   {
    "name": "Minivan",
@@ -2632,7 +4272,12 @@
    "model": "Minivan Family",
    "category": "Vans",
    "hp": 190,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-minivan-family",
+   "img": true
   },
   {
    "name": "Minivan Custom",
@@ -2640,7 +4285,12 @@
    "model": "Minivan Custom Lowrider",
    "category": "Vans",
    "hp": 220,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-minivan-custom-lowrider",
+   "img": true
   },
   {
    "name": "Paradise",
@@ -2648,7 +4298,12 @@
    "model": "Paradise Beach Van",
    "category": "Vans",
    "hp": 200,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bravado-paradise-beach-van",
+   "img": true
   },
   {
    "name": "Speedo",
@@ -2656,7 +4311,12 @@
    "model": "Speedo Commercial",
    "category": "Vans",
    "hp": 240,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Diesel",
+   "gearbox": "Automatique",
+   "slug": "vapid-speedo-commercial",
+   "img": true
   },
   {
    "name": "Speedo Custom",
@@ -2664,7 +4324,12 @@
    "model": "Speedo Custom Armored",
    "category": "Vans",
    "hp": 270,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Diesel",
+   "gearbox": "Automatique",
+   "slug": "vapid-speedo-custom-armored",
+   "img": true
   },
   {
    "name": "Surfer",
@@ -2672,7 +4337,12 @@
    "model": "Surfer Classic",
    "category": "Vans",
    "hp": 110,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bf-surfer-classic",
+   "img": true
   },
   {
    "name": "Surfer (V2 Clean)",
@@ -2680,7 +4350,12 @@
    "model": "Surfer Restored Edition",
    "category": "Vans",
    "hp": 115,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bf-surfer-restored-edition",
+   "img": true
   },
   {
    "name": "Surfer Custom",
@@ -2688,7 +4363,12 @@
    "model": "Surfer Custom Surfboard",
    "category": "Vans",
    "hp": 130,
-   "seats": 4
+   "seats": 4,
+   "trunk": 300,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "bf-surfer-custom-surfboard",
+   "img": true
   },
   {
    "name": "Youga",
@@ -2696,7 +4376,12 @@
    "model": "Youga Standard",
    "category": "Vans",
    "hp": 180,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Manuelle",
+   "slug": "vapid-youga-standard",
+   "img": true
   },
   {
    "name": "Youga Classic",
@@ -2704,7 +4389,12 @@
    "model": "Youga Classic",
    "category": "Vans",
    "hp": 200,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-youga-classic",
+   "img": true
   },
   {
    "name": "Youga Classic 4x4",
@@ -2712,7 +4402,12 @@
    "model": "Youga Classic 4WD Offroad",
    "category": "Vans",
    "hp": 230,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-youga-classic-4wd-offroad",
+   "img": true
   },
   {
    "name": "Youga Custom",
@@ -2720,7 +4415,12 @@
    "model": "Youga Custom Sport",
    "category": "Vans",
    "hp": 240,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-youga-custom-sport",
+   "img": true
   },
   {
    "name": "Youga Custom (VIP)",
@@ -2728,7 +4428,12 @@
    "model": "Youga Custom Executive",
    "category": "Vans",
    "hp": 280,
-   "seats": 4
+   "seats": 4,
+   "trunk": 400,
+   "fuel": "Essence",
+   "gearbox": "Automatique",
+   "slug": "vapid-youga-custom-executive",
+   "img": true
   }
  ]
 }

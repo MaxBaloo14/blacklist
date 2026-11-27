@@ -349,6 +349,13 @@ export function startMock(port = 54321) {
       const chunks = []; for await (const ch of req) chunks.push(ch); const raw = Buffer.concat(chunks);
       let body = null; if (raw.length && (req.headers["content-type"] ?? "").includes("json")) { try { body = JSON.parse(raw.toString()); } catch { body = null; } }
       if (process.env.MOCK_LOG) console.log(req.method, url.pathname + url.search);
+      if (url.pathname.startsWith("/__vehicle_img/")) {   // images de test pour la liste des véhicules (mise en page uniquement)
+        const slug = decodeURIComponent(url.pathname.split("/").pop()); let h = 0; for (const c of slug) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+        const sharp = (await import("sharp")).default;
+        const png = await sharp({ create: { width: 640, height: 400, channels: 3, background: { r: 40 + (h % 80), g: 50 + ((h >> 8) % 60), b: 60 + ((h >> 16) % 90) } } })
+          .composite([{ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400"><rect x="120" y="190" width="400" height="90" rx="40" fill="#e8e8e8" opacity=".9"/><rect x="190" y="130" width="260" height="80" rx="34" fill="#f4f4f4"/><circle cx="210" cy="285" r="38" fill="#111"/><circle cx="430" cy="285" r="38" fill="#111"/></svg>`) }]).png().toBuffer();
+        res.writeHead(200, { "Content-Type": "image/png", "Content-Length": png.length }); return res.end(png);
+      }
       if (url.pathname.startsWith("/auth/v1")) return await auth(req, res, url, body ?? {});
       if (url.pathname.startsWith("/rest/v1/")) return await rest(req, res, url, body);
       if (url.pathname.startsWith("/storage/v1")) return await storage(req, res, url, raw);

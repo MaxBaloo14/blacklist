@@ -13,8 +13,42 @@ const total = await p.locator(".veh-card").count();
 check("la page affiche toute la liste", total === data.length, `${total}/${data.length}`);
 check("aucun mot du jeu ou du serveur sur la page", !/\bgta\b|fivem|rp\b|storylife|pdm|concessionnaire/i.test(await text(p)));
 await p.screenshot({ path: `${SHOT}/400-vehicules-liste.png`, fullPage: false });
+{
+  // miniatures : servies par ce site (jamais depuis un site tiers), chargées, et sans adresse d'origine dans la page
+  const html = await p.content();
+  check("aucune adresse d'image tierce dans la page", !/wikia|gtabase|bing\.net|sportskeeda|pinimg|gtacars/i.test(html));
+  const first = p.locator(".veh-card .veh-img").first();
+  await first.scrollIntoViewIfNeeded(); await p.waitForTimeout(1500);
+  const info = await first.evaluate((i) => ({ src: i.getAttribute("src"), ok: i.complete && i.naturalWidth > 0 }));
+  check("miniature chargée depuis /api/vehicle-img/…", /^\/api\/vehicle-img\/[a-z0-9-]+$/.test(info.src ?? "") && info.ok, JSON.stringify(info));
+  const r1 = await p.request.get(BASE + "/api/vehicle-img/inconnu-xyz"), r2 = await p.request.get(BASE + "/api/vehicle-img/..%2f..%2fetc");
+  check("identifiant inconnu ou piégé : 404", r1.status() === 404 && r2.status() === 404, `${r1.status()} ${r2.status()}`);
+  const ok = await p.request.get(BASE + "/api/vehicle-img/" + data[0].slug);
+  check("miniature WebP mise en cache longue durée", ok.status() === 200 && /image\/webp/.test(ok.headers()["content-type"]) && /immutable/.test(ok.headers()["cache-control"]), `${ok.status()} ${ok.headers()["cache-control"]}`);
+}
 await p.fill("input[type=search]", "blista");
 check("recherche instantanée (sans accent ni casse)", (await p.locator(".veh-card").count()) >= 1 && /Blista/i.test(await p.locator(".veh-card").first().innerText()));
+// tri par puissance, filtre par marque, présentation compacte, fiche détaillée
+await p.fill("input[type=search]", "");
+await p.selectOption("select[aria-label='Trier']", "hp-desc");
+const maxHp = Math.max(...data.map((v) => v.hp ?? 0));
+check("tri par puissance décroissante", (await p.locator(".veh-card").first().innerText()).includes(String(maxHp)), await p.locator(".veh-card").first().innerText().then((t) => t.replace(/\n/g, " ")));
+await p.selectOption("select[aria-label='Trier']", "az");
+const brand = data[0].brand;
+await p.selectOption("select[aria-label='Marque']", brand);
+check("filtre par marque", (await p.locator(".veh-card").count()) === data.filter((v) => v.brand === brand).length);
+await p.selectOption("select[aria-label='Marque']", "*");
+await p.locator("button[aria-label='Liste compacte']").click();
+check("présentation compacte : barres de puissance masquées", (await p.locator(".veh-card-row").count()) === data.length && (await p.locator(".veh-card .veh-bar").count()) === 0);
+await p.locator("button[aria-label='Cartes']").click();
+await p.locator(".veh-card").first().click();
+await p.waitForTimeout(500);
+const open = await p.locator("dialog.veh-dialog[open]").count();
+const dt = open ? await p.locator("dialog.veh-dialog").innerText() : "";
+check("clic : fiche détaillée (puissance, places, boîte, carburant, autorisé)", open === 1 && /PUISSANCE/i.test(dt) && /PLACES/i.test(dt) && /AUTORIS/i.test(dt) && /BO[IÎ]TE/i.test(dt), dt.replace(/\n+/g, " ").slice(0, 160));
+await p.screenshot({ path: `${SHOT}/405-vehicule-fiche.png`, fullPage: false });
+await p.keyboard.press("Escape"); await p.waitForTimeout(300);
+check("Échap ferme la fiche", (await p.locator("dialog.veh-dialog[open]").count()) === 0);
 await p.fill("input[type=search]", "xyzxyz");
 check("recherche sans résultat : message", /Aucun véhicule/i.test(await text(p)));
 await p.fill("input[type=search]", "");

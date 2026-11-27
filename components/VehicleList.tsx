@@ -62,11 +62,11 @@ export default function VehicleList({ vehicles, categories }: { vehicles: Vehicl
         <button type="button" onClick={(e) => show(v, e.currentTarget)} className={`veh-card w-full text-left ${view === "list" ? "veh-card-row" : ""}`}>
           <span className="veh-card-icon" aria-hidden><Thumb v={v} /></span>
           <span className="min-w-0 flex-1">
-            <span className="font-display block truncate text-[24px] uppercase leading-[1.1]">{v.name}</span>
+            <span className="veh-name font-display block truncate text-[24px] uppercase leading-[1.1]">{v.name}</span>
             <span className="font-cond mt-0.5 block truncate text-[13px] uppercase tracking-[.14em] text-metal">{v.brand}{view === "grid" ? "" : ` · ${v.model}`}</span>
             {view === "grid" && <span className="veh-bar mt-2.5" aria-hidden><i style={{ width: `${hpPct(v)}%` }} /></span>}
           </span>
-          <span className="flex shrink-0 flex-col items-end gap-1">
+          <span className="veh-hpbox flex shrink-0 flex-col items-end gap-1">
             <span className="font-display text-2xl leading-none text-red">{v.hp ?? "—"}</span>
             <span className="font-cond text-[10px] font-bold tracking-[.24em] text-metal">{t("CH")}</span>
           </span>
@@ -83,19 +83,15 @@ export default function VehicleList({ vehicles, categories }: { vehicles: Vehicl
           <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-metal" aria-hidden />
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Rechercher un véhicule ou une marque…")} className="input !pl-11" />
         </label>
-        <select aria-label={t("Marque")} value={brand} onChange={(e) => setBrand(e.target.value)} className="input !w-auto">
+        <select aria-label={t("Marque")} value={brand} onChange={(e) => setBrand(e.target.value)} className="input veh-select">
           <option value="*">{t("Toutes les marques")}</option>
           {brands.map((b) => <option key={b} value={b}>{b}</option>)}
         </select>
-        <select aria-label={t("Trier")} value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="input !w-auto">
+        <select aria-label={t("Trier")} value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="input veh-select">
           <option value="az">{t("Nom (A → Z)")}</option>
           <option value="hp-desc">{t("Puissance décroissante")}</option>
           <option value="hp-asc">{t("Puissance croissante")}</option>
         </select>
-        <div role="group" aria-label={t("Présentation")} className="flex">
-          <button type="button" onClick={() => setView("grid")} aria-pressed={view === "grid"} aria-label={t("Cartes")} className={`veh-view ${view === "grid" ? "veh-view-on" : ""}`}><LayoutGrid size={18} /></button>
-          <button type="button" onClick={() => setView("list")} aria-pressed={view === "list"} aria-label={t("Liste compacte")} className={`veh-view ${view === "list" ? "veh-view-on" : ""}`}><List size={18} /></button>
-        </div>
       </div>
 
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
@@ -109,6 +105,10 @@ export default function VehicleList({ vehicles, categories }: { vehicles: Vehicl
       <div className="mb-10 flex items-center gap-4">
         <div className="font-cond text-sm tracking-[.2em] text-metal" aria-live="polite" data-count>{t("{n} véhicule(s)", { n: shown.length })}</div>
         {reset && <button type="button" onClick={() => { setQ(""); setCat("*"); setBrand("*"); }} className="font-cond text-xs font-bold tracking-[.2em] text-red hover:text-white">{t("RÉINITIALISER")}</button>}
+        <div role="group" aria-label={t("Présentation")} className="ml-auto flex">
+          <button type="button" onClick={() => setView("grid")} aria-pressed={view === "grid"} aria-label={t("Cartes")} className={`veh-view ${view === "grid" ? "veh-view-on" : ""}`}><LayoutGrid size={18} /></button>
+          <button type="button" onClick={() => setView("list")} aria-pressed={view === "list"} aria-label={t("Liste compacte")} className={`veh-view ${view === "list" ? "veh-view-on" : ""}`}><List size={18} /></button>
+        </div>
       </div>
 
       <div className="grid gap-12">
@@ -118,7 +118,7 @@ export default function VehicleList({ vehicles, categories }: { vehicles: Vehicl
               <h2 className="flex items-center gap-3 font-display text-3xl uppercase tracking-wide">{sort === "az" && (() => { const I = catIcon(c); return <I size={26} strokeWidth={1.5} className="text-red" aria-hidden />; })()}{t(c)}</h2>
               <span className="font-cond text-xs tracking-[.2em] text-metal">{list.length}</span>
             </div>
-            <ul className={view === "grid" ? "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" : "grid grid-cols-1 gap-2"}>{list.map(card)}</ul>
+            <ul className={view === "grid" ? "veh-tiles grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3" : "grid grid-cols-1 gap-2"}>{list.map(card)}</ul>
           </section>
         ))}
       </div>

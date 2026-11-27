@@ -35,5 +35,18 @@ for (const [path, what] of [["/rules", "règlement"], ["/register", "inscription
   check(`lien vers la liste dans la page ${what}`, (await p.locator("a[data-veh-link][href='/vehicles']").count()) === 1);
 }
 await p.goto(BASE + "/"); await p.waitForLoadState("networkidle");
-check("menu : entrée « VÉHICULES » après le règlement", (await p.locator("header a[href='/vehicles']").count()) >= 1 || (await p.locator("a[href='/vehicles']").count()) >= 1);
+check("menu : pas d'entrée « VÉHICULES »", (await p.locator("a[href='/vehicles']").count()) === 0);
+await p.locator(`button[aria-label="Français"]:visible`).first().click().catch(() => {}); await p.goto(BASE + "/rules"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3500);
+const card = p.locator("a.rules-card[href='/vehicles']");
+check("règlement : carré cliquable vers la liste", (await card.count()) === 1 && /(Liste des véhicules autorisés|List of allowed vehicles)/i.test(await card.innerText()) && /\b341\b/.test(await card.innerText()));
+await card.scrollIntoViewIfNeeded(); await p.screenshot({ path: `${SHOT}/403-reglement-carre.png`, fullPage: false });
+await card.click(); await p.waitForURL(/\/vehicles$/, { timeout: 10000 }).catch(() => {});
+check("le carré ouvre la liste", /\/vehicles$/.test(p.url()), p.url());
+await p.goto(BASE + "/register"); await p.waitForLoadState("networkidle"); await p.waitForTimeout(3500);
+const sc = p.locator("a[data-veh-shortcut][href='/vehicles']");
+check("inscription : raccourci vers la liste dans le panneau de droite", (await sc.count()) === 1 && (await sc.getAttribute("target")) === "_blank" && /\b341\b/.test(await sc.innerText()));
+await p.screenshot({ path: `${SHOT}/404-inscription-raccourci.png`, fullPage: false });
+const [popup] = await Promise.all([p.context().waitForEvent("page"), sc.click()]);
+await popup.waitForLoadState("networkidle");
+check("le raccourci ouvre la liste dans un nouvel onglet (le formulaire reste intact)", /\/vehicles$/.test(popup.url()) && /\/register/.test(p.url()), popup.url());
 await b.close();

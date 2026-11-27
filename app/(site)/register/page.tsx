@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CarFront } from "lucide-react";
+import vehicleData from "@/data/vehicles.json";
 import { redirect } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import Field from "@/components/Field";
@@ -10,6 +12,8 @@ import { getPublicSettings } from "@/lib/data";
 import { getT } from "@/lib/i18n";
 
 export const metadata: Metadata = { title: "Inscription" };
+
+const vehicleCount = vehicleData.vehicles.length;
 
 export default async function RegisterPage() {
   const [{ user, profile }, settings, t] = await Promise.all([getSession(), getPublicSettings(), getT()]);
@@ -54,6 +58,14 @@ export default async function RegisterPage() {
                 ))}
               </ul>
             </div>
+            <Link href="/vehicles" target="_blank" data-veh-shortcut className="rules-card rules-card-sm group flex items-center gap-4">
+              <span className="rules-card-icon" aria-hidden><CarFront size={26} strokeWidth={1.5} /></span>
+              <span className="min-w-0 flex-1">
+                <span className="font-display block text-2xl uppercase leading-tight">{t("Liste des véhicules autorisés")}</span>
+                <span className="mt-0.5 block text-sm text-[#a5a9b0]">{t("{n} véhicules à consulter avant de t'inscrire. Les véhicules de boutique sont interdits.", { n: vehicleCount })}</span>
+              </span>
+              <span className="font-cond text-lg text-red transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+            </Link>
             <div className="panel">
               <div className="kicker mb-3">{t("ET ENSUITE ?")}</div>
               <ol className="space-y-3 text-sm text-[#a5a9b0]">

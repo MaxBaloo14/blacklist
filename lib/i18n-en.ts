@@ -423,7 +423,7 @@ const EN_SITE: Record<string, string> = {
   "autorisés": "allowed", "Véhicules autorisés": "Allowed vehicles",
   "Seuls les véhicules de cette liste peuvent s'engager en duel. Les véhicules des offres premium de la boutique sont interdits.": "Only the vehicles on this list may be entered in a duel. Vehicles from the shop's premium offers are banned.",
   "Rechercher un véhicule": "Search a vehicle", "Rechercher un véhicule ou une marque…": "Search a vehicle or a brand…",
-  "{n} véhicule(s)": "{n} vehicle(s)", "Voir la liste des véhicules autorisés": "See the list of allowed vehicles", "CH": "HP", "Aucun véhicule ne correspond à ta recherche.": "No vehicle matches your search.",
+  "{n} véhicule(s)": "{n} vehicle(s)", "Voir la liste des véhicules autorisés": "See the list of allowed vehicles", "Liste des véhicules autorisés": "List of allowed vehicles", "VOIR LA LISTE": "VIEW THE LIST", "{n} véhicules à consulter avant de t'inscrire. Les véhicules de boutique sont interdits.": "{n} vehicles to check before you register. Shop vehicles are banned.", "CH": "HP", "Aucun véhicule ne correspond à ta recherche.": "No vehicle matches your search.",
   "Sportives Classiques": "Classic sports cars", "Super sportives": "Supercars", "Grosse cylindrées": "Muscle cars", "Lowrider": "Lowriders", "Drift": "Drift", "Rallye": "Rally", "Vans": "Vans",
 };
 

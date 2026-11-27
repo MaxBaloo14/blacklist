@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CarFront } from "lucide-react";
 import PageHead from "@/components/PageHead";
+import vehicleData from "@/data/vehicles.json";
 import { getPublicSettings } from "@/lib/data";
 import { money } from "@/lib/format";
 import { getI18n } from "@/lib/i18n";
@@ -8,6 +10,8 @@ import { getI18n } from "@/lib/i18n";
 export const metadata: Metadata = { title: "Règlement" };
 
 const DEFAULT_REWARDS: Record<string, number> = { "1": 2000000, "2": 1500000, "3": 1000000, "4": 800000, "5": 700000, "6": 500000, "7": 400000, "8": 300000, "9": 250000, "10": 200000 };
+
+const vehicleCount = vehicleData.vehicles.length;
 
 export default async function RulesPage() {
   const [{ t, locale }, settings] = await Promise.all([getI18n(), getPublicSettings()]);
@@ -38,7 +42,7 @@ export default async function RulesPage() {
       <PageHead kicker={t("LE RÈGLEMENT")} title={t("Les règles")} em={t("du jeu")}>{t("Tout ce qu'il faut savoir pour entrer dans la Blacklist, défier un pilote et prendre sa place.")}</PageHead>
       <section className="py-14">
         <div className="wrap">
-          <p className="mb-8 text-sm text-metal">{t("Nouveau ?")} <Link href="/guide" className="text-red hover:text-white">{t("Lis le guide du pilote")} →</Link> · <Link href="/vehicles" data-veh-link className="text-red hover:text-white">{t("Voir la liste des véhicules autorisés")} →</Link></p>
+          <p className="mb-8 text-sm text-metal">{t("Nouveau ?")} <Link href="/guide" className="text-red hover:text-white">{t("Lis le guide du pilote")} →</Link></p>
           <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map(([title, text], i) => (
               <div key={title} className="flex gap-4">
@@ -48,7 +52,17 @@ export default async function RulesPage() {
             ))}
           </div>
 
-          <div className="mt-16 grid gap-4 md:grid-cols-2">
+          <Link href="/vehicles" data-veh-link className="rules-card group mt-14 flex flex-wrap items-center gap-6">
+            <span className="rules-card-icon" aria-hidden><CarFront size={34} strokeWidth={1.5} /></span>
+            <span className="min-w-0 flex-1">
+              <span className="kicker mb-1 block">{t("VÉHICULES")}</span>
+              <span className="font-display block text-3xl uppercase leading-tight sm:text-4xl">{t("Liste des véhicules autorisés")}</span>
+              <span className="mt-1 block text-[15px] text-[#a5a9b0]">{t("{n} véhicules à consulter avant de t'inscrire. Les véhicules de boutique sont interdits.", { n: vehicleCount })}</span>
+            </span>
+            <span className="font-cond text-sm font-bold tracking-[.2em] text-red transition-transform group-hover:translate-x-1">{t("VOIR LA LISTE")} →</span>
+          </Link>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
             {rules.map(([title, items]) => (
               <section key={title} className="panel">
                 <h2 className="kicker mb-3">{title}</h2>

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Crown } from "lucide-react";
+import CarThumb from "@/components/CarThumb";
 import { useT } from "@/components/LangProvider";
 import type { Row } from "@/lib/types";
 
@@ -61,7 +62,10 @@ export default function BlacklistBoard({ initial, rewards, base, limit }: { init
                   <strong className={`font-cond block truncate uppercase leading-tight tracking-wide ${vacant ? "text-xl text-metal" : pos === 1 ? "podium-name-1 text-[40px]" : "text-[30px]"}`}>{vacant ? t("Vacant") : `${r.first_name} ${r.last_name}`}</strong>
                   {vacant
                     ? <span className="font-cond mt-1 block text-sm uppercase tracking-[.2em] text-metal/70">{t("Ouvert au vainqueur de la Warm-up Race")}</span>
-                    : <span className="font-cond block truncate text-xl tracking-wide text-[#cfcfcf]">{r.make_model ?? "—"}</span>}
+                    : <>
+                        <CarThumb slug={r.vslug} className={`car-podium mx-auto mt-3 ${pos === 1 ? "car-podium-1" : ""}`} iconSize={40} />
+                        <span className="font-cond mt-2 block truncate text-xl tracking-wide text-[#cfcfcf]">{r.make_model ?? "—"}</span>
+                      </>}
                   {!vacant && (
                     <div className="font-cond mt-3 inline-flex items-center gap-4 border-y border-white/10 px-4 py-1.5 tracking-wide">
                       <span className="text-[22px] font-bold"><span className="text-ok">{r.wins}{t("V")}</span> / <span className="text-red">{r.losses}{t("D")}</span></span>
@@ -109,14 +113,14 @@ export default function BlacklistBoard({ initial, rewards, base, limit }: { init
                   )}
                 </div>
                 <div className="font-cond flex min-w-0 items-center gap-3.5 text-lg tracking-wide text-[#cfcfcf]">
-                  {!vacant && <span className="truncate">{r.make_model ?? "—"}</span>}
+                  {!vacant && <><CarThumb slug={r.vslug} className="car-thumb-slant w-[76px] shrink-0" /><span className="truncate">{r.make_model ?? "—"}</span></>}
                 </div>
                 <div className="font-cond text-right text-[22px] font-bold tracking-wide">
                   {!vacant && <><span className="text-ok">{r.wins}{t("V")}</span> / <span className="text-red">{r.losses}{t("D")}</span></>}
                 </div>
                 {!vacant && (
                   <div className="font-cond hidden max-h-0 sm:col-span-3 sm:col-start-2 overflow-hidden text-[13px] tracking-[.18em] text-red opacity-0 transition-all duration-300 group-hover:max-h-8 group-hover:opacity-100 sm:block">
-                    {r.vehicle_class ? <span className="text-metal">{String(r.vehicle_class).toUpperCase()} · </span> : null}{t("VOIR LA FICHE")} →
+                    {r.vehicle_class ? <span className="text-metal">{t(String(r.vehicle_class)).toUpperCase()} · </span> : null}{t("VOIR LA FICHE")} →
                   </div>
                 )}
               </>

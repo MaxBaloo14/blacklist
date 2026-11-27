@@ -428,6 +428,10 @@ const EN_SITE: Record<string, string> = {
   "RÉINITIALISER": "RESET", "AUTORISÉ EN DUEL": "ALLOWED IN DUELS", "Puissance": "Power", "Places": "Seats", "Coffre": "Trunk", "Boîte": "Gearbox", "Carburant": "Fuel",
   "Manuelle": "Manual", "Automatique": "Automatic", "Essence": "Petrol", "Électrique": "Electric", "Hybride": "Hybrid",
   "Ce véhicule peut être engagé en duel une fois homologué par l'organisation.": "This vehicle may be entered in a duel once approved by the organisation.",
+  "Choisis ton véhicule dans la liste des véhicules autorisés.": "Choose your vehicle from the list of allowed vehicles.", "Choisis ton véhicule dans la liste.": "Choose your vehicle from the list.",
+  "AUTORISÉ": "ALLOWED", "Changer de véhicule": "Change vehicle", "Tape le nom de ton véhicule (ex. Blista)…": "Type your vehicle's name (e.g. Blista)…",
+  "Aucun véhicule autorisé ne correspond. Consulte la liste complète.": "No allowed vehicle matches. Check the full list.",
+  "Seuls les véhicules de la liste sont acceptés : la catégorie se remplit toute seule.": "Only vehicles from the list are accepted: the category fills in by itself.",
   "{n} véhicule(s)": "{n} vehicle(s)", "Voir la liste des véhicules autorisés": "See the list of allowed vehicles", "Liste des véhicules autorisés": "List of allowed vehicles", "VOIR LA LISTE": "VIEW THE LIST", "{n} véhicules à consulter avant de t'inscrire. Les véhicules de boutique sont interdits.": "{n} vehicles to check before you register. Shop vehicles are banned.", "CH": "HP", "Aucun véhicule ne correspond à ta recherche.": "No vehicle matches your search.",
   "Sportives Classiques": "Classic sports cars", "Super sportives": "Supercars", "Grosse cylindrées": "Muscle cars", "Lowrider": "Lowriders", "Drift": "Drift", "Rallye": "Rally", "Vans": "Vans",
 };

@@ -1,3 +1,6 @@
+import VehiclePicker from "@/components/VehiclePicker";
+import CarThumb from "@/components/CarThumb";
+import { matchVehicle } from "@/lib/vehicle-catalog";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -54,8 +57,6 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
   const cashPaid = (rewards ?? []).filter((r) => r.status === "paid").reduce((s, r) => s + Number(r.amount), 0);
   const days: number | null = myPos ? (inact ?? 0) : null;
   const limit: number = Number(settings.find((s) => s.key === "inactivity_days")?.value ?? 14);
-  const forbidden = (settings.find((s) => s.key === "forbidden_vehicle_classes")?.value ?? []) as string[];
-  const classes = ((settings.find((s) => s.key === "vehicle_classes")?.value ?? []) as string[]).filter((c) => !forbidden.includes(c));
   const ready = !current ? (pending ? t("Ton véhicule est en attente d'homologation.") : t("Aucun véhicule homologué.")) : profile.registration_status !== "validated" ? t("Ton inscription n'est pas encore validée.") : null;
   const lastVeh = vehicles?.find((v) => v.status === "rejected" && !pending);
   const m = (n: number | string) => money(n, locale);
@@ -174,13 +175,14 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
                 <div className="kicker">{t("VÉHICULE ENGAGÉ")}</div>
                 {current ? (
                   <div className="overflow-hidden border border-white/10 bg-ink2">
+                    <CarThumb slug={matchVehicle(current.make_model)?.slug} className="car-hero" iconSize={72} />
                     <div className="flex flex-wrap items-center justify-between gap-3 p-5"><div className="font-cond text-2xl font-bold uppercase tracking-wide">{current.make_model}<div className="text-sm font-normal text-metal">{t(current.vehicle_class)}</div></div><span className="badge badge-ok">{VSTATUS.approved[0]}</span></div>
                   </div>
                 ) : <p className="panel text-[#a5a9b0]">{t("Aucun véhicule homologué.")} {vehicles?.some((v) => v.status === "lost") && <b className="text-[#ff6b6b]">{t("Ton ancien véhicule a été confisqué : enregistre-en un nouveau et fais-le homologuer.")}</b>}</p>}
                 {pending && (
                   <div className="panel">
                     <div className="mb-2 flex items-center justify-between"><div className="kicker">{t("DEMANDE EN COURS")}</div><span className="badge badge-warn">{VSTATUS.pending[0]}</span></div>
-                    <div className="font-cond text-xl uppercase tracking-wide">{pending.make_model}</div>
+                    <div className="flex items-center gap-4"><CarThumb slug={matchVehicle(pending.make_model)?.slug} className="car-thumb-slant w-28 shrink-0" iconSize={20} /><div className="font-cond text-xl uppercase tracking-wide">{pending.make_model}</div></div>
                     <ActionForm action={cancelProposal} label="ANNULER LA DEMANDE" variant="ghost" small confirm="Annuler cette demande d'homologation ?" />
                   </div>
                 )}
@@ -195,8 +197,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
               <ActionForm action={proposeVehicle} label={pending ? "DEMANDE EN COURS" : current ? "PROPOSER UN CHANGEMENT" : "SOUMETTRE LE VÉHICULE"} className="panel content-start" confirm="Ce véhicule sera soumis à homologation. Ton véhicule actuel reste engagé jusqu'à la décision de l'organisation.">
                 <div className="kicker mb-4">{current ? t("CHANGER DE VÉHICULE") : t("ENREGISTRER UN VÉHICULE")}</div>
                 <fieldset disabled={!!pending} className="grid gap-4">
-                  <Field label={t("Marque et modèle")}><input name="make_model" required maxLength={80} className="input" /></Field>
-                  <Field label={t("Catégorie")}><select name="vehicle_class" required defaultValue="" className="input"><option value="" disabled>{t("Choisir…")}</option>{classes.map((c) => <option key={c} value={c}>{t(c)}</option>)}</select></Field>
+                  <VehiclePicker disabled={!!pending} />
                 </fieldset>
               </ActionForm>
             </div>

@@ -116,7 +116,7 @@ export default async function DriverAdmin({ params }: { params: Promise<{ id: st
             <li key={v.id} className="flex items-center gap-3 bg-ink p-2.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               {v.photo_path ? <img src={photoUrl(v.photo_path)!} alt="" className="h-12 w-20 object-cover" /> : <div className="h-12 w-20 bg-ink3" />}
-              <div className="min-w-0 flex-1"><div className="font-cond truncate font-bold uppercase tracking-wide">{v.make_model}</div><div className="text-xs text-metal">{v.vehicle_class} · {dateOnly(v.created_at, locale)}{v.rejection_reason ? ` · ${v.rejection_reason}` : ""}</div></div>
+              <div className="min-w-0 flex-1"><div className="font-cond truncate font-bold uppercase tracking-wide">{v.make_model}</div><div className="text-xs text-metal">{t(v.vehicle_class)} · {dateOnly(v.created_at, locale)}{v.rejection_reason ? ` · ${v.rejection_reason}` : ""}</div></div>
               <span className="badge badge-metal">{L.vehicle(v.status)}</span>
             </li>
           ))}</ul>

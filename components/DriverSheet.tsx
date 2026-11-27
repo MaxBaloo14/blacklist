@@ -1,3 +1,4 @@
+import CarThumb from "@/components/CarThumb";
 import Reveal from "@/components/Reveal";
 import DuelCard from "@/components/DuelCard";
 import DuelTimeline from "@/components/DuelTimeline";
@@ -35,6 +36,7 @@ export default async function DriverSheet({ d, duels, moves }: { d: Row; duels: 
         <div className="wrap"><PilotBadges badges={badges} label={t("Badges")} className="mb-8" /></div>
         <div className="wrap grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           <div className="border border-white/10 bg-ink2">
+            <CarThumb slug={d.vslug} className="car-hero" iconSize={72} />
             <div className="flex flex-wrap items-center justify-between gap-3 p-5">
               <div><div className="label">{t("Véhicule engagé")}</div><div className="font-cond text-2xl font-bold uppercase tracking-wide">{d.make_model ?? "—"}</div></div>
               {d.vehicle_class && <span className="badge badge-metal">{t(d.vehicle_class)}</span>}

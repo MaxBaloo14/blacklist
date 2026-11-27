@@ -1,12 +1,13 @@
-import { launch, newPage, BASE, act, text, adminPage, pilotLogin, fillSlots, pickSlot } from "./lib.mjs";
+import { launch, newPage, BASE, act, text, adminPage, pilotLogin, fillSlots, pickSlot, pickVehicle } from "./lib.mjs";
 import { execSync } from "node:child_process";
 const b = await launch();
 const names = [["Nova","Kael","0600000011"],["Vex","Ryn","0600000012"],["Drift","Zane","0600000013"],["Cobra","Mika","0600000014"],["Saber","Lio","0600000015"]];
-const cars = ["Vapid Dominator GT","Annis Elegy RH","Karin Sultan RS","Dinka Jester","Bravado Gauntlet"];
+const cars = ["Dominator GT","Elegy RH8","Sultan RS Super","Jester Modern","Gauntlet V8"];   // recherches dans la liste des véhicules autorisés
 for (const [i, [ln, fn, ph]] of names.entries()) {
   const p = await newPage(b); await p.goto(BASE + "/register");
   await p.fill('[name=last_name]', ln); await p.fill('[name=first_name]', fn); await p.fill('[name=phone]', ph);
-  await p.fill('[name=password]', "PiloteTest12345"); await p.fill('[name=make_model]', cars[i]); await p.selectOption('[name=vehicle_class]', { index: 1 });
+  await p.fill("[name=password]", "PiloteTest12345");
+  await pickVehicle(p, cars[i]);
   await act(p, "ENVOYER"); await p.context().close();
 }
 const ad = await adminPage(b);

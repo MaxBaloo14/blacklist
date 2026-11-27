@@ -5,11 +5,13 @@ import PredictionBar from "@/components/PredictionBar";
 import type { PredictionInfo } from "@/lib/predictions";
 import type { Row } from "@/lib/types";
 import { dateOnly, dateTime, money } from "@/lib/format";
+import CarThumb from "@/components/CarThumb";
+import { getApprovedCars } from "@/lib/data";
 import { getI18n } from "@/lib/i18n";
 
 /** Duel en face-à-face : un pilote de chaque côté, grand VS au centre, résultat ou compte à rebours en bas. */
 export default async function DuelCard({ d, example, rewards, prediction }: { d: Row; example?: boolean; rewards?: Row; prediction?: PredictionInfo }) {
-  const { t, locale } = await getI18n();
+  const [{ t, locale }, cars] = await Promise.all([getI18n(), example ? Promise.resolve(new Map<string, { label: string; slug: string | null }>()) : getApprovedCars()]);
   const done = d.status === "completed" || d.status === "forfeited";
   const chWin = Boolean(d.winner_id && d.winner_id === d.challenger_id);
   const dfWin = Boolean(d.winner_id && d.winner_id === d.defender_id);
@@ -56,6 +58,7 @@ export default async function DuelCard({ d, example, rewards, prediction }: { d:
       <Wrap className={`duel-side ${win ? "duel-win" : done ? "duel-lose" : ""} ${who === "df" ? "text-right" : "text-left"}`}>
         <span className="duel-pos font-display">#{pos}</span>
         <strong className="font-cond block truncate text-xl uppercase leading-tight tracking-wide">{`${first} ${last ?? ""}`.trim()}</strong>
+        {cars.get(id) && <CarThumb slug={cars.get(id)!.slug} className={`car-duel car-thumb-slant mt-2 ${who === "df" ? "ml-auto" : ""}`} />}
         <span className={`font-display block text-5xl leading-none ${win ? "text-ok" : done ? "text-red" : ""}`}>{score ?? "–"}</span>
       </Wrap>
     );

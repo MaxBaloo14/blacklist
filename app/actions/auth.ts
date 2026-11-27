@@ -1,4 +1,5 @@
 "use server";
+import { catalogBySlug } from "@/lib/vehicle-catalog";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
@@ -88,24 +89,22 @@ export async function register(_: ActionState, f: FormData): Promise<ActionState
     last_name: z.string().min(1, t("Nom requis")).max(60),
     first_name: z.string().min(1, t("Prénom requis")).max(60),
     phone: z.string().max(30).refine((v) => v.replace(/\D/g, "").length >= 4, t("Numéro de téléphone invalide")),
-    make_model: z.string().min(2, t("Marque et modèle requis")).max(80),
-    vehicle_class: z.string().min(1, t("Catégorie requise")),
   });
   const parsed = registerSchema.safeParse({
     password: String(f.get("password") ?? ""),
     last_name: str(f, "last_name"), first_name: str(f, "first_name"), phone: str(f, "phone"),
-    make_model: str(f, "make_model"), vehicle_class: str(f, "vehicle_class"),
   });
   if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message };
-  const v = parsed.data;
+  // Le véhicule se choisit dans la liste des véhicules autorisés : marque, modèle et catégorie viennent de la liste, jamais du formulaire
+  const car = catalogBySlug(str(f, "catalog_slug"));
+  if (!car) return { ok: false, message: t("Choisis ton véhicule dans la liste des véhicules autorisés.") };
+  const v = { ...parsed.data, make_model: car.label, vehicle_class: car.category };
 
   const admin = createServiceClient();
   // Règles de catégorie lues en base (modifiables par l'organisation)
   const { data: cfg } = await admin.from("settings").select("key,value").in("key", ["forbidden_vehicle_classes", "vehicle_classes"]);
   const forbidden: string[] = cfg?.find((s) => s.key === "forbidden_vehicle_classes")?.value ?? [];
-  const allowed: string[] = cfg?.find((s) => s.key === "vehicle_classes")?.value ?? [];
   if (forbidden.includes(v.vehicle_class)) return { ok: false, message: t("La catégorie « {c} » est interdite.", { c: v.vehicle_class }) };
-  if (!allowed.includes(v.vehicle_class)) return { ok: false, message: t("Catégorie de véhicule inconnue.") };
 
   // Le numéro de téléphone est l'identifiant de connexion : il doit être libre
   const digits = v.phone.replace(/\D/g, "");

@@ -25,7 +25,7 @@ if [ "$MODE" != "quick" ]; then
   [ -f /tmp/e2e-media/circuit.webm ] || ffmpeg -y -loglevel error -f lavfi -i "testsrc2=size=640x360:rate=24:duration=3" -c:v libvpx -b:v 400k /tmp/e2e-media/circuit.webm 2>/dev/null
   head -c 21500000 /dev/zero > /tmp/e2e-media/big.mp4; printf 'pas une video, juste du texte' > /tmp/e2e-media/fake.mp4
   run "Préparation : base + faux Supabase + site compilé + 5 pilotes + duels" bash tests/e2e/fixture.sh build
-  for spec in p00-flow p16 p17 p19 p20 p21 p22 p23 p25 p26 p27 p28 p29 p30 p31 p32 p33 p34 p35 p36 p6 p7; do run "Parcours navigateur : $spec" node tests/e2e/$spec.mjs; done
+  for spec in p00-flow p16 p17 p19 p20 p21 p22 p23 p25 p26 p27 p28 p29 p30 p31 p32 p33 p34 p35 p36 p37 p6 p7; do run "Parcours navigateur : $spec" node tests/e2e/$spec.mjs; done
   run "Accessibilité (WCAG 2.1 AA) sur 21 pages" node tests/e2e/axe.mjs
   run "Téléphone : aucune page ne déborde" node tests/e2e/mobile.mjs
   run "Anglais : aucun texte resté en français" node tests/e2e/en-scan.mjs

@@ -1,3 +1,5 @@
+import CarThumb from "@/components/CarThumb";
+import { matchVehicle } from "@/lib/vehicle-catalog";
 import TemplatePicker from "@/components/TemplatePicker";
 import ActionForm from "@/components/ActionForm";
 import { AdminHead, Details } from "@/components/AdminUI";
@@ -31,8 +33,10 @@ export default async function VehiclesAdmin() {
             <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-4">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-3">
+                  <CarThumb slug={matchVehicle(v.make_model)?.slug} className="car-thumb-slant w-28 shrink-0" iconSize={20} />
                   <h3 className="font-display text-3xl uppercase leading-none">{v.make_model}</h3>
-                  <span className="badge badge-metal">{v.vehicle_class}</span>
+                  <span className="badge badge-metal">{t(v.vehicle_class)}</span>
+                  {matchVehicle(v.make_model) ? <span className="badge badge-ok">{t("Dans la liste autorisée")}</span> : <span className="badge badge-red">{t("Hors liste autorisée")}</span>}
                   {v.replaces_vehicle_id && <span className="badge badge-warn">{t("Changement de véhicule")}</span>}
                 </div>
                 <dl className="font-cond mt-3 flex flex-wrap gap-x-8 gap-y-1 text-[15px] tracking-wide text-[#cfcfcf]">
@@ -60,7 +64,7 @@ export default async function VehiclesAdmin() {
       <h2 className="font-cond mb-3 text-lg font-bold uppercase tracking-[.18em]">{t("Véhicules engagés")} ({approved?.length ?? 0})</h2>
       <div className="mb-12 overflow-x-auto bg-ink2"><table className="tbl"><thead><tr><th>{t("Véhicule")}</th><th>{t("Pilote")}</th><th>{t("Actions")}</th></tr></thead><tbody>
         {approved?.map((v) => (
-          <tr key={v.id}><td className="font-cond font-bold uppercase tracking-wide">{v.make_model}<div className="text-xs font-normal normal-case text-metal">{v.vehicle_class}</div></td><td>{fullName(v.profiles)}</td>
+          <tr key={v.id}><td className="font-cond font-bold uppercase tracking-wide">{v.make_model}<div className="text-xs font-normal normal-case text-metal">{t(v.vehicle_class)}</div></td><td>{fullName(v.profiles)}</td>
             <td><div className="grid max-w-xs gap-2">
               <Details summary={t("Disqualifier")} tone="text-red"><ActionForm action={reviewVehicle} label="DISQUALIFIER" variant="ghost" small confirm="Disqualifier ce véhicule ? Le pilote ne pourra plus participer tant qu'un nouveau véhicule n'est pas homologué."><input type="hidden" name="vehicle" value={v.id} /><input type="hidden" name="decision" value="disqualified" /><Field label={t("Motif")}><input name="reason" required minLength={3} className="input" /></Field></ActionForm></Details>
               <Details summary={t("Perte / confiscation")} tone="text-red"><ActionForm action={markVehicleLost} label="MARQUER COMME PERDU" variant="ghost" small confirm="Le véhicule passera au statut Lost, définitivement."><input type="hidden" name="driver" value={v.owner_id} /><Field label={t("Motif")}><input name="reason" required minLength={3} className="input" /></Field></ActionForm></Details>

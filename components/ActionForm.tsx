@@ -1,5 +1,5 @@
 "use client";
-import { useActionState, useEffect, useRef, type ReactNode } from "react";
+import { startTransition, useActionState, useEffect, useRef, type ReactNode } from "react";
 import { useT } from "@/components/LangProvider";
 import type { ActionState } from "@/lib/types";
 
@@ -35,15 +35,24 @@ export default function ActionForm({ action, children, label, confirm, variant =
   return (
     <form
       ref={formRef}
-      action={formAction}
+      action={reset ? formAction : undefined}
       encType={encType}
       className={className}
       onSubmit={(e) => {
         if (confirm && !confirmed.current) {
           e.preventDefault();
           dialogRef.current?.showModal();
+          confirmed.current = false;
+          return;
         }
         confirmed.current = false;
+        // reset={false} : React 19 remet sinon TOUS les champs à zéro après chaque envoi (même en cas d'erreur du serveur : mot de passe, véhicule choisi… perdus).
+        // On envoie donc nous-mêmes les données, sans laisser React vider le formulaire.
+        if (!reset) {
+          e.preventDefault();
+          const data = new FormData(e.currentTarget, (e.nativeEvent as SubmitEvent).submitter);
+          startTransition(() => formAction(data));
+        }
       }}
     >
       {children}

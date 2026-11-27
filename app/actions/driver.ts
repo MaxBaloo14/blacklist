@@ -1,4 +1,5 @@
 "use server";
+import { catalogBySlug } from "@/lib/vehicle-catalog";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
@@ -72,8 +73,12 @@ export async function proposeVehicle(_: ActionState, f: FormData): Promise<Actio
   const { supabase, uid } = await userId();
   if (!uid) return await fail("Connexion requise.");
   if (!(await rateLimit("vehicle", 5, 60 * 60_000, uid))) return await fail("Trop de propositions. Réessaie plus tard.");
-  const make = str(f, "make_model"), cls = str(f, "vehicle_class");
-  if (make.length < 2 || make.length > 80 || !cls) return await fail("Marque, modèle et catégorie requis.");
+  // Le véhicule se choisit dans la liste des véhicules autorisés (marque, modèle et catégorie viennent de la liste)
+  const car = catalogBySlug(str(f, "catalog_slug"));
+  if (!car) return await fail("Choisis ton véhicule dans la liste des véhicules autorisés.");
+  const make = car.label, cls = car.category;
+  const { data: forbidden } = await supabase.from("settings").select("value").eq("key", "forbidden_vehicle_classes").maybeSingle();
+  if (Array.isArray(forbidden?.value) && forbidden.value.includes(cls)) return await fail("Cette catégorie de véhicule est interdite.");
   // Photo facultative : si elle est fournie, elle est vérifiée puis stockée dans le dossier du pilote
   let path: string | null = null;
   const file = f.get("photo") as File | null;

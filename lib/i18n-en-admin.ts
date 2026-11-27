@@ -553,4 +553,6 @@ export const EN_ADMIN: Record<string, string> = {
   "Circuit créé à partir de la suggestion. Le pilote est prévenu et reçoit ses zigollars.": "Track created from the suggestion. The driver is notified and receives their zigollars.",
   "{n} zigollars offerts à l'auteur d'une suggestion de course retenue (circuit officiel)": "{n} zigollars given to the author of an accepted course suggestion (official track)",
   "Zigollars offerts à l'auteur d'une suggestion de course retenue": "Zigollars given to the author of an accepted course suggestion",
+  "Dans la liste autorisée": "In the allowed list", "Hors liste autorisée": "Not in the allowed list",
+  "Cette catégorie de véhicule est interdite.": "This vehicle category is banned.", "Choisis ton véhicule dans la liste des véhicules autorisés.": "Choose your vehicle from the list of allowed vehicles.",
 };

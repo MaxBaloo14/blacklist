@@ -5,10 +5,10 @@ import vehicleData from "@/data/vehicles.json";
 import { redirect } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import Field from "@/components/Field";
+import VehiclePicker from "@/components/VehiclePicker";
 import PageHead from "@/components/PageHead";
 import { register } from "@/app/actions/auth";
 import { getSession } from "@/lib/auth";
-import { getPublicSettings } from "@/lib/data";
 import { getT } from "@/lib/i18n";
 
 export const metadata: Metadata = { title: "Inscription" };
@@ -16,11 +16,8 @@ export const metadata: Metadata = { title: "Inscription" };
 const vehicleCount = vehicleData.vehicles.length;
 
 export default async function RegisterPage() {
-  const [{ user, profile }, settings, t] = await Promise.all([getSession(), getPublicSettings(), getT()]);
+  const [{ user, profile }, t] = await Promise.all([getSession(), getT()]);
   if (user && profile) redirect("/profile");
-  const all: string[] = settings.find((s) => s.key === "vehicle_classes")?.value ?? [];
-  const forbidden: string[] = settings.find((s) => s.key === "forbidden_vehicle_classes")?.value ?? [];
-  const classes = all.filter((c) => !forbidden.includes(c));
 
   return (
     <>
@@ -39,13 +36,7 @@ export default async function RegisterPage() {
             <div className="kicker mb-1 mt-8">{t("VÉHICULE ENGAGÉ")}</div>
             <p className="mb-4 text-sm text-metal"><Link href="/vehicles" target="_blank" data-veh-link className="text-red hover:text-white">{t("Voir la liste des véhicules autorisés")} →</Link></p>
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label={t("Marque et modèle")}><input name="make_model" required maxLength={80} placeholder={t("ex. Marque Modèle")} className="input" /></Field>
-              <Field label={t("Catégorie")}>
-                <select name="vehicle_class" required defaultValue="" className="input">
-                  <option value="" disabled>{t("Choisir…")}</option>
-                  {classes.map((c) => <option key={c} value={c}>{t(c)}</option>)}
-                </select>
-              </Field>
+              <div className="sm:col-span-2"><VehiclePicker /></div>
             </div>
           </ActionForm>
 

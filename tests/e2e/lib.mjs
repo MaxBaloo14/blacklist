@@ -52,6 +52,14 @@ export async function adminPage(browser) {
   }
   return page;
 }
+/** Choisit un véhicule dans le sélecteur de la liste autorisée (tape la recherche, clique la première proposition). */
+export async function pickVehicle(page, query, nth = 0) {
+  await page.fill('[role=combobox][aria-label]', query);
+  const opt = page.locator('[role=option]').nth(nth);
+  await opt.waitFor({ timeout: 8000 });
+  await opt.click();
+  await page.locator('[data-picked]').waitFor({ timeout: 5000 });
+}
 export async function pilotLogin(p, phone) {
   await p.goto(BASE + "/login");
   await p.fill('[name=identifier], [name=phone]', phone); await p.fill('[name=password]', "PiloteTest12345");

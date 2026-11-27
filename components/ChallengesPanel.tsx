@@ -1,3 +1,5 @@
+import CarThumb from "@/components/CarThumb";
+import { matchVehicle } from "@/lib/vehicle-catalog";
 import Link from "next/link";
 import ActionForm from "@/components/ActionForm";
 import Countdown from "@/components/Countdown";
@@ -37,7 +39,7 @@ export default async function ChallengesPanel({ supabase, userId, myPos, ready, 
               <div>
                 <div className="label">{t("Ta cible — directement au-dessus de toi")}</div>
                 <div className="font-display text-4xl uppercase"><span className="text-red">#{target.position}</span> {target.first_name} {target.last_name}</div>
-                <div className="font-cond tracking-wide text-metal">{target.make_model}</div>
+                <div className="mt-2 flex items-center gap-3"><CarThumb slug={matchVehicle(target.make_model)?.slug} className="car-thumb-slant w-24 shrink-0" iconSize={18} /><span className="font-cond tracking-wide text-metal">{target.make_model}</span></div>
               </div>
               <div className="max-w-sm text-sm text-[#a5a9b0]">
                 {ready && <p className="mb-2 text-[#ff6b6b]">{ready}</p>}

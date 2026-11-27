@@ -52,7 +52,7 @@ check("Échap ferme la fiche", (await p.locator("dialog.veh-dialog[open]").count
 await p.fill("input[type=search]", "xyzxyz");
 check("recherche sans résultat : message", /Aucun véhicule/i.test(await text(p)));
 await p.fill("input[type=search]", "");
-await p.locator(".shop-chip", { hasText: /^SUV$/i }).click();
+await p.locator(".shop-chip", { hasText: /^SUV\b/i }).click();
 const suv = await p.locator(".veh-card").count();
 check("filtre par catégorie", suv === data.filter((v) => v.category === "SUV").length && suv > 0, String(suv));
 await p.screenshot({ path: `${SHOT}/401-vehicules-suv.png`, fullPage: false });

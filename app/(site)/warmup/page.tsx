@@ -1,3 +1,4 @@
+import CarThumb from "@/components/CarThumb";
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import { getWarmupParticipants, getWarmups } from "@/lib/data";
@@ -36,7 +37,7 @@ export default async function Warmup() {
                 {names(upcoming.id).length ? (
                   <ul className="grid gap-2 sm:grid-cols-2">
                     {names(upcoming.id).map((p) => (
-                      <li key={p.driver_id} className="border-l-2 border-red-dark bg-ink px-3 py-2"><span className="font-cond block uppercase tracking-wide">{p.first_name} {p.last_name}</span><span className="text-xs text-metal">{p.make_model}</span></li>
+                      <li key={p.driver_id} className="flex items-center gap-3 border-l-2 border-red-dark bg-ink px-3 py-2"><CarThumb slug={p.vslug} className="car-thumb-slant w-14 shrink-0" iconSize={16} /><span className="min-w-0"><span className="font-cond block uppercase tracking-wide">{p.first_name} {p.last_name}</span><span className="text-xs text-metal">{p.make_model}</span></span></li>
                     ))}
                   </ul>
                 ) : <p className="text-sm text-metal">{t("Les participants sont inscrits par l'organisation.")}</p>}

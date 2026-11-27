@@ -44,5 +44,3 @@ update shop_items set ends_at = now() - interval '1 minute' where name = 'Casque
 select t_anon(); select t_eq('après l''échéance : invisible pour le public', (select count(*)::text from shop_items where name = 'Casque doré (limité)'), '0'); reset role;
 select t_as(11); select t_fail($$select shop_buy((select id from shop_items where name = 'Casque doré (limité)'))$$, 'achat refusé après la fin'); reset role;
 select t_as(2); select t_eq('le staff voit toujours l''article terminé', (select count(*)::text from shop_items where name = 'Casque doré (limité)'), '1'); reset role;
-\echo ''
-\echo '### TOUS LES SCÉNARIOS PASSENT (suppression de compte incluse)'

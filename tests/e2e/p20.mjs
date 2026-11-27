@@ -3,7 +3,12 @@ const b = await launch();
 // Calendrier + pronostic
 const z = await newPage(b, { width: 1400, height: 1000 }); await pilotLogin(z, "0600000013");
 await z.goto(BASE + "/calendar"); await z.waitForLoadState("networkidle"); await z.waitForTimeout(3600);
-check("calendrier : duels visibles dans la grille", (await z.locator(".cal-ev-duel").count()) >= 2, String(await z.locator(".cal-ev-duel").count()));
+{
+  // le calendrier montre le mois en cours : on attend les duels programmés DANS ce mois (le jeu d'essai est daté par rapport à aujourd'hui, un duel peut tomber le mois suivant)
+  const { execSync } = await import("node:child_process");
+  const inMonth = Number(execSync(`su postgres -c "psql -d bl_e2e -Atc \\"select count(*) from challenges where status = 'scheduled' and date_trunc('month', scheduled_at at time zone 'Europe/Paris') = date_trunc('month', now() at time zone 'Europe/Paris')\\""`).toString().trim());
+  check("calendrier : duels visibles dans la grille", inMonth > 0 && (await z.locator(".cal-ev-duel").count()) >= inMonth, `${await z.locator(".cal-ev-duel").count()} / ${inMonth}`);
+}
 await z.screenshot({ path: `${SHOT}/180-calendar.png`, fullPage: true });
 const firstVote = z.locator(".predict-btn").first(); await firstVote.click(); await z.waitForTimeout(1800);
 const t1 = await text(z); check("vote enregistré (1 vote, 100 %)", /1 vote/.test(t1) && /100%|100 %/.test(t1), (t1.match(/PRONOSTIC.{0,80}/) ?? [""])[0]);

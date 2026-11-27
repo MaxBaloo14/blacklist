@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import ActionForm from "@/components/ActionForm";
 import Field from "@/components/Field";
@@ -31,7 +32,8 @@ export default async function RegisterPage() {
               <Field label={t("Numéro de téléphone")} hint={t("C'est ton identifiant de connexion.")}><input name="phone" required type="tel" maxLength={30} autoComplete="tel" className="input" /></Field>
               <Field label={t("Mot de passe")} hint={t("10 caractères minimum.")} className="sm:col-span-2"><input name="password" type="password" required minLength={10} maxLength={72} autoComplete="new-password" className="input" /></Field>
             </div>
-            <div className="kicker mb-4 mt-8">{t("VÉHICULE ENGAGÉ")}</div>
+            <div className="kicker mb-1 mt-8">{t("VÉHICULE ENGAGÉ")}</div>
+            <p className="mb-4 text-sm text-metal"><Link href="/vehicles" target="_blank" data-veh-link className="text-red hover:text-white">{t("Voir la liste des véhicules autorisés")} →</Link></p>
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label={t("Marque et modèle")}><input name="make_model" required maxLength={80} placeholder={t("ex. Marque Modèle")} className="input" /></Field>
               <Field label={t("Catégorie")}>

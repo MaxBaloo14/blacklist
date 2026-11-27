@@ -12,6 +12,7 @@ export function buildNavLinks(t: (s: string) => string, o: { loggedIn: boolean; 
     { href: "/race-network", label: t("CIRCUITS") },
     { href: "/boutique", label: t("BOUTIQUE") },
     { href: "/rules", label: t("RÈGLEMENT") },
+    { href: "/vehicles", label: t("VÉHICULES") },
     { href: DISCORD_URL, label: "DISCORD", external: true },
     ...(o.loggedIn
       ? [{ href: "/profile", label: t("MON PROFIL") }, { href: "/reclamation", label: t("RÉCLAMATION") }, { href: "/suggestion", label: t("SUGGESTION") }]

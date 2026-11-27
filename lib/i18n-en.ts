@@ -420,6 +420,11 @@ const EN_SITE: Record<string, string> = {
   "60 points de passage au maximum pour une suggestion.": "60 waypoints maximum for a suggestion.",
   "Chaque pilote reçoit 10 000 zigollars à l'inscription : ils sont verrouillés et ne se dépensent qu'à partir de son premier gain (victoire en duel, participation à une Warm-up Race…)": "Every driver gets 10,000 zigollars on registration: they are locked and can only be spent from their first gain (duel victory, Warm-up Race participation…)",
   "Tout pilote peut suggérer une course en traçant son parcours sur la carte (60 points de passage au maximum) ; les autres pilotes peuvent voter": "Any driver can suggest a race by drawing its route on the map (60 waypoints maximum); other drivers can vote",
+  "autorisés": "allowed", "Véhicules autorisés": "Allowed vehicles",
+  "Seuls les véhicules de cette liste peuvent s'engager en duel. Les véhicules des offres premium de la boutique sont interdits.": "Only the vehicles on this list may be entered in a duel. Vehicles from the shop's premium offers are banned.",
+  "Rechercher un véhicule": "Search a vehicle", "Rechercher un véhicule ou une marque…": "Search a vehicle or a brand…",
+  "{n} véhicule(s)": "{n} vehicle(s)", "Voir la liste des véhicules autorisés": "See the list of allowed vehicles", "CH": "HP", "Aucun véhicule ne correspond à ta recherche.": "No vehicle matches your search.",
+  "Sportives Classiques": "Classic sports cars", "Super sportives": "Supercars", "Grosse cylindrées": "Muscle cars", "Lowrider": "Lowriders", "Drift": "Drift", "Rallye": "Rally", "Vans": "Vans",
 };
 
 export const EN: Record<string, string> = { ...EN_SITE, ...EN_ADMIN };

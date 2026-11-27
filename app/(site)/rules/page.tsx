@@ -38,7 +38,7 @@ export default async function RulesPage() {
       <PageHead kicker={t("LE RÈGLEMENT")} title={t("Les règles")} em={t("du jeu")}>{t("Tout ce qu'il faut savoir pour entrer dans la Blacklist, défier un pilote et prendre sa place.")}</PageHead>
       <section className="py-14">
         <div className="wrap">
-          <p className="mb-8 text-sm text-metal">{t("Nouveau ?")} <Link href="/guide" className="text-red hover:text-white">{t("Lis le guide du pilote")} →</Link></p>
+          <p className="mb-8 text-sm text-metal">{t("Nouveau ?")} <Link href="/guide" className="text-red hover:text-white">{t("Lis le guide du pilote")} →</Link> · <Link href="/vehicles" data-veh-link className="text-red hover:text-white">{t("Voir la liste des véhicules autorisés")} →</Link></p>
           <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map(([title, text], i) => (
               <div key={title} className="flex gap-4">

@@ -431,3 +431,7 @@ button.bet-side:hover { box-shadow: inset 0 0 0 1px #c62828; }
 .route-drawer { max-height: 72vh; overflow: auto; background: #0b0c0f; box-shadow: inset 0 0 0 1px #ffffff1f; overscroll-behavior: contain; }
 .route-drawer:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .req-card { padding: 1.5rem; background: var(--grain), linear-gradient(165deg, #1a1c21, #0c0d10); box-shadow: inset 0 0 0 1px #ffffff12; border-left: 4px solid #c62828; }
+
+/* Liste des véhicules autorisés */
+.veh-card { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; background: var(--grain), linear-gradient(165deg, #1a1c21 0%, #0c0d10 100%); box-shadow: inset 0 0 0 1px #ffffff12; border-left: 3px solid #c62828; transition: box-shadow .2s, transform .2s; }
+.veh-card:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px #c6282880, 0 12px 28px #00000055; }

@@ -1,0 +1,3238 @@
+{
+ "source": "concessionnaire",
+ "importedAt": "2026-11-27",
+ "vehicles": [
+  {
+   "name": "Asbo",
+   "brand": "Maxwell",
+   "model": "Maxwell Asbo",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Blista",
+   "brand": "Dinka",
+   "model": "Dinka Blista",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Blista Kanjo",
+   "brand": "Dinka",
+   "model": "Dinka Blista Kanjo",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Brioso 300",
+   "brand": "Grotti",
+   "model": "Grotti Brioso 300",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Brioso 300 Large",
+   "brand": "Grotti",
+   "model": "Grotti Brioso 300 Large",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Brioso R/A",
+   "brand": "Grotti",
+   "model": "Grotti Brioso R/A",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Club",
+   "brand": "BF",
+   "model": "BF Club",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Dilettante",
+   "brand": "Karin",
+   "model": "Karin Dilettante",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 4
+  },
+  {
+   "name": "Issi",
+   "brand": "Weeny",
+   "model": "Weeny Issi",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Issi Classique",
+   "brand": "Weeny",
+   "model": "Weeny Issi Classique",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Panto",
+   "brand": "Benefactor",
+   "model": "Benefactor Panto",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Prairie",
+   "brand": "Bollokan",
+   "model": "Bollokan Prairie",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Rhapsody",
+   "brand": "Declasse",
+   "model": "Declasse Rhapsody",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Uranus Lozspeed",
+   "brand": "Vapid",
+   "model": "Vapid Uranus Lozspeed",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Weevil",
+   "brand": "BF",
+   "model": "BF Weevil",
+   "category": "Compactes",
+   "hp": 120,
+   "seats": 2
+  },
+  {
+   "name": "Asea",
+   "brand": "Declasse",
+   "model": "Asea Sedan",
+   "category": "Berlines",
+   "hp": 140,
+   "seats": 4
+  },
+  {
+   "name": "Asea (neige)",
+   "brand": "Declasse",
+   "model": "Asea Snow & Stickerbomb Spec",
+   "category": "Berlines",
+   "hp": 140,
+   "seats": 4
+  },
+  {
+   "name": "Asterope",
+   "brand": "Karin",
+   "model": "Asterope Comfort Sedan",
+   "category": "Berlines",
+   "hp": 180,
+   "seats": 4
+  },
+  {
+   "name": "Asterope GZ",
+   "brand": "Karin",
+   "model": "Asterope GZ Modern Sedan",
+   "category": "Berlines",
+   "hp": 220,
+   "seats": 4
+  },
+  {
+   "name": "Chavos V6",
+   "brand": "Dundreary",
+   "model": "Chavos V6 Executive",
+   "category": "Berlines",
+   "hp": 320,
+   "seats": 4
+  },
+  {
+   "name": "Cinquemila",
+   "brand": "Lampadati",
+   "model": "Cinquemila Sport Sedan",
+   "category": "Berlines",
+   "hp": 580,
+   "seats": 4
+  },
+  {
+   "name": "Cognoscenti",
+   "brand": "Enus",
+   "model": "Cognoscenti Luxury V12",
+   "category": "Berlines",
+   "hp": 500,
+   "seats": 4
+  },
+  {
+   "name": "Cognoscenti 55",
+   "brand": "Enus",
+   "model": "Cognoscenti 55 Short Wheelbase",
+   "category": "Berlines",
+   "hp": 500,
+   "seats": 4
+  },
+  {
+   "name": "Deity",
+   "brand": "Enus",
+   "model": "Deity Modern Luxury Sedan",
+   "category": "Berlines",
+   "hp": 550,
+   "seats": 4
+  },
+  {
+   "name": "Emperor",
+   "brand": "Albany",
+   "model": "Emperor Classic Sedan",
+   "category": "Berlines",
+   "hp": 180,
+   "seats": 4
+  },
+  {
+   "name": "Emperor (neige)",
+   "brand": "Albany",
+   "model": "Emperor Beater & Patina Spec",
+   "category": "Berlines",
+   "hp": 175,
+   "seats": 4
+  },
+  {
+   "name": "Fugitive",
+   "brand": "Cheval",
+   "model": "Fugitive V8 Performance",
+   "category": "Berlines",
+   "hp": 350,
+   "seats": 4
+  },
+  {
+   "name": "Glendale",
+   "brand": "Benefactor",
+   "model": "Glendale Classic Sedan",
+   "category": "Berlines",
+   "hp": 160,
+   "seats": 4
+  },
+  {
+   "name": "Glendale Custom",
+   "brand": "Benefactor",
+   "model": "Glendale Custom Lowrider",
+   "category": "Berlines",
+   "hp": 200,
+   "seats": 4
+  },
+  {
+   "name": "Hardy Way",
+   "brand": "Dundreary",
+   "model": "Hardy Way Cruiser",
+   "category": "Berlines",
+   "hp": 280,
+   "seats": 4
+  },
+  {
+   "name": "Ingot",
+   "brand": "Vulcar",
+   "model": "Ingot Wagon Estate",
+   "category": "Berlines",
+   "hp": 150,
+   "seats": 4
+  },
+  {
+   "name": "Intruder",
+   "brand": "Karin",
+   "model": "Intruder Sport Sedan",
+   "category": "Berlines",
+   "hp": 210,
+   "seats": 4
+  },
+  {
+   "name": "Minimus",
+   "brand": "Enus",
+   "model": "Minimus Modern Luxury Sedan",
+   "category": "Berlines",
+   "hp": 600,
+   "seats": 4
+  },
+  {
+   "name": "Premier",
+   "brand": "Declasse",
+   "model": "Premier Sedan",
+   "category": "Berlines",
+   "hp": 170,
+   "seats": 4
+  },
+  {
+   "name": "Regina",
+   "brand": "Dundreary",
+   "model": "Regina Station Wagon",
+   "category": "Berlines",
+   "hp": 150,
+   "seats": 4
+  },
+  {
+   "name": "Revolter",
+   "brand": "Übermacht",
+   "model": "Revolter Luxury Sport Sedan",
+   "category": "Berlines",
+   "hp": 480,
+   "seats": 4
+  },
+  {
+   "name": "Rhinehart",
+   "brand": "Übermacht",
+   "model": "Rhinehart Touring Wagon",
+   "category": "Berlines",
+   "hp": 450,
+   "seats": 4
+  },
+  {
+   "name": "Schafter",
+   "brand": "Benefactor",
+   "model": "Schafter Sedan Sport",
+   "category": "Berlines",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Schafter LWB",
+   "brand": "Benefactor",
+   "model": "Schafter Long Wheelbase",
+   "category": "Berlines",
+   "hp": 450,
+   "seats": 4
+  },
+  {
+   "name": "Stafford",
+   "brand": "Enus",
+   "model": "Stafford Classic Limousine",
+   "category": "Berlines",
+   "hp": 200,
+   "seats": 4
+  },
+  {
+   "name": "Stanier",
+   "brand": "Vapid",
+   "model": "Stanier V8 Sedan",
+   "category": "Berlines",
+   "hp": 240,
+   "seats": 4
+  },
+  {
+   "name": "Stratum",
+   "brand": "Zirconium",
+   "model": "Stratum Twin-Turbo Wagon",
+   "category": "Berlines",
+   "hp": 280,
+   "seats": 4
+  },
+  {
+   "name": "Stretch",
+   "brand": "Dundreary",
+   "model": "Stretch Presidential Limousine",
+   "category": "Berlines",
+   "hp": 300,
+   "seats": 6
+  },
+  {
+   "name": "Super Diamond",
+   "brand": "Enus",
+   "model": "Super Diamond V12",
+   "category": "Berlines",
+   "hp": 450,
+   "seats": 4
+  },
+  {
+   "name": "Surge",
+   "brand": "Cheval",
+   "model": "Surge Electric Sedan",
+   "category": "Berlines",
+   "hp": 180,
+   "seats": 4
+  },
+  {
+   "name": "Tailgater",
+   "brand": "Obey",
+   "model": "Tailgater V6 Sedan",
+   "category": "Berlines",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Tailgater S",
+   "brand": "Obey",
+   "model": "Tailgater S Performance",
+   "category": "Berlines",
+   "hp": 450,
+   "seats": 4
+  },
+  {
+   "name": "Vorschlaghammer",
+   "brand": "Benefactor",
+   "model": "Vorschlaghammer AMG Classic",
+   "category": "Berlines",
+   "hp": 385,
+   "seats": 4
+  },
+  {
+   "name": "Warrener",
+   "brand": "Vapid",
+   "model": "Warrener Sedan Heritage",
+   "category": "Berlines",
+   "hp": 160,
+   "seats": 4
+  },
+  {
+   "name": "Washington",
+   "brand": "Albany",
+   "model": "Washington V8 Sedan",
+   "category": "Berlines",
+   "hp": 240,
+   "seats": 4
+  },
+  {
+   "name": "Buffalo EVX",
+   "brand": "Bravado",
+   "model": "Buffalo EVX Muscle Coupe",
+   "category": "Coupés",
+   "hp": 800,
+   "seats": 4
+  },
+  {
+   "name": "Cognoscenti Cabrio",
+   "brand": "Enus",
+   "model": "Cognoscenti Cabrio GT",
+   "category": "Coupés",
+   "hp": 560,
+   "seats": 4
+  },
+  {
+   "name": "Exemplar",
+   "brand": "Dewbauchee",
+   "model": "Exemplar 4-Door Coupe GT",
+   "category": "Coupés",
+   "hp": 470,
+   "seats": 4
+  },
+  {
+   "name": "F620",
+   "brand": "Ocelot",
+   "model": "F620 Sport Coupe",
+   "category": "Coupés",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Felon",
+   "brand": "Lampadati",
+   "model": "Felon Grand Tourer",
+   "category": "Coupés",
+   "hp": 400,
+   "seats": 4
+  },
+  {
+   "name": "Felon GT",
+   "brand": "Lampadati",
+   "model": "Felon GT Convertible",
+   "category": "Coupés",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "FR36",
+   "brand": "Fathom",
+   "model": "FR36 Drift Coupe",
+   "category": "Coupés",
+   "hp": 480,
+   "seats": 2
+  },
+  {
+   "name": "Jackal",
+   "brand": "Ocelot",
+   "model": "Jackal Executive Coupe",
+   "category": "Coupés",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "Kanjo SJ",
+   "brand": "Dinka",
+   "model": "Kanjo SJ Japanese Coupe",
+   "category": "Coupés",
+   "hp": 220,
+   "seats": 2
+  },
+  {
+   "name": "Oracle",
+   "brand": "Übermacht",
+   "model": "Oracle Gen 2 Luxury Coupe",
+   "category": "Coupés",
+   "hp": 350,
+   "seats": 4
+  },
+  {
+   "name": "Oracle XS",
+   "brand": "Übermacht",
+   "model": "Oracle XS Classic",
+   "category": "Coupés",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Postlude",
+   "brand": "Dinka",
+   "model": "Postlude Vintage Coupe",
+   "category": "Coupés",
+   "hp": 160,
+   "seats": 2
+  },
+  {
+   "name": "Previon",
+   "brand": "Karin",
+   "model": "Previon 90s Coupe",
+   "category": "Coupés",
+   "hp": 250,
+   "seats": 2
+  },
+  {
+   "name": "Sentinel",
+   "brand": "Übermacht",
+   "model": "Sentinel Convertible",
+   "category": "Coupés",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Sentinel XS",
+   "brand": "Übermacht",
+   "model": "Sentinel XS Tuner Coupe",
+   "category": "Coupés",
+   "hp": 343,
+   "seats": 2
+  },
+  {
+   "name": "Sultan RS",
+   "brand": "Karin",
+   "model": "Sultan RS Super Coupe",
+   "category": "Coupés",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Windsor",
+   "brand": "Enus",
+   "model": "Windsor V12 Luxury Coupe",
+   "category": "Coupés",
+   "hp": 624,
+   "seats": 2
+  },
+  {
+   "name": "Windsor Drop",
+   "brand": "Enus",
+   "model": "Windsor Drop Convertible 4-Door",
+   "category": "Coupés",
+   "hp": 624,
+   "seats": 4
+  },
+  {
+   "name": "Zion",
+   "brand": "Übermacht",
+   "model": "Zion Grand Tourer",
+   "category": "Coupés",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Zion Cabrio",
+   "brand": "Übermacht",
+   "model": "Zion Cabrio",
+   "category": "Coupés",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "10F",
+   "brand": "Obey",
+   "model": "10F R8 Sport",
+   "category": "Sportives",
+   "hp": 560,
+   "seats": 2
+  },
+  {
+   "name": "10F Widebody",
+   "brand": "Obey",
+   "model": "10F Widebody Edition",
+   "category": "Sportives",
+   "hp": 620,
+   "seats": 2
+  },
+  {
+   "name": "300R",
+   "brand": "Annis",
+   "model": "300R Modern Sport",
+   "category": "Sportives",
+   "hp": 400,
+   "seats": 2
+  },
+  {
+   "name": "8F Drafter",
+   "brand": "Obey",
+   "model": "8F Drafter Quattro",
+   "category": "Sportives",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "9F",
+   "brand": "Obey",
+   "model": "9F V10 Sport",
+   "category": "Sportives",
+   "hp": 525,
+   "seats": 2
+  },
+  {
+   "name": "9F Cabrio",
+   "brand": "Obey",
+   "model": "9F Cabrio Spyder",
+   "category": "Sportives",
+   "hp": 525,
+   "seats": 2
+  },
+  {
+   "name": "Alpha",
+   "brand": "Albany",
+   "model": "Alpha Sport Coupe",
+   "category": "Sportives",
+   "hp": 430,
+   "seats": 2
+  },
+  {
+   "name": "Banshee",
+   "brand": "Bravado",
+   "model": "Banshee Roadster",
+   "category": "Sportives",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Banshee 900R",
+   "brand": "Bravado",
+   "model": "Banshee 900R Widebody",
+   "category": "Sportives",
+   "hp": 560,
+   "seats": 2
+  },
+  {
+   "name": "Bestia GTS",
+   "brand": "Grotti",
+   "model": "Bestia GTS Shooting Brake",
+   "category": "Sportives",
+   "hp": 680,
+   "seats": 2
+  },
+  {
+   "name": "Blista Go Go Monkey",
+   "brand": "Dinka",
+   "model": "Dinka Blista Go Go Monkey",
+   "category": "Sportives",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Buffalo",
+   "brand": "Bravado",
+   "model": "Buffalo Classic V8",
+   "category": "Sportives",
+   "hp": 340,
+   "seats": 4
+  },
+  {
+   "name": "Buffalo S",
+   "brand": "Bravado",
+   "model": "Buffalo S Performance",
+   "category": "Sportives",
+   "hp": 470,
+   "seats": 4
+  },
+  {
+   "name": "Buffalo Sprunk",
+   "brand": "Bravado",
+   "model": "Buffalo Sprunk Race Edition",
+   "category": "Sportives",
+   "hp": 480,
+   "seats": 4
+  },
+  {
+   "name": "Buffalo STX",
+   "brand": "Bravado",
+   "model": "Buffalo STX Hellfire",
+   "category": "Sportives",
+   "hp": 707,
+   "seats": 4
+  },
+  {
+   "name": "Carbonizzare",
+   "brand": "Grotti",
+   "model": "Carbonizzare Hardtop Convertible",
+   "category": "Sportives",
+   "hp": 570,
+   "seats": 2
+  },
+  {
+   "name": "Comet",
+   "brand": "Pfister",
+   "model": "Comet Classic Coupe",
+   "category": "Sportives",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Comet S2",
+   "brand": "Pfister",
+   "model": "Comet S2 Modern Coupe",
+   "category": "Sportives",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Comet S2 Cabrio",
+   "brand": "Pfister",
+   "model": "Comet S2 Cabrio",
+   "category": "Sportives",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Comet SR",
+   "brand": "Pfister",
+   "model": "Comet SR Track Weapon",
+   "category": "Sportives",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Coquette",
+   "brand": "Invetero",
+   "model": "Coquette C7 Sport",
+   "category": "Sportives",
+   "hp": 460,
+   "seats": 2
+  },
+  {
+   "name": "Cypher",
+   "brand": "Übermacht",
+   "model": "Cypher M Coupe",
+   "category": "Sportives",
+   "hp": 510,
+   "seats": 2
+  },
+  {
+   "name": "Elegy Rétro Custom",
+   "brand": "Annis",
+   "model": "Elegy Retro Custom",
+   "category": "Sportives",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Elegy RH8",
+   "brand": "Annis",
+   "model": "Elegy RH8 Modern GT",
+   "category": "Sportives",
+   "hp": 545,
+   "seats": 2
+  },
+  {
+   "name": "Envisage",
+   "brand": "Överflöd",
+   "model": "Envisage Concept Coupe",
+   "category": "Sportives",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "Euros",
+   "brand": "Annis",
+   "model": "Euros Sport Coupe",
+   "category": "Sportives",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "Euros X32",
+   "brand": "Annis",
+   "model": "Annis Euros X32",
+   "category": "Sportives",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Feltzer",
+   "brand": "Benefactor",
+   "model": "Feltzer DTM Sport",
+   "category": "Sportives",
+   "hp": 520,
+   "seats": 2
+  },
+  {
+   "name": "Furore GT",
+   "brand": "Lampadati",
+   "model": "Furore GT Sports",
+   "category": "Sportives",
+   "hp": 480,
+   "seats": 2
+  },
+  {
+   "name": "Fusiade",
+   "brand": "Schyster",
+   "model": "Schyster Fusiade",
+   "category": "Sportives",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Fusilade",
+   "brand": "Schyster",
+   "model": "Fusilade V6 Sport",
+   "category": "Sportives",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "Growler",
+   "brand": "Pfister",
+   "model": "Growler Cayman Coupe",
+   "category": "Sportives",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Hotring Everon",
+   "brand": "Karin",
+   "model": "Hotring Everon Stock Car",
+   "category": "Sportives",
+   "hp": 750,
+   "seats": 2
+  },
+  {
+   "name": "Imorgon",
+   "brand": "Överflöd",
+   "model": "Imorgon Electric Sports",
+   "category": "Sportives",
+   "hp": 600,
+   "seats": 2
+  },
+  {
+   "name": "Jester",
+   "brand": "Dinka",
+   "model": "Jester Modern Hybrid Sports",
+   "category": "Sportives",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Jester (Racecar)",
+   "brand": "Dinka",
+   "model": "Jester Race Edition",
+   "category": "Sportives",
+   "hp": 530,
+   "seats": 2
+  },
+  {
+   "name": "Jester RR",
+   "brand": "Dinka",
+   "model": "Jester RR Modern Coupe",
+   "category": "Sportives",
+   "hp": 382,
+   "seats": 2
+  },
+  {
+   "name": "Jugular",
+   "brand": "Ocelot",
+   "model": "Jugular V8 Performance",
+   "category": "Sportives",
+   "hp": 600,
+   "seats": 4
+  },
+  {
+   "name": "Khamelion",
+   "brand": "Hijak",
+   "model": "Khamelion Electric GT",
+   "category": "Sportives",
+   "hp": 400,
+   "seats": 2
+  },
+  {
+   "name": "Komoda",
+   "brand": "Lampadati",
+   "model": "Komoda V6 Sport Sedan",
+   "category": "Sportives",
+   "hp": 505,
+   "seats": 4
+  },
+  {
+   "name": "Kuruma",
+   "brand": "Karin",
+   "model": "Kuruma Sport AWD",
+   "category": "Sportives",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Locust",
+   "brand": "Ocelot",
+   "model": "Locust Open-Top Roadcar",
+   "category": "Sportives",
+   "hp": 400,
+   "seats": 2
+  },
+  {
+   "name": "LSCM Jester RR",
+   "brand": "Dinka",
+   "model": "Jester RR Car Meet Edition",
+   "category": "Sportives",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Lynx",
+   "brand": "Ocelot",
+   "model": "Lynx GT Sport",
+   "category": "Sportives",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Massacro",
+   "brand": "Dewbauchee",
+   "model": "Massacro GT Coupe",
+   "category": "Sportives",
+   "hp": 520,
+   "seats": 2
+  },
+  {
+   "name": "Massacro (Racecar)",
+   "brand": "Dewbauchee",
+   "model": "Massacro Race Version",
+   "category": "Sportives",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Neon",
+   "brand": "Pfister",
+   "model": "Neon EV Performance Sedan",
+   "category": "Sportives",
+   "hp": 760,
+   "seats": 2
+  },
+  {
+   "name": "Niobe",
+   "brand": "Enus",
+   "model": "Niobe Hybrid Sport",
+   "category": "Sportives",
+   "hp": 820,
+   "seats": 2
+  },
+  {
+   "name": "Omnis e-GT",
+   "brand": "Obey",
+   "model": "Omnis e-GT Electric RS",
+   "category": "Sportives",
+   "hp": 637,
+   "seats": 4
+  },
+  {
+   "name": "Panthere",
+   "brand": "Annis",
+   "model": "Panthere Sport Coupe",
+   "category": "Sportives",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Pariah",
+   "brand": "Ocelot",
+   "model": "Pariah Ultra Sport",
+   "category": "Sportives",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Penumbra",
+   "brand": "Maibatsu",
+   "model": "Penumbra Street Coupe",
+   "category": "Sportives",
+   "hp": 260,
+   "seats": 2
+  },
+  {
+   "name": "Penumbra FF",
+   "brand": "Maibatsu",
+   "model": "Penumbra FF Tuner Edition",
+   "category": "Sportives",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Raiden",
+   "brand": "Coil",
+   "model": "Raiden EV Sport Sedan",
+   "category": "Sportives",
+   "hp": 700,
+   "seats": 4
+  },
+  {
+   "name": "Rapid GT",
+   "brand": "Dewbauchee",
+   "model": "Rapid GT Coupe",
+   "category": "Sportives",
+   "hp": 510,
+   "seats": 2
+  },
+  {
+   "name": "Rapid GT (variante)",
+   "brand": "Dewbauchee",
+   "model": "Rapid GT Convertible",
+   "category": "Sportives",
+   "hp": 510,
+   "seats": 2
+  },
+  {
+   "name": "Rapid GT X",
+   "brand": "Dewbauchee",
+   "model": "Rapid GT X Performance",
+   "category": "Sportives",
+   "hp": 580,
+   "seats": 2
+  },
+  {
+   "name": "Ruston",
+   "brand": "Hijak",
+   "model": "Ruston Track Lightweight",
+   "category": "Sportives",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Schafter V12",
+   "brand": "Benefactor",
+   "model": "Schafter V12 Performance",
+   "category": "Sportives",
+   "hp": 520,
+   "seats": 4
+  },
+  {
+   "name": "Schwartzer",
+   "brand": "Benefactor",
+   "model": "Schwartzer V8 Sport",
+   "category": "Sportives",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Sentinel XS4",
+   "brand": "Übermacht",
+   "model": "Sentinel XS4 Sports Sedan",
+   "category": "Sportives",
+   "hp": 510,
+   "seats": 4
+  },
+  {
+   "name": "Seven-70",
+   "brand": "Dewbauchee",
+   "model": "Seven-70 Super Coupe",
+   "category": "Sportives",
+   "hp": 730,
+   "seats": 2
+  },
+  {
+   "name": "SM722",
+   "brand": "Benefactor",
+   "model": "SM722 Roadster Speedster",
+   "category": "Sportives",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "Specter",
+   "brand": "Dewbauchee",
+   "model": "Specter GT",
+   "category": "Sportives",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Specter Custom",
+   "brand": "Dewbauchee",
+   "model": "Specter Custom Widebody",
+   "category": "Sportives",
+   "hp": 600,
+   "seats": 2
+  },
+  {
+   "name": "Sugoi",
+   "brand": "Dinka",
+   "model": "Sugoi Type-R Hatchback",
+   "category": "Sportives",
+   "hp": 320,
+   "seats": 4
+  },
+  {
+   "name": "Sultan",
+   "brand": "Karin",
+   "model": "Sultan 4WD Sport",
+   "category": "Sportives",
+   "hp": 280,
+   "seats": 4
+  },
+  {
+   "name": "Sultan Classic",
+   "brand": "Karin",
+   "model": "Sultan Classic 90s Rally",
+   "category": "Sportives",
+   "hp": 280,
+   "seats": 4
+  },
+  {
+   "name": "Surano",
+   "brand": "Benefactor",
+   "model": "Surano Roadster V8",
+   "category": "Sportives",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "V-STR",
+   "brand": "Albany",
+   "model": "V-STR Performance Sedan",
+   "category": "Sportives",
+   "hp": 640,
+   "seats": 4
+  },
+  {
+   "name": "Vectre",
+   "brand": "Emperor",
+   "model": "Vectre F Sport Coupe",
+   "category": "Sportives",
+   "hp": 472,
+   "seats": 2
+  },
+  {
+   "name": "Verlierer",
+   "brand": "Bravado",
+   "model": "Verlierer GT Sports",
+   "category": "Sportives",
+   "hp": 480,
+   "seats": 2
+  },
+  {
+   "name": "190Z",
+   "brand": "Karin",
+   "model": "190Z Fairlady GT",
+   "category": "Sportives Classiques",
+   "hp": 270,
+   "seats": 2
+  },
+  {
+   "name": "Ardent",
+   "brand": "Ocelot",
+   "model": "Ardent Classic GT",
+   "category": "Sportives Classiques",
+   "hp": 310,
+   "seats": 2
+  },
+  {
+   "name": "Astrale",
+   "brand": "Pegassi",
+   "model": "Astrale Classic V12",
+   "category": "Sportives Classiques",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Casco",
+   "brand": "Lampadati",
+   "model": "Casco GT V8",
+   "category": "Sportives Classiques",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Cheburek",
+   "brand": "Rune",
+   "model": "Cheburek Classic Rally",
+   "category": "Sportives Classiques",
+   "hp": 160,
+   "seats": 4
+  },
+  {
+   "name": "Cheetah Classic",
+   "brand": "Grotti",
+   "model": "Cheetah Classic 80s",
+   "category": "Sportives Classiques",
+   "hp": 390,
+   "seats": 2
+  },
+  {
+   "name": "Coquette Classic",
+   "brand": "Invetero",
+   "model": "Coquette Classic Convertible",
+   "category": "Sportives Classiques",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Coquette D1",
+   "brand": "Invetero",
+   "model": "Coquette D1 Roadster",
+   "category": "Sportives Classiques",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "Coquette D5",
+   "brand": "Invetero",
+   "model": "Coquette D5 Grand Sport",
+   "category": "Sportives Classiques",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Dynasty",
+   "brand": "Weeny",
+   "model": "Dynasty Taxi Vintage",
+   "category": "Sportives Classiques",
+   "hp": 110,
+   "seats": 4
+  },
+  {
+   "name": "Fagaloa",
+   "brand": "Vulcar",
+   "model": "Fagaloa Wagon Estate",
+   "category": "Sportives Classiques",
+   "hp": 120,
+   "seats": 4
+  },
+  {
+   "name": "Fränken Stange",
+   "brand": "Albany",
+   "model": "Fränken Stange Hotrod",
+   "category": "Sportives Classiques",
+   "hp": 400,
+   "seats": 4
+  },
+  {
+   "name": "GT500",
+   "brand": "Grotti",
+   "model": "GT500 Berlinetta",
+   "category": "Sportives Classiques",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "GT750",
+   "brand": "Grotti",
+   "model": "GT750 Competizione",
+   "category": "Sportives Classiques",
+   "hp": 370,
+   "seats": 2
+  },
+  {
+   "name": "Infernus Classic",
+   "brand": "Pegassi",
+   "model": "Infernus Classic V12",
+   "category": "Sportives Classiques",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Itali Classic",
+   "brand": "Progen",
+   "model": "Itali GT Classic",
+   "category": "Sportives Classiques",
+   "hp": 340,
+   "seats": 2
+  },
+  {
+   "name": "JB 700W",
+   "brand": "Dewbauchee",
+   "model": "JB 700W Secret Agent",
+   "category": "Sportives Classiques",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Mamba",
+   "brand": "Declasse",
+   "model": "Mamba V8 Roadster",
+   "category": "Sportives Classiques",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Michelli GT",
+   "brand": "Lampadati",
+   "model": "Michelli GT Veloce",
+   "category": "Sportives Classiques",
+   "hp": 220,
+   "seats": 2
+  },
+  {
+   "name": "Monroe",
+   "brand": "Pegassi",
+   "model": "Monroe V12 Miura",
+   "category": "Sportives Classiques",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Nebula Turbo",
+   "brand": "Vulcar",
+   "model": "Nebula Turbo Rally",
+   "category": "Sportives Classiques",
+   "hp": 240,
+   "seats": 2
+  },
+  {
+   "name": "Peyote",
+   "brand": "Vapid",
+   "model": "Peyote Convertible",
+   "category": "Sportives Classiques",
+   "hp": 200,
+   "seats": 2
+  },
+  {
+   "name": "Peyote Custom",
+   "brand": "Vapid",
+   "model": "Peyote Custom Lowrider",
+   "category": "Sportives Classiques",
+   "hp": 250,
+   "seats": 2
+  },
+  {
+   "name": "Pigalle",
+   "brand": "Lampadati",
+   "model": "Pigalle GT Coupe",
+   "category": "Sportives Classiques",
+   "hp": 210,
+   "seats": 2
+  },
+  {
+   "name": "Rapid GT Classic",
+   "brand": "Dewbauchee",
+   "model": "Rapid GT Classic V8",
+   "category": "Sportives Classiques",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Retinue",
+   "brand": "Vapid",
+   "model": "Retinue Mk1 Rally",
+   "category": "Sportives Classiques",
+   "hp": 180,
+   "seats": 2
+  },
+  {
+   "name": "Retinue MK II",
+   "brand": "Vapid",
+   "model": "Retinue Mk2 Escort",
+   "category": "Sportives Classiques",
+   "hp": 210,
+   "seats": 2
+  },
+  {
+   "name": "Roosevelt",
+   "brand": "Albany",
+   "model": "Roosevelt Gangster Vintage",
+   "category": "Sportives Classiques",
+   "hp": 180,
+   "seats": 6
+  },
+  {
+   "name": "Roosevelt Valor",
+   "brand": "Albany",
+   "model": "Roosevelt Valor Executive",
+   "category": "Sportives Classiques",
+   "hp": 210,
+   "seats": 6
+  },
+  {
+   "name": "Savestra",
+   "brand": "Annis",
+   "model": "Savestra Rotary Coupe",
+   "category": "Sportives Classiques",
+   "hp": 230,
+   "seats": 2
+  },
+  {
+   "name": "Stinger",
+   "brand": "Grotti",
+   "model": "Stinger Convertible",
+   "category": "Sportives Classiques",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "Stinger GT",
+   "brand": "Grotti",
+   "model": "Stinger GT Berlinetta",
+   "category": "Sportives Classiques",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Stinger TT",
+   "brand": "Grotti",
+   "model": "Stinger TT Twin Turbo",
+   "category": "Sportives Classiques",
+   "hp": 410,
+   "seats": 2
+  },
+  {
+   "name": "Stirling GT",
+   "brand": "Benefactor",
+   "model": "Stirling GT Gullwing",
+   "category": "Sportives Classiques",
+   "hp": 330,
+   "seats": 2
+  },
+  {
+   "name": "Swinger",
+   "brand": "Ocelot",
+   "model": "Swinger Endurance Le Mans",
+   "category": "Sportives Classiques",
+   "hp": 460,
+   "seats": 2
+  },
+  {
+   "name": "Torero",
+   "brand": "Pegassi",
+   "model": "Torero Countach V12",
+   "category": "Sportives Classiques",
+   "hp": 430,
+   "seats": 2
+  },
+  {
+   "name": "Turismo Classic",
+   "brand": "Grotti",
+   "model": "Turismo Classic F40",
+   "category": "Sportives Classiques",
+   "hp": 478,
+   "seats": 2
+  },
+  {
+   "name": "Viseris",
+   "brand": "Lampadati",
+   "model": "Viseris GT V8",
+   "category": "Sportives Classiques",
+   "hp": 390,
+   "seats": 2
+  },
+  {
+   "name": "Z-Type",
+   "brand": "Truffade",
+   "model": "Z-Type Atlantic 1937",
+   "category": "Sportives Classiques",
+   "hp": 230,
+   "seats": 2
+  },
+  {
+   "name": "Zion Classic",
+   "brand": "Ubermacht",
+   "model": "Zion Classic M Coupe",
+   "category": "Sportives Classiques",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "811",
+   "brand": "Pfister",
+   "model": "811 Hybrid Spyder",
+   "category": "Super sportives",
+   "hp": 887,
+   "seats": 2
+  },
+  {
+   "name": "Adder",
+   "brand": "Truffade",
+   "model": "Adder Hypercar V16",
+   "category": "Super sportives",
+   "hp": 1000,
+   "seats": 2
+  },
+  {
+   "name": "Autarch",
+   "brand": "Överflöd",
+   "model": "Autarch Hypercar",
+   "category": "Super sportives",
+   "hp": 850,
+   "seats": 2
+  },
+  {
+   "name": "Banshee GTS",
+   "brand": "Bravado",
+   "model": "Banshee GTS V10 Twin-Turbo",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Bullet",
+   "brand": "Vapid",
+   "model": "Bullet GT V8",
+   "category": "Super sportives",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Champion",
+   "brand": "Dewbauchee",
+   "model": "Champion V12 Coupe",
+   "category": "Super sportives",
+   "hp": 720,
+   "seats": 2
+  },
+  {
+   "name": "Cheetah",
+   "brand": "Grotti",
+   "model": "Cheetah V12 Berlinetta",
+   "category": "Super sportives",
+   "hp": 660,
+   "seats": 2
+  },
+  {
+   "name": "Coquette D10",
+   "brand": "Invetero",
+   "model": "Coquette D10 Mid-Engine",
+   "category": "Super sportives",
+   "hp": 670,
+   "seats": 2
+  },
+  {
+   "name": "Cyclone",
+   "brand": "Coil",
+   "model": "Cyclone EV Hypercar",
+   "category": "Super sportives",
+   "hp": 1000,
+   "seats": 2
+  },
+  {
+   "name": "Deveste Eight",
+   "brand": "Principe",
+   "model": "Deveste Eight V16 Concept",
+   "category": "Super sportives",
+   "hp": 1100,
+   "seats": 2
+  },
+  {
+   "name": "Emerus",
+   "brand": "Progen",
+   "model": "Emerus Hypercar Track Spec",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Entity MT",
+   "brand": "Överflöd",
+   "model": "Entity MT Track Edition",
+   "category": "Super sportives",
+   "hp": 900,
+   "seats": 2
+  },
+  {
+   "name": "Entity XF",
+   "brand": "Överflöd",
+   "model": "Entity XF AWD Hypercar",
+   "category": "Super sportives",
+   "hp": 790,
+   "seats": 2
+  },
+  {
+   "name": "Entity XXR",
+   "brand": "Överflöd",
+   "model": "Entity XXR Hypercar",
+   "category": "Super sportives",
+   "hp": 880,
+   "seats": 2
+  },
+  {
+   "name": "ETR1",
+   "brand": "Emperor",
+   "model": "ETR1 GT3 Supercar",
+   "category": "Super sportives",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "FMJ",
+   "brand": "Vapid",
+   "model": "FMJ GT Supercar",
+   "category": "Super sportives",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "FMJ MK V",
+   "brand": "Vapid",
+   "model": "FMJ MK V Carbon Edition",
+   "category": "Super sportives",
+   "hp": 850,
+   "seats": 2
+  },
+  {
+   "name": "Furia",
+   "brand": "Grotti",
+   "model": "Furia Hypercar AWD",
+   "category": "Super sportives",
+   "hp": 830,
+   "seats": 2
+  },
+  {
+   "name": "GP1",
+   "brand": "Progen",
+   "model": "GP1 Three-Seater Legend",
+   "category": "Super sportives",
+   "hp": 627,
+   "seats": 2
+  },
+  {
+   "name": "Ignus",
+   "brand": "Pegassi",
+   "model": "Ignus Hypercar V12",
+   "category": "Super sportives",
+   "hp": 819,
+   "seats": 2
+  },
+  {
+   "name": "Infernus",
+   "brand": "Pegassi",
+   "model": "Infernus V12 Supercar",
+   "category": "Super sportives",
+   "hp": 640,
+   "seats": 2
+  },
+  {
+   "name": "Itali GTB",
+   "brand": "Progen",
+   "model": "Itali GTB Twin-Turbo",
+   "category": "Super sportives",
+   "hp": 620,
+   "seats": 2
+  },
+  {
+   "name": "Itali GTB Custom",
+   "brand": "Progen",
+   "model": "Itali GTB Custom Benny's",
+   "category": "Super sportives",
+   "hp": 700,
+   "seats": 2
+  },
+  {
+   "name": "Itali GTO",
+   "brand": "Grotti",
+   "model": "Itali GTO Berlinetta V12",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Itali RSX",
+   "brand": "Grotti",
+   "model": "Itali RSX Stradale",
+   "category": "Super sportives",
+   "hp": 986,
+   "seats": 2
+  },
+  {
+   "name": "Krieger",
+   "brand": "Benefactor",
+   "model": "Krieger AMG Hypercar",
+   "category": "Super sportives",
+   "hp": 1000,
+   "seats": 2
+  },
+  {
+   "name": "LM87",
+   "brand": "Lampadati",
+   "model": "LM87 Endurance Prototype",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "LSCM Cheetah Classique",
+   "brand": "Grotti",
+   "model": "Grotti LSCM Cheetah Classique",
+   "category": "Super sportives",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Luiva",
+   "brand": "Överflöd",
+   "model": "Luiva Hypercar V12",
+   "category": "Super sportives",
+   "hp": 860,
+   "seats": 2
+  },
+  {
+   "name": "Neo",
+   "brand": "Wysser",
+   "model": "Neo V8 Supercar",
+   "category": "Super sportives",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "Nero",
+   "brand": "Truffade",
+   "model": "Nero W16 Hypercar",
+   "category": "Super sportives",
+   "hp": 1500,
+   "seats": 2
+  },
+  {
+   "name": "Nero Custom",
+   "brand": "Truffade",
+   "model": "Nero Custom Vision GT",
+   "category": "Super sportives",
+   "hp": 1600,
+   "seats": 2
+  },
+  {
+   "name": "Osiris",
+   "brand": "Pegassi",
+   "model": "Osiris Gullwing Hypercar",
+   "category": "Super sportives",
+   "hp": 730,
+   "seats": 2
+  },
+  {
+   "name": "Penetrator",
+   "brand": "Ocelot",
+   "model": "Penetrator V12 Classic",
+   "category": "Super sportives",
+   "hp": 540,
+   "seats": 2
+  },
+  {
+   "name": "Pipistrello",
+   "brand": "Överflöd",
+   "model": "Pipistrello EV Hypercar",
+   "category": "Super sportives",
+   "hp": 1900,
+   "seats": 2
+  },
+  {
+   "name": "RE-7B",
+   "brand": "Annis",
+   "model": "RE-7B Group C Racecar",
+   "category": "Super sportives",
+   "hp": 780,
+   "seats": 2
+  },
+  {
+   "name": "Reaper",
+   "brand": "Pegassi",
+   "model": "Reaper V8 Supercar",
+   "category": "Super sportives",
+   "hp": 750,
+   "seats": 2
+  },
+  {
+   "name": "S80RR",
+   "brand": "Annis",
+   "model": "S80RR Group C Champion",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "SC1",
+   "brand": "Übermacht",
+   "model": "SC1 Hommage Supercar",
+   "category": "Super sportives",
+   "hp": 600,
+   "seats": 2
+  },
+  {
+   "name": "Schlagen GT",
+   "brand": "Benefactor",
+   "model": "Schlagen GT V8 Biturbo",
+   "category": "Super sportives",
+   "hp": 585,
+   "seats": 2
+  },
+  {
+   "name": "Suzume",
+   "brand": "Annis",
+   "model": "Suzume GT Supercar",
+   "category": "Super sportives",
+   "hp": 600,
+   "seats": 2
+  },
+  {
+   "name": "T20",
+   "brand": "Progen",
+   "model": "T20 Active-Aero Hypercar",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Taipan",
+   "brand": "Cheval",
+   "model": "Taipan Hypercar",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Tempesta",
+   "brand": "Pegassi",
+   "model": "Tempesta V10 AWD",
+   "category": "Super sportives",
+   "hp": 610,
+   "seats": 2
+  },
+  {
+   "name": "Tezeract",
+   "brand": "Pegassi",
+   "model": "Tezeract EV Hypercar",
+   "category": "Super sportives",
+   "hp": 1200,
+   "seats": 2
+  },
+  {
+   "name": "Thrax",
+   "brand": "Truffade",
+   "model": "Thrax Hypercar V16",
+   "category": "Super sportives",
+   "hp": 1500,
+   "seats": 2
+  },
+  {
+   "name": "Tigon",
+   "brand": "Lampadati",
+   "model": "Tigon V8 Custom",
+   "category": "Super sportives",
+   "hp": 700,
+   "seats": 2
+  },
+  {
+   "name": "Torero XO",
+   "brand": "Pegassi",
+   "model": "Torero XO Hypercar V12",
+   "category": "Super sportives",
+   "hp": 814,
+   "seats": 2
+  },
+  {
+   "name": "Turismo Omaggio",
+   "brand": "Grotti",
+   "model": "Turismo Omaggio V8 Biturbo",
+   "category": "Super sportives",
+   "hp": 720,
+   "seats": 2
+  },
+  {
+   "name": "Turismo R",
+   "brand": "Grotti",
+   "model": "Turismo R Hybrid V12",
+   "category": "Super sportives",
+   "hp": 963,
+   "seats": 2
+  },
+  {
+   "name": "Tyrant",
+   "brand": "Överflöd",
+   "model": "Tyrant Extreme Hypercar",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Tyrus",
+   "brand": "Progen",
+   "model": "Tyrus GTR Longtail",
+   "category": "Super sportives",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "Vacca",
+   "brand": "Pegassi",
+   "model": "Vacca V10 Supercar",
+   "category": "Super sportives",
+   "hp": 560,
+   "seats": 2
+  },
+  {
+   "name": "Vagner",
+   "brand": "Dewbauchee",
+   "model": "Vagner Valkyrie Concept",
+   "category": "Super sportives",
+   "hp": 1100,
+   "seats": 2
+  },
+  {
+   "name": "Virtue",
+   "brand": "Ocelot",
+   "model": "Virtue EV Hypercar",
+   "category": "Super sportives",
+   "hp": 2000,
+   "seats": 2
+  },
+  {
+   "name": "Visione",
+   "brand": "Grotti",
+   "model": "Visione Concept V12",
+   "category": "Super sportives",
+   "hp": 800,
+   "seats": 2
+  },
+  {
+   "name": "Voltic",
+   "brand": "Coil",
+   "model": "Voltic Electric Roadster",
+   "category": "Super sportives",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "X-Treme",
+   "brand": "Pegassi",
+   "model": "X-Treme SCV12 Track Spec",
+   "category": "Super sportives",
+   "hp": 830,
+   "seats": 2
+  },
+  {
+   "name": "X80 Proto",
+   "brand": "Grotti",
+   "model": "X80 Proto Concept",
+   "category": "Super sportives",
+   "hp": 900,
+   "seats": 2
+  },
+  {
+   "name": "XA-21",
+   "brand": "Ocelot",
+   "model": "XA-21 Hybrid Supercar",
+   "category": "Super sportives",
+   "hp": 780,
+   "seats": 2
+  },
+  {
+   "name": "Zeno",
+   "brand": "Överflöd",
+   "model": "Zeno Twin-Turbo Hypercar",
+   "category": "Super sportives",
+   "hp": 1350,
+   "seats": 2
+  },
+  {
+   "name": "Zentorno",
+   "brand": "Pegassi",
+   "model": "Zentorno V12 Extreme",
+   "category": "Super sportives",
+   "hp": 750,
+   "seats": 2
+  },
+  {
+   "name": "Zorrusso",
+   "brand": "Pegassi",
+   "model": "Zorrusso Roadster V12",
+   "category": "Super sportives",
+   "hp": 770,
+   "seats": 2
+  },
+  {
+   "name": "Brigham",
+   "brand": "Albany",
+   "model": "Brigham Classic Estate",
+   "category": "Grosse cylindrées",
+   "hp": 280,
+   "seats": 4
+  },
+  {
+   "name": "Broadway",
+   "brand": "Classique",
+   "model": "Broadway Vintage Coupe",
+   "category": "Grosse cylindrées",
+   "hp": 220,
+   "seats": 4
+  },
+  {
+   "name": "Clique",
+   "brand": "Vapid",
+   "model": "Clique 50s Muscle",
+   "category": "Grosse cylindrées",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "Clique Wagon",
+   "brand": "Vapid",
+   "model": "Clique Wagon",
+   "category": "Grosse cylindrées",
+   "hp": 330,
+   "seats": 4
+  },
+  {
+   "name": "Deviant",
+   "brand": "Schyster",
+   "model": "Deviant Custom Hemi",
+   "category": "Grosse cylindrées",
+   "hp": 480,
+   "seats": 2
+  },
+  {
+   "name": "Dominator",
+   "brand": "Vapid",
+   "model": "Dominator V8 Muscle",
+   "category": "Grosse cylindrées",
+   "hp": 435,
+   "seats": 2
+  },
+  {
+   "name": "Dominator ASP",
+   "brand": "Vapid",
+   "model": "Dominator ASP SVT",
+   "category": "Grosse cylindrées",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Dominator FX",
+   "brand": "Vapid",
+   "model": "Dominator FX Foxbody",
+   "category": "Grosse cylindrées",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Dominator GT",
+   "brand": "Vapid",
+   "model": "Dominator GT Convertible",
+   "category": "Grosse cylindrées",
+   "hp": 510,
+   "seats": 2
+  },
+  {
+   "name": "Dominator GTT",
+   "brand": "Vapid",
+   "model": "Dominator GTT Fastback",
+   "category": "Grosse cylindrées",
+   "hp": 490,
+   "seats": 2
+  },
+  {
+   "name": "Dominator GTX",
+   "brand": "Vapid",
+   "model": "Dominator GTX Widebody",
+   "category": "Grosse cylindrées",
+   "hp": 520,
+   "seats": 2
+  },
+  {
+   "name": "Dukes",
+   "brand": "Imponte",
+   "model": "Dukes Charger V8",
+   "category": "Grosse cylindrées",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Ellie",
+   "brand": "Vapid",
+   "model": "Ellie GT500 Eleonor",
+   "category": "Grosse cylindrées",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Eudora",
+   "brand": "Classique",
+   "model": "Eudora Deluxe Hardtop",
+   "category": "Grosse cylindrées",
+   "hp": 260,
+   "seats": 4
+  },
+  {
+   "name": "Gauntlet",
+   "brand": "Bravado",
+   "model": "Gauntlet V8 SRT",
+   "category": "Grosse cylindrées",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Gauntlet Classic",
+   "brand": "Bravado",
+   "model": "Gauntlet Classic 1970",
+   "category": "Grosse cylindrées",
+   "hp": 410,
+   "seats": 2
+  },
+  {
+   "name": "Gauntlet Classic Custom",
+   "brand": "Bravado",
+   "model": "Gauntlet Classic Superbird",
+   "category": "Grosse cylindrées",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Gauntlet Hellfire",
+   "brand": "Bravado",
+   "model": "Gauntlet Hellfire SRT Demon",
+   "category": "Grosse cylindrées",
+   "hp": 707,
+   "seats": 2
+  },
+  {
+   "name": "Gauntlet Redwood",
+   "brand": "Bravado",
+   "model": "Gauntlet Redwood Race Spec",
+   "category": "Grosse cylindrées",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Greenwood",
+   "brand": "Bravado",
+   "model": "Greenwood Sedan V8",
+   "category": "Grosse cylindrées",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Hermes",
+   "brand": "Albany",
+   "model": "Hermes Lead Sled",
+   "category": "Grosse cylindrées",
+   "hp": 400,
+   "seats": 2
+  },
+  {
+   "name": "Hotknife",
+   "brand": "Vapid",
+   "model": "Hotknife Hot Rod",
+   "category": "Grosse cylindrées",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Hotring Hellfire",
+   "brand": "Bravado",
+   "model": "Hotring Hellfire Stockcar",
+   "category": "Grosse cylindrées",
+   "hp": 750,
+   "seats": 2
+  },
+  {
+   "name": "Hustler",
+   "brand": "Vapid",
+   "model": "Hustler Coupe 30s",
+   "category": "Grosse cylindrées",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Impaler",
+   "brand": "Declasse",
+   "model": "Impaler V8 Hardtop",
+   "category": "Grosse cylindrées",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Impaler Anticipation",
+   "brand": "Declasse",
+   "model": "Impaler Anticipation Edition",
+   "category": "Grosse cylindrées",
+   "hp": 390,
+   "seats": 2
+  },
+  {
+   "name": "Impaler LX",
+   "brand": "Declasse",
+   "model": "Impaler LX Coupe",
+   "category": "Grosse cylindrées",
+   "hp": 370,
+   "seats": 2
+  },
+  {
+   "name": "Impaler-SZ",
+   "brand": "Declasse",
+   "model": "Impaler SZ SS Sedan",
+   "category": "Grosse cylindrées",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "Imperator Apocalypse",
+   "brand": "Vapid",
+   "model": "Imperator Interceptor",
+   "category": "Grosse cylindrées",
+   "hp": 500,
+   "seats": 2
+  },
+  {
+   "name": "Nightshade",
+   "brand": "Imponte",
+   "model": "Nightshade V8 Coupe",
+   "category": "Grosse cylindrées",
+   "hp": 400,
+   "seats": 2
+  },
+  {
+   "name": "Peyote Gasser",
+   "brand": "Vapid",
+   "model": "Vapid Peyote Gasser",
+   "category": "Grosse cylindrées",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Phoenix",
+   "brand": "Imponte",
+   "model": "Phoenix Trans-Am V8",
+   "category": "Grosse cylindrées",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Picador",
+   "brand": "Cheval",
+   "model": "Picador El Camino Pickup",
+   "category": "Grosse cylindrées",
+   "hp": 290,
+   "seats": 2
+  },
+  {
+   "name": "Rat-Truck",
+   "brand": "Rat",
+   "model": "Rat-Truck Restored V8",
+   "category": "Grosse cylindrées",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "Ruiner",
+   "brand": "Imponte",
+   "model": "Ruiner 450 T-Top",
+   "category": "Grosse cylindrées",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Ruiner ZZ-8",
+   "brand": "Imponte",
+   "model": "Ruiner ZZ-8 Ram Air",
+   "category": "Grosse cylindrées",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Slamvan",
+   "brand": "Vapid",
+   "model": "Vapid Slamvan",
+   "category": "Grosse cylindrées",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Slamvan Custom",
+   "brand": "Vapid",
+   "model": "Vapid Slamvan Custom",
+   "category": "Grosse cylindrées",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Slamvan Du Lost",
+   "brand": "Vapid",
+   "model": "Vapid Slamvan Du Lost",
+   "category": "Grosse cylindrées",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Stallion",
+   "brand": "Declasse",
+   "model": "Stallion Convertible V8",
+   "category": "Grosse cylindrées",
+   "hp": 340,
+   "seats": 2
+  },
+  {
+   "name": "Stallion Burger Shot",
+   "brand": "Declasse",
+   "model": "Stallion Burger Shot Race",
+   "category": "Grosse cylindrées",
+   "hp": 390,
+   "seats": 2
+  },
+  {
+   "name": "Tahoma Coupe",
+   "brand": "Declasse",
+   "model": "Tahoma Coupe Lowrider",
+   "category": "Grosse cylindrées",
+   "hp": 310,
+   "seats": 2
+  },
+  {
+   "name": "Tampa",
+   "brand": "Declasse",
+   "model": "Tampa Muscle Coupe",
+   "category": "Grosse cylindrées",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Tampa GT",
+   "brand": "Declasse",
+   "model": "Tampa GT Supercharged",
+   "category": "Grosse cylindrées",
+   "hp": 580,
+   "seats": 2
+  },
+  {
+   "name": "Tulip",
+   "brand": "Declasse",
+   "model": "Tulip 4-Door V8",
+   "category": "Grosse cylindrées",
+   "hp": 350,
+   "seats": 4
+  },
+  {
+   "name": "Tulip M-100",
+   "brand": "Declasse",
+   "model": "Tulip M-100 Coupe",
+   "category": "Grosse cylindrées",
+   "hp": 330,
+   "seats": 2
+  },
+  {
+   "name": "Vamos",
+   "brand": "Declasse",
+   "model": "Vamos SS 396",
+   "category": "Grosse cylindrées",
+   "hp": 390,
+   "seats": 2
+  },
+  {
+   "name": "Vigero",
+   "brand": "Declasse",
+   "model": "Vigero 1st Gen",
+   "category": "Grosse cylindrées",
+   "hp": 370,
+   "seats": 2
+  },
+  {
+   "name": "Vigero ZX",
+   "brand": "Declasse",
+   "model": "Vigero ZX Widebody SS",
+   "category": "Grosse cylindrées",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "Vigero ZX Décapotable",
+   "brand": "Declasse",
+   "model": "Vigero ZX Convertible SS",
+   "category": "Grosse cylindrées",
+   "hp": 650,
+   "seats": 2
+  },
+  {
+   "name": "Virgo",
+   "brand": "Albany",
+   "model": "Virgo Coupe V8",
+   "category": "Grosse cylindrées",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "Weevil Custom",
+   "brand": "BF",
+   "model": "Weevil Custom Hot Rod",
+   "category": "Grosse cylindrées",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Yosemite",
+   "brand": "Declasse",
+   "model": "Yosemite Slammed Truck",
+   "category": "Grosse cylindrées",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Blade",
+   "brand": "Vapid",
+   "model": "Blade Gasser Special",
+   "category": "Lowrider",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Buccaneer",
+   "brand": "Albany",
+   "model": "Buccaneer Hardtop V8",
+   "category": "Lowrider",
+   "hp": 340,
+   "seats": 2
+  },
+  {
+   "name": "Buccaneer Custom",
+   "brand": "Albany",
+   "model": "Buccaneer Lowrider Custom",
+   "category": "Lowrider",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Chino",
+   "brand": "Vapid",
+   "model": "Chino Classic V8",
+   "category": "Lowrider",
+   "hp": 310,
+   "seats": 2
+  },
+  {
+   "name": "Chino Custom",
+   "brand": "Vapid",
+   "model": "Chino Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Faction",
+   "brand": "Willard",
+   "model": "Faction Turbo Coupe",
+   "category": "Lowrider",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "Faction Custom",
+   "brand": "Willard",
+   "model": "Faction Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "Manana",
+   "brand": "Albany",
+   "model": "Manana Hardtop Coupe",
+   "category": "Lowrider",
+   "hp": 190,
+   "seats": 2
+  },
+  {
+   "name": "Manana Custom",
+   "brand": "Albany",
+   "model": "Manana Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 230,
+   "seats": 2
+  },
+  {
+   "name": "Moonbeam",
+   "brand": "Declasse",
+   "model": "Moonbeam Minivan V8",
+   "category": "Lowrider",
+   "hp": 200,
+   "seats": 4
+  },
+  {
+   "name": "Moonbeam Custom",
+   "brand": "Declasse",
+   "model": "Moonbeam Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 260,
+   "seats": 4
+  },
+  {
+   "name": "Primo",
+   "brand": "Albany",
+   "model": "Primo Classic Sedan",
+   "category": "Lowrider",
+   "hp": 190,
+   "seats": 4
+  },
+  {
+   "name": "Primo Custom",
+   "brand": "Albany",
+   "model": "Primo Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 220,
+   "seats": 4
+  },
+  {
+   "name": "Sabre Turbo",
+   "brand": "Declasse",
+   "model": "Sabre Turbo 454",
+   "category": "Lowrider",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Sabre Turbo Custom",
+   "brand": "Declasse",
+   "model": "Sabre Turbo Custom Benny's",
+   "category": "Lowrider",
+   "hp": 480,
+   "seats": 2
+  },
+  {
+   "name": "Tornado (V1)",
+   "brand": "Declasse",
+   "model": "Tornado Classic Coupe",
+   "category": "Lowrider",
+   "hp": 180,
+   "seats": 2
+  },
+  {
+   "name": "Tornado (V2)",
+   "brand": "Declasse",
+   "model": "Tornado Convertible V8",
+   "category": "Lowrider",
+   "hp": 210,
+   "seats": 2
+  },
+  {
+   "name": "Tornado Custom",
+   "brand": "Declasse",
+   "model": "Tornado Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 240,
+   "seats": 2
+  },
+  {
+   "name": "Virgo Classic",
+   "brand": "Albany",
+   "model": "Virgo Classic Edition",
+   "category": "Lowrider",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "Virgo Classic Custom",
+   "brand": "Albany",
+   "model": "Virgo Classic Custom Benny's",
+   "category": "Lowrider",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Voodoo",
+   "brand": "Declasse",
+   "model": "Voodoo Vintage Patina",
+   "category": "Lowrider",
+   "hp": 250,
+   "seats": 2
+  },
+  {
+   "name": "Voodoo Custom",
+   "brand": "Declasse",
+   "model": "Voodoo Custom Lowrider",
+   "category": "Lowrider",
+   "hp": 310,
+   "seats": 2
+  },
+  {
+   "name": "Chavos V6",
+   "brand": "Dundreary",
+   "model": "Chavos V6 Sport Drift",
+   "category": "Drift",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "Cheburek",
+   "brand": "Rune",
+   "model": "Cheburek Tuning Drift",
+   "category": "Drift",
+   "hp": 250,
+   "seats": 4
+  },
+  {
+   "name": "Dominator FX",
+   "brand": "Vapid",
+   "model": "Dominator FX Fox Drift",
+   "category": "Drift",
+   "hp": 510,
+   "seats": 2
+  },
+  {
+   "name": "Euros",
+   "brand": "Annis",
+   "model": "Euros Drift Tuned",
+   "category": "Drift",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "FR36",
+   "brand": "Fathom",
+   "model": "FR36 Drift Spec",
+   "category": "Drift",
+   "hp": 480,
+   "seats": 2
+  },
+  {
+   "name": "Futo",
+   "brand": "Karin",
+   "model": "Futo Classic Drift",
+   "category": "Drift",
+   "hp": 290,
+   "seats": 2
+  },
+  {
+   "name": "Futo GTX",
+   "brand": "Karin",
+   "model": "Futo GTX Drift Master",
+   "category": "Drift",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Gauntlet Hellfire",
+   "brand": "Bravado",
+   "model": "Gauntlet Hellfire Drift Spec",
+   "category": "Drift",
+   "hp": 700,
+   "seats": 2
+  },
+  {
+   "name": "Hardy",
+   "brand": "Karin",
+   "model": "Hardy Drift Sedan",
+   "category": "Drift",
+   "hp": 420,
+   "seats": 4
+  },
+  {
+   "name": "Jester Classic",
+   "brand": "Dinka",
+   "model": "Jester Classic Twin-Turbo",
+   "category": "Drift",
+   "hp": 430,
+   "seats": 2
+  },
+  {
+   "name": "Jester RR",
+   "brand": "Dinka",
+   "model": "Jester RR Track & Drift",
+   "category": "Drift",
+   "hp": 520,
+   "seats": 2
+  },
+  {
+   "name": "Keitora",
+   "brand": "Karin",
+   "model": "Keitora Mini Drift Truck",
+   "category": "Drift",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "Remus",
+   "brand": "Annis",
+   "model": "Remus Silvia Drift",
+   "category": "Drift",
+   "hp": 410,
+   "seats": 2
+  },
+  {
+   "name": "RT3000",
+   "brand": "Dinka",
+   "model": "RT3000 Roadster Drift",
+   "category": "Drift",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Sentinel XS",
+   "brand": "Ubermacht",
+   "model": "Sentinel XS Drift Line",
+   "category": "Drift",
+   "hp": 460,
+   "seats": 2
+  },
+  {
+   "name": "Tampa Drift",
+   "brand": "Declasse",
+   "model": "Tampa Drift V8 Muscle",
+   "category": "Drift",
+   "hp": 550,
+   "seats": 2
+  },
+  {
+   "name": "Walton L35 de Drift",
+   "brand": "Declasse",
+   "model": "Walton L35 Custom Drift",
+   "category": "Drift",
+   "hp": 530,
+   "seats": 2
+  },
+  {
+   "name": "Yosemite Drift",
+   "brand": "Declasse",
+   "model": "Yosemite Drift Truck",
+   "category": "Drift",
+   "hp": 580,
+   "seats": 2
+  },
+  {
+   "name": "ZR350",
+   "brand": "Annis",
+   "model": "ZR350 Rotary Drift",
+   "category": "Drift",
+   "hp": 440,
+   "seats": 2
+  },
+  {
+   "name": "Calico GTF",
+   "brand": "Karin",
+   "model": "Calico GTF Rally Turbo",
+   "category": "Rallye",
+   "hp": 300,
+   "seats": 2
+  },
+  {
+   "name": "Comet Safari",
+   "brand": "Pfister",
+   "model": "Comet Safari Offroad GT",
+   "category": "Rallye",
+   "hp": 380,
+   "seats": 2
+  },
+  {
+   "name": "Flash GT",
+   "brand": "Vapid",
+   "model": "Flash GT Rally Spec",
+   "category": "Rallye",
+   "hp": 350,
+   "seats": 2
+  },
+  {
+   "name": "GB200",
+   "brand": "Vapid",
+   "model": "GB200 Group B Rally",
+   "category": "Rallye",
+   "hp": 450,
+   "seats": 2
+  },
+  {
+   "name": "Issi Rallye",
+   "brand": "Weeny",
+   "model": "Issi Rallye Cross SUV",
+   "category": "Rallye",
+   "hp": 320,
+   "seats": 2
+  },
+  {
+   "name": "Issi Sport",
+   "brand": "Weeny",
+   "model": "Issi Sport AWD Rally",
+   "category": "Rallye",
+   "hp": 280,
+   "seats": 2
+  },
+  {
+   "name": "La Coureuse",
+   "brand": "Penaud",
+   "model": "La Coureuse EV Rally Spec",
+   "category": "Rallye",
+   "hp": 420,
+   "seats": 2
+  },
+  {
+   "name": "Omnis",
+   "brand": "Obey",
+   "model": "Omnis Group B Legend",
+   "category": "Rallye",
+   "hp": 460,
+   "seats": 2
+  },
+  {
+   "name": "Sentinel Classic Widebody",
+   "brand": "Übermacht",
+   "model": "Sentinel Classic Widebody Rally",
+   "category": "Rallye",
+   "hp": 360,
+   "seats": 2
+  },
+  {
+   "name": "Sultan RS Classic",
+   "brand": "Karin",
+   "model": "Sultan RS Classic 2-Door Rally",
+   "category": "Rallye",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "Tropos Rallye",
+   "brand": "Lampadati",
+   "model": "Tropos Rallye Stratos",
+   "category": "Rallye",
+   "hp": 310,
+   "seats": 2
+  },
+  {
+   "name": "Aleutian",
+   "brand": "Vapid",
+   "model": "Vapid Aleutian",
+   "category": "SUV",
+   "hp": 350,
+   "seats": 4
+  },
+  {
+   "name": "Astron",
+   "brand": "Pfister",
+   "model": "Astron Sport SUV",
+   "category": "SUV",
+   "hp": 440,
+   "seats": 4
+  },
+  {
+   "name": "Baller",
+   "brand": "Gallivanter",
+   "model": "Baller Gen 1 Luxury SUV",
+   "category": "SUV",
+   "hp": 375,
+   "seats": 4
+  },
+  {
+   "name": "Baller II",
+   "brand": "Gallivanter",
+   "model": "Baller Modern Edition",
+   "category": "SUV",
+   "hp": 400,
+   "seats": 4
+  },
+  {
+   "name": "Baller LE",
+   "brand": "Gallivanter",
+   "model": "Baller LE Executive",
+   "category": "SUV",
+   "hp": 510,
+   "seats": 4
+  },
+  {
+   "name": "Baller LE LWB",
+   "brand": "Gallivanter",
+   "model": "Baller LE Long Wheelbase",
+   "category": "SUV",
+   "hp": 510,
+   "seats": 5
+  },
+  {
+   "name": "Baller ST",
+   "brand": "Gallivanter",
+   "model": "Baller ST Sport",
+   "category": "SUV",
+   "hp": 575,
+   "seats": 4
+  },
+  {
+   "name": "Baller ST-D",
+   "brand": "Gallivanter",
+   "model": "Baller ST-D Performance Edition",
+   "category": "SUV",
+   "hp": 600,
+   "seats": 4
+  },
+  {
+   "name": "Beejay XL",
+   "brand": "Karin",
+   "model": "Beejay XL All-Terrain",
+   "category": "SUV",
+   "hp": 260,
+   "seats": 4
+  },
+  {
+   "name": "Cavalcade (new)",
+   "brand": "Albany",
+   "model": "Cavalcade Gen 2",
+   "category": "SUV",
+   "hp": 360,
+   "seats": 4
+  },
+  {
+   "name": "Cavalcade (old)",
+   "brand": "Albany",
+   "model": "Cavalcade Classic V8",
+   "category": "SUV",
+   "hp": 320,
+   "seats": 4
+  },
+  {
+   "name": "Cavalcade XL",
+   "brand": "Albany",
+   "model": "Cavalcade XL Executive",
+   "category": "SUV",
+   "hp": 420,
+   "seats": 4
+  },
+  {
+   "name": "Dubsta",
+   "brand": "Benefactor",
+   "model": "Dubsta V8 4x4",
+   "category": "SUV",
+   "hp": 400,
+   "seats": 4
+  },
+  {
+   "name": "Dubsta Luxury",
+   "brand": "Benefactor",
+   "model": "Dubsta Luxury Edition",
+   "category": "SUV",
+   "hp": 500,
+   "seats": 4
+  },
+  {
+   "name": "FQ 2",
+   "brand": "Fathom",
+   "model": "FQ 2 Crossover",
+   "category": "SUV",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Granger",
+   "brand": "Declasse",
+   "model": "Granger 3500 V8",
+   "category": "SUV",
+   "hp": 350,
+   "seats": 8
+  },
+  {
+   "name": "Granger 3600LX",
+   "brand": "Declasse",
+   "model": "Granger 3600LX Executive",
+   "category": "SUV",
+   "hp": 420,
+   "seats": 8
+  },
+  {
+   "name": "Gresley",
+   "brand": "Bravado",
+   "model": "Gresley V6 All-Wheel-Drive",
+   "category": "SUV",
+   "hp": 290,
+   "seats": 4
+  },
+  {
+   "name": "Habanero",
+   "brand": "Emperor",
+   "model": "Habanero Crossover",
+   "category": "SUV",
+   "hp": 250,
+   "seats": 4
+  },
+  {
+   "name": "Huntley S",
+   "brand": "Enus",
+   "model": "Huntley S Sport Luxury",
+   "category": "SUV",
+   "hp": 450,
+   "seats": 4
+  },
+  {
+   "name": "I-Wagen",
+   "brand": "Obey",
+   "model": "I-Wagen EV SUV",
+   "category": "SUV",
+   "hp": 408,
+   "seats": 4
+  },
+  {
+   "name": "Jubilee",
+   "brand": "Enus",
+   "model": "Jubilee Ultra Luxury SUV",
+   "category": "SUV",
+   "hp": 563,
+   "seats": 4
+  },
+  {
+   "name": "Landstalker",
+   "brand": "Dundreary",
+   "model": "Landstalker V8 Classic",
+   "category": "SUV",
+   "hp": 300,
+   "seats": 4
+  },
+  {
+   "name": "Landstalker XL",
+   "brand": "Dundreary",
+   "model": "Landstalker XL modern",
+   "category": "SUV",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "Mesa",
+   "brand": "Canis",
+   "model": "Mesa 4x4 Offroad",
+   "category": "SUV",
+   "hp": 280,
+   "seats": 4
+  },
+  {
+   "name": "Novak",
+   "brand": "Lampadati",
+   "model": "Novak Sport Crossover",
+   "category": "SUV",
+   "hp": 550,
+   "seats": 4
+  },
+  {
+   "name": "Patriot",
+   "brand": "Mammoth",
+   "model": "Patriot Military SUV",
+   "category": "SUV",
+   "hp": 350,
+   "seats": 4
+  },
+  {
+   "name": "Patriot Stretch",
+   "brand": "Mammoth",
+   "model": "Patriot Stretch Limousine",
+   "category": "SUV",
+   "hp": 400,
+   "seats": 6
+  },
+  {
+   "name": "Radius",
+   "brand": "Vapid",
+   "model": "Radius Crossover V6",
+   "category": "SUV",
+   "hp": 285,
+   "seats": 4
+  },
+  {
+   "name": "Rebla GTS",
+   "brand": "Übermacht",
+   "model": "Rebla GTS Performance",
+   "category": "SUV",
+   "hp": 600,
+   "seats": 4
+  },
+  {
+   "name": "Rocoto",
+   "brand": "Pegassi",
+   "model": "Rocoto Sport SUV",
+   "category": "SUV",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "Seminole",
+   "brand": "Canis",
+   "model": "Seminole V8 4WD",
+   "category": "SUV",
+   "hp": 305,
+   "seats": 4
+  },
+  {
+   "name": "Serrano",
+   "brand": "Benefactor",
+   "model": "Serrano V6 Luxury",
+   "category": "SUV",
+   "hp": 270,
+   "seats": 4
+  },
+  {
+   "name": "Toros",
+   "brand": "Pegassi",
+   "model": "Toros Super SUV V12",
+   "category": "SUV",
+   "hp": 650,
+   "seats": 4
+  },
+  {
+   "name": "Vivanite",
+   "brand": "Karin",
+   "model": "Vivanite Modern SUV",
+   "category": "SUV",
+   "hp": 450,
+   "seats": 4
+  },
+  {
+   "name": "Vivanite (Platinum)",
+   "brand": "Karin",
+   "model": "Vivanite Platinum Edition",
+   "category": "SUV",
+   "hp": 500,
+   "seats": 4
+  },
+  {
+   "name": "Woodlander",
+   "brand": "Vapid",
+   "model": "Woodlander Classic 4x4",
+   "category": "SUV",
+   "hp": 380,
+   "seats": 4
+  },
+  {
+   "name": "XLS",
+   "brand": "Benefactor",
+   "model": "XLS Executive SUV",
+   "category": "SUV",
+   "hp": 440,
+   "seats": 4
+  },
+  {
+   "name": "Burrito",
+   "brand": "Declasse",
+   "model": "Burrito Standard",
+   "category": "Vans",
+   "hp": 220,
+   "seats": 4
+  },
+  {
+   "name": "Burrito de Gang (V1)",
+   "brand": "Declasse",
+   "model": "Burrito Gang Edition",
+   "category": "Vans",
+   "hp": 210,
+   "seats": 4
+  },
+  {
+   "name": "Burrito de Gang (V2)",
+   "brand": "Declasse",
+   "model": "Burrito Gang Custom Heavy",
+   "category": "Vans",
+   "hp": 260,
+   "seats": 4
+  },
+  {
+   "name": "Minivan",
+   "brand": "Vapid",
+   "model": "Minivan Family",
+   "category": "Vans",
+   "hp": 190,
+   "seats": 4
+  },
+  {
+   "name": "Minivan Custom",
+   "brand": "Vapid",
+   "model": "Minivan Custom Lowrider",
+   "category": "Vans",
+   "hp": 220,
+   "seats": 4
+  },
+  {
+   "name": "Paradise",
+   "brand": "Bravado",
+   "model": "Paradise Beach Van",
+   "category": "Vans",
+   "hp": 200,
+   "seats": 4
+  },
+  {
+   "name": "Speedo",
+   "brand": "Vapid",
+   "model": "Speedo Commercial",
+   "category": "Vans",
+   "hp": 240,
+   "seats": 4
+  },
+  {
+   "name": "Speedo Custom",
+   "brand": "Vapid",
+   "model": "Speedo Custom Armored",
+   "category": "Vans",
+   "hp": 270,
+   "seats": 4
+  },
+  {
+   "name": "Surfer",
+   "brand": "BF",
+   "model": "Surfer Classic",
+   "category": "Vans",
+   "hp": 110,
+   "seats": 4
+  },
+  {
+   "name": "Surfer (V2 Clean)",
+   "brand": "BF",
+   "model": "Surfer Restored Edition",
+   "category": "Vans",
+   "hp": 115,
+   "seats": 4
+  },
+  {
+   "name": "Surfer Custom",
+   "brand": "BF",
+   "model": "Surfer Custom Surfboard",
+   "category": "Vans",
+   "hp": 130,
+   "seats": 4
+  },
+  {
+   "name": "Youga",
+   "brand": "Vapid",
+   "model": "Youga Standard",
+   "category": "Vans",
+   "hp": 180,
+   "seats": 4
+  },
+  {
+   "name": "Youga Classic",
+   "brand": "Vapid",
+   "model": "Youga Classic",
+   "category": "Vans",
+   "hp": 200,
+   "seats": 4
+  },
+  {
+   "name": "Youga Classic 4x4",
+   "brand": "Vapid",
+   "model": "Youga Classic 4WD Offroad",
+   "category": "Vans",
+   "hp": 230,
+   "seats": 4
+  },
+  {
+   "name": "Youga Custom",
+   "brand": "Vapid",
+   "model": "Youga Custom Sport",
+   "category": "Vans",
+   "hp": 240,
+   "seats": 4
+  },
+  {
+   "name": "Youga Custom (VIP)",
+   "brand": "Vapid",
+   "model": "Youga Custom Executive",
+   "category": "Vans",
+   "hp": 280,
+   "seats": 4
+  }
+ ]
+}
